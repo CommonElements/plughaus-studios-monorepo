@@ -91,11 +91,14 @@ class PlugHaus_Property_Management {
         require_once PHPM_CORE_DIR . 'includes/core/class-phpm-capabilities.php';
         require_once PHPM_CORE_DIR . 'includes/core/class-phpm-post-types.php';
         require_once PHPM_CORE_DIR . 'includes/core/class-phpm-taxonomies.php';
+        require_once PHPM_CORE_DIR . 'includes/core/class-phpm-data-validation.php';
         
         // Admin functionality
         require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-admin.php';
         require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-admin-menus.php';
         require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-admin-settings.php';
+        require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-meta-boxes.php';
+        require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-admin-list-tables.php';
         
         // Public functionality
         require_once PHPM_CORE_DIR . 'includes/public/class-phpm-public.php';
@@ -103,6 +106,21 @@ class PlugHaus_Property_Management {
         
         // API functionality
         require_once PHPM_CORE_DIR . 'includes/api/class-phpm-rest-api.php';
+        
+        // Sample data functionality
+        require_once PHPM_CORE_DIR . 'includes/class-phpm-sample-data.php';
+        require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-sample-data-admin.php';
+        
+        // Import/Export functionality
+        require_once PHPM_CORE_DIR . 'includes/class-phpm-import-export.php';
+        require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-import-export-admin.php';
+        
+        // Email notification system
+        require_once PHPM_CORE_DIR . 'includes/class-phpm-email-notifications.php';
+        require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-email-settings-admin.php';
+        
+        // Frontend page settings
+        require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-frontend-settings-admin.php';
     }
     
     /**
@@ -142,11 +160,26 @@ class PlugHaus_Property_Management {
      * Register admin hooks
      */
     private function define_admin_hooks() {
+        // Initialize core functionality first
+        PHPM_Post_Types::init();
+        PHPM_Capabilities::init();
+        
         $admin = new PHPM_Admin();
         
         add_action('admin_enqueue_scripts', array($admin, 'enqueue_styles'));
         add_action('admin_enqueue_scripts', array($admin, 'enqueue_scripts'));
         add_action('admin_menu', array($admin, 'add_admin_menus'));
+        
+        // Initialize admin settings
+        new PHPM_Admin_Settings();
+        
+        // Initialize admin components with static init methods
+        PHPM_Frontend_Settings_Admin::init();
+        PHPM_Sample_Data_Admin::init();
+        PHPM_Admin_List_Tables::init();
+        PHPM_Email_Settings_Admin::init();
+        PHPM_Import_Export_Admin::init();
+        PHPM_Meta_Boxes::init();
     }
     
     /**
@@ -157,6 +190,9 @@ class PlugHaus_Property_Management {
         
         add_action('wp_enqueue_scripts', array($public, 'enqueue_styles'));
         add_action('wp_enqueue_scripts', array($public, 'enqueue_scripts'));
+        
+        // Initialize shortcodes
+        PHPM_Shortcodes::init();
     }
     
     /**

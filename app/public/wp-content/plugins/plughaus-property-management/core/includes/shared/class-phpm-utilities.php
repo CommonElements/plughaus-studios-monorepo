@@ -16,6 +16,14 @@ if (!defined('ABSPATH')) {
  * PlugHaus Property Management Utilities Class
  */
 class PHPM_Utilities {
+    
+    /**
+     * Initialize utilities hooks
+     */
+    public static function init() {
+        add_action('wp_ajax_phpm_dismiss_sample_data_notice', array(__CLASS__, 'ajax_dismiss_sample_data_notice'));
+        add_action('wp_ajax_phpm_dismiss_sample_removal_notice', array(__CLASS__, 'ajax_dismiss_sample_removal_notice'));
+    }
 
     /**
      * Format currency amount
@@ -498,4 +506,37 @@ class PHPM_Utilities {
 
         return apply_filters('phpm_sanitize_tenant_data', $sanitized, $data);
     }
+    
+    /**
+     * AJAX handler for dismissing sample data notice
+     */
+    public static function ajax_dismiss_sample_data_notice() {
+        check_ajax_referer('phpm_admin_nonce', 'nonce');
+        
+        if (!current_user_can('manage_options')) {
+            wp_die(__('Insufficient permissions.', 'plughaus-property'));
+        }
+        
+        set_transient('phpm_sample_data_notice_dismissed', true, WEEK_IN_SECONDS);
+        
+        wp_die(); // This is required to terminate immediately and return a proper response
+    }
+    
+    /**
+     * AJAX handler for dismissing sample removal notice
+     */
+    public static function ajax_dismiss_sample_removal_notice() {
+        check_ajax_referer('phpm_admin_nonce', 'nonce');
+        
+        if (!current_user_can('manage_options')) {
+            wp_die(__('Insufficient permissions.', 'plughaus-property'));
+        }
+        
+        set_transient('phpm_sample_removal_notice_dismissed', true, WEEK_IN_SECONDS);
+        
+        wp_die(); // This is required to terminate immediately and return a proper response
+    }
 }
+
+// Initialize utilities
+PHPM_Utilities::init();

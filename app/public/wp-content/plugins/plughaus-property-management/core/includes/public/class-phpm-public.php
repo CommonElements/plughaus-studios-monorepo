@@ -50,7 +50,8 @@ class PHPM_Public {
      */
     public function enqueue_scripts() {
         // Only load on property pages or pages with shortcodes
-        if (!is_singular('phpm_property') && !is_post_type_archive('phpm_property') && !has_shortcode(get_post()->post_content, 'phpm_')) {
+        $post = get_post();
+        if (!is_singular('phpm_property') && !is_post_type_archive('phpm_property') && (!$post || !has_shortcode($post->post_content, 'phpm_'))) {
             return;
         }
         

@@ -1,22 +1,30 @@
-# PlugHaus Studios - Monorepo
+# PlugHaus Studios - WordPress Plugin Development Studio
 
-**Complete Property Management Ecosystem for WordPress**
+**Professional WordPress Plugin Ecosystem & Development Platform**
 
-This monorepo contains all PlugHaus Studios plugins, the company website, and shared utilities in a single, unified codebase.
+PlugHaus Studios is a comprehensive WordPress plugin development studio that creates professional-grade plugins for diverse industries. This monorepo contains our complete development ecosystem including plugins, company website, licensing platform, and shared development framework.
 
 ## 🏗️ **Repository Structure**
 
 ```
-plughaus-studios-monorepo/
-├── packages/                          # Individual plugin packages
-│   ├── property-management/           # Core property management plugin
-│   ├── payments-gateway/              # Future: Payments plugin
-│   ├── document-automator/            # Future: Document automation
-│   └── shared/                       # Shared utilities & components
-├── website/                          # PlugHausStudios.com
-├── tools/                            # Build tools & scripts
-├── dist/                             # Built/extracted packages
-└── docs/                             # Documentation
+plughaus-studios/
+├── app/public/wp-content/
+│   ├── plugins/
+│   │   ├── plughaus-property-management/    # Property Management Plugin (Current)
+│   │   ├── license-manager-for-woocommerce/ # Licensing System
+│   │   └── woocommerce/                     # E-commerce Platform
+│   └── themes/
+│       └── plughaus-studios/               # Company Website Theme
+├── website/                                # Marketing Site Content
+├── packages/                              # Future Plugin Development
+│   ├── sports-league-management/          # Planned: Sports leagues
+│   ├── fantasy-sports/                    # Planned: Fantasy sports
+│   ├── field-service-management/          # Planned: Field services
+│   ├── commonelements-integration/        # Planned: CE.com bridge
+│   └── shared/                           # Shared Development Framework
+├── tools/                                # Build & Development Tools
+├── dist/                                 # Distribution Packages
+└── docs/                                # Documentation
 ```
 
 ## 🚀 **Quick Start**
@@ -44,19 +52,36 @@ composer install
 npm run dev
 ```
 
-## 📦 **Available Packages**
+## 🎯 **Studio Vision & Product Portfolio**
 
-### Property Management Plugin
-- **Free Version**: Basic property, tenant, and lease management
-- **Pro Version**: Advanced analytics, automation, and integrations
-- **WordPress.org**: Compliant free version for marketplace
-- **Commercial**: Licensed pro version with full features
+### **Current Products**
 
-### Shared Utilities
-- Common functions across all plugins
-- Licensing system integration
-- WordPress standards compliance
-- PropPlugs ecosystem compatibility
+#### Property Management Ecosystem (Active Development)
+- **Free Version**: WordPress.org compliant - Property, tenant, lease management
+- **Pro Version**: Advanced analytics, automation, reporting ($149/year)
+- **Add-on Modules**: HOA/COA, Commercial, STR, Advanced Accounting
+- **Target Market**: Small-medium property managers (alternative to Yardi/AppFolio)
+
+### **Planned Product Pipeline**
+
+#### Sports & Recreation
+- **Sports League Management**: Team management, schedules, statistics
+- **Fantasy Sports Platform**: League administration, scoring systems
+
+#### Business Services  
+- **Field Service Management**: Technician dispatch, work orders, scheduling
+- **CommonElements Integration**: Bridge CE.com platform features to WordPress
+
+#### Development Framework
+- **Shared Architecture**: Common licensing, admin patterns, utilities
+- **Rapid Plugin Development**: Standardized freemium model implementation
+- **Cross-Product Synergies**: Shared customer base and licensing infrastructure
+
+### **Business Model Strategy**
+- **Freemium Foundation**: WordPress.org free versions for user acquisition
+- **Pro Licensing**: Direct sales via PlugHausStudios.com for revenue
+- **Ecosystem Expansion**: Vertical-specific add-ons for ARPU growth
+- **Market Diversification**: Multiple industry verticals reduce risk
 
 ## 🔧 **Development Commands**
 
