@@ -1,14 +1,15 @@
 === PlugHaus Property Management ===
 Contributors: plughausstudios
-Tags: property management, real estate, tenant management, lease management, rental property
+Donate link: https://plughausstudios.com/donate/
+Tags: property management, rental properties, tenants, leases, maintenance, real estate, landlord, property manager
 Requires at least: 5.8
-Tested up to: 6.8
-Stable tag: 1.0.0
+Tested up to: 6.4
 Requires PHP: 7.4
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A lightweight, powerful property management solution for WordPress. Perfect for landlords and property managers of all sizes.
+A lightweight, powerful property management solution for WordPress. Perfect for small property managers and landlords.
 
 == Description ==
 
