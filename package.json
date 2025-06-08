@@ -12,31 +12,25 @@
     "dev": "concurrently \"npm run dev:plugins\" \"npm run dev:website\"",
     "dev:plugins": "lerna run dev --parallel",
     "dev:website": "cd website && npm run dev",
-    
     "build": "npm run build:plugins && npm run build:website",
     "build:plugins": "lerna run build",
     "build:website": "cd website && npm run build",
-    
     "extract:free": "node tools/build/extract-plugin.js --type=free",
-    "extract:pro": "node tools/build/extract-plugin.js --type=pro", 
+    "extract:pro": "node tools/build/extract-plugin.js --type=pro",
     "extract:all": "npm run extract:free && npm run extract:pro",
-    
     "test": "npm run test:plugins && npm run test:website",
     "test:plugins": "lerna run test",
     "test:website": "cd website && npm run test",
-    
     "lint": "npm run lint:plugins && npm run lint:website",
     "lint:plugins": "lerna run lint",
     "lint:website": "cd website && npm run lint",
-    
     "release": "node tools/build/release-manager.js",
-    
     "setup": "./tools/dev/local-setup.sh",
     "clean": "lerna clean && rm -rf node_modules dist build"
   },
   "keywords": [
     "wordpress",
-    "property-management", 
+    "property-management",
     "real-estate",
     "landlord",
     "tenant",
@@ -54,11 +48,11 @@
     "url": "https://github.com/CommonElements/plughaus-studios-monorepo/issues"
   },
   "devDependencies": {
-    "lerna": "^8.0.0",
-    "concurrently": "^8.0.0",
     "@wordpress/scripts": "^27.0.0",
-    "jest": "^29.0.0",
+    "concurrently": "^8.0.0",
     "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "lerna": "^8.0.0",
     "prettier": "^3.0.0"
   },
   "engines": {
@@ -67,5 +61,10 @@
   },
   "volta": {
     "node": "18.19.0"
+  },
+  "dependencies": {
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.2",
+    "minimatch": "^10.0.1"
   }
 }
