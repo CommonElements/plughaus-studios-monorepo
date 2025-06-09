@@ -118,8 +118,8 @@ class PlugHaus_Property_Management_Pro {
      * Check if free version is active
      */
     private function is_free_version_active() {
-        return class_exists('PlugHaus_Property_Management_Free') || 
-               is_plugin_active('plughaus-property-management-free/plughaus-property-management.php');
+        return class_exists('PlugHaus_Property_Management') || 
+               is_plugin_active('plughaus-property-management/plughaus-property-management.php');
     }
     
     /**

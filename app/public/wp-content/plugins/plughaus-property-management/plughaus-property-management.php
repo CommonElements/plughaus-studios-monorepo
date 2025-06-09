@@ -61,13 +61,31 @@ class PlugHaus_Property_Management {
         
         $this->load_dependencies();
         $this->set_locale();
-        $this->define_admin_hooks();
+        
+        // Hook into WordPress initialization
+        add_action('init', array($this, 'init_plugin'));
+        add_action('admin_init', array($this, 'init_admin'));
+    }
+    
+    /**
+     * Initialize plugin on WordPress init
+     */
+    public function init_plugin() {
         $this->define_public_hooks();
         $this->define_api_hooks();
         
         // Load pro features if licensed
         if ($this->is_pro) {
             $this->load_pro_features();
+        }
+    }
+    
+    /**
+     * Initialize admin functionality
+     */
+    public function init_admin() {
+        if (is_admin()) {
+            $this->define_admin_hooks();
         }
     }
     
@@ -218,7 +236,8 @@ class PlugHaus_Property_Management {
      * Run the plugin
      */
     public function run() {
-        // Plugin is initialized through hooks
+        // Plugin initialization is already done in constructor
+        // This method exists for compatibility
     }
 }
 
