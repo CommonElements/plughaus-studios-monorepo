@@ -61,31 +61,13 @@ class PlugHaus_Property_Management {
         
         $this->load_dependencies();
         $this->set_locale();
-        
-        // Hook into WordPress initialization
-        add_action('init', array($this, 'init_plugin'));
-        add_action('admin_init', array($this, 'init_admin'));
-    }
-    
-    /**
-     * Initialize plugin on WordPress init
-     */
-    public function init_plugin() {
+        $this->define_admin_hooks();
         $this->define_public_hooks();
         $this->define_api_hooks();
         
         // Load pro features if licensed
         if ($this->is_pro) {
             $this->load_pro_features();
-        }
-    }
-    
-    /**
-     * Initialize admin functionality
-     */
-    public function init_admin() {
-        if (is_admin()) {
-            $this->define_admin_hooks();
         }
     }
     
@@ -122,23 +104,10 @@ class PlugHaus_Property_Management {
         require_once PHPM_CORE_DIR . 'includes/public/class-phpm-public.php';
         require_once PHPM_CORE_DIR . 'includes/public/class-phpm-shortcodes.php';
         
-        // API functionality
-        require_once PHPM_CORE_DIR . 'includes/api/class-phpm-rest-api.php';
-        
-        // Sample data functionality
-        require_once PHPM_CORE_DIR . 'includes/class-phpm-sample-data.php';
-        require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-sample-data-admin.php';
-        
-        // Import/Export functionality
-        require_once PHPM_CORE_DIR . 'includes/class-phpm-import-export.php';
-        require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-import-export-admin.php';
-        
-        // Email notification system
-        require_once PHPM_CORE_DIR . 'includes/class-phpm-email-notifications.php';
-        require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-email-settings-admin.php';
-        
-        // Frontend page settings
-        require_once PHPM_CORE_DIR . 'includes/admin/class-phpm-frontend-settings-admin.php';
+        // Basic API functionality (free features only)
+        if (file_exists(PHPM_CORE_DIR . 'includes/api/class-phpm-rest-api.php')) {
+            require_once PHPM_CORE_DIR . 'includes/api/class-phpm-rest-api.php';
+        }
     }
     
     /**
@@ -191,13 +160,10 @@ class PlugHaus_Property_Management {
         // Initialize admin settings
         new PHPM_Admin_Settings();
         
-        // Initialize admin components with static init methods
-        PHPM_Frontend_Settings_Admin::init();
-        PHPM_Sample_Data_Admin::init();
-        PHPM_Admin_List_Tables::init();
-        PHPM_Email_Settings_Admin::init();
-        PHPM_Import_Export_Admin::init();
-        PHPM_Meta_Boxes::init();
+        // Initialize basic admin components
+        if (class_exists('PHPM_Meta_Boxes')) {
+            add_action('admin_init', array('PHPM_Meta_Boxes', 'init'));
+        }
     }
     
     /**
@@ -217,10 +183,13 @@ class PlugHaus_Property_Management {
      * Register API hooks
      */
     private function define_api_hooks() {
-        add_action('rest_api_init', array('PHPM_REST_API', 'register_routes'));
+        // Only load API if class exists
+        if (class_exists('PHPM_REST_API')) {
+            add_action('rest_api_init', array('PHPM_REST_API', 'register_routes'));
+        }
         
         // Pro API endpoints (if licensed)
-        if ($this->is_pro) {
+        if ($this->is_pro && class_exists('PHPM_License_Manager')) {
             add_action('rest_api_init', array('PHPM_License_Manager', 'register_routes'));
         }
     }
