@@ -64,9 +64,9 @@
                 $results.addClass('loading');
                 
                 $.ajax({
-                    url: phpm_public.ajax_url,
+                    url: vmp_public.ajax_url,
                     type: 'GET',
-                    data: formData + '&action=phpm_search_properties',
+                    data: formData + '&action=vmp_search_properties',
                     success: function(response) {
                         if (response.success) {
                             $results.html(response.data.html);
@@ -99,12 +99,12 @@
      */
     function performLiveSearch(query) {
         $.ajax({
-            url: phpm_public.ajax_url,
+            url: vmp_public.ajax_url,
             type: 'GET',
             data: {
-                action: 'phpm_live_search',
+                action: 'vmp_live_search',
                 query: query,
-                nonce: phpm_public.nonce
+                nonce: vmp_public.nonce
             },
             success: function(response) {
                 if (response.success) {
@@ -171,10 +171,10 @@
                 e.preventDefault();
                 
                 var formData = new FormData($form[0]);
-                formData.append('action', 'phpm_submit_maintenance_request');
+                formData.append('action', 'vmp_submit_maintenance_request');
                 
                 $.ajax({
-                    url: phpm_public.ajax_url,
+                    url: vmp_public.ajax_url,
                     type: 'POST',
                     data: formData,
                     processData: false,
@@ -336,12 +336,12 @@
             var documentId = $(this).data('document-id');
             
             $.ajax({
-                url: phpm_public.ajax_url,
+                url: vmp_public.ajax_url,
                 type: 'POST',
                 data: {
-                    action: 'phpm_track_document_download',
+                    action: 'vmp_track_document_download',
                     document_id: documentId,
-                    nonce: phpm_public.nonce
+                    nonce: vmp_public.nonce
                 }
             });
         });
@@ -359,12 +359,12 @@
             
             if (confirm('Would you like to request a lease renewal?')) {
                 $.ajax({
-                    url: phpm_public.ajax_url,
+                    url: vmp_public.ajax_url,
                     type: 'POST',
                     data: {
-                        action: 'phpm_request_lease_renewal',
+                        action: 'vmp_request_lease_renewal',
                         lease_id: $(this).data('lease-id'),
-                        nonce: phpm_public.nonce
+                        nonce: vmp_public.nonce
                     },
                     success: function(response) {
                         if (response.success) {
@@ -397,8 +397,135 @@
      * Show payment method modal
      */
     function showPaymentMethodModal() {
-        // Implementation for payment method modal
-        // This would integrate with Stripe or other payment processors
+        // Create modal HTML
+        var modalHTML = '<div class="phpm-modal phpm-payment-modal" id="phpm-payment-modal">' +
+            '<div class="phpm-modal-content">' +
+                '<div class="phpm-modal-header">' +
+                    '<h3>' + vmp_public.strings.add_payment_method + '</h3>' +
+                    '<span class="phpm-modal-close">&times;</span>' +
+                '</div>' +
+                '<div class="phpm-modal-body">' +
+                    '<div class="phpm-payment-methods">' +
+                        '<div class="phpm-payment-option" data-method="bank">' +
+                            '<span class="dashicons dashicons-bank"></span>' +
+                            '<h4>' + vmp_public.strings.bank_account + '</h4>' +
+                            '<p>' + vmp_public.strings.bank_description + '</p>' +
+                        '</div>' +
+                        '<div class="phpm-payment-option" data-method="card">' +
+                            '<span class="dashicons dashicons-admin-site"></span>' +
+                            '<h4>' + vmp_public.strings.credit_card + '</h4>' +
+                            '<p>' + vmp_public.strings.card_description + '</p>' +
+                        '</div>' +
+                    '</div>' +
+                    '<form class="phpm-payment-form" style="display: none;">' +
+                        '<div class="phpm-form-group">' +
+                            '<label for="payment-nickname">' + vmp_public.strings.nickname + '</label>' +
+                            '<input type="text" id="payment-nickname" name="nickname" placeholder="e.g., My Checking Account" required>' +
+                        '</div>' +
+                        '<div class="phpm-bank-fields" style="display: none;">' +
+                            '<div class="phpm-form-group">' +
+                                '<label for="account-number">' + vmp_public.strings.account_number + '</label>' +
+                                '<input type="text" id="account-number" name="account_number" placeholder="1234567890">' +
+                            '</div>' +
+                            '<div class="phpm-form-group">' +
+                                '<label for="routing-number">' + vmp_public.strings.routing_number + '</label>' +
+                                '<input type="text" id="routing-number" name="routing_number" placeholder="123456789">' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="phpm-card-fields" style="display: none;">' +
+                            '<div class="phpm-form-group">' +
+                                '<label for="card-number">' + vmp_public.strings.card_number + '</label>' +
+                                '<input type="text" id="card-number" name="card_number" placeholder="1234 5678 9012 3456">' +
+                            '</div>' +
+                            '<div class="phpm-form-row">' +
+                                '<div class="phpm-form-group phpm-form-group-half">' +
+                                    '<label for="expiry-date">' + vmp_public.strings.expiry_date + '</label>' +
+                                    '<input type="text" id="expiry-date" name="expiry_date" placeholder="MM/YY">' +
+                                '</div>' +
+                                '<div class="phpm-form-group phpm-form-group-half">' +
+                                    '<label for="cvv">' + vmp_public.strings.cvv + '</label>' +
+                                    '<input type="text" id="cvv" name="cvv" placeholder="123">' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="phpm-form-actions">' +
+                            '<button type="button" class="phpm-button phpm-button-secondary" id="phpm-cancel-payment">' + vmp_public.strings.cancel + '</button>' +
+                            '<button type="submit" class="phpm-button phpm-button-primary">' + vmp_public.strings.save_payment_method + '</button>' +
+                        '</div>' +
+                    '</form>' +
+                '</div>' +
+            '</div>' +
+        '</div>';
+        
+        // Add modal to page
+        $('body').append(modalHTML);
+        var $modal = $('#phpm-payment-modal');
+        
+        // Handle payment method selection
+        $modal.on('click', '.phpm-payment-option', function() {
+            var method = $(this).data('method');
+            
+            $('.phpm-payment-option').removeClass('selected');
+            $(this).addClass('selected');
+            
+            $('.phpm-payment-methods').hide();
+            $('.phpm-payment-form').show();
+            
+            if (method === 'bank') {
+                $('.phpm-bank-fields').show();
+                $('.phpm-card-fields').hide();
+            } else if (method === 'card') {
+                $('.phpm-bank-fields').hide();
+                $('.phpm-card-fields').show();
+            }
+        });
+        
+        // Handle form submission
+        $modal.on('submit', '.phpm-payment-form', function(e) {
+            e.preventDefault();
+            
+            var $form = $(this);
+            var formData = $form.serialize();
+            
+            $.ajax({
+                url: vmp_public.ajax_url,
+                type: 'POST',
+                data: formData + '&action=vmp_add_payment_method&nonce=' + vmp_public.nonce,
+                beforeSend: function() {
+                    $form.find('button[type="submit"]').prop('disabled', true).text(vmp_public.strings.saving);
+                },
+                success: function(response) {
+                    if (response.success) {
+                        showMessage('success', response.data.message);
+                        $modal.remove();
+                        location.reload(); // Refresh to show new payment method
+                    } else {
+                        showMessage('error', response.data.message);
+                    }
+                },
+                error: function() {
+                    showMessage('error', vmp_public.strings.error_occurred);
+                },
+                complete: function() {
+                    $form.find('button[type="submit"]').prop('disabled', false).text(vmp_public.strings.save_payment_method);
+                }
+            });
+        });
+        
+        // Handle modal close
+        $modal.on('click', '.phpm-modal-close, #phpm-cancel-payment', function() {
+            $modal.remove();
+        });
+        
+        // Close on outside click
+        $modal.on('click', function(e) {
+            if (e.target === this) {
+                $modal.remove();
+            }
+        });
+        
+        // Show modal
+        $modal.fadeIn();
     }
     
     /**
@@ -428,9 +555,9 @@
         var formData = $form.serialize();
         
         $.ajax({
-            url: phpm_public.ajax_url,
+            url: vmp_public.ajax_url,
             type: 'POST',
-            data: formData + '&action=phpm_property_inquiry',
+            data: formData + '&action=vmp_property_inquiry',
             beforeSend: function() {
                 $form.find('button[type="submit"]').prop('disabled', true).text('Sending...');
             },

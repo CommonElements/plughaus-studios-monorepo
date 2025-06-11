@@ -107,31 +107,31 @@ class PHPM_Admin {
         
         // Reports submenu
         add_submenu_page(
-            'phpm-dashboard',
+            'vmp-dashboard',
             __('Reports', 'plughaus-property'),
             __('Reports', 'plughaus-property'),
             'manage_options',
-            'phpm-reports',
+            'vmp-reports',
             array($this, 'render_reports')
         );
         
         // Import/Export submenu
         add_submenu_page(
-            'phpm-dashboard',
+            'vmp-dashboard',
             __('Import/Export', 'plughaus-property'),
             __('Import/Export', 'plughaus-property'),
             'manage_options',
-            'phpm-import-export',
+            'vmp-import-export',
             array($this, 'render_import_export')
         );
         
         // Settings submenu
         add_submenu_page(
-            'phpm-dashboard',
+            'vmp-dashboard',
             __('Settings', 'plughaus-property'),
             __('Settings', 'plughaus-property'),
             'manage_options',
-            'phpm-settings',
+            'vmp-settings',
             array($this, 'render_settings')
         );
     }
@@ -173,9 +173,9 @@ class PHPM_Admin {
      * Render quick stats widget
      */
     private function render_quick_stats() {
-        $total_properties = wp_count_posts('phpm_property')->publish;
-        $total_units = wp_count_posts('phpm_unit')->publish;
-        $total_tenants = wp_count_posts('phpm_tenant')->publish;
+        $total_properties = wp_count_posts('vmp_property')->publish;
+        $total_units = wp_count_posts('vmp_unit')->publish;
+        $total_tenants = wp_count_posts('vmp_tenant')->publish;
         $active_leases = $this->count_active_leases();
         
         ?>
@@ -205,7 +205,7 @@ class PHPM_Admin {
      */
     private function count_active_leases() {
         $args = array(
-            'post_type' => 'phpm_lease',
+            'post_type' => 'vmp_lease',
             'post_status' => 'active',
             'posts_per_page' => -1,
             'fields' => 'ids'
@@ -285,7 +285,7 @@ class PHPM_Admin {
                     <p><?php _e('Import properties, units, and tenants from a CSV file.', 'plughaus-property'); ?></p>
                     
                     <form method="post" enctype="multipart/form-data">
-                        <?php wp_nonce_field('phpm_import_data', 'phpm_import_nonce'); ?>
+                        <?php wp_nonce_field('vmp_import_data', 'vmp_import_nonce'); ?>
                         
                         <table class="form-table">
                             <tr>
@@ -311,7 +311,7 @@ class PHPM_Admin {
                         </table>
                         
                         <p class="submit">
-                            <input type="submit" name="phpm_import" class="button button-primary" value="<?php _e('Import Data', 'plughaus-property'); ?>">
+                            <input type="submit" name="vmp_import" class="button button-primary" value="<?php _e('Import Data', 'plughaus-property'); ?>">
                         </p>
                     </form>
                 </div>
@@ -321,7 +321,7 @@ class PHPM_Admin {
                     <p><?php _e('Export your property data to CSV format.', 'plughaus-property'); ?></p>
                     
                     <form method="post">
-                        <?php wp_nonce_field('phpm_export_data', 'phpm_export_nonce'); ?>
+                        <?php wp_nonce_field('vmp_export_data', 'vmp_export_nonce'); ?>
                         
                         <table class="form-table">
                             <tr>
@@ -341,7 +341,7 @@ class PHPM_Admin {
                         </table>
                         
                         <p class="submit">
-                            <input type="submit" name="phpm_export" class="button button-primary" value="<?php _e('Export Data', 'plughaus-property'); ?>">
+                            <input type="submit" name="vmp_export" class="button button-primary" value="<?php _e('Export Data', 'plughaus-property'); ?>">
                         </p>
                     </form>
                 </div>
@@ -360,8 +360,8 @@ class PHPM_Admin {
             
             <form method="post" action="options.php">
                 <?php
-                settings_fields('phpm_settings_group');
-                do_settings_sections('phpm_settings');
+                settings_fields('vmp_settings_group');
+                do_settings_sections('vmp_settings');
                 submit_button();
                 ?>
             </form>
@@ -374,7 +374,7 @@ class PHPM_Admin {
      */
     public function add_dashboard_widgets() {
         wp_add_dashboard_widget(
-            'phpm_dashboard_widget',
+            'vmp_dashboard_widget',
             __('Property Management Overview', 'plughaus-property'),
             array($this, 'render_dashboard_widget')
         );
@@ -393,40 +393,40 @@ class PHPM_Admin {
     public function add_meta_boxes() {
         // Property details
         add_meta_box(
-            'phpm_property_details',
+            'vmp_property_details',
             __('Property Details', 'plughaus-property'),
             array($this, 'render_property_details_meta_box'),
-            'phpm_property',
+            'vmp_property',
             'normal',
             'high'
         );
         
         // Unit details
         add_meta_box(
-            'phpm_unit_details',
+            'vmp_unit_details',
             __('Unit Details', 'plughaus-property'),
             array($this, 'render_unit_details_meta_box'),
-            'phpm_unit',
+            'vmp_unit',
             'normal',
             'high'
         );
         
         // Tenant details
         add_meta_box(
-            'phpm_tenant_details',
+            'vmp_tenant_details',
             __('Tenant Details', 'plughaus-property'),
             array($this, 'render_tenant_details_meta_box'),
-            'phpm_tenant',
+            'vmp_tenant',
             'normal',
             'high'
         );
         
         // Lease details
         add_meta_box(
-            'phpm_lease_details',
+            'vmp_lease_details',
             __('Lease Details', 'plughaus-property'),
             array($this, 'render_lease_details_meta_box'),
-            'phpm_lease',
+            'vmp_lease',
             'normal',
             'high'
         );
@@ -436,21 +436,21 @@ class PHPM_Admin {
      * Render property details meta box
      */
     public function render_property_details_meta_box($post) {
-        wp_nonce_field('phpm_save_property_details', 'phpm_property_nonce');
+        wp_nonce_field('vmp_save_property_details', 'vmp_property_nonce');
         
         // Get existing data
-        $address = get_post_meta($post->ID, '_phpm_property_address', true);
-        $city = get_post_meta($post->ID, '_phpm_property_city', true);
-        $state = get_post_meta($post->ID, '_phpm_property_state', true);
-        $zip = get_post_meta($post->ID, '_phpm_property_zip', true);
-        $units = get_post_meta($post->ID, '_phpm_property_units', true);
-        $type = get_post_meta($post->ID, '_phpm_property_type', true);
-        $property_code = get_post_meta($post->ID, '_phpm_property_code', true);
+        $address = get_post_meta($post->ID, '_vmp_property_address', true);
+        $city = get_post_meta($post->ID, '_vmp_property_city', true);
+        $state = get_post_meta($post->ID, '_vmp_property_state', true);
+        $zip = get_post_meta($post->ID, '_vmp_property_zip', true);
+        $units = get_post_meta($post->ID, '_vmp_property_units', true);
+        $type = get_post_meta($post->ID, '_vmp_property_type', true);
+        $property_code = get_post_meta($post->ID, '_vmp_property_code', true);
         
         // Generate property code if doesn't exist
         if (empty($property_code) && $post->ID) {
             $property_code = PHPM_Utilities::generate_property_code();
-            update_post_meta($post->ID, '_phpm_property_code', $property_code);
+            update_post_meta($post->ID, '_vmp_property_code', $property_code);
         }
         
         ?>
@@ -467,9 +467,9 @@ class PHPM_Admin {
                 <?php endif; ?>
                 
                 <tr>
-                    <th><label for="phpm_property_type"><?php _e('Property Type', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_property_type"><?php _e('Property Type', 'plughaus-property'); ?></label></th>
                     <td>
-                        <select id="phpm_property_type" name="phpm_property_type" class="regular-text">
+                        <select id="vmp_property_type" name="vmp_property_type" class="regular-text">
                             <option value=""><?php _e('Select Type', 'plughaus-property'); ?></option>
                             <?php foreach (PHPM_Utilities::get_property_types() as $key => $label): ?>
                                 <option value="<?php echo esc_attr($key); ?>" <?php selected($type, $key); ?>>
@@ -481,45 +481,45 @@ class PHPM_Admin {
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_property_address"><?php _e('Street Address', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_property_address"><?php _e('Street Address', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="text" id="phpm_property_address" name="phpm_property_address" 
+                        <input type="text" id="vmp_property_address" name="vmp_property_address" 
                                value="<?php echo esc_attr($address); ?>" class="large-text" 
                                placeholder="<?php _e('123 Main Street', 'plughaus-property'); ?>" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_property_city"><?php _e('City', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_property_city"><?php _e('City', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="text" id="phpm_property_city" name="phpm_property_city" 
+                        <input type="text" id="vmp_property_city" name="vmp_property_city" 
                                value="<?php echo esc_attr($city); ?>" class="regular-text" 
                                placeholder="<?php _e('San Francisco', 'plughaus-property'); ?>" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_property_state"><?php _e('State/Province', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_property_state"><?php _e('State/Province', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="text" id="phpm_property_state" name="phpm_property_state" 
+                        <input type="text" id="vmp_property_state" name="vmp_property_state" 
                                value="<?php echo esc_attr($state); ?>" class="small-text" 
                                placeholder="<?php _e('CA', 'plughaus-property'); ?>" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_property_zip"><?php _e('ZIP/Postal Code', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_property_zip"><?php _e('ZIP/Postal Code', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="text" id="phpm_property_zip" name="phpm_property_zip" 
+                        <input type="text" id="vmp_property_zip" name="vmp_property_zip" 
                                value="<?php echo esc_attr($zip); ?>" class="small-text" 
                                placeholder="<?php _e('94102', 'plughaus-property'); ?>" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_property_units"><?php _e('Number of Units', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_property_units"><?php _e('Number of Units', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="number" id="phpm_property_units" name="phpm_property_units" 
+                        <input type="number" id="vmp_property_units" name="vmp_property_units" 
                                value="<?php echo esc_attr($units); ?>" class="small-text" min="1" max="999" 
                                placeholder="1" />
                         <p class="description"><?php _e('Total rentable units in this property', 'plughaus-property'); ?></p>
@@ -589,75 +589,75 @@ class PHPM_Admin {
         $post_type = get_post_type($post_id);
         
         // Save property details
-        if ('phpm_property' === $post_type && isset($_POST['phpm_property_nonce'])) {
-            if (!wp_verify_nonce($_POST['phpm_property_nonce'], 'phpm_save_property_details')) {
+        if ('vmp_property' === $post_type && isset($_POST['vmp_property_nonce'])) {
+            if (!wp_verify_nonce($_POST['vmp_property_nonce'], 'vmp_save_property_details')) {
                 return;
             }
             
-            update_post_meta($post_id, '_phpm_property_type', sanitize_text_field($_POST['phpm_property_type']));
-            update_post_meta($post_id, '_phpm_property_address', sanitize_text_field($_POST['phpm_property_address']));
-            update_post_meta($post_id, '_phpm_property_city', sanitize_text_field($_POST['phpm_property_city']));
-            update_post_meta($post_id, '_phpm_property_state', sanitize_text_field($_POST['phpm_property_state']));
-            update_post_meta($post_id, '_phpm_property_zip', sanitize_text_field($_POST['phpm_property_zip']));
-            update_post_meta($post_id, '_phpm_property_units', intval($_POST['phpm_property_units']));
+            update_post_meta($post_id, '_vmp_property_type', sanitize_text_field($_POST['vmp_property_type']));
+            update_post_meta($post_id, '_vmp_property_address', sanitize_text_field($_POST['vmp_property_address']));
+            update_post_meta($post_id, '_vmp_property_city', sanitize_text_field($_POST['vmp_property_city']));
+            update_post_meta($post_id, '_vmp_property_state', sanitize_text_field($_POST['vmp_property_state']));
+            update_post_meta($post_id, '_vmp_property_zip', sanitize_text_field($_POST['vmp_property_zip']));
+            update_post_meta($post_id, '_vmp_property_units', intval($_POST['vmp_property_units']));
         }
         
         // Save unit details
-        if ('phpm_unit' === $post_type && isset($_POST['phpm_unit_nonce'])) {
-            if (!wp_verify_nonce($_POST['phpm_unit_nonce'], 'phpm_save_unit_details')) {
+        if ('vmp_unit' === $post_type && isset($_POST['vmp_unit_nonce'])) {
+            if (!wp_verify_nonce($_POST['vmp_unit_nonce'], 'vmp_save_unit_details')) {
                 return;
             }
             
-            $property_id = intval($_POST['phpm_unit_property_id']);
-            $unit_number = sanitize_text_field($_POST['phpm_unit_number']);
+            $property_id = intval($_POST['vmp_unit_property_id']);
+            $unit_number = sanitize_text_field($_POST['vmp_unit_number']);
             
-            update_post_meta($post_id, '_phpm_unit_property_id', $property_id);
-            update_post_meta($post_id, '_phpm_unit_number', $unit_number);
-            update_post_meta($post_id, '_phpm_unit_bedrooms', intval($_POST['phpm_unit_bedrooms']));
-            update_post_meta($post_id, '_phpm_unit_bathrooms', floatval($_POST['phpm_unit_bathrooms']));
-            update_post_meta($post_id, '_phpm_unit_square_feet', intval($_POST['phpm_unit_square_feet']));
-            update_post_meta($post_id, '_phpm_unit_rent_amount', floatval($_POST['phpm_unit_rent_amount']));
-            update_post_meta($post_id, '_phpm_unit_status', sanitize_text_field($_POST['phpm_unit_status']));
+            update_post_meta($post_id, '_vmp_unit_property_id', $property_id);
+            update_post_meta($post_id, '_vmp_unit_number', $unit_number);
+            update_post_meta($post_id, '_vmp_unit_bedrooms', intval($_POST['vmp_unit_bedrooms']));
+            update_post_meta($post_id, '_vmp_unit_bathrooms', floatval($_POST['vmp_unit_bathrooms']));
+            update_post_meta($post_id, '_vmp_unit_square_feet', intval($_POST['vmp_unit_square_feet']));
+            update_post_meta($post_id, '_vmp_unit_rent_amount', floatval($_POST['vmp_unit_rent_amount']));
+            update_post_meta($post_id, '_vmp_unit_status', sanitize_text_field($_POST['vmp_unit_status']));
             
             // Generate unit code if property and unit number are set
             if (!empty($property_id) && !empty($unit_number)) {
                 $unit_code = PHPM_Utilities::generate_unit_code($property_id, $unit_number);
-                update_post_meta($post_id, '_phpm_unit_code', $unit_code);
+                update_post_meta($post_id, '_vmp_unit_code', $unit_code);
             }
         }
         
         // Save tenant details
-        if ('phpm_tenant' === $post_type && isset($_POST['phpm_tenant_nonce'])) {
-            if (!wp_verify_nonce($_POST['phpm_tenant_nonce'], 'phpm_save_tenant_details')) {
+        if ('vmp_tenant' === $post_type && isset($_POST['vmp_tenant_nonce'])) {
+            if (!wp_verify_nonce($_POST['vmp_tenant_nonce'], 'vmp_save_tenant_details')) {
                 return;
             }
             
-            update_post_meta($post_id, '_phpm_tenant_first_name', sanitize_text_field($_POST['phpm_tenant_first_name']));
-            update_post_meta($post_id, '_phpm_tenant_last_name', sanitize_text_field($_POST['phpm_tenant_last_name']));
-            update_post_meta($post_id, '_phpm_tenant_email', sanitize_email($_POST['phpm_tenant_email']));
-            update_post_meta($post_id, '_phpm_tenant_phone', sanitize_text_field($_POST['phpm_tenant_phone']));
-            update_post_meta($post_id, '_phpm_tenant_emergency_name', sanitize_text_field($_POST['phpm_tenant_emergency_name']));
-            update_post_meta($post_id, '_phpm_tenant_emergency_phone', sanitize_text_field($_POST['phpm_tenant_emergency_phone']));
-            update_post_meta($post_id, '_phpm_tenant_emergency_relationship', sanitize_text_field($_POST['phpm_tenant_emergency_relationship']));
-            update_post_meta($post_id, '_phpm_tenant_move_in_date', sanitize_text_field($_POST['phpm_tenant_move_in_date']));
-            update_post_meta($post_id, '_phpm_tenant_notes', wp_kses_post($_POST['phpm_tenant_notes']));
+            update_post_meta($post_id, '_vmp_tenant_first_name', sanitize_text_field($_POST['vmp_tenant_first_name']));
+            update_post_meta($post_id, '_vmp_tenant_last_name', sanitize_text_field($_POST['vmp_tenant_last_name']));
+            update_post_meta($post_id, '_vmp_tenant_email', sanitize_email($_POST['vmp_tenant_email']));
+            update_post_meta($post_id, '_vmp_tenant_phone', sanitize_text_field($_POST['vmp_tenant_phone']));
+            update_post_meta($post_id, '_vmp_tenant_emergency_name', sanitize_text_field($_POST['vmp_tenant_emergency_name']));
+            update_post_meta($post_id, '_vmp_tenant_emergency_phone', sanitize_text_field($_POST['vmp_tenant_emergency_phone']));
+            update_post_meta($post_id, '_vmp_tenant_emergency_relationship', sanitize_text_field($_POST['vmp_tenant_emergency_relationship']));
+            update_post_meta($post_id, '_vmp_tenant_move_in_date', sanitize_text_field($_POST['vmp_tenant_move_in_date']));
+            update_post_meta($post_id, '_vmp_tenant_notes', wp_kses_post($_POST['vmp_tenant_notes']));
         }
         
         // Save lease details
-        if ('phpm_lease' === $post_type && isset($_POST['phpm_lease_nonce'])) {
-            if (!wp_verify_nonce($_POST['phpm_lease_nonce'], 'phpm_save_lease_details')) {
+        if ('vmp_lease' === $post_type && isset($_POST['vmp_lease_nonce'])) {
+            if (!wp_verify_nonce($_POST['vmp_lease_nonce'], 'vmp_save_lease_details')) {
                 return;
             }
             
-            update_post_meta($post_id, '_phpm_lease_property_id', intval($_POST['phpm_lease_property_id']));
-            update_post_meta($post_id, '_phpm_lease_unit_id', intval($_POST['phpm_lease_unit_id']));
-            update_post_meta($post_id, '_phpm_lease_tenant_id', intval($_POST['phpm_lease_tenant_id']));
-            update_post_meta($post_id, '_phpm_lease_start_date', sanitize_text_field($_POST['phpm_lease_start_date']));
-            update_post_meta($post_id, '_phpm_lease_end_date', sanitize_text_field($_POST['phpm_lease_end_date']));
-            update_post_meta($post_id, '_phpm_lease_rent_amount', floatval($_POST['phpm_lease_rent_amount']));
-            update_post_meta($post_id, '_phpm_lease_security_deposit', floatval($_POST['phpm_lease_security_deposit']));
-            update_post_meta($post_id, '_phpm_lease_status', sanitize_text_field($_POST['phpm_lease_status']));
-            update_post_meta($post_id, '_phpm_lease_notes', wp_kses_post($_POST['phpm_lease_notes']));
+            update_post_meta($post_id, '_vmp_lease_property_id', intval($_POST['vmp_lease_property_id']));
+            update_post_meta($post_id, '_vmp_lease_unit_id', intval($_POST['vmp_lease_unit_id']));
+            update_post_meta($post_id, '_vmp_lease_tenant_id', intval($_POST['vmp_lease_tenant_id']));
+            update_post_meta($post_id, '_vmp_lease_start_date', sanitize_text_field($_POST['vmp_lease_start_date']));
+            update_post_meta($post_id, '_vmp_lease_end_date', sanitize_text_field($_POST['vmp_lease_end_date']));
+            update_post_meta($post_id, '_vmp_lease_rent_amount', floatval($_POST['vmp_lease_rent_amount']));
+            update_post_meta($post_id, '_vmp_lease_security_deposit', floatval($_POST['vmp_lease_security_deposit']));
+            update_post_meta($post_id, '_vmp_lease_status', sanitize_text_field($_POST['vmp_lease_status']));
+            update_post_meta($post_id, '_vmp_lease_notes', wp_kses_post($_POST['vmp_lease_notes']));
         }
     }
     
@@ -665,27 +665,27 @@ class PHPM_Admin {
      * Render unit details meta box
      */
     public function render_unit_details_meta_box($post) {
-        wp_nonce_field('phpm_save_unit_details', 'phpm_unit_nonce');
+        wp_nonce_field('vmp_save_unit_details', 'vmp_unit_nonce');
         
         // Get existing data
-        $property_id = get_post_meta($post->ID, '_phpm_unit_property_id', true);
-        $unit_number = get_post_meta($post->ID, '_phpm_unit_number', true);
-        $bedrooms = get_post_meta($post->ID, '_phpm_unit_bedrooms', true);
-        $bathrooms = get_post_meta($post->ID, '_phpm_unit_bathrooms', true);
-        $square_feet = get_post_meta($post->ID, '_phpm_unit_square_feet', true);
-        $rent_amount = get_post_meta($post->ID, '_phpm_unit_rent_amount', true);
-        $unit_code = get_post_meta($post->ID, '_phpm_unit_code', true);
-        $status = get_post_meta($post->ID, '_phpm_unit_status', true);
+        $property_id = get_post_meta($post->ID, '_vmp_unit_property_id', true);
+        $unit_number = get_post_meta($post->ID, '_vmp_unit_number', true);
+        $bedrooms = get_post_meta($post->ID, '_vmp_unit_bedrooms', true);
+        $bathrooms = get_post_meta($post->ID, '_vmp_unit_bathrooms', true);
+        $square_feet = get_post_meta($post->ID, '_vmp_unit_square_feet', true);
+        $rent_amount = get_post_meta($post->ID, '_vmp_unit_rent_amount', true);
+        $unit_code = get_post_meta($post->ID, '_vmp_unit_code', true);
+        $status = get_post_meta($post->ID, '_vmp_unit_status', true);
         
         // Generate unit code if doesn't exist
         if (empty($unit_code) && $post->ID && !empty($property_id)) {
             $unit_code = PHPM_Utilities::generate_unit_code($property_id, $unit_number);
-            update_post_meta($post->ID, '_phpm_unit_code', $unit_code);
+            update_post_meta($post->ID, '_vmp_unit_code', $unit_code);
         }
         
         // Get properties for dropdown
         $properties = get_posts(array(
-            'post_type' => 'phpm_property',
+            'post_type' => 'vmp_property',
             'post_status' => 'publish',
             'posts_per_page' => -1,
             'orderby' => 'title',
@@ -706,9 +706,9 @@ class PHPM_Admin {
                 <?php endif; ?>
                 
                 <tr>
-                    <th><label for="phpm_unit_property_id"><?php _e('Property', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_unit_property_id"><?php _e('Property', 'plughaus-property'); ?></label></th>
                     <td>
-                        <select id="phpm_unit_property_id" name="phpm_unit_property_id" class="regular-text">
+                        <select id="vmp_unit_property_id" name="vmp_unit_property_id" class="regular-text">
                             <option value=""><?php _e('Select Property', 'plughaus-property'); ?></option>
                             <?php foreach ($properties as $property): ?>
                                 <option value="<?php echo esc_attr($property->ID); ?>" <?php selected($property_id, $property->ID); ?>>
@@ -721,42 +721,42 @@ class PHPM_Admin {
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_unit_number"><?php _e('Unit Number', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_unit_number"><?php _e('Unit Number', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="text" id="phpm_unit_number" name="phpm_unit_number" 
+                        <input type="text" id="vmp_unit_number" name="vmp_unit_number" 
                                value="<?php echo esc_attr($unit_number); ?>" class="regular-text" 
                                placeholder="<?php _e('101, A, 1st Floor, etc.', 'plughaus-property'); ?>" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_unit_bedrooms"><?php _e('Bedrooms', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_unit_bedrooms"><?php _e('Bedrooms', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="number" id="phpm_unit_bedrooms" name="phpm_unit_bedrooms" 
+                        <input type="number" id="vmp_unit_bedrooms" name="vmp_unit_bedrooms" 
                                value="<?php echo esc_attr($bedrooms); ?>" class="small-text" min="0" max="20" step="1" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_unit_bathrooms"><?php _e('Bathrooms', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_unit_bathrooms"><?php _e('Bathrooms', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="number" id="phpm_unit_bathrooms" name="phpm_unit_bathrooms" 
+                        <input type="number" id="vmp_unit_bathrooms" name="vmp_unit_bathrooms" 
                                value="<?php echo esc_attr($bathrooms); ?>" class="small-text" min="0" max="20" step="0.5" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_unit_square_feet"><?php _e('Square Feet', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_unit_square_feet"><?php _e('Square Feet', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="number" id="phpm_unit_square_feet" name="phpm_unit_square_feet" 
+                        <input type="number" id="vmp_unit_square_feet" name="vmp_unit_square_feet" 
                                value="<?php echo esc_attr($square_feet); ?>" class="regular-text" min="1" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_unit_rent_amount"><?php _e('Monthly Rent', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_unit_rent_amount"><?php _e('Monthly Rent', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="number" id="phpm_unit_rent_amount" name="phpm_unit_rent_amount" 
+                        <input type="number" id="vmp_unit_rent_amount" name="vmp_unit_rent_amount" 
                                value="<?php echo esc_attr($rent_amount); ?>" class="regular-text" min="0" step="0.01" 
                                placeholder="<?php _e('2500.00', 'plughaus-property'); ?>" />
                         <p class="description"><?php _e('Monthly rental amount in local currency', 'plughaus-property'); ?></p>
@@ -764,9 +764,9 @@ class PHPM_Admin {
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_unit_status"><?php _e('Unit Status', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_unit_status"><?php _e('Unit Status', 'plughaus-property'); ?></label></th>
                     <td>
-                        <select id="phpm_unit_status" name="phpm_unit_status" class="regular-text">
+                        <select id="vmp_unit_status" name="vmp_unit_status" class="regular-text">
                             <option value="available" <?php selected($status, 'available'); ?>><?php _e('Available', 'plughaus-property'); ?></option>
                             <option value="occupied" <?php selected($status, 'occupied'); ?>><?php _e('Occupied', 'plughaus-property'); ?></option>
                             <option value="maintenance" <?php selected($status, 'maintenance'); ?>><?php _e('Under Maintenance', 'plughaus-property'); ?></option>
@@ -795,44 +795,44 @@ class PHPM_Admin {
      * Render tenant details meta box
      */
     public function render_tenant_details_meta_box($post) {
-        wp_nonce_field('phpm_save_tenant_details', 'phpm_tenant_nonce');
+        wp_nonce_field('vmp_save_tenant_details', 'vmp_tenant_nonce');
         
         // Get existing data
-        $first_name = get_post_meta($post->ID, '_phpm_tenant_first_name', true);
-        $last_name = get_post_meta($post->ID, '_phpm_tenant_last_name', true);
-        $email = get_post_meta($post->ID, '_phpm_tenant_email', true);
-        $phone = get_post_meta($post->ID, '_phpm_tenant_phone', true);
-        $emergency_name = get_post_meta($post->ID, '_phpm_tenant_emergency_name', true);
-        $emergency_phone = get_post_meta($post->ID, '_phpm_tenant_emergency_phone', true);
-        $emergency_relationship = get_post_meta($post->ID, '_phpm_tenant_emergency_relationship', true);
-        $move_in_date = get_post_meta($post->ID, '_phpm_tenant_move_in_date', true);
-        $notes = get_post_meta($post->ID, '_phpm_tenant_notes', true);
+        $first_name = get_post_meta($post->ID, '_vmp_tenant_first_name', true);
+        $last_name = get_post_meta($post->ID, '_vmp_tenant_last_name', true);
+        $email = get_post_meta($post->ID, '_vmp_tenant_email', true);
+        $phone = get_post_meta($post->ID, '_vmp_tenant_phone', true);
+        $emergency_name = get_post_meta($post->ID, '_vmp_tenant_emergency_name', true);
+        $emergency_phone = get_post_meta($post->ID, '_vmp_tenant_emergency_phone', true);
+        $emergency_relationship = get_post_meta($post->ID, '_vmp_tenant_emergency_relationship', true);
+        $move_in_date = get_post_meta($post->ID, '_vmp_tenant_move_in_date', true);
+        $notes = get_post_meta($post->ID, '_vmp_tenant_notes', true);
         
         ?>
         <div class="phpm-meta-box">
             <table class="form-table">
                 <tr>
-                    <th><label for="phpm_tenant_first_name"><?php _e('First Name', 'plughaus-property'); ?> <span class="required">*</span></label></th>
+                    <th><label for="vmp_tenant_first_name"><?php _e('First Name', 'plughaus-property'); ?> <span class="required">*</span></label></th>
                     <td>
-                        <input type="text" id="phpm_tenant_first_name" name="phpm_tenant_first_name" 
+                        <input type="text" id="vmp_tenant_first_name" name="vmp_tenant_first_name" 
                                value="<?php echo esc_attr($first_name); ?>" class="regular-text" required 
                                placeholder="<?php _e('John', 'plughaus-property'); ?>" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_tenant_last_name"><?php _e('Last Name', 'plughaus-property'); ?> <span class="required">*</span></label></th>
+                    <th><label for="vmp_tenant_last_name"><?php _e('Last Name', 'plughaus-property'); ?> <span class="required">*</span></label></th>
                     <td>
-                        <input type="text" id="phpm_tenant_last_name" name="phpm_tenant_last_name" 
+                        <input type="text" id="vmp_tenant_last_name" name="vmp_tenant_last_name" 
                                value="<?php echo esc_attr($last_name); ?>" class="regular-text" required 
                                placeholder="<?php _e('Smith', 'plughaus-property'); ?>" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_tenant_email"><?php _e('Email Address', 'plughaus-property'); ?> <span class="required">*</span></label></th>
+                    <th><label for="vmp_tenant_email"><?php _e('Email Address', 'plughaus-property'); ?> <span class="required">*</span></label></th>
                     <td>
-                        <input type="email" id="phpm_tenant_email" name="phpm_tenant_email" 
+                        <input type="email" id="vmp_tenant_email" name="vmp_tenant_email" 
                                value="<?php echo esc_attr($email); ?>" class="regular-text" required 
                                placeholder="<?php _e('john.smith@example.com', 'plughaus-property'); ?>" />
                         <?php if (!empty($email) && !PHPM_Utilities::validate_email($email)): ?>
@@ -842,9 +842,9 @@ class PHPM_Admin {
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_tenant_phone"><?php _e('Phone Number', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_tenant_phone"><?php _e('Phone Number', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="tel" id="phpm_tenant_phone" name="phpm_tenant_phone" 
+                        <input type="tel" id="vmp_tenant_phone" name="vmp_tenant_phone" 
                                value="<?php echo esc_attr($phone); ?>" class="regular-text" 
                                placeholder="<?php _e('(555) 123-4567', 'plughaus-property'); ?>" />
                         <?php if (!empty($phone)): ?>
@@ -854,9 +854,9 @@ class PHPM_Admin {
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_tenant_move_in_date"><?php _e('Move-In Date', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_tenant_move_in_date"><?php _e('Move-In Date', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="date" id="phpm_tenant_move_in_date" name="phpm_tenant_move_in_date" 
+                        <input type="date" id="vmp_tenant_move_in_date" name="vmp_tenant_move_in_date" 
                                value="<?php echo esc_attr($move_in_date); ?>" class="regular-text" />
                     </td>
                 </tr>
@@ -865,27 +865,27 @@ class PHPM_Admin {
             <h4><?php _e('Emergency Contact', 'plughaus-property'); ?></h4>
             <table class="form-table">
                 <tr>
-                    <th><label for="phpm_tenant_emergency_name"><?php _e('Emergency Contact Name', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_tenant_emergency_name"><?php _e('Emergency Contact Name', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="text" id="phpm_tenant_emergency_name" name="phpm_tenant_emergency_name" 
+                        <input type="text" id="vmp_tenant_emergency_name" name="vmp_tenant_emergency_name" 
                                value="<?php echo esc_attr($emergency_name); ?>" class="regular-text" 
                                placeholder="<?php _e('Jane Smith', 'plughaus-property'); ?>" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_tenant_emergency_phone"><?php _e('Emergency Contact Phone', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_tenant_emergency_phone"><?php _e('Emergency Contact Phone', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="tel" id="phpm_tenant_emergency_phone" name="phpm_tenant_emergency_phone" 
+                        <input type="tel" id="vmp_tenant_emergency_phone" name="vmp_tenant_emergency_phone" 
                                value="<?php echo esc_attr($emergency_phone); ?>" class="regular-text" 
                                placeholder="<?php _e('(555) 987-6543', 'plughaus-property'); ?>" />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_tenant_emergency_relationship"><?php _e('Relationship', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_tenant_emergency_relationship"><?php _e('Relationship', 'plughaus-property'); ?></label></th>
                     <td>
-                        <select id="phpm_tenant_emergency_relationship" name="phpm_tenant_emergency_relationship" class="regular-text">
+                        <select id="vmp_tenant_emergency_relationship" name="vmp_tenant_emergency_relationship" class="regular-text">
                             <option value=""><?php _e('Select Relationship', 'plughaus-property'); ?></option>
                             <option value="spouse" <?php selected($emergency_relationship, 'spouse'); ?>><?php _e('Spouse', 'plughaus-property'); ?></option>
                             <option value="parent" <?php selected($emergency_relationship, 'parent'); ?>><?php _e('Parent', 'plughaus-property'); ?></option>
@@ -901,9 +901,9 @@ class PHPM_Admin {
             <h4><?php _e('Additional Information', 'plughaus-property'); ?></h4>
             <table class="form-table">
                 <tr>
-                    <th><label for="phpm_tenant_notes"><?php _e('Notes', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_tenant_notes"><?php _e('Notes', 'plughaus-property'); ?></label></th>
                     <td>
-                        <textarea id="phpm_tenant_notes" name="phpm_tenant_notes" class="large-text" rows="4" 
+                        <textarea id="vmp_tenant_notes" name="vmp_tenant_notes" class="large-text" rows="4" 
                                   placeholder="<?php _e('Additional notes about this tenant...', 'plughaus-property'); ?>"><?php echo esc_textarea($notes); ?></textarea>
                         <p class="description"><?php _e('Any additional information or special notes about this tenant', 'plughaus-property'); ?></p>
                     </td>
@@ -945,22 +945,22 @@ class PHPM_Admin {
      * Render lease details meta box
      */
     public function render_lease_details_meta_box($post) {
-        wp_nonce_field('phpm_save_lease_details', 'phpm_lease_nonce');
+        wp_nonce_field('vmp_save_lease_details', 'vmp_lease_nonce');
         
         // Get existing data
-        $property_id = get_post_meta($post->ID, '_phpm_lease_property_id', true);
-        $unit_id = get_post_meta($post->ID, '_phpm_lease_unit_id', true);
-        $tenant_id = get_post_meta($post->ID, '_phpm_lease_tenant_id', true);
-        $start_date = get_post_meta($post->ID, '_phpm_lease_start_date', true);
-        $end_date = get_post_meta($post->ID, '_phpm_lease_end_date', true);
-        $rent_amount = get_post_meta($post->ID, '_phpm_lease_rent_amount', true);
-        $security_deposit = get_post_meta($post->ID, '_phpm_lease_security_deposit', true);
-        $status = get_post_meta($post->ID, '_phpm_lease_status', true);
-        $notes = get_post_meta($post->ID, '_phpm_lease_notes', true);
+        $property_id = get_post_meta($post->ID, '_vmp_lease_property_id', true);
+        $unit_id = get_post_meta($post->ID, '_vmp_lease_unit_id', true);
+        $tenant_id = get_post_meta($post->ID, '_vmp_lease_tenant_id', true);
+        $start_date = get_post_meta($post->ID, '_vmp_lease_start_date', true);
+        $end_date = get_post_meta($post->ID, '_vmp_lease_end_date', true);
+        $rent_amount = get_post_meta($post->ID, '_vmp_lease_rent_amount', true);
+        $security_deposit = get_post_meta($post->ID, '_vmp_lease_security_deposit', true);
+        $status = get_post_meta($post->ID, '_vmp_lease_status', true);
+        $notes = get_post_meta($post->ID, '_vmp_lease_notes', true);
         
         // Get properties for dropdown
         $properties = get_posts(array(
-            'post_type' => 'phpm_property',
+            'post_type' => 'vmp_property',
             'post_status' => 'publish',
             'posts_per_page' => -1,
             'orderby' => 'title',
@@ -971,12 +971,12 @@ class PHPM_Admin {
         $units = array();
         if (!empty($property_id)) {
             $units = get_posts(array(
-                'post_type' => 'phpm_unit',
+                'post_type' => 'vmp_unit',
                 'post_status' => 'publish',
                 'posts_per_page' => -1,
                 'meta_query' => array(
                     array(
-                        'key' => '_phpm_unit_property_id',
+                        'key' => '_vmp_unit_property_id',
                         'value' => $property_id,
                         'compare' => '='
                     )
@@ -988,7 +988,7 @@ class PHPM_Admin {
         
         // Get tenants for dropdown
         $tenants = get_posts(array(
-            'post_type' => 'phpm_tenant',
+            'post_type' => 'vmp_tenant',
             'post_status' => 'publish',
             'posts_per_page' => -1,
             'orderby' => 'title',
@@ -1019,9 +1019,9 @@ class PHPM_Admin {
         <div class="phpm-meta-box">
             <table class="form-table">
                 <tr>
-                    <th><label for="phpm_lease_property_id"><?php _e('Property', 'plughaus-property'); ?> <span class="required">*</span></label></th>
+                    <th><label for="vmp_lease_property_id"><?php _e('Property', 'plughaus-property'); ?> <span class="required">*</span></label></th>
                     <td>
-                        <select id="phpm_lease_property_id" name="phpm_lease_property_id" class="regular-text" required>
+                        <select id="vmp_lease_property_id" name="vmp_lease_property_id" class="regular-text" required>
                             <option value=""><?php _e('Select Property', 'plughaus-property'); ?></option>
                             <?php foreach ($properties as $property): ?>
                                 <option value="<?php echo esc_attr($property->ID); ?>" <?php selected($property_id, $property->ID); ?>>
@@ -1033,9 +1033,9 @@ class PHPM_Admin {
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_lease_unit_id"><?php _e('Unit', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_lease_unit_id"><?php _e('Unit', 'plughaus-property'); ?></label></th>
                     <td>
-                        <select id="phpm_lease_unit_id" name="phpm_lease_unit_id" class="regular-text">
+                        <select id="vmp_lease_unit_id" name="vmp_lease_unit_id" class="regular-text">
                             <option value=""><?php _e('Select Unit', 'plughaus-property'); ?></option>
                             <?php foreach ($units as $unit): ?>
                                 <option value="<?php echo esc_attr($unit->ID); ?>" <?php selected($unit_id, $unit->ID); ?>>
@@ -1048,9 +1048,9 @@ class PHPM_Admin {
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_lease_tenant_id"><?php _e('Tenant', 'plughaus-property'); ?> <span class="required">*</span></label></th>
+                    <th><label for="vmp_lease_tenant_id"><?php _e('Tenant', 'plughaus-property'); ?> <span class="required">*</span></label></th>
                     <td>
-                        <select id="phpm_lease_tenant_id" name="phpm_lease_tenant_id" class="regular-text" required>
+                        <select id="vmp_lease_tenant_id" name="vmp_lease_tenant_id" class="regular-text" required>
                             <option value=""><?php _e('Select Tenant', 'plughaus-property'); ?></option>
                             <?php foreach ($tenants as $tenant): ?>
                                 <option value="<?php echo esc_attr($tenant->ID); ?>" <?php selected($tenant_id, $tenant->ID); ?>>
@@ -1062,9 +1062,9 @@ class PHPM_Admin {
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_lease_status"><?php _e('Lease Status', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_lease_status"><?php _e('Lease Status', 'plughaus-property'); ?></label></th>
                     <td>
-                        <select id="phpm_lease_status" name="phpm_lease_status" class="regular-text">
+                        <select id="vmp_lease_status" name="vmp_lease_status" class="regular-text">
                             <?php foreach (PHPM_Utilities::get_lease_statuses() as $key => $label): ?>
                                 <option value="<?php echo esc_attr($key); ?>" <?php selected($status, $key); ?>>
                                     <?php echo esc_html($label); ?>
@@ -1078,17 +1078,17 @@ class PHPM_Admin {
             <h4><?php _e('Lease Term', 'plughaus-property'); ?></h4>
             <table class="form-table">
                 <tr>
-                    <th><label for="phpm_lease_start_date"><?php _e('Start Date', 'plughaus-property'); ?> <span class="required">*</span></label></th>
+                    <th><label for="vmp_lease_start_date"><?php _e('Start Date', 'plughaus-property'); ?> <span class="required">*</span></label></th>
                     <td>
-                        <input type="date" id="phpm_lease_start_date" name="phpm_lease_start_date" 
+                        <input type="date" id="vmp_lease_start_date" name="vmp_lease_start_date" 
                                value="<?php echo esc_attr($start_date); ?>" class="regular-text" required />
                     </td>
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_lease_end_date"><?php _e('End Date', 'plughaus-property'); ?> <span class="required">*</span></label></th>
+                    <th><label for="vmp_lease_end_date"><?php _e('End Date', 'plughaus-property'); ?> <span class="required">*</span></label></th>
                     <td>
-                        <input type="date" id="phpm_lease_end_date" name="phpm_lease_end_date" 
+                        <input type="date" id="vmp_lease_end_date" name="vmp_lease_end_date" 
                                value="<?php echo esc_attr($end_date); ?>" class="regular-text" required />
                         <?php if (!empty($lease_term)): ?>
                             <p class="description"><?php printf(__('Lease term: %s', 'plughaus-property'), $lease_term); ?></p>
@@ -1103,9 +1103,9 @@ class PHPM_Admin {
             <h4><?php _e('Financial Details', 'plughaus-property'); ?></h4>
             <table class="form-table">
                 <tr>
-                    <th><label for="phpm_lease_rent_amount"><?php _e('Monthly Rent', 'plughaus-property'); ?> <span class="required">*</span></label></th>
+                    <th><label for="vmp_lease_rent_amount"><?php _e('Monthly Rent', 'plughaus-property'); ?> <span class="required">*</span></label></th>
                     <td>
-                        <input type="number" id="phpm_lease_rent_amount" name="phpm_lease_rent_amount" 
+                        <input type="number" id="vmp_lease_rent_amount" name="vmp_lease_rent_amount" 
                                value="<?php echo esc_attr($rent_amount); ?>" class="regular-text" min="0" step="0.01" required 
                                placeholder="<?php _e('2500.00', 'plughaus-property'); ?>" />
                         <?php if (!empty($rent_amount)): ?>
@@ -1115,9 +1115,9 @@ class PHPM_Admin {
                 </tr>
                 
                 <tr>
-                    <th><label for="phpm_lease_security_deposit"><?php _e('Security Deposit', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_lease_security_deposit"><?php _e('Security Deposit', 'plughaus-property'); ?></label></th>
                     <td>
-                        <input type="number" id="phpm_lease_security_deposit" name="phpm_lease_security_deposit" 
+                        <input type="number" id="vmp_lease_security_deposit" name="vmp_lease_security_deposit" 
                                value="<?php echo esc_attr($security_deposit); ?>" class="regular-text" min="0" step="0.01" 
                                placeholder="<?php _e('2500.00', 'plughaus-property'); ?>" />
                         <?php if (!empty($security_deposit)): ?>
@@ -1130,9 +1130,9 @@ class PHPM_Admin {
             <h4><?php _e('Additional Information', 'plughaus-property'); ?></h4>
             <table class="form-table">
                 <tr>
-                    <th><label for="phpm_lease_notes"><?php _e('Lease Notes', 'plughaus-property'); ?></label></th>
+                    <th><label for="vmp_lease_notes"><?php _e('Lease Notes', 'plughaus-property'); ?></label></th>
                     <td>
-                        <textarea id="phpm_lease_notes" name="phpm_lease_notes" class="large-text" rows="4" 
+                        <textarea id="vmp_lease_notes" name="vmp_lease_notes" class="large-text" rows="4" 
                                   placeholder="<?php _e('Special terms, conditions, or notes about this lease...', 'plughaus-property'); ?>"><?php echo esc_textarea($notes); ?></textarea>
                     </td>
                 </tr>

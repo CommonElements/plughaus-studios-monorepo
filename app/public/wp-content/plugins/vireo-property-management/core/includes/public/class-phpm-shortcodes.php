@@ -102,7 +102,7 @@ class PHPM_Shortcodes {
         
         // Build query arguments
         $query_args = array(
-            'post_type' => 'phpm_property',
+            'post_type' => 'vmp_property',
             'post_status' => 'publish',
             'posts_per_page' => intval($atts['limit']),
             'meta_query' => array()
@@ -120,7 +120,7 @@ class PHPM_Shortcodes {
         // Show only available properties if setting is enabled
         if ($settings['show_available_only']) {
             $query_args['meta_query'][] = array(
-                'key' => '_phpm_availability_status',
+                'key' => '_vmp_availability_status',
                 'value' => 'available',
                 'compare' => '='
             );
@@ -186,7 +186,7 @@ class PHPM_Shortcodes {
         }
         
         $property = get_post($property_id);
-        if (!$property || $property->post_type !== 'phpm_property') {
+        if (!$property || $property->post_type !== 'vmp_property') {
             return '<p>' . __('Property not found.', 'plughaus-property') . '</p>';
         }
         
@@ -290,7 +290,7 @@ class PHPM_Shortcodes {
                             <option value=""><?php _e('Any Location', 'plughaus-property'); ?></option>
                             <?php
                             $locations = get_terms(array(
-                                'taxonomy' => 'phpm_location',
+                                'taxonomy' => 'vmp_location',
                                 'hide_empty' => true
                             ));
                             foreach ($locations as $location) {
@@ -308,7 +308,7 @@ class PHPM_Shortcodes {
                             <option value=""><?php _e('Any Type', 'plughaus-property'); ?></option>
                             <?php
                             $types = get_terms(array(
-                                'taxonomy' => 'phpm_property_type',
+                                'taxonomy' => 'vmp_property_type',
                                 'hide_empty' => true
                             ));
                             foreach ($types as $type) {
@@ -887,7 +887,7 @@ class PHPM_Shortcodes {
                             <option value=""><?php _e('Select a property (optional)', 'plughaus-property'); ?></option>
                             <?php
                             $properties = get_posts(array(
-                                'post_type' => 'phpm_property',
+                                'post_type' => 'vmp_property',
                                 'post_status' => 'publish',
                                 'numberposts' => -1
                             ));
@@ -986,10 +986,10 @@ class PHPM_Shortcodes {
         $user_id = get_current_user_id();
         
         $tenant_query = new WP_Query(array(
-            'post_type' => 'phpm_tenant',
+            'post_type' => 'vmp_tenant',
             'meta_query' => array(
                 array(
-                    'key' => '_phpm_user_id',
+                    'key' => '_vmp_user_id',
                     'value' => $user_id,
                     'compare' => '='
                 )
@@ -1005,11 +1005,11 @@ class PHPM_Shortcodes {
     }
     
     private static function render_property_card($property_id, $settings) {
-        $address = get_post_meta($property_id, '_phpm_address', true);
-        $city = get_post_meta($property_id, '_phpm_city', true);
-        $units = get_post_meta($property_id, '_phpm_total_units', true);
-        $available_units = get_post_meta($property_id, '_phpm_available_units', true);
-        $rent_range = get_post_meta($property_id, '_phpm_rent_range', true);
+        $address = get_post_meta($property_id, '_vmp_address', true);
+        $city = get_post_meta($property_id, '_vmp_city', true);
+        $units = get_post_meta($property_id, '_vmp_total_units', true);
+        $available_units = get_post_meta($property_id, '_vmp_available_units', true);
+        $rent_range = get_post_meta($property_id, '_vmp_rent_range', true);
         
         ob_start();
         ?>
@@ -1079,11 +1079,110 @@ class PHPM_Shortcodes {
     // For brevity, I'm including the key framework with placeholder implementations
     
     private static function get_property_filters($atts) {
-        return array('meta_query' => array(), 'tax_query' => array());
+        $meta_query = array();
+        $tax_query = array();
+        
+        // Filter by property type
+        if (!empty($atts['type']) || !empty($_GET['property_type'])) {
+            $type = !empty($atts['type']) ? $atts['type'] : $_GET['property_type'];
+            $tax_query[] = array(
+                'taxonomy' => 'vmp_property_type',
+                'field' => 'slug',
+                'terms' => $type
+            );
+        }
+        
+        // Filter by location
+        if (!empty($atts['location']) || !empty($_GET['location'])) {
+            $location = !empty($atts['location']) ? $atts['location'] : $_GET['location'];
+            $tax_query[] = array(
+                'taxonomy' => 'vmp_location',
+                'field' => 'slug',
+                'terms' => $location
+            );
+        }
+        
+        // Filter by rent range
+        if (!empty($atts['min_rent']) || !empty($_GET['min_rent'])) {
+            $min_rent = !empty($atts['min_rent']) ? $atts['min_rent'] : $_GET['min_rent'];
+            $meta_query[] = array(
+                'key' => '_vmp_property_rent_min',
+                'value' => floatval($min_rent),
+                'compare' => '>=',
+                'type' => 'NUMERIC'
+            );
+        }
+        
+        if (!empty($atts['max_rent']) || !empty($_GET['max_rent'])) {
+            $max_rent = !empty($atts['max_rent']) ? $atts['max_rent'] : $_GET['max_rent'];
+            $meta_query[] = array(
+                'key' => '_vmp_property_rent_max',
+                'value' => floatval($max_rent),
+                'compare' => '<=',
+                'type' => 'NUMERIC'
+            );
+        }
+        
+        // Filter by bedrooms
+        if (!empty($atts['bedrooms']) || !empty($_GET['bedrooms'])) {
+            $bedrooms = !empty($atts['bedrooms']) ? $atts['bedrooms'] : $_GET['bedrooms'];
+            $meta_query[] = array(
+                'key' => '_vmp_property_bedrooms_min',
+                'value' => intval($bedrooms),
+                'compare' => '>=',
+                'type' => 'NUMERIC'
+            );
+        }
+        
+        return array('meta_query' => $meta_query, 'tax_query' => $tax_query);
     }
     
     private static function render_property_search_form($atts) {
-        return '<!-- Search form would be rendered here -->';
+        ob_start();
+        ?>
+        <div class="vmp-property-search-form">
+            <form method="get" class="vmp-search-form">
+                <div class="vmp-search-fields">
+                    <div class="vmp-search-field">
+                        <label for="property_type"><?php _e('Type', 'plughaus-property'); ?></label>
+                        <select name="property_type" id="property_type">
+                            <option value=""><?php _e('Any Type', 'plughaus-property'); ?></option>
+                            <option value="apartment" <?php selected($_GET['property_type'] ?? '', 'apartment'); ?>><?php _e('Apartment', 'plughaus-property'); ?></option>
+                            <option value="house" <?php selected($_GET['property_type'] ?? '', 'house'); ?>><?php _e('House', 'plughaus-property'); ?></option>
+                            <option value="condo" <?php selected($_GET['property_type'] ?? '', 'condo'); ?>><?php _e('Condo', 'plughaus-property'); ?></option>
+                        </select>
+                    </div>
+                    
+                    <div class="vmp-search-field">
+                        <label for="min_rent"><?php _e('Min Rent', 'plughaus-property'); ?></label>
+                        <input type="number" name="min_rent" id="min_rent" value="<?php echo esc_attr($_GET['min_rent'] ?? ''); ?>" placeholder="$500">
+                    </div>
+                    
+                    <div class="vmp-search-field">
+                        <label for="max_rent"><?php _e('Max Rent', 'plughaus-property'); ?></label>
+                        <input type="number" name="max_rent" id="max_rent" value="<?php echo esc_attr($_GET['max_rent'] ?? ''); ?>" placeholder="$3000">
+                    </div>
+                    
+                    <div class="vmp-search-field">
+                        <label for="bedrooms"><?php _e('Bedrooms', 'plughaus-property'); ?></label>
+                        <select name="bedrooms" id="bedrooms">
+                            <option value=""><?php _e('Any', 'plughaus-property'); ?></option>
+                            <?php for ($i = 1; $i <= 5; $i++) : ?>
+                                <option value="<?php echo $i; ?>" <?php selected($_GET['bedrooms'] ?? '', $i); ?>><?php echo $i; ?>+</option>
+                            <?php endfor; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="vmp-search-submit">
+                        <button type="submit" class="vmp-button vmp-button-primary">
+                            <?php _e('Search', 'plughaus-property'); ?>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     private static function render_property_filters() {
@@ -1091,11 +1190,96 @@ class PHPM_Shortcodes {
     }
     
     private static function render_pagination($query) {
-        return '<!-- Pagination would be rendered here -->';
+        if ($query->max_num_pages <= 1) {
+            return '';
+        }
+        
+        $current_page = max(1, get_query_var('paged'));
+        $total_pages = $query->max_num_pages;
+        
+        ob_start();
+        ?>
+        <div class="vmp-pagination">
+            <div class="vmp-pagination-info">
+                <?php printf(
+                    __('Page %d of %d', 'plughaus-property'),
+                    $current_page,
+                    $total_pages
+                ); ?>
+            </div>
+            
+            <div class="vmp-pagination-links">
+                <?php if ($current_page > 1) : ?>
+                    <a href="<?php echo get_pagenum_link($current_page - 1); ?>" class="vmp-button vmp-button-secondary">
+                        <?php _e('Previous', 'plughaus-property'); ?>
+                    </a>
+                <?php endif; ?>
+                
+                <?php for ($i = max(1, $current_page - 2); $i <= min($total_pages, $current_page + 2); $i++) : ?>
+                    <?php if ($i == $current_page) : ?>
+                        <span class="vmp-button vmp-button-primary current"><?php echo $i; ?></span>
+                    <?php else : ?>
+                        <a href="<?php echo get_pagenum_link($i); ?>" class="vmp-button vmp-button-secondary"><?php echo $i; ?></a>
+                    <?php endif; ?>
+                <?php endfor; ?>
+                
+                <?php if ($current_page < $total_pages) : ?>
+                    <a href="<?php echo get_pagenum_link($current_page + 1); ?>" class="vmp-button vmp-button-secondary">
+                        <?php _e('Next', 'plughaus-property'); ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     private static function render_property_meta($property_id) {
-        return '<!-- Property meta would be rendered here -->';
+        $address = get_post_meta($property_id, '_vmp_property_address', true);
+        $city = get_post_meta($property_id, '_vmp_property_city', true);
+        $state = get_post_meta($property_id, '_vmp_property_state', true);
+        $zip = get_post_meta($property_id, '_vmp_property_zip', true);
+        $units = get_post_meta($property_id, '_vmp_property_units', true);
+        $type = get_post_meta($property_id, '_vmp_property_type', true);
+        
+        ob_start();
+        ?>
+        <div class="vmp-property-meta">
+            <?php if ($address || $city || $state) : ?>
+                <div class="vmp-property-address">
+                    <span class="dashicons dashicons-location"></span>
+                    <span class="vmp-address-text">
+                        <?php 
+                        $address_parts = array_filter(array($address, $city, $state, $zip));
+                        echo esc_html(implode(', ', $address_parts));
+                        ?>
+                    </span>
+                </div>
+            <?php endif; ?>
+            
+            <div class="vmp-property-details">
+                <?php if ($type) : ?>
+                    <span class="vmp-property-type">
+                        <span class="dashicons dashicons-building"></span>
+                        <?php echo esc_html(ucfirst($type)); ?>
+                    </span>
+                <?php endif; ?>
+                
+                <?php if ($units) : ?>
+                    <span class="vmp-property-units">
+                        <span class="dashicons dashicons-admin-home"></span>
+                        <?php printf(_n('%d Unit', '%d Units', $units, 'plughaus-property'), $units); ?>
+                    </span>
+                <?php endif; ?>
+                
+                <span class="vmp-property-id">
+                    <span class="dashicons dashicons-tag"></span>
+                    <?php printf(__('ID: %d', 'plughaus-property'), $property_id); ?>
+                </span>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     private static function render_property_gallery($property_id) {
@@ -1103,15 +1287,167 @@ class PHPM_Shortcodes {
     }
     
     private static function render_property_features($property_id) {
-        return '<!-- Property features would be rendered here -->';
+        $year_built = get_post_meta($property_id, '_vmp_property_year_built', true);
+        $square_footage = get_post_meta($property_id, '_vmp_property_square_footage', true);
+        $lot_size = get_post_meta($property_id, '_vmp_property_lot_size', true);
+        $parking = get_post_meta($property_id, '_vmp_property_parking', true);
+        $pets_allowed = get_post_meta($property_id, '_vmp_property_pets_allowed', true);
+        
+        ob_start();
+        ?>
+        <div class="vmp-property-features">
+            <ul class="vmp-features-list">
+                <?php if ($year_built) : ?>
+                    <li class="vmp-feature">
+                        <span class="dashicons dashicons-calendar-alt"></span>
+                        <?php printf(__('Built in %s', 'plughaus-property'), esc_html($year_built)); ?>
+                    </li>
+                <?php endif; ?>
+                
+                <?php if ($square_footage) : ?>
+                    <li class="vmp-feature">
+                        <span class="dashicons dashicons-admin-home"></span>
+                        <?php printf(__('%s sq ft', 'plughaus-property'), number_format($square_footage)); ?>
+                    </li>
+                <?php endif; ?>
+                
+                <?php if ($lot_size) : ?>
+                    <li class="vmp-feature">
+                        <span class="dashicons dashicons-location-alt"></span>
+                        <?php printf(__('%s acre lot', 'plughaus-property'), number_format($lot_size, 2)); ?>
+                    </li>
+                <?php endif; ?>
+                
+                <?php if ($parking) : ?>
+                    <li class="vmp-feature">
+                        <span class="dashicons dashicons-car"></span>
+                        <?php echo esc_html($parking); ?>
+                    </li>
+                <?php endif; ?>
+                
+                <?php if ($pets_allowed) : ?>
+                    <li class="vmp-feature">
+                        <span class="dashicons dashicons-heart"></span>
+                        <?php _e('Pet Friendly', 'plughaus-property'); ?>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     private static function render_property_amenities($property_id) {
-        return '<!-- Property amenities would be rendered here -->';
+        $amenities = get_post_meta($property_id, '_vmp_property_amenities', true);
+        $amenities_list = wp_get_post_terms($property_id, 'vmp_amenities');
+        
+        ob_start();
+        ?>
+        <div class="vmp-property-amenities">
+            <?php if ($amenities_list && !is_wp_error($amenities_list)) : ?>
+                <ul class="vmp-amenities-list">
+                    <?php foreach ($amenities_list as $amenity) : ?>
+                        <li class="vmp-amenity">
+                            <span class="dashicons dashicons-yes"></span>
+                            <?php echo esc_html($amenity->name); ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php elseif ($amenities) : ?>
+                <div class="vmp-amenities-text">
+                    <?php echo wpautop(esc_html($amenities)); ?>
+                </div>
+            <?php else : ?>
+                <p class="vmp-no-amenities">
+                    <?php _e('No amenities listed.', 'plughaus-property'); ?>
+                </p>
+            <?php endif; ?>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     private static function render_available_units($property_id) {
-        return '<!-- Available units would be rendered here -->';
+        global $wpdb;
+        
+        // Query units from database
+        $units = $wpdb->get_results($wpdb->prepare("
+            SELECT * FROM {$wpdb->prefix}vmp_units 
+            WHERE property_id = %d AND status = 'available'
+            ORDER BY unit_number ASC
+        ", $property_id));
+        
+        ob_start();
+        ?>
+        <div class="vmp-available-units">
+            <?php if ($units) : ?>
+                <div class="vmp-units-grid">
+                    <?php foreach ($units as $unit) : ?>
+                        <div class="vmp-unit-card">
+                            <div class="vmp-unit-header">
+                                <h4 class="vmp-unit-title">
+                                    <?php printf(__('Unit %s', 'plughaus-property'), esc_html($unit->unit_number)); ?>
+                                </h4>
+                                <span class="vmp-unit-status available">
+                                    <?php _e('Available', 'plughaus-property'); ?>
+                                </span>
+                            </div>
+                            
+                            <div class="vmp-unit-details">
+                                <?php if ($unit->bedrooms) : ?>
+                                    <span class="vmp-unit-bedrooms">
+                                        <span class="dashicons dashicons-admin-home"></span>
+                                        <?php printf(_n('%d Bedroom', '%d Bedrooms', $unit->bedrooms, 'plughaus-property'), $unit->bedrooms); ?>
+                                    </span>
+                                <?php endif; ?>
+                                
+                                <?php if ($unit->bathrooms) : ?>
+                                    <span class="vmp-unit-bathrooms">
+                                        <span class="dashicons dashicons-admin-tools"></span>
+                                        <?php printf(_n('%s Bath', '%s Baths', $unit->bathrooms, 'plughaus-property'), number_format($unit->bathrooms, 1)); ?>
+                                    </span>
+                                <?php endif; ?>
+                                
+                                <?php if ($unit->square_footage) : ?>
+                                    <span class="vmp-unit-sqft">
+                                        <span class="dashicons dashicons-editor-expand"></span>
+                                        <?php printf(__('%s sq ft', 'plughaus-property'), number_format($unit->square_footage)); ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                            
+                            <?php if ($unit->rent_amount) : ?>
+                                <div class="vmp-unit-rent">
+                                    <span class="vmp-rent-amount">
+                                        $<?php echo number_format($unit->rent_amount); ?>
+                                    </span>
+                                    <span class="vmp-rent-period"><?php _e('/month', 'plughaus-property'); ?></span>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <?php if ($unit->available_date) : ?>
+                                <div class="vmp-unit-available-date">
+                                    <?php printf(__('Available: %s', 'plughaus-property'), date_i18n(get_option('date_format'), strtotime($unit->available_date))); ?>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class="vmp-unit-actions">
+                                <a href="#contact" class="vmp-button vmp-button-primary">
+                                    <?php _e('Inquire', 'plughaus-property'); ?>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else : ?>
+                <div class="vmp-no-units">
+                    <p><?php _e('No units are currently available.', 'plughaus-property'); ?></p>
+                    <p><?php _e('Please check back later or contact us to be notified when units become available.', 'plughaus-property'); ?></p>
+                </div>
+            <?php endif; ?>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     private static function render_property_map($property_id, $settings) {
@@ -1123,39 +1459,1009 @@ class PHPM_Shortcodes {
     }
     
     private static function render_tenant_lease_info($tenant_id) {
-        return '<!-- Tenant lease info would be rendered here -->';
+        global $wpdb;
+        
+        // Get current lease for tenant
+        $lease = $wpdb->get_row($wpdb->prepare("
+            SELECT l.*, p.name as property_name, u.unit_number
+            FROM {$wpdb->prefix}vmp_leases l
+            LEFT JOIN {$wpdb->prefix}vmp_properties p ON l.property_id = p.id
+            LEFT JOIN {$wpdb->prefix}vmp_units u ON l.unit_id = u.id
+            WHERE l.tenant_id = %d AND l.status = 'active'
+            ORDER BY l.start_date DESC
+            LIMIT 1
+        ", $tenant_id));
+        
+        ob_start();
+        ?>
+        <div class="vmp-tenant-lease-info">
+            <?php if ($lease) : ?>
+                <div class="vmp-lease-details">
+                    <div class="vmp-lease-property">
+                        <h4><?php echo esc_html($lease->property_name); ?></h4>
+                        <?php if ($lease->unit_number) : ?>
+                            <p class="vmp-unit-info"><?php printf(__('Unit %s', 'plughaus-property'), esc_html($lease->unit_number)); ?></p>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <div class="vmp-lease-terms">
+                        <div class="vmp-lease-dates">
+                            <span class="vmp-lease-start">
+                                <strong><?php _e('Lease Start:', 'plughaus-property'); ?></strong>
+                                <?php echo date_i18n(get_option('date_format'), strtotime($lease->start_date)); ?>
+                            </span>
+                            <span class="vmp-lease-end">
+                                <strong><?php _e('Lease End:', 'plughaus-property'); ?></strong>
+                                <?php echo date_i18n(get_option('date_format'), strtotime($lease->end_date)); ?>
+                            </span>
+                        </div>
+                        
+                        <div class="vmp-lease-financial">
+                            <span class="vmp-monthly-rent">
+                                <strong><?php _e('Monthly Rent:', 'plughaus-property'); ?></strong>
+                                $<?php echo number_format($lease->rent_amount, 2); ?>
+                            </span>
+                            <?php if ($lease->deposit_amount) : ?>
+                                <span class="vmp-security-deposit">
+                                    <strong><?php _e('Security Deposit:', 'plughaus-property'); ?></strong>
+                                    $<?php echo number_format($lease->deposit_amount, 2); ?>
+                                </span>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <div class="vmp-lease-status">
+                            <?php 
+                            $days_remaining = ceil((strtotime($lease->end_date) - time()) / (60 * 60 * 24));
+                            if ($days_remaining > 0) :
+                            ?>
+                                <span class="vmp-status-active">
+                                    <?php printf(_n('%d day remaining', '%d days remaining', $days_remaining, 'plughaus-property'), $days_remaining); ?>
+                                </span>
+                            <?php else : ?>
+                                <span class="vmp-status-expired">
+                                    <?php _e('Lease has expired', 'plughaus-property'); ?>
+                                </span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php else : ?>
+                <div class="vmp-no-lease">
+                    <p><?php _e('No active lease found.', 'plughaus-property'); ?></p>
+                </div>
+            <?php endif; ?>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     private static function render_tenant_maintenance_requests($tenant_id, $limit = 5) {
-        return '<!-- Tenant maintenance requests would be rendered here -->';
+        global $wpdb;
+        
+        // Query maintenance requests from database
+        $requests = $wpdb->get_results($wpdb->prepare("
+            SELECT mr.*, p.name as property_name, u.unit_number
+            FROM {$wpdb->prefix}vmp_maintenance_requests mr
+            LEFT JOIN {$wpdb->prefix}vmp_properties p ON mr.property_id = p.id
+            LEFT JOIN {$wpdb->prefix}vmp_units u ON mr.unit_id = u.id
+            WHERE mr.tenant_id = %d
+            ORDER BY mr.created_at DESC
+            LIMIT %d
+        ", $tenant_id, $limit));
+        
+        ob_start();
+        ?>
+        <div class="vmp-maintenance-requests">
+            <?php if ($requests) : ?>
+                <div class="vmp-requests-list">
+                    <?php foreach ($requests as $request) : ?>
+                        <div class="vmp-request-item status-<?php echo esc_attr($request->status); ?>">
+                            <div class="vmp-request-header">
+                                <h4 class="vmp-request-title"><?php echo esc_html($request->title); ?></h4>
+                                <span class="vmp-request-status status-<?php echo esc_attr($request->status); ?>">
+                                    <?php echo esc_html(ucfirst($request->status)); ?>
+                                </span>
+                            </div>
+                            
+                            <div class="vmp-request-meta">
+                                <span class="vmp-request-date">
+                                    <span class="dashicons dashicons-calendar-alt"></span>
+                                    <?php echo date_i18n(get_option('date_format'), strtotime($request->created_at)); ?>
+                                </span>
+                                
+                                <?php if ($request->property_name) : ?>
+                                    <span class="vmp-request-property">
+                                        <span class="dashicons dashicons-admin-home"></span>
+                                        <?php echo esc_html($request->property_name); ?>
+                                        <?php if ($request->unit_number) : ?>
+                                            - Unit <?php echo esc_html($request->unit_number); ?>
+                                        <?php endif; ?>
+                                    </span>
+                                <?php endif; ?>
+                                
+                                <?php if ($request->priority) : ?>
+                                    <span class="vmp-request-priority priority-<?php echo esc_attr($request->priority); ?>">
+                                        <span class="dashicons dashicons-flag"></span>
+                                        <?php echo esc_html(ucfirst($request->priority)); ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                            
+                            <?php if ($request->description) : ?>
+                                <div class="vmp-request-description">
+                                    <?php echo wp_kses_post(wp_trim_words($request->description, 20)); ?>
+                                </div>
+                            <?php endif; ?>
+                            
+                            <?php if ($request->scheduled_date && strtotime($request->scheduled_date) > time()) : ?>
+                                <div class="vmp-request-scheduled">
+                                    <span class="dashicons dashicons-calendar"></span>
+                                    <?php printf(__('Scheduled: %s', 'plughaus-property'), date_i18n(get_option('date_format') . ' ' . get_option('time_format'), strtotime($request->scheduled_date))); ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else : ?>
+                <div class="vmp-no-requests">
+                    <p><?php _e('No maintenance requests found.', 'plughaus-property'); ?></p>
+                </div>
+            <?php endif; ?>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     private static function render_tenant_payment_history($tenant_id) {
-        return '<!-- Tenant payment history would be rendered here -->';
+        global $wpdb;
+        
+        // Query payment history from database
+        $payments = $wpdb->get_results($wpdb->prepare("
+            SELECT p.*, pr.name as property_name, l.start_date, l.end_date
+            FROM {$wpdb->prefix}vmp_payments p
+            LEFT JOIN {$wpdb->prefix}vmp_leases l ON p.lease_id = l.id
+            LEFT JOIN {$wpdb->prefix}vmp_properties pr ON p.property_id = pr.id
+            WHERE p.tenant_id = %d
+            ORDER BY p.payment_date DESC
+            LIMIT 12
+        ", $tenant_id));
+        
+        ob_start();
+        ?>
+        <div class="vmp-payment-history">
+            <?php if ($payments) : ?>
+                <div class="vmp-payments-table">
+                    <table class="vmp-table">
+                        <thead>
+                            <tr>
+                                <th><?php _e('Date', 'plughaus-property'); ?></th>
+                                <th><?php _e('Type', 'plughaus-property'); ?></th>
+                                <th><?php _e('Amount', 'plughaus-property'); ?></th>
+                                <th><?php _e('Status', 'plughaus-property'); ?></th>
+                                <th><?php _e('Method', 'plughaus-property'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($payments as $payment) : ?>
+                                <tr class="payment-status-<?php echo esc_attr($payment->status); ?>">
+                                    <td class="vmp-payment-date">
+                                        <?php echo date_i18n(get_option('date_format'), strtotime($payment->payment_date)); ?>
+                                        <?php if ($payment->due_date && strtotime($payment->payment_date) > strtotime($payment->due_date)) : ?>
+                                            <span class="vmp-late-indicator" title="<?php _e('Late Payment', 'plughaus-property'); ?>">
+                                                <span class="dashicons dashicons-warning"></span>
+                                            </span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td class="vmp-payment-type">
+                                        <?php echo esc_html(ucfirst(str_replace('_', ' ', $payment->payment_type))); ?>
+                                        <?php if ($payment->property_name) : ?>
+                                            <small class="vmp-property-ref"><?php echo esc_html($payment->property_name); ?></small>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td class="vmp-payment-amount">
+                                        <span class="vmp-amount-primary">$<?php echo number_format($payment->amount, 2); ?></span>
+                                        <?php if ($payment->late_fee > 0 || $payment->other_fees > 0) : ?>
+                                            <small class="vmp-fees">
+                                                <?php if ($payment->late_fee > 0) : ?>
+                                                    + $<?php echo number_format($payment->late_fee, 2); ?> <?php _e('late fee', 'plughaus-property'); ?>
+                                                <?php endif; ?>
+                                                <?php if ($payment->other_fees > 0) : ?>
+                                                    + $<?php echo number_format($payment->other_fees, 2); ?> <?php _e('fees', 'plughaus-property'); ?>
+                                                <?php endif; ?>
+                                            </small>
+                                            <div class="vmp-total-amount">
+                                                <?php _e('Total:', 'plughaus-property'); ?> $<?php echo number_format($payment->total_amount, 2); ?>
+                                            </div>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td class="vmp-payment-status">
+                                        <span class="vmp-status-badge status-<?php echo esc_attr($payment->status); ?>">
+                                            <?php echo esc_html(ucfirst($payment->status)); ?>
+                                        </span>
+                                    </td>
+                                    <td class="vmp-payment-method">
+                                        <?php if ($payment->payment_method) : ?>
+                                            <?php echo esc_html(ucfirst(str_replace('_', ' ', $payment->payment_method))); ?>
+                                        <?php endif; ?>
+                                        <?php if ($payment->transaction_id) : ?>
+                                            <small class="vmp-transaction-id">
+                                                ID: <?php echo esc_html($payment->transaction_id); ?>
+                                            </small>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="vmp-payment-summary">
+                    <?php
+                    $total_paid = array_sum(array_column($payments, 'total_amount'));
+                    $recent_payments = array_filter($payments, function($p) {
+                        return strtotime($p->payment_date) > strtotime('-30 days');
+                    });
+                    ?>
+                    <div class="vmp-summary-stats">
+                        <div class="vmp-stat">
+                            <span class="vmp-stat-label"><?php _e('Total Paid (Last 12)', 'plughaus-property'); ?></span>
+                            <span class="vmp-stat-value">$<?php echo number_format($total_paid, 2); ?></span>
+                        </div>
+                        <div class="vmp-stat">
+                            <span class="vmp-stat-label"><?php _e('Payments This Month', 'plughaus-property'); ?></span>
+                            <span class="vmp-stat-value"><?php echo count($recent_payments); ?></span>
+                        </div>
+                    </div>
+                </div>
+            <?php else : ?>
+                <div class="vmp-no-payments">
+                    <p><?php _e('No payment history found.', 'plughaus-property'); ?></p>
+                </div>
+            <?php endif; ?>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     private static function render_tenant_documents($tenant_id) {
-        return '<!-- Tenant documents would be rendered here -->';
+        global $wpdb;
+        
+        // Query documents from database
+        $documents = $wpdb->get_results($wpdb->prepare("
+            SELECT d.*, p.name as property_name
+            FROM {$wpdb->prefix}vmp_documents d
+            LEFT JOIN {$wpdb->prefix}vmp_properties p ON d.property_id = p.id
+            WHERE d.tenant_id = %d AND d.is_public = 1
+            ORDER BY d.uploaded_at DESC
+        ", $tenant_id));
+        
+        ob_start();
+        ?>
+        <div class="vmp-tenant-documents">
+            <?php if ($documents) : ?>
+                <div class="vmp-documents-list">
+                    <?php foreach ($documents as $document) : ?>
+                        <div class="vmp-document-item">
+                            <div class="vmp-document-icon">
+                                <?php
+                                $file_extension = pathinfo($document->file_name, PATHINFO_EXTENSION);
+                                switch (strtolower($file_extension)) {
+                                    case 'pdf':
+                                        echo '<span class="dashicons dashicons-media-document"></span>';
+                                        break;
+                                    case 'doc':
+                                    case 'docx':
+                                        echo '<span class="dashicons dashicons-media-text"></span>';
+                                        break;
+                                    case 'jpg':
+                                    case 'jpeg':
+                                    case 'png':
+                                    case 'gif':
+                                        echo '<span class="dashicons dashicons-format-image"></span>';
+                                        break;
+                                    default:
+                                        echo '<span class="dashicons dashicons-media-default"></span>';
+                                }
+                                ?>
+                            </div>
+                            
+                            <div class="vmp-document-info">
+                                <h4 class="vmp-document-title"><?php echo esc_html($document->title); ?></h4>
+                                
+                                <div class="vmp-document-meta">
+                                    <span class="vmp-document-type">
+                                        <?php echo esc_html(ucfirst(str_replace('_', ' ', $document->document_type))); ?>
+                                    </span>
+                                    
+                                    <span class="vmp-document-date">
+                                        <?php echo date_i18n(get_option('date_format'), strtotime($document->uploaded_at)); ?>
+                                    </span>
+                                    
+                                    <?php if ($document->file_size) : ?>
+                                        <span class="vmp-document-size">
+                                            <?php echo size_format($document->file_size); ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                                
+                                <?php if ($document->description) : ?>
+                                    <div class="vmp-document-description">
+                                        <?php echo esc_html($document->description); ?>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <?php if ($document->expiry_date && strtotime($document->expiry_date) < time()) : ?>
+                                    <div class="vmp-document-expired">
+                                        <span class="dashicons dashicons-warning"></span>
+                                        <?php printf(__('Expired: %s', 'plughaus-property'), date_i18n(get_option('date_format'), strtotime($document->expiry_date))); ?>
+                                    </div>
+                                <?php elseif ($document->expiry_date) : ?>
+                                    <div class="vmp-document-expires">
+                                        <?php printf(__('Expires: %s', 'plughaus-property'), date_i18n(get_option('date_format'), strtotime($document->expiry_date))); ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            
+                            <div class="vmp-document-actions">
+                                <a href="<?php echo esc_url(home_url('/wp-content/plugins/vireo-property-management/download.php?doc=' . $document->id . '&token=' . wp_create_nonce('vmp_download_' . $document->id))); ?>" 
+                                   class="vmp-button vmp-button-secondary" 
+                                   target="_blank">
+                                    <span class="dashicons dashicons-download"></span>
+                                    <?php _e('Download', 'plughaus-property'); ?>
+                                </a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else : ?>
+                <div class="vmp-no-documents">
+                    <p><?php _e('No documents available.', 'plughaus-property'); ?></p>
+                </div>
+            <?php endif; ?>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     private static function render_tenant_dashboard_stats($tenant_id) {
-        return '<!-- Dashboard stats would be rendered here -->';
+        global $wpdb;
+        
+        // Get current lease information
+        $lease = $wpdb->get_row($wpdb->prepare("
+            SELECT l.*, p.name as property_name, u.unit_number
+            FROM {$wpdb->prefix}vmp_leases l
+            LEFT JOIN {$wpdb->prefix}vmp_properties p ON l.property_id = p.id
+            LEFT JOIN {$wpdb->prefix}vmp_units u ON l.unit_id = u.id
+            WHERE l.tenant_id = %d AND l.status = 'active'
+            ORDER BY l.start_date DESC
+            LIMIT 1
+        ", $tenant_id));
+        
+        // Get payment statistics
+        $payment_stats = $wpdb->get_row($wpdb->prepare("
+            SELECT 
+                COUNT(*) as total_payments,
+                SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as completed_payments,
+                SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending_payments,
+                SUM(CASE WHEN payment_date > due_date THEN 1 ELSE 0 END) as late_payments
+            FROM {$wpdb->prefix}vmp_payments
+            WHERE tenant_id = %d AND payment_date >= DATE_SUB(NOW(), INTERVAL 12 MONTH)
+        ", $tenant_id));
+        
+        // Get maintenance request statistics
+        $maintenance_stats = $wpdb->get_row($wpdb->prepare("
+            SELECT 
+                COUNT(*) as total_requests,
+                SUM(CASE WHEN status = 'open' THEN 1 ELSE 0 END) as open_requests,
+                SUM(CASE WHEN status = 'in_progress' THEN 1 ELSE 0 END) as in_progress_requests,
+                SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as completed_requests
+            FROM {$wpdb->prefix}vmp_maintenance_requests
+            WHERE tenant_id = %d
+        ", $tenant_id));
+        
+        // Calculate lease days remaining
+        $days_remaining = 0;
+        if ($lease && $lease->end_date) {
+            $days_remaining = max(0, ceil((strtotime($lease->end_date) - time()) / (60 * 60 * 24)));
+        }
+        
+        ob_start();
+        ?>
+        <div class="vmp-dashboard-stats">
+            <div class="vmp-stats-grid">
+                
+                <!-- Lease Status -->
+                <?php if ($lease) : ?>
+                    <div class="vmp-stat-card lease-status">
+                        <div class="vmp-stat-icon">
+                            <span class="dashicons dashicons-admin-home"></span>
+                        </div>
+                        <div class="vmp-stat-content">
+                            <div class="vmp-stat-number"><?php echo $days_remaining; ?></div>
+                            <div class="vmp-stat-label"><?php _e('Days Remaining', 'plughaus-property'); ?></div>
+                            <div class="vmp-stat-sublabel"><?php echo esc_html($lease->property_name); ?></div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                
+                <!-- Payment Status -->
+                <div class="vmp-stat-card payment-status">
+                    <div class="vmp-stat-icon">
+                        <span class="dashicons dashicons-money-alt"></span>
+                    </div>
+                    <div class="vmp-stat-content">
+                        <div class="vmp-stat-number"><?php echo $payment_stats ? $payment_stats->completed_payments : 0; ?></div>
+                        <div class="vmp-stat-label"><?php _e('Payments Made', 'plughaus-property'); ?></div>
+                        <div class="vmp-stat-sublabel"><?php _e('Last 12 months', 'plughaus-property'); ?></div>
+                    </div>
+                </div>
+                
+                <!-- Maintenance Requests -->
+                <div class="vmp-stat-card maintenance-status">
+                    <div class="vmp-stat-icon">
+                        <span class="dashicons dashicons-admin-tools"></span>
+                    </div>
+                    <div class="vmp-stat-content">
+                        <div class="vmp-stat-number"><?php echo $maintenance_stats ? $maintenance_stats->open_requests + $maintenance_stats->in_progress_requests : 0; ?></div>
+                        <div class="vmp-stat-label"><?php _e('Active Requests', 'plughaus-property'); ?></div>
+                        <div class="vmp-stat-sublabel">
+                            <?php 
+                            if ($maintenance_stats && $maintenance_stats->total_requests > 0) {
+                                printf(__('%d total requests', 'plughaus-property'), $maintenance_stats->total_requests);
+                            } else {
+                                _e('No requests', 'plughaus-property');
+                            }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Payment Performance -->
+                <?php if ($payment_stats && $payment_stats->total_payments > 0) : ?>
+                    <div class="vmp-stat-card performance-status">
+                        <div class="vmp-stat-icon">
+                            <span class="dashicons dashicons-awards"></span>
+                        </div>
+                        <div class="vmp-stat-content">
+                            <?php 
+                            $on_time_rate = round((($payment_stats->total_payments - $payment_stats->late_payments) / $payment_stats->total_payments) * 100);
+                            ?>
+                            <div class="vmp-stat-number"><?php echo $on_time_rate; ?>%</div>
+                            <div class="vmp-stat-label"><?php _e('On-Time Rate', 'plughaus-property'); ?></div>
+                            <div class="vmp-stat-sublabel">
+                                <?php printf(_n('%d late payment', '%d late payments', $payment_stats->late_payments, 'plughaus-property'), $payment_stats->late_payments); ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                
+            </div>
+            
+            <!-- Additional Status Information -->
+            <div class="vmp-status-alerts">
+                <?php if ($lease && $days_remaining <= 30 && $days_remaining > 0) : ?>
+                    <div class="vmp-alert vmp-alert-warning">
+                        <span class="dashicons dashicons-warning"></span>
+                        <?php printf(__('Your lease expires in %d days. Contact your property manager about renewal.', 'plughaus-property'), $days_remaining); ?>
+                    </div>
+                <?php elseif ($lease && $days_remaining <= 0) : ?>
+                    <div class="vmp-alert vmp-alert-danger">
+                        <span class="dashicons dashicons-warning"></span>
+                        <?php _e('Your lease has expired. Please contact your property manager immediately.', 'plughaus-property'); ?>
+                    </div>
+                <?php endif; ?>
+                
+                <?php if ($payment_stats && $payment_stats->pending_payments > 0) : ?>
+                    <div class="vmp-alert vmp-alert-info">
+                        <span class="dashicons dashicons-info"></span>
+                        <?php printf(_n('You have %d pending payment.', 'You have %d pending payments.', $payment_stats->pending_payments, 'plughaus-property'), $payment_stats->pending_payments); ?>
+                    </div>
+                <?php endif; ?>
+                
+                <?php if ($maintenance_stats && ($maintenance_stats->open_requests + $maintenance_stats->in_progress_requests) > 0) : ?>
+                    <div class="vmp-alert vmp-alert-info">
+                        <span class="dashicons dashicons-admin-tools"></span>
+                        <?php 
+                        $active_requests = $maintenance_stats->open_requests + $maintenance_stats->in_progress_requests;
+                        printf(_n('You have %d active maintenance request.', 'You have %d active maintenance requests.', $active_requests, 'plughaus-property'), $active_requests);
+                        ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
     private static function render_tenant_payment_status($tenant_id) {
-        return '<!-- Payment status would be rendered here -->';
+        global $wpdb;
+        
+        // Get current lease
+        $lease = $wpdb->get_row($wpdb->prepare("
+            SELECT l.*, p.name as property_name
+            FROM {$wpdb->prefix}vmp_leases l
+            LEFT JOIN {$wpdb->prefix}vmp_properties p ON l.property_id = p.id
+            WHERE l.tenant_id = %d AND l.status = 'active'
+            ORDER BY l.start_date DESC
+            LIMIT 1
+        ", $tenant_id));
+        
+        if (!$lease) {
+            return '<p>' . __('No active lease found.', 'plughaus-property') . '</p>';
+        }
+        
+        // Calculate next due date based on rent_due_day
+        $rent_due_day = $lease->rent_due_day ?: 1;
+        $current_month = date('Y-m');
+        $next_due_date = $current_month . '-' . str_pad($rent_due_day, 2, '0', STR_PAD_LEFT);
+        
+        // If we've passed this month's due date, calculate next month
+        if (date('Y-m-d') > $next_due_date) {
+            $next_due_date = date('Y-m-d', strtotime('first day of next month +' . ($rent_due_day - 1) . ' days'));
+        }
+        
+        // Get latest payment for current period
+        $latest_payment = $wpdb->get_row($wpdb->prepare("
+            SELECT *
+            FROM {$wpdb->prefix}vmp_payments
+            WHERE tenant_id = %d AND lease_id = %d
+            ORDER BY payment_date DESC
+            LIMIT 1
+        ", $tenant_id, $lease->id));
+        
+        // Check if rent is paid for current period
+        $is_current = false;
+        $days_until_due = 0;
+        $payment_status = 'pending';
+        
+        if ($latest_payment) {
+            $payment_month = date('Y-m', strtotime($latest_payment->payment_date));
+            $current_month = date('Y-m', strtotime($next_due_date));
+            
+            if ($payment_month === $current_month && $latest_payment->status === 'completed') {
+                $is_current = true;
+                $payment_status = 'current';
+            }
+        }
+        
+        $days_until_due = ceil((strtotime($next_due_date) - time()) / (60 * 60 * 24));
+        
+        if (!$is_current && $days_until_due < 0) {
+            $payment_status = 'overdue';
+        } elseif (!$is_current && $days_until_due <= 5) {
+            $payment_status = 'due_soon';
+        }
+        
+        ob_start();
+        ?>
+        <div class="vmp-payment-status">
+            <div class="vmp-payment-overview status-<?php echo esc_attr($payment_status); ?>">
+                
+                <div class="vmp-payment-header">
+                    <div class="vmp-payment-icon">
+                        <?php if ($payment_status === 'current') : ?>
+                            <span class="dashicons dashicons-yes-alt"></span>
+                        <?php elseif ($payment_status === 'overdue') : ?>
+                            <span class="dashicons dashicons-warning"></span>
+                        <?php else : ?>
+                            <span class="dashicons dashicons-money-alt"></span>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <div class="vmp-payment-info">
+                        <h4 class="vmp-payment-title">
+                            <?php if ($payment_status === 'current') : ?>
+                                <?php _e('Rent Paid', 'plughaus-property'); ?>
+                            <?php elseif ($payment_status === 'overdue') : ?>
+                                <?php _e('Rent Overdue', 'plughaus-property'); ?>
+                            <?php elseif ($payment_status === 'due_soon') : ?>
+                                <?php _e('Rent Due Soon', 'plughaus-property'); ?>
+                            <?php else : ?>
+                                <?php _e('Next Rent Due', 'plughaus-property'); ?>
+                            <?php endif; ?>
+                        </h4>
+                        
+                        <div class="vmp-payment-amount">
+                            <span class="vmp-amount">$<?php echo number_format($lease->rent_amount, 2); ?></span>
+                            <span class="vmp-period"><?php _e('/ month', 'plughaus-property'); ?></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="vmp-payment-details">
+                    <div class="vmp-detail-row">
+                        <span class="vmp-detail-label"><?php _e('Next Due Date:', 'plughaus-property'); ?></span>
+                        <span class="vmp-detail-value"><?php echo date_i18n(get_option('date_format'), strtotime($next_due_date)); ?></span>
+                    </div>
+                    
+                    <div class="vmp-detail-row">
+                        <span class="vmp-detail-label"><?php _e('Property:', 'plughaus-property'); ?></span>
+                        <span class="vmp-detail-value"><?php echo esc_html($lease->property_name); ?></span>
+                    </div>
+                    
+                    <?php if ($payment_status === 'current' && $latest_payment) : ?>
+                        <div class="vmp-detail-row">
+                            <span class="vmp-detail-label"><?php _e('Last Payment:', 'plughaus-property'); ?></span>
+                            <span class="vmp-detail-value"><?php echo date_i18n(get_option('date_format'), strtotime($latest_payment->payment_date)); ?></span>
+                        </div>
+                    <?php elseif ($payment_status === 'overdue') : ?>
+                        <div class="vmp-detail-row vmp-overdue">
+                            <span class="vmp-detail-label"><?php _e('Days Overdue:', 'plughaus-property'); ?></span>
+                            <span class="vmp-detail-value"><?php echo abs($days_until_due); ?> <?php _e('days', 'plughaus-property'); ?></span>
+                        </div>
+                    <?php elseif ($payment_status === 'due_soon') : ?>
+                        <div class="vmp-detail-row vmp-due-soon">
+                            <span class="vmp-detail-label"><?php _e('Due In:', 'plughaus-property'); ?></span>
+                            <span class="vmp-detail-value"><?php echo $days_until_due; ?> <?php _e('days', 'plughaus-property'); ?></span>
+                        </div>
+                    <?php else : ?>
+                        <div class="vmp-detail-row">
+                            <span class="vmp-detail-label"><?php _e('Days Until Due:', 'plughaus-property'); ?></span>
+                            <span class="vmp-detail-value"><?php echo $days_until_due; ?> <?php _e('days', 'plughaus-property'); ?></span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                
+                <?php if ($payment_status !== 'current') : ?>
+                    <div class="vmp-payment-actions">
+                        <button class="vmp-button vmp-button-primary" data-action="pay-rent">
+                            <span class="dashicons dashicons-money-alt"></span>
+                            <?php _e('Pay Rent Online', 'plughaus-property'); ?>
+                        </button>
+                    </div>
+                <?php endif; ?>
+                
+                <?php if ($lease->late_fee_amount > 0 && $payment_status === 'overdue') : ?>
+                    <div class="vmp-late-fee-notice">
+                        <span class="dashicons dashicons-info"></span>
+                        <?php printf(__('Late fee of $%s may apply after %d days past due date.', 'plughaus-property'), 
+                            number_format($lease->late_fee_amount, 2), 
+                            $lease->late_fee_grace_days ?: 5
+                        ); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+            
+            <!-- Payment Methods Info -->
+            <?php if ($payment_status !== 'current') : ?>
+                <div class="vmp-payment-methods">
+                    <h5><?php _e('Payment Options', 'plughaus-property'); ?></h5>
+                    <ul class="vmp-payment-options">
+                        <li>
+                            <span class="dashicons dashicons-admin-site"></span>
+                            <?php _e('Online payment portal (recommended)', 'plughaus-property'); ?>
+                        </li>
+                        <li>
+                            <span class="dashicons dashicons-money"></span>
+                            <?php _e('Check or money order', 'plughaus-property'); ?>
+                        </li>
+                        <?php if ($lease->payment_method) : ?>
+                            <li>
+                                <span class="dashicons dashicons-bank"></span>
+                                <?php echo esc_html(ucfirst(str_replace('_', ' ', $lease->payment_method))); ?>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+        </div>
+        <?php
+        return ob_get_clean();
     }
     
+    /**
+     * Process maintenance request form submission
+     */
     private static function process_maintenance_request() {
-        // Process maintenance request submission
+        if (!isset($_POST['phmp_maintenance_nonce']) || 
+            !wp_verify_nonce($_POST['phmp_maintenance_nonce'], 'phmp_submit_maintenance_request')) {
+            return;
+        }
+        
+        global $wpdb;
+        
+        $property_id = intval($_POST['property_id']);
+        $unit_id = intval($_POST['unit_id']);
+        $tenant_id = get_current_user_id();
+        $title = sanitize_text_field($_POST['maintenance_title']);
+        $description = sanitize_textarea_field($_POST['maintenance_description']);
+        $category = sanitize_text_field($_POST['maintenance_category']);
+        $priority = sanitize_text_field($_POST['maintenance_priority']);
+        $access_required = isset($_POST['tenant_access_required']) ? 1 : 0;
+        
+        // Validate required fields
+        if (empty($title) || empty($description) || empty($property_id)) {
+            wp_die(__('Please fill in all required fields.', 'plughaus-property'));
+        }
+        
+        // Insert maintenance request
+        $table_name = $wpdb->prefix . 'vmp_maintenance_requests';
+        $result = $wpdb->insert(
+            $table_name,
+            array(
+                'property_id' => $property_id,
+                'unit_id' => $unit_id ?: null,
+                'tenant_id' => $tenant_id,
+                'requested_by' => $tenant_id,
+                'title' => $title,
+                'description' => $description,
+                'category' => $category,
+                'priority' => $priority,
+                'status' => 'open',
+                'tenant_access_required' => $access_required,
+                'emergency_request' => ($priority === 'emergency') ? 1 : 0,
+                'created_at' => current_time('mysql')
+            ),
+            array('%d', '%d', '%d', '%d', '%s', '%s', '%s', '%s', '%s', '%d', '%d', '%s')
+        );
+        
+        if ($result) {
+            // Send notification email to property manager
+            $property = $wpdb->get_row($wpdb->prepare(
+                "SELECT name FROM {$wpdb->prefix}vmp_properties WHERE id = %d",
+                $property_id
+            ));
+            
+            $to = get_option('admin_email');
+            $subject = sprintf(__('[Property Management] New Maintenance Request: %s', 'plughaus-property'), $title);
+            $message = sprintf(
+                __("A new maintenance request has been submitted:\n\nProperty: %s\nTitle: %s\nPriority: %s\nDescription: %s\n\nTenant Access Required: %s\n\nPlease log in to the admin panel to review and assign this request.", 'plughaus-property'),
+                $property ? $property->name : __('Unknown', 'plughaus-property'),
+                $title,
+                ucfirst($priority),
+                $description,
+                $access_required ? __('Yes', 'plughaus-property') : __('No', 'plughaus-property')
+            );
+            
+            wp_mail($to, $subject, $message);
+            
+            // Redirect with success message
+            wp_redirect(add_query_arg('maintenance_submitted', '1', wp_get_referer()));
+            exit;
+        } else {
+            wp_die(__('Error submitting maintenance request. Please try again.', 'plughaus-property'));
+        }
     }
     
+    /**
+     * Process rental application form submission
+     */
     private static function process_rental_application() {
-        // Process rental application submission
+        if (!isset($_POST['phmp_application_nonce']) || 
+            !wp_verify_nonce($_POST['phmp_application_nonce'], 'phmp_submit_rental_application')) {
+            return;
+        }
+        
+        global $wpdb;
+        
+        // Collect and sanitize form data
+        $property_id = intval($_POST['desired_property']);
+        $first_name = sanitize_text_field($_POST['first_name']);
+        $last_name = sanitize_text_field($_POST['last_name']);
+        $email = sanitize_email($_POST['email']);
+        $phone = sanitize_text_field($_POST['phone']);
+        $date_of_birth = sanitize_text_field($_POST['date_of_birth']);
+        $ssn_last_four = sanitize_text_field($_POST['ssn_last_four']);
+        $employment_status = sanitize_text_field($_POST['employment_status']);
+        $employer = sanitize_text_field($_POST['employer']);
+        $monthly_income = floatval($_POST['monthly_income']);
+        $current_address = sanitize_textarea_field($_POST['current_address']);
+        $emergency_contact_name = sanitize_text_field($_POST['emergency_contact_name']);
+        $emergency_contact_phone = sanitize_text_field($_POST['emergency_contact_phone']);
+        $emergency_contact_relationship = sanitize_text_field($_POST['emergency_contact_relationship']);
+        
+        // Validate required fields
+        if (empty($first_name) || empty($last_name) || empty($email) || empty($phone)) {
+            wp_die(__('Please fill in all required fields.', 'plughaus-property'));
+        }
+        
+        // Validate email format
+        if (!is_email($email)) {
+            wp_die(__('Please provide a valid email address.', 'plughaus-property'));
+        }
+        
+        // Check if application already exists for this email/property combination
+        $existing = $wpdb->get_var($wpdb->prepare(
+            "SELECT id FROM {$wpdb->prefix}vmp_tenants WHERE email = %s AND status = 'applicant'",
+            $email
+        ));
+        
+        if ($existing) {
+            wp_die(__('An application with this email address already exists.', 'plughaus-property'));
+        }
+        
+        // Insert tenant record as applicant
+        $table_name = $wpdb->prefix . 'vmp_tenants';
+        $result = $wpdb->insert(
+            $table_name,
+            array(
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+                'email' => $email,
+                'phone' => $phone,
+                'date_of_birth' => $date_of_birth ?: null,
+                'ssn_last_four' => $ssn_last_four,
+                'employment_status' => $employment_status,
+                'employer' => $employer,
+                'monthly_income' => $monthly_income ?: null,
+                'current_address' => $current_address,
+                'emergency_contact_name' => $emergency_contact_name,
+                'emergency_contact_phone' => $emergency_contact_phone,
+                'emergency_contact_relationship' => $emergency_contact_relationship,
+                'status' => 'applicant',
+                'background_check_status' => 'pending',
+                'created_at' => current_time('mysql')
+            ),
+            array(
+                '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%f', 
+                '%s', '%s', '%s', '%s', '%s', '%s', '%s'
+            )
+        );
+        
+        if ($result) {
+            $applicant_id = $wpdb->insert_id;
+            
+            // Create activity log entry
+            $wpdb->insert(
+                $wpdb->prefix . 'vmp_activity_log',
+                array(
+                    'action' => 'rental_application_submitted',
+                    'object_type' => 'tenant',
+                    'object_id' => $applicant_id,
+                    'new_values' => json_encode(array(
+                        'property_id' => $property_id,
+                        'applicant_name' => $first_name . ' ' . $last_name,
+                        'email' => $email
+                    )),
+                    'ip_address' => $_SERVER['REMOTE_ADDR'],
+                    'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+                    'created_at' => current_time('mysql')
+                ),
+                array('%s', '%s', '%d', '%s', '%s', '%s', '%s')
+            );
+            
+            // Send notification email to property manager
+            $property = $wpdb->get_row($wpdb->prepare(
+                "SELECT name FROM {$wpdb->prefix}vmp_properties WHERE id = %d",
+                $property_id
+            ));
+            
+            $to = get_option('admin_email');
+            $subject = sprintf(__('[Property Management] New Rental Application: %s %s', 'plughaus-property'), $first_name, $last_name);
+            $message = sprintf(
+                __("A new rental application has been submitted:\n\nApplicant: %s %s\nEmail: %s\nPhone: %s\nProperty Interest: %s\nMonthly Income: $%s\nEmployment: %s at %s\n\nPlease log in to the admin panel to review this application and initiate background checks.", 'plughaus-property'),
+                $first_name,
+                $last_name,
+                $email,
+                $phone,
+                $property ? $property->name : __('Not specified', 'plughaus-property'),
+                number_format($monthly_income, 2),
+                $employment_status,
+                $employer
+            );
+            
+            wp_mail($to, $subject, $message);
+            
+            // Send confirmation email to applicant
+            $applicant_subject = __('Rental Application Received', 'plughaus-property');
+            $applicant_message = sprintf(
+                __("Dear %s,\n\nThank you for submitting your rental application. We have received your information and will begin processing your application.\n\nNext steps:\n1. Background and credit check (typically 24-48 hours)\n2. Application review\n3. Decision notification\n\nWe will contact you within 48 hours with an update.\n\nBest regards,\nProperty Management Team", 'plughaus-property'),
+                $first_name
+            );
+            
+            wp_mail($email, $applicant_subject, $applicant_message);
+            
+            // Redirect with success message
+            wp_redirect(add_query_arg('application_submitted', '1', wp_get_referer()));
+            exit;
+        } else {
+            wp_die(__('Error submitting application. Please try again.', 'plughaus-property'));
+        }
     }
     
+    /**
+     * Process contact form submission
+     */
     private static function process_contact_form() {
-        // Process contact form submission
+        if (!isset($_POST['phmp_contact_nonce']) || 
+            !wp_verify_nonce($_POST['phmp_contact_nonce'], 'phmp_submit_contact_form')) {
+            return;
+        }
+        
+        global $wpdb;
+        
+        $name = sanitize_text_field($_POST['contact_name']);
+        $email = sanitize_email($_POST['contact_email']);
+        $phone = sanitize_text_field($_POST['contact_phone']);
+        $property_inquiry = intval($_POST['property_inquiry']);
+        $subject = sanitize_text_field($_POST['contact_subject']);
+        $message = sanitize_textarea_field($_POST['contact_message']);
+        
+        // Validate required fields
+        if (empty($name) || empty($email) || empty($subject) || empty($message)) {
+            wp_die(__('Please fill in all required fields.', 'plughaus-property'));
+        }
+        
+        // Validate email format
+        if (!is_email($email)) {
+            wp_die(__('Please provide a valid email address.', 'plughaus-property'));
+        }
+        
+        // Get property information if specified
+        $property_info = '';
+        if ($property_inquiry) {
+            $property = $wpdb->get_row($wpdb->prepare(
+                "SELECT name, address FROM {$wpdb->prefix}vmp_properties WHERE id = %d",
+                $property_inquiry
+            ));
+            
+            if ($property) {
+                $property_info = sprintf(
+                    __("\n\nProperty of Interest: %s\nAddress: %s", 'plughaus-property'),
+                    $property->name,
+                    $property->address
+                );
+            }
+        }
+        
+        // Create activity log entry
+        $wpdb->insert(
+            $wpdb->prefix . 'vmp_activity_log',
+            array(
+                'action' => 'contact_form_submitted',
+                'object_type' => 'communication',
+                'new_values' => json_encode(array(
+                    'name' => $name,
+                    'email' => $email,
+                    'subject' => $subject,
+                    'property_inquiry' => $property_inquiry
+                )),
+                'ip_address' => $_SERVER['REMOTE_ADDR'],
+                'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+                'created_at' => current_time('mysql')
+            ),
+            array('%s', '%s', '%s', '%s', '%s', '%s')
+        );
+        
+        // Send email to property manager
+        $to = get_option('admin_email');
+        $email_subject = sprintf(__('[Property Management] Contact Form: %s', 'plughaus-property'), $subject);
+        $email_message = sprintf(
+            __("A new contact form submission has been received:\n\nName: %s\nEmail: %s\nPhone: %s\nSubject: %s\n\nMessage:\n%s%s\n\nPlease respond to this inquiry promptly.", 'plughaus-property'),
+            $name,
+            $email,
+            $phone ?: __('Not provided', 'plughaus-property'),
+            $subject,
+            $message,
+            $property_info
+        );
+        
+        $headers = array(
+            'Content-Type: text/plain; charset=UTF-8',
+            'From: ' . get_bloginfo('name') . ' <' . get_option('admin_email') . '>',
+            'Reply-To: ' . $name . ' <' . $email . '>'
+        );
+        
+        $mail_sent = wp_mail($to, $email_subject, $email_message, $headers);
+        
+        if ($mail_sent) {
+            // Send confirmation email to sender
+            $confirmation_subject = __('Thank you for contacting us', 'plughaus-property');
+            $confirmation_message = sprintf(
+                __("Dear %s,\n\nThank you for contacting us. We have received your message and will respond within 24 hours.\n\nYour message:\nSubject: %s\n%s\n\nBest regards,\nProperty Management Team", 'plughaus-property'),
+                $name,
+                $subject,
+                $message
+            );
+            
+            wp_mail($email, $confirmation_subject, $confirmation_message);
+            
+            // Redirect with success message
+            wp_redirect(add_query_arg('contact_sent', '1', wp_get_referer()));
+            exit;
+        } else {
+            wp_die(__('Error sending message. Please try again.', 'plughaus-property'));
+        }
     }
 }
 

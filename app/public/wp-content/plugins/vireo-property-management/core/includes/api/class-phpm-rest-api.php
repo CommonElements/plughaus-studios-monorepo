@@ -203,7 +203,7 @@ class PHPM_REST_API {
      */
     public static function get_properties($request) {
         $args = array(
-            'post_type' => 'phpm_property',
+            'post_type' => 'vmp_property',
             'posts_per_page' => $request->get_param('per_page') ?: 10,
             'paged' => $request->get_param('page') ?: 1,
             'orderby' => $request->get_param('orderby') ?: 'date',
@@ -218,7 +218,7 @@ class PHPM_REST_API {
         // Add filters
         if ($type = $request->get_param('type')) {
             $args['tax_query'][] = array(
-                'taxonomy' => 'phpm_property_type',
+                'taxonomy' => 'vmp_property_type',
                 'field' => 'slug',
                 'terms' => $type,
             );
@@ -226,7 +226,7 @@ class PHPM_REST_API {
         
         if ($location = $request->get_param('location')) {
             $args['tax_query'][] = array(
-                'taxonomy' => 'phpm_location',
+                'taxonomy' => 'vmp_location',
                 'field' => 'slug',
                 'terms' => $location,
             );
@@ -261,7 +261,7 @@ class PHPM_REST_API {
         $property_id = $request->get_param('id');
         $property = get_post($property_id);
         
-        if (!$property || 'phpm_property' !== $property->post_type) {
+        if (!$property || 'vmp_property' !== $property->post_type) {
             return new WP_Error('rest_property_invalid_id', __('Invalid property ID.', 'plughaus-property'), array('status' => 404));
         }
         
@@ -273,7 +273,7 @@ class PHPM_REST_API {
      */
     public static function create_property($request) {
         $property_data = array(
-            'post_type' => 'phpm_property',
+            'post_type' => 'vmp_property',
             'post_title' => sanitize_text_field($request->get_param('title')),
             'post_content' => wp_kses_post($request->get_param('description')),
             'post_status' => 'publish',
@@ -287,32 +287,32 @@ class PHPM_REST_API {
         
         // Update meta fields
         if ($address = $request->get_param('address')) {
-            update_post_meta($property_id, '_phpm_property_address', sanitize_text_field($address));
+            update_post_meta($property_id, '_vmp_property_address', sanitize_text_field($address));
         }
         
         if ($city = $request->get_param('city')) {
-            update_post_meta($property_id, '_phpm_property_city', sanitize_text_field($city));
+            update_post_meta($property_id, '_vmp_property_city', sanitize_text_field($city));
         }
         
         if ($state = $request->get_param('state')) {
-            update_post_meta($property_id, '_phpm_property_state', sanitize_text_field($state));
+            update_post_meta($property_id, '_vmp_property_state', sanitize_text_field($state));
         }
         
         if ($zip = $request->get_param('zip')) {
-            update_post_meta($property_id, '_phpm_property_zip', sanitize_text_field($zip));
+            update_post_meta($property_id, '_vmp_property_zip', sanitize_text_field($zip));
         }
         
         if ($units = $request->get_param('units')) {
-            update_post_meta($property_id, '_phpm_property_units', intval($units));
+            update_post_meta($property_id, '_vmp_property_units', intval($units));
         }
         
         // Set taxonomies
         if ($types = $request->get_param('property_types')) {
-            wp_set_object_terms($property_id, $types, 'phpm_property_type');
+            wp_set_object_terms($property_id, $types, 'vmp_property_type');
         }
         
         if ($amenities = $request->get_param('amenities')) {
-            wp_set_object_terms($property_id, $amenities, 'phpm_amenities');
+            wp_set_object_terms($property_id, $amenities, 'vmp_amenities');
         }
         
         return rest_ensure_response(self::prepare_property_response($property_id));
@@ -325,7 +325,7 @@ class PHPM_REST_API {
         $property_id = $request->get_param('id');
         $property = get_post($property_id);
         
-        if (!$property || 'phpm_property' !== $property->post_type) {
+        if (!$property || 'vmp_property' !== $property->post_type) {
             return new WP_Error('rest_property_invalid_id', __('Invalid property ID.', 'plughaus-property'), array('status' => 404));
         }
         
@@ -352,17 +352,17 @@ class PHPM_REST_API {
         
         foreach ($meta_fields as $field) {
             if ($value = $request->get_param($field)) {
-                update_post_meta($property_id, '_phpm_property_' . $field, sanitize_text_field($value));
+                update_post_meta($property_id, '_vmp_property_' . $field, sanitize_text_field($value));
             }
         }
         
         // Update taxonomies
         if ($types = $request->get_param('property_types')) {
-            wp_set_object_terms($property_id, $types, 'phpm_property_type');
+            wp_set_object_terms($property_id, $types, 'vmp_property_type');
         }
         
         if ($amenities = $request->get_param('amenities')) {
-            wp_set_object_terms($property_id, $amenities, 'phpm_amenities');
+            wp_set_object_terms($property_id, $amenities, 'vmp_amenities');
         }
         
         return rest_ensure_response(self::prepare_property_response($property_id));
@@ -375,7 +375,7 @@ class PHPM_REST_API {
         $property_id = $request->get_param('id');
         $property = get_post($property_id);
         
-        if (!$property || 'phpm_property' !== $property->post_type) {
+        if (!$property || 'vmp_property' !== $property->post_type) {
             return new WP_Error('rest_property_invalid_id', __('Invalid property ID.', 'plughaus-property'), array('status' => 404));
         }
         
@@ -404,14 +404,14 @@ class PHPM_REST_API {
             'date_created' => $property->post_date,
             'date_modified' => $property->post_modified,
             'featured_image' => get_the_post_thumbnail_url($property->ID, 'full'),
-            'address' => get_post_meta($property->ID, '_phpm_property_address', true),
-            'city' => get_post_meta($property->ID, '_phpm_property_city', true),
-            'state' => get_post_meta($property->ID, '_phpm_property_state', true),
-            'zip' => get_post_meta($property->ID, '_phpm_property_zip', true),
-            'units' => get_post_meta($property->ID, '_phpm_property_units', true),
-            'property_types' => wp_get_post_terms($property->ID, 'phpm_property_type', array('fields' => 'names')),
-            'amenities' => wp_get_post_terms($property->ID, 'phpm_amenities', array('fields' => 'names')),
-            'location' => wp_get_post_terms($property->ID, 'phpm_location', array('fields' => 'names')),
+            'address' => get_post_meta($property->ID, '_vmp_property_address', true),
+            'city' => get_post_meta($property->ID, '_vmp_property_city', true),
+            'state' => get_post_meta($property->ID, '_vmp_property_state', true),
+            'zip' => get_post_meta($property->ID, '_vmp_property_zip', true),
+            'units' => get_post_meta($property->ID, '_vmp_property_units', true),
+            'property_types' => wp_get_post_terms($property->ID, 'vmp_property_type', array('fields' => 'names')),
+            'amenities' => wp_get_post_terms($property->ID, 'vmp_amenities', array('fields' => 'names')),
+            'location' => wp_get_post_terms($property->ID, 'vmp_location', array('fields' => 'names')),
         );
         
         return $response;
@@ -422,7 +422,7 @@ class PHPM_REST_API {
      */
     public static function get_units($request) {
         $args = array(
-            'post_type' => 'phpm_unit',
+            'post_type' => 'vmp_unit',
             'posts_per_page' => $request->get_param('per_page') ?: 10,
             'paged' => $request->get_param('page') ?: 1,
         );
@@ -430,7 +430,7 @@ class PHPM_REST_API {
         // Filter by property
         if ($property_id = $request->get_param('property')) {
             $args['meta_query'][] = array(
-                'key' => '_phpm_unit_property',
+                'key' => '_vmp_unit_property',
                 'value' => $property_id,
                 'compare' => '=',
             );
@@ -474,12 +474,12 @@ class PHPM_REST_API {
             'title' => $unit->post_title,
             'description' => $unit->post_content,
             'status' => $unit->post_status,
-            'property_id' => get_post_meta($unit->ID, '_phpm_unit_property', true),
-            'rent' => get_post_meta($unit->ID, '_phpm_unit_rent', true),
-            'bedrooms' => get_post_meta($unit->ID, '_phpm_unit_bedrooms', true),
-            'bathrooms' => get_post_meta($unit->ID, '_phpm_unit_bathrooms', true),
-            'sqft' => get_post_meta($unit->ID, '_phpm_unit_sqft', true),
-            'amenities' => wp_get_post_terms($unit->ID, 'phpm_amenities', array('fields' => 'names')),
+            'property_id' => get_post_meta($unit->ID, '_vmp_unit_property', true),
+            'rent' => get_post_meta($unit->ID, '_vmp_unit_rent', true),
+            'bedrooms' => get_post_meta($unit->ID, '_vmp_unit_bedrooms', true),
+            'bathrooms' => get_post_meta($unit->ID, '_vmp_unit_bathrooms', true),
+            'sqft' => get_post_meta($unit->ID, '_vmp_unit_sqft', true),
+            'amenities' => wp_get_post_terms($unit->ID, 'vmp_amenities', array('fields' => 'names')),
         );
         
         return $response;
