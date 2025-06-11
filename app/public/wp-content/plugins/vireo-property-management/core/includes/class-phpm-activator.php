@@ -38,8 +38,8 @@ class PHPM_Activator {
         }
         
         // Set activation timestamp
-        update_option('phpm_activation_date', current_time('timestamp'));
-        update_option('phpm_version', PHPM_VERSION);
+        update_option('vmp_activation_date', current_time('timestamp'));
+        update_option('vmp_version', VMP_VERSION);
     }
     
     /**
@@ -51,7 +51,7 @@ class PHPM_Activator {
         $charset_collate = $wpdb->get_charset_collate();
         
         // Property views table
-        $table_name = $wpdb->prefix . 'phpm_property_views';
+        $table_name = $wpdb->prefix . 'vmp_property_views';
         $sql = "CREATE TABLE $table_name (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             property_id bigint(20) unsigned NOT NULL,
@@ -69,7 +69,7 @@ class PHPM_Activator {
         dbDelta($sql);
         
         // Maintenance log table
-        $table_name = $wpdb->prefix . 'phpm_maintenance_log';
+        $table_name = $wpdb->prefix . 'vmp_maintenance_log';
         $sql = "CREATE TABLE $table_name (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             maintenance_id bigint(20) unsigned NOT NULL,
@@ -86,7 +86,7 @@ class PHPM_Activator {
         dbDelta($sql);
         
         // Payments table
-        $table_name = $wpdb->prefix . 'phpm_payments';
+        $table_name = $wpdb->prefix . 'vmp_payments';
         $sql = "CREATE TABLE $table_name (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             lease_id bigint(20) unsigned NOT NULL,
@@ -109,7 +109,7 @@ class PHPM_Activator {
         dbDelta($sql);
         
         // Lease history table
-        $table_name = $wpdb->prefix . 'phpm_lease_history';
+        $table_name = $wpdb->prefix . 'vmp_lease_history';
         $sql = "CREATE TABLE $table_name (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             lease_id bigint(20) unsigned NOT NULL,
@@ -127,7 +127,7 @@ class PHPM_Activator {
         dbDelta($sql);
         
         // Documents table
-        $table_name = $wpdb->prefix . 'phpm_documents';
+        $table_name = $wpdb->prefix . 'vmp_documents';
         $sql = "CREATE TABLE $table_name (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             property_id bigint(20) unsigned DEFAULT NULL,
@@ -179,19 +179,19 @@ class PHPM_Activator {
     private static function create_default_pages() {
         $pages = array(
             'tenant-portal' => array(
-                'title' => __('Tenant Portal', 'plughaus-property'),
-                'content' => '[phpm_tenant_portal]',
-                'option_name' => 'phpm_tenant_portal_page_id'
+                'title' => __('Tenant Portal', 'vireo-property'),
+                'content' => '[vmp_tenant_portal]',
+                'option_name' => 'vmp_tenant_portal_page_id'
             ),
             'maintenance-request' => array(
-                'title' => __('Maintenance Request', 'plughaus-property'),
-                'content' => '[phpm_maintenance_form]',
-                'option_name' => 'phpm_maintenance_page_id'
+                'title' => __('Maintenance Request', 'vireo-property'),
+                'content' => '[vmp_maintenance_form]',
+                'option_name' => 'vmp_maintenance_page_id'
             ),
             'property-listings' => array(
-                'title' => __('Property Listings', 'plughaus-property'),
-                'content' => '[phpm_property_listings]',
-                'option_name' => 'phpm_properties_page_id'
+                'title' => __('Property Listings', 'vireo-property'),
+                'content' => '[vmp_property_listings]',
+                'option_name' => 'vmp_properties_page_id'
             )
         );
         
