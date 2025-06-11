@@ -12,14 +12,14 @@ class PHPM_REST_API {
     /**
      * API namespace
      */
-    const NAMESPACE = 'phpm/v1';
+    const NAMESPACE = 'vmp/v1';
     
     /**
      * Register REST API routes
      */
     public static function register_routes() {
         // Check if API is enabled
-        $options = get_option('phpm_settings');
+        $options = get_option('vmp_settings');
         if (isset($options['enable_api']) && !$options['enable_api']) {
             return;
         }

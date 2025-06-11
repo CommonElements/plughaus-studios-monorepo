@@ -18,18 +18,18 @@ class PHPM_Shortcodes {
      */
     public static function init() {
         // Property listings and search
-        add_shortcode('phpm_property_listings', array(__CLASS__, 'property_listings_shortcode'));
-        add_shortcode('phpm_property_detail', array(__CLASS__, 'property_detail_shortcode'));
-        add_shortcode('phpm_property_search', array(__CLASS__, 'property_search_shortcode'));
+        add_shortcode('vmp_property_listings', array(__CLASS__, 'property_listings_shortcode'));
+        add_shortcode('vmp_property_detail', array(__CLASS__, 'property_detail_shortcode'));
+        add_shortcode('vmp_property_search', array(__CLASS__, 'property_search_shortcode'));
         
         // Tenant portal and dashboard
-        add_shortcode('phpm_tenant_portal', array(__CLASS__, 'tenant_portal_shortcode'));
-        add_shortcode('phpm_tenant_dashboard', array(__CLASS__, 'tenant_dashboard_shortcode'));
+        add_shortcode('vmp_tenant_portal', array(__CLASS__, 'tenant_portal_shortcode'));
+        add_shortcode('vmp_tenant_dashboard', array(__CLASS__, 'tenant_dashboard_shortcode'));
         
         // Forms
-        add_shortcode('phpm_maintenance_request_form', array(__CLASS__, 'maintenance_request_form_shortcode'));
-        add_shortcode('phpm_rental_application', array(__CLASS__, 'rental_application_shortcode'));
-        add_shortcode('phpm_contact_form', array(__CLASS__, 'contact_form_shortcode'));
+        add_shortcode('vmp_maintenance_request_form', array(__CLASS__, 'maintenance_request_form_shortcode'));
+        add_shortcode('vmp_rental_application', array(__CLASS__, 'rental_application_shortcode'));
+        add_shortcode('vmp_contact_form', array(__CLASS__, 'contact_form_shortcode'));
         
         // Process form submissions
         add_action('init', array(__CLASS__, 'process_form_submissions'));

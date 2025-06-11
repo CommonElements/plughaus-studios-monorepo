@@ -35,15 +35,15 @@ class PHPM_Admin {
      */
     public function enqueue_styles($hook) {
         // Only load on our plugin pages
-        if (strpos($hook, 'phpm') === false && get_post_type() !== 'phpm_property' && get_post_type() !== 'phpm_unit' && get_post_type() !== 'phpm_tenant' && get_post_type() !== 'phpm_lease' && get_post_type() !== 'phpm_maintenance') {
+        if (strpos($hook, 'vmp') === false && get_post_type() !== 'vmp_property' && get_post_type() !== 'vmp_unit' && get_post_type() !== 'vmp_tenant' && get_post_type() !== 'vmp_lease' && get_post_type() !== 'vmp_maintenance') {
             return;
         }
         
         wp_enqueue_style(
-            'phpm-admin',
-            PHPM_PLUGIN_URL . 'core/assets/css/admin.css',
+            'vmp-admin',
+            VMP_PLUGIN_URL . 'core/assets/css/admin.css',
             array(),
-            PHPM_VERSION
+            VMP_VERSION
         );
     }
     
@@ -52,23 +52,23 @@ class PHPM_Admin {
      */
     public function enqueue_scripts($hook) {
         // Only load on our plugin pages
-        if (strpos($hook, 'phpm') === false && get_post_type() !== 'phpm_property' && get_post_type() !== 'phpm_unit' && get_post_type() !== 'phpm_tenant' && get_post_type() !== 'phpm_lease' && get_post_type() !== 'phpm_maintenance') {
+        if (strpos($hook, 'vmp') === false && get_post_type() !== 'vmp_property' && get_post_type() !== 'vmp_unit' && get_post_type() !== 'vmp_tenant' && get_post_type() !== 'vmp_lease' && get_post_type() !== 'vmp_maintenance') {
             return;
         }
         
         wp_enqueue_script(
-            'phpm-admin',
-            PHPM_PLUGIN_URL . 'core/assets/js/admin.js',
+            'vmp-admin',
+            VMP_PLUGIN_URL . 'core/assets/js/admin.js',
             array('jquery', 'wp-api'),
-            PHPM_VERSION,
+            VMP_VERSION,
             true
         );
         
         // Localize script
-        wp_localize_script('phpm-admin', 'phpm_admin', array(
+        wp_localize_script('vmp-admin', 'vmp_admin', array(
             'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('phpm_admin_nonce'),
-            'api_url' => home_url('/wp-json/phpm/v1/'),
+            'nonce' => wp_create_nonce('vmp_admin_nonce'),
+            'api_url' => home_url('/wp-json/vmp/v1/'),
             'strings' => array(
                 'confirm_delete' => __('Are you sure you want to delete this?', 'plughaus-property'),
                 'saving' => __('Saving...', 'plughaus-property'),
@@ -87,7 +87,7 @@ class PHPM_Admin {
             __('PlugHaus Property', 'plughaus-property'),
             __('Property Mgmt', 'plughaus-property'),
             'manage_options',
-            'phpm-dashboard',
+            'vmp-dashboard',
             array($this, 'render_dashboard'),
             'dashicons-building',
             25
@@ -95,11 +95,11 @@ class PHPM_Admin {
         
         // Dashboard submenu
         add_submenu_page(
-            'phpm-dashboard',
+            'vmp-dashboard',
             __('Dashboard', 'plughaus-property'),
             __('Dashboard', 'plughaus-property'),
             'manage_options',
-            'phpm-dashboard',
+            'vmp-dashboard',
             array($this, 'render_dashboard')
         );
         
