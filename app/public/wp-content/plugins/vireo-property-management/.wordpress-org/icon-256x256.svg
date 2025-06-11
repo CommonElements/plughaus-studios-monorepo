@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="256" height="256" rx="16" fill="#059669"/>
+  
+  <!-- Building Icon -->
+  <g transform="translate(64, 64)">
+    <!-- Main Building -->
+    <rect x="20" y="40" width="88" height="88" rx="4" fill="white" opacity="0.9"/>
+    
+    <!-- Windows -->
+    <rect x="32" y="52" width="16" height="16" rx="2" fill="#059669"/>
+    <rect x="56" y="52" width="16" height="16" rx="2" fill="#059669"/>
+    <rect x="80" y="52" width="16" height="16" rx="2" fill="#059669"/>
+    
+    <rect x="32" y="76" width="16" height="16" rx="2" fill="#059669"/>
+    <rect x="56" y="76" width="16" height="16" rx="2" fill="#059669"/>
+    <rect x="80" y="76" width="16" height="16" rx="2" fill="#059669"/>
+    
+    <rect x="32" y="100" width="16" height="16" rx="2" fill="#059669"/>
+    <rect x="80" y="100" width="16" height="16" rx="2" fill="#059669"/>
+    
+    <!-- Door -->
+    <rect x="56" y="100" width="16" height="28" fill="#047857"/>
+    
+    <!-- Roof -->
+    <path d="M10 40 L64 10 L118 40 L118 44 L10 44 Z" fill="white"/>
+    
+    <!-- Vireo Bird silhouette on roof -->
+    <path d="M54 20 Q60 16 66 20 L68 24 L66 26 Q64 28 60 28 Q56 28 54 26 L52 24 Z" fill="#059669"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="128" y="210" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="white">
+    VIREO
+  </text>
+  <text x="128" y="232" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="400" fill="white" opacity="0.9">
+    Property Management
+  </text>
+</svg>

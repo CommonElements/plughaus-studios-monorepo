@@ -5,9 +5,13 @@
  */
 
 get_header();
+
+// Debug output to verify page is loading
+echo '<!-- Plugin Directory Page Template Loading -->';
 ?>
 
 <div class="plugin-directory-page">
+<!-- VIREO PLUGIN DIRECTORY PAGE TEMPLATE LOADED SUCCESSFULLY -->
     
     <section class="page-header">
         <div class="container">
@@ -78,6 +82,127 @@ get_header();
     <section class="plugins-showcase">
         <div class="container">
             
+            <!-- Our Live Plugins -->
+            <div class="plugin-category">
+                <div class="category-header">
+                    <h2>🌟 Currently Available</h2>
+                    <p>Professional WordPress plugins developed by Vireo Designs, ready for production use</p>
+                </div>
+                <div class="section-divider"></div>
+                
+                <div class="plugins-grid">
+                    
+                    <!-- Vireo Property Management Plugin -->
+                    <?php 
+                    $property_plugin_path = WP_PLUGIN_DIR . '/vireo-property-management/vireo-property-management.php';
+                    $property_exists = file_exists($property_plugin_path);
+                    if ($property_exists) {
+                        $property_data = get_plugin_data($property_plugin_path);
+                    }
+                    ?>
+                    
+                    <div class="plugin-card featured-card" data-industry="property-management">
+                        <div class="plugin-header">
+                            <div class="plugin-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="plugin-meta">
+                                <h3 class="plugin-title">Vireo Property Management</h3>
+                                <div class="plugin-badges">
+                                    <span class="badge badge-success">Active Development</span>
+                                    <?php if ($property_exists && isset($property_data['Version'])) : ?>
+                                        <span class="badge badge-gray">v<?php echo esc_html($property_data['Version']); ?></span>
+                                    <?php endif; ?>
+                                    <span class="badge badge-info">Free + Pro</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="plugin-description">
+                            <p>Complete property management solution for small landlords. Manage properties, tenants, leases, and maintenance requests. Alternative to expensive Yardi/AppFolio systems.</p>
+                        </div>
+                        
+                        <div class="plugin-stats-row">
+                            <div class="plugin-stat">
+                                <i class="fas fa-code-branch"></i>
+                                <span>In Development</span>
+                            </div>
+                            <div class="plugin-stat">
+                                <i class="fas fa-home"></i>
+                                <span>Property Focus</span>
+                            </div>
+                            <div class="plugin-stat">
+                                <i class="fas fa-database"></i>
+                                <span>Full Database</span>
+                            </div>
+                        </div>
+                        
+                        <div class="plugin-actions">
+                            <a href="<?php echo home_url('/plugin-property-management/'); ?>" class="btn btn-secondary">Learn More</a>
+                            <a href="<?php echo home_url('/shop/'); ?>" class="btn btn-primary">Pre-Order Pro</a>
+                            <?php if ($property_exists) : ?>
+                                <span class="plugin-status-badge">✅ Installed</span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    
+                    <!-- Vireo Sports League Management Plugin -->
+                    <?php 
+                    $sports_plugin_path = WP_PLUGIN_DIR . '/vireo-sports-league/vireo-sports-league.php';
+                    $sports_exists = file_exists($sports_plugin_path);
+                    if ($sports_exists) {
+                        $sports_data = get_plugin_data($sports_plugin_path);
+                    }
+                    ?>
+                    
+                    <div class="plugin-card featured-card" data-industry="sports-leagues">
+                        <div class="plugin-header">
+                            <div class="plugin-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="plugin-meta">
+                                <h3 class="plugin-title">Vireo Sports League Manager</h3>
+                                <div class="plugin-badges">
+                                    <span class="badge badge-success">Active Development</span>
+                                    <?php if ($sports_exists && isset($sports_data['Version'])) : ?>
+                                        <span class="badge badge-gray">v<?php echo esc_html($sports_data['Version']); ?></span>
+                                    <?php endif; ?>
+                                    <span class="badge badge-info">Free + Pro</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="plugin-description">
+                            <p>Comprehensive sports league management with team rosters, scheduling, statistics tracking, and tournament brackets. Perfect for local leagues and recreational sports.</p>
+                        </div>
+                        
+                        <div class="plugin-stats-row">
+                            <div class="plugin-stat">
+                                <i class="fas fa-code-branch"></i>
+                                <span>In Development</span>
+                            </div>
+                            <div class="plugin-stat">
+                                <i class="fas fa-users"></i>
+                                <span>Team Management</span>
+                            </div>
+                            <div class="plugin-stat">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Statistics</span>
+                            </div>
+                        </div>
+                        
+                        <div class="plugin-actions">
+                            <a href="<?php echo home_url('/industries/sports-leagues/'); ?>" class="btn btn-secondary">Learn More</a>
+                            <a href="<?php echo home_url('/shop/'); ?>" class="btn btn-primary">Pre-Order Pro</a>
+                            <?php if ($sports_exists) : ?>
+                                <span class="plugin-status-badge">✅ Installed</span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
             <!-- Ecosystem Plugins -->
             <div class="plugin-category">
                 <div class="category-header">
@@ -122,7 +247,30 @@ get_header();
                         
                         <div class="plugin-actions">
                             <a href="<?php echo home_url('/industries/property-management/'); ?>" class="btn btn-secondary">Learn More</a>
-                            <a href="<?php echo home_url('/shop/'); ?>?product=property-management-pro" class="btn btn-primary">Get Pro</a>
+                            <?php 
+                            // Get WooCommerce product for Property Management Pro
+                            $product_query = new WP_Query(array(
+                                'post_type' => 'product',
+                                'meta_query' => array(
+                                    array(
+                                        'key' => '_sku',
+                                        'value' => 'property-management-pro',
+                                        'compare' => 'LIKE'
+                                    )
+                                ),
+                                'posts_per_page' => 1
+                            ));
+                            
+                            if ($product_query->have_posts()) {
+                                $product_query->the_post();
+                                $product = wc_get_product(get_the_ID());
+                                $product_url = get_permalink();
+                                wp_reset_postdata();
+                                echo '<a href="' . esc_url($product_url) . '" class="btn btn-primary">Get Pro - ' . $product->get_price_html() . '</a>';
+                            } else {
+                                echo '<a href="' . esc_url(home_url('/shop/')) . '" class="btn btn-primary">Get Pro</a>';
+                            }
+                            ?>
                         </div>
                     </div>
                     
@@ -249,7 +397,30 @@ get_header();
                         
                         <div class="plugin-actions">
                             <a href="<?php echo home_url('/industries/sports-leagues/'); ?>" class="btn btn-secondary">Learn More</a>
-                            <a href="<?php echo home_url('/shop/'); ?>?product=sports-league-pro" class="btn btn-primary">Get Pro</a>
+                            <?php 
+                            // Get WooCommerce product for Sports League Pro
+                            $sports_product_query = new WP_Query(array(
+                                'post_type' => 'product',
+                                'meta_query' => array(
+                                    array(
+                                        'key' => '_sku',
+                                        'value' => 'sports-league-pro',
+                                        'compare' => 'LIKE'
+                                    )
+                                ),
+                                'posts_per_page' => 1
+                            ));
+                            
+                            if ($sports_product_query->have_posts()) {
+                                $sports_product_query->the_post();
+                                $sports_product = wc_get_product(get_the_ID());
+                                $sports_product_url = get_permalink();
+                                wp_reset_postdata();
+                                echo '<a href="' . esc_url($sports_product_url) . '" class="btn btn-primary">Get Pro - ' . $sports_product->get_price_html() . '</a>';
+                            } else {
+                                echo '<a href="' . esc_url(home_url('/shop/')) . '" class="btn btn-primary">Get Pro</a>';
+                            }
+                            ?>
                         </div>
                     </div>
                     
@@ -331,6 +502,104 @@ get_header();
                     
                 </div>
             </div>
+            
+            <?php
+            // Get WooCommerce products that are our plugins
+            if (class_exists('WooCommerce')) {
+                // Look for products with plugin-related keywords
+                $wc_products = new WP_Query(array(
+                    'post_type' => 'product',
+                    'posts_per_page' => 6,
+                    'post_status' => 'publish',
+                    's' => 'property management OR sports league OR vireo',
+                    'meta_query' => array(
+                        array(
+                            'key' => '_stock_status',
+                            'value' => 'instock',
+                            'compare' => '='
+                        )
+                    )
+                ));
+                
+                // If no search results, get all products
+                if (!$wc_products->have_posts()) {
+                    wp_reset_postdata();
+                    $wc_products = new WP_Query(array(
+                        'post_type' => 'product',
+                        'posts_per_page' => 6,
+                        'post_status' => 'publish',
+                        'meta_query' => array(
+                            array(
+                                'key' => '_stock_status',
+                                'value' => 'instock',
+                                'compare' => '='
+                            )
+                        )
+                    ));
+                }
+                
+                if ($wc_products->have_posts()) : ?>
+                <!-- Available Products -->
+                <div class="plugin-category">
+                    <div class="category-header">
+                        <h2>🛒 Professional Licenses</h2>
+                        <p>Pro versions and premium licenses for our WordPress plugins</p>
+                    </div>
+                    <div class="section-divider"></div>
+                    
+                    <div class="plugins-grid">
+                        <?php while ($wc_products->have_posts()) : $wc_products->the_post(); 
+                            $product = wc_get_product(get_the_ID());
+                            if (!$product) continue;
+                        ?>
+                        
+                        <div class="plugin-card product-card">
+                            <div class="plugin-header">
+                                <div class="plugin-icon">
+                                    <?php if (has_post_thumbnail()) : ?>
+                                        <?php the_post_thumbnail('thumbnail', array('class' => 'plugin-thumb')); ?>
+                                    <?php else : ?>
+                                        <i class="fas fa-shopping-cart"></i>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="plugin-meta">
+                                    <h3 class="plugin-title"><?php the_title(); ?></h3>
+                                    <div class="plugin-badges">
+                                        <span class="badge badge-success">Available</span>
+                                        <?php if ($product->is_on_sale()) : ?>
+                                            <span class="badge badge-warning">Sale</span>
+                                        <?php endif; ?>
+                                        <span class="badge badge-premium">Pro License</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="plugin-description">
+                                <?php echo wp_trim_words(get_the_excerpt() ?: $product->get_short_description(), 20); ?>
+                            </div>
+                            
+                            <div class="plugin-pricing">
+                                <div class="wc-price-display">
+                                    <span class="price"><?php echo $product->get_price_html(); ?></span>
+                                    <?php if ($product->is_on_sale()) : ?>
+                                        <span class="sale-badge">SAVE <?php echo round((($product->get_regular_price() - $product->get_sale_price()) / $product->get_regular_price()) * 100); ?>%</span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            
+                            <div class="plugin-actions">
+                                <a href="<?php the_permalink(); ?>" class="btn btn-secondary">View Details</a>
+                                <a href="<?php echo esc_url('?add-to-cart=' . get_the_ID()); ?>" class="btn btn-primary">
+                                    <i class="fas fa-shopping-cart"></i> Purchase License
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <?php endwhile; ?>
+                    </div>
+                </div>
+                <?php endif; wp_reset_postdata(); ?>
+            <?php } ?>
             
         </div>
     </section>
@@ -546,6 +815,106 @@ get_header();
     border-left: 4px solid var(--secondary-color);
 }
 
+.featured-card {
+    border-left: 4px solid var(--accent-color);
+    position: relative;
+}
+
+.featured-card::before {
+    content: "⭐";
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.2rem;
+}
+
+.plugin-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+.plugin-stats-row {
+    display: flex;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+    padding: var(--space-3);
+    background: var(--gray-50);
+    border-radius: var(--radius);
+}
+
+.plugin-stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--gray-600);
+}
+
+.plugin-stat i {
+    color: var(--primary-color);
+}
+
+.product-card {
+    border-left: 4px solid var(--success-color);
+}
+
+.wc-price-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3);
+    background: var(--gray-50);
+    border-radius: var(--radius);
+    margin-bottom: var(--space-4);
+}
+
+.wc-price-display .price {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.sale-badge {
+    background: var(--warning-color);
+    color: var(--white);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius);
+    font-size: var(--text-xs);
+    font-weight: 600;
+}
+
+.section-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--primary-gradient);
+    border-radius: var(--radius);
+    margin: 0 auto var(--space-8);
+}
+
+.plugin-status-badge {
+    background: var(--success-color);
+    color: var(--white);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    margin-left: var(--space-2);
+}
+
+.badge-premium {
+    background: var(--accent-color);
+    color: var(--white);
+}
+
+.plugin-actions {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .plugin-header {
     display: flex;
     gap: var(--space-4);
@@ -555,14 +924,45 @@ get_header();
 .plugin-icon {
     width: 60px;
     height: 60px;
-    background: var(--primary-gradient);
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
     border-radius: var(--radius-xl);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
+    color: #6b7280;
     font-size: var(--text-xl);
     flex-shrink: 0;
+}
+
+/* Industry-specific icon colors */
+[data-industry="property-management"] .plugin-icon {
+    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+    color: #0369a1;
+}
+
+[data-industry="sports-leagues"] .plugin-icon {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #d97706;
+}
+
+[data-industry="equipment-rental"] .plugin-icon {
+    background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+    color: #7c3aed;
+}
+
+[data-industry="marina-rv"] .plugin-icon {
+    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+    color: #0891b2;
+}
+
+[data-industry="self-storage"] .plugin-icon {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #dc2626;
+}
+
+[data-industry="nonprofits"] .plugin-icon {
+    background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+    color: #ec4899;
 }
 
 .plugin-meta {
@@ -607,9 +1007,9 @@ get_header();
 }
 
 .pricing-tier.featured {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, #0891b2, #7c3aed);
     color: var(--white);
-    border-color: var(--primary-color);
+    border-color: #0891b2;
 }
 
 .tier-name {

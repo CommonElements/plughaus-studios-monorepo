@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="772" height="250" viewBox="0 0 772 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient Background -->
+  <defs>
+    <linearGradient id="sportsBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0891b2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0e7490;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="sportsPattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+      <circle cx="25" cy="25" r="20" stroke="white" stroke-width="0.5" fill="none" opacity="0.1"/>
+    </pattern>
+  </defs>
+  
+  <rect width="772" height="250" fill="url(#sportsBg)"/>
+  <rect width="772" height="250" fill="url(#sportsPattern)"/>
+  
+  <!-- Left Side - Sports Icons -->
+  <g transform="translate(50, 50)">
+    <!-- Trophy -->
+    <g transform="translate(0, 0)">
+      <path d="M40 20 C40 20 36 36 36 52 C36 68 40 80 60 80 C80 80 84 68 84 52 C84 36 80 20 80 20 Z" fill="white" opacity="0.9"/>
+      <path d="M40 28 C20 28 12 36 12 48 C12 60 20 68 32 68" stroke="white" stroke-width="6" fill="none" opacity="0.8"/>
+      <path d="M80 28 C100 28 108 36 108 48 C108 60 100 68 88 68" stroke="white" stroke-width="6" fill="none" opacity="0.8"/>
+      <rect x="50" y="80" width="20" height="10" fill="white" opacity="0.85"/>
+      <rect x="44" y="90" width="32" height="6" fill="white" opacity="0.85"/>
+      <rect x="38" y="96" width="44" height="10" rx="2" fill="white" opacity="0.9"/>
+    </g>
+    
+    <!-- Soccer Ball -->
+    <g transform="translate(120, 80)" opacity="0.3">
+      <circle cx="20" cy="20" r="20" fill="white"/>
+      <path d="M20 0 L14 8 L14 16 L20 20 L26 16 L26 8 Z" fill="#0891b2"/>
+      <path d="M8 14 L0 20 L8 26 L14 26 L14 16 Z" fill="#0891b2"/>
+      <path d="M32 14 L40 20 L32 26 L26 26 L26 16 Z" fill="#0891b2"/>
+    </g>
+    
+    <!-- Basketball -->
+    <g transform="translate(60, 120)" opacity="0.3">
+      <circle cx="15" cy="15" r="15" fill="white"/>
+      <path d="M15 0 L15 30 M0 15 L30 15 M5 5 Q15 10 25 5 M5 25 Q15 20 25 25" stroke="#0891b2" stroke-width="1" fill="none"/>
+    </g>
+  </g>
+  
+  <!-- Right Side - Text -->
+  <g transform="translate(250, 65)">
+    <!-- Plugin Name -->
+    <text x="0" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="800" fill="white">
+      Vireo Sports League Manager
+    </text>
+    
+    <!-- Tagline -->
+    <text x="0" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="400" fill="white" opacity="0.9">
+      Professional League Management for WordPress
+    </text>
+    
+    <!-- Features -->
+    <g transform="translate(0, 70)">
+      <g transform="translate(0, 0)">
+        <circle cx="8" cy="8" r="6" fill="white" opacity="0.2"/>
+        <path d="M8 4 L11 7 L6 12 L3 9" stroke="white" stroke-width="2" fill="none"/>
+        <text x="24" y="12" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="white">
+          Team &amp; Player Management
+        </text>
+      </g>
+      
+      <g transform="translate(220, 0)">
+        <circle cx="8" cy="8" r="6" fill="white" opacity="0.2"/>
+        <path d="M8 4 L11 7 L6 12 L3 9" stroke="white" stroke-width="2" fill="none"/>
+        <text x="24" y="12" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="white">
+          Schedule &amp; Results
+        </text>
+      </g>
+      
+      <g transform="translate(0, 30)">
+        <circle cx="8" cy="8" r="6" fill="white" opacity="0.2"/>
+        <path d="M8 4 L11 7 L6 12 L3 9" stroke="white" stroke-width="2" fill="none"/>
+        <text x="24" y="12" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="white">
+          Automatic Standings
+        </text>
+      </g>
+      
+      <g transform="translate(220, 30)">
+        <circle cx="8" cy="8" r="6" fill="white" opacity="0.2"/>
+        <path d="M8 4 L11 7 L6 12 L3 9" stroke="white" stroke-width="2" fill="none"/>
+        <text x="24" y="12" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="white">
+          Player Statistics
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Bottom Corner - Website -->
+  <text x="622" y="230" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="white" opacity="0.6">
+    vireodesigns.com
+  </text>
+</svg>

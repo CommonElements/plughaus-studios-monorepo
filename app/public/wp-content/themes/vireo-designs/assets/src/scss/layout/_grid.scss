@@ -1,0 +1,48 @@
+/**
+ * Grid layout styles for Vireo Designs
+ */
+
+.container {
+  @include container;
+}
+
+.grid {
+  display: grid;
+  gap: $spacing-6;
+  
+  &.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    
+    @include respond-to(mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+    
+    @include respond-to(tablet-down) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include respond-to(mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  &.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+    
+    @include respond-to(desktop-down) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    @include respond-to(tablet-down) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include respond-to(mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+}

@@ -1,0 +1,204 @@
+/**
+ * Homepage Color Balance Overrides
+ * Reduces overwhelming green and introduces balanced color palette
+ */
+
+/* Define balanced gradients */
+:root {
+    --nature-gradient: linear-gradient(135deg, #1e40af 0%, #7c3aed 50%, #0891b2 100%);
+    --hero-gradient: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0891b2 100%);
+    --accent-gradient: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+}
+
+/* Hero Section - Dark professional background instead of green blast */
+.hero-section {
+    background: var(--hero-gradient) !important;
+    position: relative;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 30% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(8, 145, 178, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Hero glow - Change from green to blue/purple */
+.hero-glow {
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, transparent 70%) !important;
+}
+
+/* Value section - Professional grey instead of green */
+.value-section {
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%) !important;
+    color: #1e293b !important;
+}
+
+.value-item {
+    background: white !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.value-number {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* Features section backgrounds */
+.features-section {
+    background: white !important;
+}
+
+.feature-card {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.feature-card:hover {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.08) !important;
+}
+
+.feature-icon {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe) !important;
+    color: #2563eb !important;
+}
+
+.feature-card:hover .feature-icon {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
+    color: white !important;
+}
+
+/* Plugin showcase section */
+.plugins-showcase {
+    background: linear-gradient(180deg, #fafbfc 0%, white 100%) !important;
+}
+
+/* CTA Section - Use accent gradient instead of green */
+.cta-section {
+    background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%) !important;
+}
+
+/* Stat cards in hero */
+.stat-card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.stat-icon {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
+}
+
+/* Activity feed dots */
+.activity-dot.success {
+    background: #3b82f6 !important;
+}
+
+.activity-dot.info {
+    background: #8b5cf6 !important;
+}
+
+.activity-dot.warning {
+    background: #f59e0b !important;
+}
+
+/* Window controls (fake browser) */
+.control.green {
+    background: #3b82f6 !important;
+}
+
+/* Trust items */
+.trust-item {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.trust-item:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Buttons - Replace green primary with blue gradient */
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%) !important;
+    border: none !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.25) !important;
+}
+
+.btn-outline {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: white !important;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Text gradient */
+.text-gradient {
+    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ef4444 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* Section headers */
+.section-title {
+    color: #1e293b !important;
+}
+
+.section-description {
+    color: #64748b !important;
+}
+
+/* Override any inline green styles */
+[style*="background-color: #059669"],
+[style*="background-color: #10b981"],
+[style*="background-color: #047857"] {
+    background-color: #3b82f6 !important;
+}
+
+/* Reduce green icons */
+.vireo-bird {
+    filter: hue-rotate(200deg) saturate(0.8);
+}
+
+/* Stats section background */
+.stats-section {
+    background: #f8fafc !important;
+}
+
+/* Testimonials background */
+.testimonials-section {
+    background: white !important;
+}
+
+/* Footer */
+.site-footer {
+    background: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+/* Newsletter section */
+.newsletter-section {
+    background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%) !important;
+}

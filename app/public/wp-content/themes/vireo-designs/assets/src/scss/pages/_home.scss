@@ -1,0 +1,36 @@
+/**
+ * Home page styles for Vireo Designs
+ */
+
+.home-page {
+  .hero {
+    padding: $spacing-24 0;
+  }
+  
+  .features-section {
+    padding: $spacing-20 0;
+    
+    .container {
+      @include container;
+    }
+    
+    .features-grid {
+      @include grid(3, $spacing-8);
+      margin-top: $spacing-12;
+      
+      @include respond-to(tablet-down) {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+  
+  .cta-section {
+    padding: $spacing-20 0;
+    background: $vireo-light;
+    text-align: center;
+    
+    .container {
+      @include container;
+    }
+  }
+}

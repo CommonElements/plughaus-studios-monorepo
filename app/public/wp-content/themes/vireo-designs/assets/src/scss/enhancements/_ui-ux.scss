@@ -1,0 +1,17 @@
+/**
+ * UI/UX enhancement styles for Vireo Designs
+ */
+
+.smooth-transitions * {
+  transition: all $transition-fast;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: $shadow-lg;
+}
+
+.focus-ring:focus {
+  outline: 2px solid $vireo-primary;
+  outline-offset: 2px;
+}

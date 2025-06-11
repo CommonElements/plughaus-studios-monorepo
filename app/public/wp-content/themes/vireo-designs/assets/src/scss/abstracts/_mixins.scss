@@ -1,0 +1,399 @@
+/**
+ * SCSS Mixins for Vireo Designs Theme
+ * 
+ * Reusable mixins for common patterns and responsive design
+ */
+
+// Responsive Breakpoints
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: #{$mobile-max}) {
+      @content;
+    }
+  }
+  @else if $breakpoint == tablet {
+    @media (min-width: #{$tablet-min}) {
+      @content;
+    }
+  }
+  @else if $breakpoint == tablet-down {
+    @media (max-width: #{$tablet-max}) {
+      @content;
+    }
+  }
+  @else if $breakpoint == desktop {
+    @media (min-width: #{$desktop-min}) {
+      @content;
+    }
+  }
+  @else if $breakpoint == desktop-down {
+    @media (max-width: #{$desktop-max}) {
+      @content;
+    }
+  }
+  @else {
+    @warn "Unknown breakpoint: #{$breakpoint}";
+  }
+}
+
+@mixin sm {
+  @media (min-width: #{$screen-sm}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$screen-md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$screen-lg}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$screen-xl}) {
+    @content;
+  }
+}
+
+@mixin xxl {
+  @media (min-width: #{$screen-2xl}) {
+    @content;
+  }
+}
+
+// Container
+@mixin container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 $spacing-4;
+  
+  @include sm {
+    max-width: $container-sm;
+  }
+  
+  @include md {
+    max-width: $container-md;
+    padding: 0 $spacing-6;
+  }
+  
+  @include lg {
+    max-width: $container-lg;
+    padding: 0 $spacing-8;
+  }
+  
+  @include xl {
+    max-width: $container-xl;
+  }
+  
+  @include xxl {
+    max-width: $container-2xl;
+  }
+}
+
+// Flexbox utilities
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Grid utilities
+@mixin grid($columns: 1, $gap: $grid-gutter) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+@mixin grid-responsive {
+  display: grid;
+  gap: $grid-gutter;
+  grid-template-columns: 1fr;
+  
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @include lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Button styles
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $btn-padding-y $btn-padding-x;
+  border: 1px solid transparent;
+  border-radius: $btn-border-radius;
+  font-weight: $btn-font-weight;
+  font-size: $font-size-base;
+  line-height: $line-height-tight;
+  text-decoration: none;
+  cursor: pointer;
+  transition: $btn-transition;
+  user-select: none;
+  
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin btn-primary {
+  @include btn-base;
+  background-color: $vireo-primary;
+  border-color: $vireo-primary;
+  color: white;
+  
+  &:hover:not(:disabled) {
+    background-color: darken($vireo-primary, 10%);
+    border-color: darken($vireo-primary, 10%);
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($vireo-primary, 0.1);
+  }
+}
+
+@mixin btn-secondary {
+  @include btn-base;
+  background-color: transparent;
+  border-color: $gray-300;
+  color: $text-primary;
+  
+  &:hover:not(:disabled) {
+    background-color: $gray-50;
+    border-color: $gray-400;
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($gray-300, 0.1);
+  }
+}
+
+@mixin btn-ghost {
+  @include btn-base;
+  background-color: transparent;
+  border-color: transparent;
+  color: $vireo-primary;
+  
+  &:hover:not(:disabled) {
+    background-color: rgba($vireo-primary, 0.1);
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($vireo-primary, 0.1);
+  }
+}
+
+// Input styles
+@mixin input-base {
+  display: block;
+  width: 100%;
+  padding: $input-padding-y $input-padding-x;
+  border: 1px solid $input-border-color;
+  border-radius: $input-border-radius;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $text-primary;
+  background-color: $bg-primary;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+  
+  &:focus {
+    outline: none;
+    border-color: $input-focus-border-color;
+    box-shadow: 0 0 0 3px $input-focus-ring-color;
+  }
+}
+
+// List reset
+@mixin list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// Card styles
+@mixin card {
+  background: $bg-primary;
+  border: 1px solid $gray-200;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  overflow: hidden;
+}
+
+// Screen reader only
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Card styles
+@mixin card {
+  background-color: $bg-primary;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-base;
+  overflow: hidden;
+}
+
+@mixin card-hover {
+  transition: transform $transition-base, box-shadow $transition-base;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// Typography mixins
+@mixin heading-base {
+  font-family: $font-family-sans;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $text-primary;
+}
+
+@mixin heading-1 {
+  @include heading-base;
+  font-size: $font-size-4xl;
+  
+  @include md {
+    font-size: $font-size-5xl;
+  }
+  
+  @include lg {
+    font-size: $font-size-6xl;
+  }
+}
+
+@mixin heading-2 {
+  @include heading-base;
+  font-size: $font-size-3xl;
+  
+  @include md {
+    font-size: $font-size-4xl;
+  }
+}
+
+@mixin heading-3 {
+  @include heading-base;
+  font-size: $font-size-2xl;
+  
+  @include md {
+    font-size: $font-size-3xl;
+  }
+}
+
+@mixin body-large {
+  font-size: $font-size-lg;
+  line-height: $line-height-relaxed;
+  color: $text-secondary;
+}
+
+@mixin body-base {
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $text-primary;
+}
+
+// Utility mixins
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin aspect-ratio($width, $height) {
+  aspect-ratio: $width / $height;
+  
+  @supports not (aspect-ratio: 1 / 1) {
+    &::before {
+      content: "";
+      display: block;
+      padding-top: percentage($height / $width);
+    }
+  }
+}
+
+// Animation mixins
+@mixin fade-in($duration: $animation-base) {
+  animation: fadeIn $duration ease-out;
+}
+
+@mixin slide-in-up($duration: $animation-base) {
+  animation: slideInUp $duration ease-out;
+}
+
+@mixin slide-in-down($duration: $animation-base) {
+  animation: slideInDown $duration ease-out;
+}
+
+// Gradient mixins
+@mixin gradient-primary {
+  background: $bg-gradient;
+}
+
+@mixin gradient-text {
+  background: $bg-gradient;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Focus styles
+@mixin focus-ring($color: $vireo-primary) {
+  &:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba($color, 0.1);
+  }
+}

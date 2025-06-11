@@ -1,7 +1,7 @@
 {
-  "name": "@plughausstudios/monorepo",
+  "name": "@vireodesigns/monorepo",
   "version": "1.0.0",
-  "description": "PlugHaus Studios - Complete Property Management Ecosystem for WordPress",
+  "description": "Vireo Designs - Professional WordPress Plugin Development Studio",
   "private": true,
   "workspaces": [
     "packages/*",
@@ -9,51 +9,74 @@
     "tools/*"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev:plugins\" \"npm run dev:website\"",
+    "dev": "concurrently \"npm run dev:theme\" \"npm run dev:plugins\" \"npm run dev:website\"",
+    "dev:theme": "webpack --mode=development --watch --config=webpack.config.js",
     "dev:plugins": "lerna run dev --parallel",
     "dev:website": "cd website && npm run dev",
-    "build": "npm run build:plugins && npm run build:website",
+    "build": "npm run build:theme && npm run build:plugins && npm run build:website",
+    "build:theme": "webpack --mode=production --config=webpack.config.js",
     "build:plugins": "lerna run build",
     "build:website": "cd website && npm run build",
+    "watch": "npm run dev:theme",
     "extract:free": "node tools/build/extract-plugin.js --type=free",
     "extract:pro": "node tools/build/extract-plugin.js --type=pro",
     "extract:all": "npm run extract:free && npm run extract:pro",
     "test": "npm run test:plugins && npm run test:website",
     "test:plugins": "lerna run test",
     "test:website": "cd website && npm run test",
-    "lint": "npm run lint:plugins && npm run lint:website",
+    "lint": "npm run lint:plugins && npm run lint:website && npm run lint:theme",
     "lint:plugins": "lerna run lint",
     "lint:website": "cd website && npm run lint",
+    "lint:theme": "eslint app/public/wp-content/themes/vireo-designs/assets/js --ext .js",
+    "stylelint": "stylelint app/public/wp-content/themes/vireo-designs/assets/scss/**/*.scss",
     "release": "node tools/build/release-manager.js",
     "setup": "./tools/dev/local-setup.sh",
-    "clean": "lerna clean && rm -rf node_modules dist build"
+    "clean": "lerna clean && rm -rf node_modules dist build app/public/wp-content/themes/vireo-designs/assets/css/dist app/public/wp-content/themes/vireo-designs/assets/js/dist"
   },
   "keywords": [
     "wordpress",
+    "plugin-development",
     "property-management",
-    "real-estate",
-    "landlord",
-    "tenant",
-    "lease",
-    "property"
+    "sports-league",
+    "themes",
+    "vireo-designs"
   ],
-  "author": "PlugHaus Studios",
+  "author": "Vireo Designs",
   "license": "GPL-2.0-or-later",
-  "homepage": "https://plughausstudios.com",
+  "homepage": "https://vireodesigns.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CommonElements/plughaus-studios-monorepo.git"
+    "url": "git+https://github.com/VireoDesigns/vireo-monorepo.git"
   },
   "bugs": {
-    "url": "https://github.com/CommonElements/plughaus-studios-monorepo/issues"
+    "url": "https://github.com/VireoDesigns/vireo-monorepo/issues"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
     "@wordpress/scripts": "^27.0.0",
+    "autoprefixer": "^10.4.16",
+    "babel-loader": "^9.1.3",
+    "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^8.0.0",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
     "eslint": "^8.0.0",
+    "file-loader": "^6.2.0",
     "jest": "^29.0.0",
     "lerna": "^8.0.0",
-    "prettier": "^3.0.0"
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss": "^8.4.31",
+    "postcss-loader": "^7.3.3",
+    "prettier": "^3.0.0",
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2",
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard-scss": "^11.1.0",
+    "terser-webpack-plugin": "^5.3.9",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
   },
   "engines": {
     "node": ">=18.0.0",

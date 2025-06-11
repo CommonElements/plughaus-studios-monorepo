@@ -1,0 +1,31 @@
+/**
+ * Contact page styles for Vireo Designs
+ */
+
+.contact-page {
+  .contact-grid {
+    @include grid(2, $spacing-12);
+    margin: $spacing-12 0;
+    
+    @include respond-to(mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .contact-info {
+    h3 {
+      margin-bottom: $spacing-6;
+    }
+    
+    .info-item {
+      @include flex-center;
+      gap: $spacing-3;
+      margin-bottom: $spacing-4;
+      
+      i {
+        color: $vireo-primary;
+        font-size: $font-size-lg;
+      }
+    }
+  }
+}

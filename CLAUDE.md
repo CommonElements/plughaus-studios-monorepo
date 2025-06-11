@@ -1,34 +1,47 @@
-# PlugHaus Studios - WordPress Plugin Development Studio
+# Vireo Designs - WordPress Plugin Development Studio
 
 ## 🎯 Studio Overview
 
-This is **PlugHaus Studios** - a comprehensive WordPress plugin development studio creating professional-grade plugins for diverse industries. This monorepo contains our complete development ecosystem including the flagship **Property Management Plugin** and multiple planned products.
+This is **Vireo Designs** - a comprehensive WordPress plugin development studio creating professional-grade plugins for diverse industries. This monorepo contains our complete development ecosystem including the flagship **Property Management Plugin** and multiple planned products.
 
 ### Studio Mission
 - **WordPress Ecosystem Leader**: Build professional plugins for multiple industry verticals
-- **Freemium Business Model**: WordPress.org free versions driving pro sales via PlugHausStudios.com
+- **Freemium Business Model**: WordPress.org free versions driving pro sales via VireoDesigns.com
 - **Shared Architecture**: Common licensing, development patterns, and utility framework
 - **Market Diversification**: Multiple products reducing risk and maximizing revenue potential
 
 ### Current Product Portfolio
-- **Property Management Ecosystem** (Active Development): Free + Pro + Add-ons targeting small property managers as Yardi/AppFolio alternative
-- **Sports League Management** (Planned): Team management, schedules, statistics
-- **Fantasy Sports Platform** (Planned): League administration, scoring systems
-- **Field Service Management** (Planned): Technician dispatch, work orders, scheduling
-- **CommonElements Integration** (Planned): Bridge CE.com platform features to WordPress
+
+#### ✅ **Active Development**
+- **Property Management Ecosystem**: Free + Pro + Add-ons targeting small property managers as Yardi/AppFolio alternative
+
+#### 🚧 **In Development**  
+- **Sports League Management**: Team management, schedules, statistics, standings for multi-sport leagues
+
+#### 🎯 **Priority Pipeline (2025)**
+- **EquipRent Pro**: Equipment & Tool Rental Management System
+- **GymFlow**: Small Gym & Fitness Studio Management  
+- **DealerEdge**: Auto Shop & Small Car Dealer Management System
+- **StudioSnap**: Photography Studio Management Platform
+
+#### 📋 **Future Expansion**
+- **Fantasy Sports Platform**: League administration, scoring systems
+- **Field Service Management**: Technician dispatch, work orders, scheduling  
+- **CommonElements Integration**: Bridge CE.com platform features to WordPress
 
 ## 🏗️ Studio Architecture Overview
 
 ### Monorepo Structure
 ```
-plughaus-studios/
+vireo-designs/
 ├── app/public/wp-content/
 │   ├── plugins/
-│   │   ├── plughaus-property-management/    # Main Development Plugin
+│   │   ├── vireo-property-management/       # Main Development Plugin
+│   │   ├── vireo-sports-league/             # Sports League Management Plugin
 │   │   ├── license-manager-for-woocommerce/ # Licensing Infrastructure
 │   │   └── woocommerce/                     # E-commerce Platform
 │   └── themes/
-│       └── plughaus-studios/               # Company Website Theme
+│       └── vireo-designs/                   # Company Website Theme
 ├── website/                                # Marketing Site Content
 ├── packages/                              # Future Plugin Development
 │   ├── sports-league-management/          # Planned: Sports leagues
@@ -43,8 +56,8 @@ plughaus-studios/
 
 ### Property Management Plugin Structure
 ```
-plughaus-property-management/
-├── plughaus-property-management.php    # Main plugin file with conditional loading
+vireo-property-management/
+├── vireo-property-management.php        # Main plugin file with conditional loading
 ├── core/                               # Free features (WordPress.org compliant)
 │   ├── includes/
 │   │   ├── admin/                      # Admin interface classes
@@ -128,7 +141,7 @@ npm run watch
 ### License Validation Flow
 1. User enters license key in Settings → Pro License
 2. AJAX call to license validation endpoint
-3. Server validates against PlugHausStudios.com API
+3. Server validates against VireoDesigns.com API
 4. License status cached locally
 5. Pro features enabled/disabled accordingly
 
@@ -326,7 +339,7 @@ define('PHPM_DEBUG', true);
 
 ### Pro Version Distribution
 1. Run `npm run build:pro`
-2. Upload to PlugHausStudios.com
+2. Upload to VireoDesigns.com
 3. Configure WooCommerce licensing
 4. Set up automated delivery system
 
@@ -340,18 +353,18 @@ define('PHPM_DEBUG', true);
 
 ### Key Contacts
 - **Primary Development**: Contact through Claude Code sessions
-- **Business Requirements**: PlugHaus Studios team
+- **Business Requirements**: Vireo Designs team
 - **Technical Support**: WordPress.org forums (free version)
 
 ---
 
 ## 🎯 Current Studio Status (Updated June 8, 2025)
 
-**PlugHaus Studios ecosystem is architecturally complete and ready for active development.** The monorepo contains a sophisticated WordPress plugin development platform with the Property Management Plugin as the flagship product.
+**Vireo Designs ecosystem is architecturally complete and ready for active development.** The monorepo contains a sophisticated WordPress plugin development platform with the Property Management Plugin as the flagship product.
 
 ### ✅ **Current Environment**
 - **Location**: Local by Flywheel - "The Beginning is Finished"
-- **Studio Website**: PlugHaus Studios theme with WooCommerce integration
+- **Studio Website**: Vireo Designs theme with WooCommerce integration
 - **Main Product**: Property Management Plugin ecosystem (free + pro + addons)
 - **Licensing Infrastructure**: WooCommerce License Manager for all products
 - **Database**: Fresh WordPress installation ready for development
@@ -369,7 +382,7 @@ define('PHPM_DEBUG', true);
 
 **Infrastructure Complete**:
 - ✅ Monorepo structure with shared development framework
-- ✅ PlugHaus Studios website theme with WooCommerce integration
+- ✅ Vireo Designs website theme with WooCommerce integration
 - ✅ Licensing system ready for multiple products
 - ✅ Build tools and distribution automation
 - ✅ Documentation structure for multi-product ecosystem
@@ -448,3 +461,254 @@ define('PHPM_DEBUG', true);
 - [ ] Licensing infrastructure ready for multiple products
 
 **Status**: Studio ecosystem architecturally complete, Property Management Plugin ready for active feature development and testing! 🚀
+
+---
+
+## 🌟 **BUSINESS STRATEGY & MARKET EXPANSION (2025-2027)**
+
+### 🎯 **Core Business Philosophy**
+**"WordPress Business Operating System for Overlooked Industries"**
+
+We build lightweight, powerful, affordable alternatives to expensive SaaS platforms for industry segments plagued by complex, overpriced software solutions. Our sweet spot: **small to medium businesses (SMBs) using spreadsheets or paying $200-1000/month for enterprise software they don't need.**
+
+### 💰 **Revenue Model & Market Opportunity**
+
+#### **Primary Revenue Streams**
+- **Free Versions**: WordPress.org distribution for lead generation and market penetration
+- **Pro Licenses**: $99-299/year per site with advanced features
+- **Enterprise Plans**: $299-499/year for multi-location businesses
+- **Add-on Modules**: $49-99/year for specialized functionality
+- **Professional Services**: Setup, customization, training packages
+
+#### **Total Addressable Market Analysis**
+| Industry Segment | Est. Businesses | Target Penetration | Annual Revenue Potential |
+|------------------|----------------|-------------------|-------------------------|
+| Equipment Rental | 100,000+ | 1% = 1,000 customers | $150,000 - $300,000 |
+| Auto Shops/Dealers | 190,000+ | 1% = 1,900 customers | $285,000 - $570,000 |
+| Gyms/Fitness Studios | 200,000+ | 1% = 2,000 customers | $300,000 - $600,000 |
+| Photography Studios | 200,000+ | 1% = 2,000 customers | $300,000 - $600,000 |
+| Property Management | 50,000+ | 2% = 1,000 customers | $200,000 - $400,000 |
+| Sports Organizations | 150,000+ | 1% = 1,500 customers | $225,000 - $450,000 |
+| **TOTAL CORE PORTFOLIO** | **890,000+** | **9,400 customers** | **$1.46M - $2.92M ARR** |
+
+*Conservative estimates at 1-2% market penetration with $150-300 average annual customer value*
+
+### 🚀 **2025 Priority Product Launch Strategy**
+
+#### **Q1 2025: EquipRent Pro - Equipment Rental Management**
+**Target Launch**: March 2025  
+**Market**: $400+ billion equipment rental industry  
+**Pain Point**: Most rental businesses use spreadsheets or pay $200-500/month for complex software
+
+**Core Features (Free)**:
+- Basic inventory management
+- Availability calendar  
+- Simple booking system
+- Customer database
+- Basic invoicing
+
+**Pro Features ($199/year)**:
+- Delivery scheduling & route optimization
+- Damage assessment & photo documentation
+- Maintenance tracking & service alerts
+- Multi-location management
+- Advanced pricing (seasonal, bulk discounts)
+- Insurance integration
+- QR code asset tracking
+- Mobile app for field teams
+
+**Target Markets**:
+- Tool rental shops
+- Party/event equipment rental
+- Construction equipment rental
+- Camera/AV equipment rental
+- Outdoor recreation rentals
+
+#### **Q2 2025: DealerEdge - Auto Shop & Small Dealer Management**
+**Target Launch**: June 2025  
+**Market**: 150,000+ auto repair shops + 40,000+ small car dealers  
+**Pain Point**: Current solutions cost $300-1000/month, most use spreadsheets
+
+**Dual-Market Approach**:
+
+**Auto Repair Shop Features**:
+- Work order management
+- Customer vehicle history
+- Parts inventory tracking
+- Labor time tracking
+- Appointment scheduling
+- Invoice generation
+
+**Small Car Dealer Features**:
+- Vehicle inventory management
+- Customer lead tracking
+- Sales process workflow
+- Financing application integration
+- DMV paperwork management
+- Lot management tools
+
+**Pro Features ($249/year)**:
+- Multi-location management
+- Advanced reporting & analytics
+- Automated follow-up campaigns
+- Integration with parts suppliers
+- Mobile app for lot/shop floor
+- Customer portal access
+
+#### **Q3 2025: GymFlow - Fitness Studio Management**
+**Target Launch**: September 2025  
+**Market**: 200,000+ gyms/studios paying $100-300/month for MindBody, Zen Planner  
+**Pain Point**: Existing solutions overkill for small studios, expensive for limited features
+
+**Core Features (Free)**:
+- Member roster management
+- Class scheduling
+- Basic payment tracking
+- Trainer assignment
+
+**Pro Features ($149/year)**:
+- Automated billing & payment processing
+- Member check-in app
+- Equipment booking system
+- Trainer commission tracking
+- Member progress tracking
+- Workout program management
+- Mobile app for members
+
+**Target Markets**:
+- Boutique fitness studios (50-500 members)
+- Martial arts schools
+- Yoga studios
+- Personal training facilities
+- CrossFit boxes
+
+#### **Q4 2025: StudioSnap - Photography Studio Management**
+**Target Launch**: December 2025  
+**Market**: 200,000+ photographers paying $30-100/month for Studio Ninja, ShootQ  
+**Pain Point**: Photographer-specific solutions expensive, generic tools inadequate
+
+**Core Features (Free)**:
+- Client booking system
+- Session scheduling
+- Basic contract management
+- Photo gallery sharing
+
+**Pro Features ($129/year)**:
+- Advanced client portal
+- Automated workflow management
+- Payment processing & invoicing
+- Model release management
+- Shoot planning tools
+- Integration with editing software
+- Marketing automation
+
+### 🎯 **Extended Market Opportunities (2026-2027)**
+
+#### **Healthcare & Medical Verticals**
+- **Veterinary Practice Management**: 25,000+ vet clinics
+- **Physical Therapy Clinics**: 40,000+ PT practices  
+- **Small Dental Practices**: Solo and 2-3 dentist practices
+
+#### **Trade & Contractor Services**
+- **HVAC Contractor Management**: 100,000+ HVAC businesses
+- **Plumbing Contractor Software**: 120,000+ plumbing companies
+- **Electrical Contractor Management**: 80,000+ electrical contractors
+- **Landscaping/Lawn Care**: 100,000+ lawn care businesses
+
+#### **Specialty Service Industries**
+- **Food Truck Management**: 25,000+ mobile food vendors
+- **Catering Business Management**: 15,000+ catering companies
+- **Self-Storage Management**: 50,000+ storage facilities
+- **Boat Marina Management**: 12,000+ marinas
+
+#### **Creative & Personal Services**
+- **Tattoo Shop Management**: 20,000+ tattoo parlors
+- **Nail Salon Management**: 130,000+ nail salons
+- **Music School Management**: 50,000+ music teachers/schools
+
+### 🏗️ **Shared Technology Infrastructure**
+
+#### **Core Platform Components (Reusable Across All Plugins)**
+- **Universal Customer/Client Management System**
+- **Shared Booking & Scheduling Engine**
+- **Common Payment Processing Integration** (Stripe, Square, WooCommerce)
+- **Unified Inventory Management Framework**
+- **Cross-Plugin Reporting Dashboard**
+- **Shared User Roles & Permissions System**
+- **Common Email Automation Platform**
+- **Universal Mobile App Framework**
+
+#### **Development Efficiency Strategy**
+- **70% Code Reuse** across similar business management plugins
+- **Rapid Plugin Development**: 3-4 month development cycles vs 12+ months from scratch
+- **Shared Quality Assurance**: Common testing frameworks and standards
+- **Unified Documentation**: Consistent user experience across all products
+
+### 💡 **Competitive Advantages**
+
+#### **Technical Advantages**
+1. **WordPress-Native Integration**: Seamless integration with existing business websites
+2. **Self-Hosted Option**: Data ownership vs SaaS vendor lock-in
+3. **Extensible Architecture**: Can integrate with existing WordPress plugins
+4. **Cost-Effective**: One-time annual fee vs monthly SaaS subscriptions
+
+#### **Business Model Advantages**
+1. **Freemium Distribution**: WordPress.org provides massive distribution channel
+2. **Industry-Specific Solutions**: Tailored features vs generic business software
+3. **SMB-Focused Pricing**: Affordable for small businesses, competitive for medium businesses
+4. **No Vendor Lock-In**: Data portability and self-hosting options
+
+#### **Market Positioning**
+- **vs Expensive SaaS**: "WordPress-native alternative to expensive monthly subscriptions"
+- **vs Generic Solutions**: "Industry-specific features built for your business type"  
+- **vs Custom Development**: "Professional solution without custom development costs"
+
+### 📈 **Growth Strategy & Scaling Plan**
+
+#### **Phase 1 (2025): Core Portfolio Launch**
+- Launch 4 priority plugins (Equipment Rental, Auto/Dealer, Gym, Photography)
+- Establish WordPress.org presence and community
+- Build initial customer base and testimonials
+- Refine shared infrastructure and development processes
+
+#### **Phase 2 (2026): Market Expansion**
+- Launch 6-8 additional industry verticals
+- Introduce premium add-on modules
+- Develop professional services offerings
+- Expand to international markets
+
+#### **Phase 3 (2027): Platform Consolidation**
+- Launch unified "Business Management Suite" offering
+- Introduce enterprise multi-industry packages
+- Develop partner/reseller program
+- Consider white-label opportunities
+
+### 🎯 **Success Metrics & KPIs**
+
+#### **Product Metrics**
+- WordPress.org download rates and active installations
+- Free-to-Pro conversion rates (target: 3-5%)
+- Customer retention rates (target: 85%+ annual)
+- Net Promoter Score by industry vertical
+
+#### **Business Metrics**
+- Monthly Recurring Revenue (MRR) growth
+- Customer Acquisition Cost (CAC) by channel
+- Customer Lifetime Value (CLV) by industry
+- Market penetration rates by vertical
+
+#### **Technical Metrics**
+- Plugin performance and reliability scores
+- WordPress compatibility maintenance
+- Support ticket resolution times
+- Feature adoption rates
+
+---
+
+## 🔮 **VISION: WordPress Business Management Ecosystem**
+
+**By 2027, establish the leading WordPress-native business management platform serving 20+ industry verticals with 25,000+ active customers generating $10M+ ARR.**
+
+Our ecosystem will be the go-to alternative for small and medium businesses seeking powerful, affordable, industry-specific software solutions without the complexity and cost of enterprise SaaS platforms.
+
+**The future of business management software is WordPress-native, industry-specific, and affordably priced for the businesses that need it most.**

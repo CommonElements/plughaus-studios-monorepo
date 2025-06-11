@@ -1,0 +1,89 @@
+/**
+ * SCSS Functions for Vireo Designs Theme
+ * 
+ * Utility functions for calculations and transformations
+ */
+
+// Convert px to rem
+@function rem($pixels, $base: 16) {
+  @return ($pixels / $base) * 1rem;
+}
+
+// Convert px to em
+@function em($pixels, $base: 16) {
+  @return ($pixels / $base) * 1em;
+}
+
+// Strip unit from number
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+// Get color with opacity
+@function alpha($color, $opacity) {
+  @return rgba($color, $opacity);
+}
+
+// Lighten color by percentage
+@function lighten-color($color, $percentage) {
+  @return lighten($color, $percentage);
+}
+
+// Darken color by percentage
+@function darken-color($color, $percentage) {
+  @return darken($color, $percentage);
+}
+
+// Calculate responsive font size
+@function fluid-size($min-size, $max-size, $min-width: 320px, $max-width: 1200px) {
+  $slope: ($max-size - $min-size) / ($max-width - $min-width);
+  $intercept: $min-size - $slope * $min-width;
+  
+  @return clamp(#{$min-size}, #{$intercept} + #{$slope * 100vw}, #{$max-size});
+}
+
+// Get spacing value
+@function spacing($multiplier) {
+  @return $spacing-4 * $multiplier;
+}
+
+// Z-index function
+@function z($layer) {
+  $z-layers: (
+    'dropdown': $z-dropdown,
+    'sticky': $z-sticky,
+    'fixed': $z-fixed,
+    'modal-backdrop': $z-modal-backdrop,
+    'modal': $z-modal,
+    'popover': $z-popover,
+    'tooltip': $z-tooltip
+  );
+  
+  @if map-has-key($z-layers, $layer) {
+    @return map-get($z-layers, $layer);
+  }
+  
+  @warn "Unknown z-index layer: #{$layer}";
+  @return 1;
+}
+
+// Get breakpoint value
+@function breakpoint($name) {
+  $breakpoints: (
+    'sm': $screen-sm,
+    'md': $screen-md,
+    'lg': $screen-lg,
+    'xl': $screen-xl,
+    '2xl': $screen-2xl
+  );
+  
+  @if map-has-key($breakpoints, $name) {
+    @return map-get($breakpoints, $name);
+  }
+  
+  @warn "Unknown breakpoint: #{$name}";
+  @return 0;
+}

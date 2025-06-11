@@ -1,0 +1,46 @@
+/**
+ * Hero component styles for Vireo Designs
+ */
+
+.hero {
+  padding: $spacing-20 0;
+  background: linear-gradient(135deg, $vireo-light 0%, rgba($vireo-primary, 0.05) 100%);
+  
+  .container {
+    @include container;
+    text-align: center;
+  }
+  
+  .hero-title {
+    font-size: $font-size-4xl;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-6;
+    color: $text-primary;
+    
+    @include respond-to(mobile) {
+      font-size: $font-size-3xl;
+    }
+  }
+  
+  .hero-description {
+    font-size: $font-size-xl;
+    color: $text-secondary;
+    margin-bottom: $spacing-8;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    @include respond-to(mobile) {
+      font-size: $font-size-lg;
+    }
+  }
+  
+  .hero-actions {
+    @include flex-center;
+    gap: $spacing-4;
+    
+    @include respond-to(mobile) {
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+/**
+ * Footer layout styles for Vireo Designs
+ */
+
+.site-footer {
+  background: $gray-900;
+  color: $gray-300;
+  margin-top: $spacing-20;
+  
+  .container {
+    @include container;
+    padding-top: $spacing-12;
+    padding-bottom: $spacing-8;
+  }
+  
+  a {
+    color: $gray-300;
+    
+    &:hover {
+      color: $vireo-primary;
+    }
+  }
+}
+
+.footer-bottom {
+  border-top: 1px solid $gray-700;
+  padding-top: $spacing-6;
+  margin-top: $spacing-8;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $gray-400;
+}

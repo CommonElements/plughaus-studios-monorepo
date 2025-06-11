@@ -1,0 +1,40 @@
+/**
+ * Form component styles for Vireo Designs
+ */
+
+.form-group {
+  margin-bottom: $spacing-6;
+  
+  label {
+    display: block;
+    font-weight: $font-weight-medium;
+    color: $text-primary;
+    margin-bottom: $spacing-2;
+  }
+  
+  input,
+  textarea,
+  select {
+    @include input-base;
+  }
+  
+  .form-help {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    margin-top: $spacing-2;
+  }
+  
+  .form-error {
+    font-size: $font-size-sm;
+    color: $error;
+    margin-top: $spacing-2;
+  }
+}
+
+.form-grid {
+  @include grid(2, $spacing-6);
+  
+  @include respond-to(mobile) {
+    grid-template-columns: 1fr;
+  }
+}

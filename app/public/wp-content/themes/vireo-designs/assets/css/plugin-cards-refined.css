@@ -1,0 +1,399 @@
+/**
+ * Plugin Cards Refined Styles
+ * Premium quality plugin directory cards with reduced green emphasis
+ */
+
+/* CSS Variables for Better Color Control */
+:root {
+    /* Convert primary color to RGB for transparency support */
+    --primary-color-rgb: 5, 150, 105;
+    --primary-dark-rgb: 4, 120, 87;
+    --primary-light-rgb: 16, 185, 129;
+    
+    /* Neutral accent colors to balance green */
+    --accent-blue: #0891b2;
+    --accent-purple: #7c3aed;
+    --accent-orange: #f59e0b;
+    --accent-pink: #ec4899;
+    
+    /* Card specific colors */
+    --card-shadow: rgba(0, 0, 0, 0.08);
+    --card-shadow-hover: rgba(0, 0, 0, 0.12);
+    --card-border: #e5e7eb;
+    --card-border-hover: #d1d5db;
+}
+
+/* Plugin Card Base Styles - Refined */
+.plugin-card {
+    background: white;
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 3px var(--card-shadow);
+}
+
+.plugin-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, transparent);
+    transition: background 0.4s ease;
+}
+
+.plugin-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.08),
+        0 2px 4px -1px rgba(0, 0, 0, 0.04),
+        0 20px 25px -5px rgba(0, 0, 0, 0.08);
+    border-color: var(--card-border-hover);
+}
+
+.plugin-card:hover::before {
+    background: linear-gradient(90deg, 
+        var(--accent-blue) 0%, 
+        var(--accent-purple) 50%, 
+        var(--accent-orange) 100%);
+}
+
+/* Plugin Header - Refined Layout */
+.plugin-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.plugin-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.plugin-icon::after {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.5) 50%,
+        transparent 70%
+    );
+    transform: translateX(-100%) rotate(45deg);
+    transition: transform 0.6s;
+}
+
+.plugin-card:hover .plugin-icon::after {
+    transform: translateX(100%) rotate(45deg);
+}
+
+/* Industry-specific icon colors with reduced green emphasis */
+.plugin-card[data-industry="property-management"] .plugin-icon {
+    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+    color: #0369a1;
+}
+
+.plugin-card[data-industry="sports-leagues"] .plugin-icon {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #d97706;
+}
+
+.plugin-card[data-industry="equipment-rental"] .plugin-icon {
+    background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+    color: #7c3aed;
+}
+
+.plugin-card[data-industry="marina-rv"] .plugin-icon {
+    background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+    color: #0891b2;
+}
+
+/* Plugin Meta - More Professional */
+.plugin-meta {
+    flex: 1;
+}
+
+.plugin-title {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.plugin-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+/* Refined Badge System */
+.badge {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    border: 1px solid transparent;
+}
+
+.badge-success {
+    background: #f0fdf4;
+    color: #15803d;
+    border-color: #bbf7d0;
+}
+
+.badge-info {
+    background: #f0f9ff;
+    color: #0369a1;
+    border-color: #bae6fd;
+}
+
+.badge-warning {
+    background: #fffbeb;
+    color: #b45309;
+    border-color: #fde68a;
+}
+
+.badge-gray {
+    background: #f9fafb;
+    color: #4b5563;
+    border-color: #e5e7eb;
+}
+
+/* Plugin Description */
+.plugin-description {
+    margin-bottom: 1.5rem;
+}
+
+.plugin-description p {
+    color: var(--gray-600);
+    line-height: 1.7;
+    font-size: 0.9375rem;
+}
+
+/* Plugin Stats Row - More Subtle */
+.plugin-stats-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--gray-100);
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.plugin-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--gray-600);
+}
+
+.plugin-stat i {
+    color: var(--gray-400);
+    font-size: 1rem;
+}
+
+/* Plugin Actions - Refined Buttons */
+.plugin-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: auto;
+}
+
+.plugin-actions .btn {
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.plugin-actions .btn-secondary {
+    background: #f9fafb;
+    color: var(--gray-700);
+    border: 1px solid var(--gray-300);
+}
+
+.plugin-actions .btn-secondary:hover {
+    background: #f3f4f6;
+    border-color: var(--gray-400);
+    transform: translateY(-1px);
+}
+
+.plugin-actions .btn-primary {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    color: white;
+    border: none;
+}
+
+.plugin-actions .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(var(--primary-color-rgb), 0.25);
+}
+
+/* Featured Card Enhancements */
+.plugin-card.featured-card {
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--accent-blue), var(--accent-purple)) border-box;
+    position: relative;
+}
+
+.plugin-card.featured-card::after {
+    content: 'FEATURED';
+    position: absolute;
+    top: 1rem;
+    right: -2rem;
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+    color: white;
+    padding: 0.25rem 3rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    transform: rotate(45deg);
+}
+
+/* Coming Soon Cards */
+.plugin-card.coming-soon {
+    opacity: 0.85;
+    border-style: dashed;
+}
+
+.plugin-card.coming-soon .plugin-icon {
+    filter: grayscale(50%);
+}
+
+/* Ecosystem Cards */
+.ecosystem-card {
+    background: linear-gradient(135deg, #fafafa 0%, #f9fafb 100%);
+}
+
+.ecosystem-card .pricing-tiers {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.pricing-tier {
+    flex: 1;
+    padding: 0.75rem;
+    border-radius: 8px;
+    text-align: center;
+    background: white;
+    border: 1px solid var(--gray-200);
+}
+
+.pricing-tier.featured {
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
+}
+
+.tier-name {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 0.25rem;
+}
+
+.tier-price {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gray-900);
+}
+
+/* Plugin Status Badge */
+.plugin-status-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #f0fdf4;
+    color: #15803d;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid #bbf7d0;
+}
+
+/* Loading State */
+.plugin-card.loading {
+    pointer-events: none;
+}
+
+.plugin-card.loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive Improvements */
+@media (max-width: 768px) {
+    .plugin-card {
+        padding: 1.25rem;
+    }
+    
+    .plugin-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .plugin-stats-row {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .plugin-actions {
+        flex-direction: column;
+    }
+}
+
+/* Animation Classes */
+.plugin-card {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Stagger animation for multiple cards */
+.plugin-card:nth-child(1) { animation-delay: 0.1s; }
+.plugin-card:nth-child(2) { animation-delay: 0.2s; }
+.plugin-card:nth-child(3) { animation-delay: 0.3s; }
+.plugin-card:nth-child(4) { animation-delay: 0.4s; }
