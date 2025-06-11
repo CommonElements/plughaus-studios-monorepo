@@ -125,6 +125,92 @@ npm run build
 npm run watch
 ```
 
+## 🌿 Git Workflow & Branch Management
+
+### Branch Structure
+- **`main`**: Production-ready code, releases only
+- **`develop`**: Primary development branch with completed features
+- **`feature/*`**: Individual feature development branches
+- **`hotfix/*`**: Critical production fixes
+- **`backup/*`**: Automated backup branches (auto-managed)
+
+### Development Workflow
+
+#### Standard Feature Development
+```bash
+# Create feature branch from develop
+git checkout develop
+git pull origin develop
+git checkout -b feature/new-feature-name
+
+# Work on feature with regular commits
+git add .
+git commit -m "✨ Add new feature implementation"
+
+# When feature is complete, merge back to develop
+git checkout develop
+git merge feature/new-feature-name
+git branch -d feature/new-feature-name
+```
+
+#### Daily Development Pattern
+```bash
+# Start each session by ensuring clean develop branch
+git checkout develop
+git status
+
+# Make changes and commit regularly with descriptive messages
+git add specific-files
+git commit -m "🔧 FIX: Resolve specific issue with detailed description"
+
+# The automated backup system creates safety branches automatically
+# No manual backup branch management needed
+```
+
+### Commit Message Standards
+- **✅ COMPLETE**: Major feature completion
+- **🔧 FIX**: Bug fixes and corrections
+- **✨ ADD**: New features or functionality
+- **🚀 RELEASE**: Version releases
+- **📝 DOCS**: Documentation updates
+- **🧹 CLEANUP**: Code refactoring and cleanup
+- **🚨 CRITICAL**: Emergency fixes
+- **🎯 TARGET**: Specific goal achievements
+
+### Automated Systems
+- **Pre-commit Hooks**: Automatic code quality checks (PHP syntax, file size, security)
+- **Backup System**: Auto-creates backup branches on every commit to develop
+- **Branch Cleanup**: Automatically manages backup branch retention (keeps latest 3)
+
+### Branch Protection Rules
+- **main**: Protected, requires pull request and review
+- **develop**: Primary development, direct commits allowed for core team
+- **backup/***: Auto-managed, do not modify manually
+
+### Git Best Practices
+1. **Commit Frequently**: Small, focused commits are better than large ones
+2. **Descriptive Messages**: Always explain the "why" not just the "what"
+3. **Clean History**: Use meaningful commit messages for future debugging
+4. **Test Before Merge**: Ensure all changes work before merging to develop
+5. **Stay Updated**: Regularly pull from develop before starting new work
+
+### Emergency Procedures
+```bash
+# Restore from backup if needed
+git checkout backup/develop_YYYYMMDD_HHMMSS_commit-hash
+git checkout -b emergency-restore
+git checkout develop
+git reset --hard emergency-restore
+
+# Hotfix for production issues
+git checkout main
+git checkout -b hotfix/critical-issue
+# Fix issue
+git checkout main
+git merge hotfix/critical-issue
+git tag v1.x.x
+```
+
 ## 🔑 Licensing System
 
 ### Architecture
