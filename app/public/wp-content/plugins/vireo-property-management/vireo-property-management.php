@@ -83,9 +83,23 @@ class Vireo_Property_Management {
      * Check if pro license is valid
      */
     private function check_pro_license() {
-        // For now, return false (free version only)
-        // This will be replaced with actual license checking
-        return false;
+        // Check if pro directory exists
+        if (!file_exists(VPM_PRO_DIR)) {
+            return false;
+        }
+        
+        // Load license manager if not already loaded
+        if (!class_exists('PHPM_License_Manager')) {
+            $license_file = VPM_PRO_DIR . 'includes/licensing/class-phpm-license-manager.php';
+            if (file_exists($license_file)) {
+                require_once $license_file;
+            } else {
+                return false;
+            }
+        }
+        
+        // Check license validity
+        return class_exists('PHPM_License_Manager') ? PHPM_License_Manager::is_valid() : false;
     }
     
     /**
@@ -129,16 +143,28 @@ class Vireo_Property_Management {
             return;
         }
         
-        // Pro licensing
-        require_once VPM_PRO_DIR . 'includes/licensing/class-phpm-license-manager.php';
+        // Pro licensing (already loaded in check_pro_license, but initialize it)
+        if (class_exists('PHPM_License_Manager')) {
+            new PHPM_License_Manager();
+        }
         
         // Pro features
-        require_once VPM_PRO_DIR . 'includes/advanced-features/class-phpm-advanced-dashboard.php';
-        require_once VPM_PRO_DIR . 'includes/advanced-features/class-phpm-advanced-reporting.php';
+        if (file_exists(VPM_PRO_DIR . 'includes/advanced-features/class-phpm-advanced-dashboard.php')) {
+            require_once VPM_PRO_DIR . 'includes/advanced-features/class-phpm-advanced-dashboard.php';
+        }
+        
+        if (file_exists(VPM_PRO_DIR . 'includes/advanced-features/class-phpm-advanced-reporting.php')) {
+            require_once VPM_PRO_DIR . 'includes/advanced-features/class-phpm-advanced-reporting.php';
+        }
         
         // Pro integrations
-        require_once VPM_PRO_DIR . 'includes/integrations/class-phpm-payment-automation.php';
-        require_once VPM_PRO_DIR . 'includes/integrations/class-phpm-email-automation.php';
+        if (file_exists(VPM_PRO_DIR . 'includes/integrations/class-phpm-payment-automation.php')) {
+            require_once VPM_PRO_DIR . 'includes/integrations/class-phpm-payment-automation.php';
+        }
+        
+        if (file_exists(VPM_PRO_DIR . 'includes/integrations/class-phpm-email-automation.php')) {
+            require_once VPM_PRO_DIR . 'includes/integrations/class-phpm-email-automation.php';
+        }
     }
     
     /**

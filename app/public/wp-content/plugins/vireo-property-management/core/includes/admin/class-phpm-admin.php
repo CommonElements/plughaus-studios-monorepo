@@ -74,6 +74,16 @@ class PHPM_Admin {
                 'saving' => __('Saving...', 'plughaus-property'),
                 'saved' => __('Saved!', 'plughaus-property'),
                 'error' => __('An error occurred. Please try again.', 'plughaus-property'),
+                'enter_license_key' => __('Please enter a valid license key.', 'plughaus-property'),
+                'validating' => __('Validating...', 'plughaus-property'),
+                'validate_license' => __('Validate License', 'plughaus-property'),
+                'confirm_deactivate' => __('Are you sure you want to deactivate your license?', 'plughaus-property'),
+                'deactivating' => __('Deactivating...', 'plughaus-property'),
+                'deactivate_license' => __('Deactivate License', 'plughaus-property'),
+                'license_status' => __('License Status:', 'plughaus-property'),
+                'active' => __('Active', 'plughaus-property'),
+                'not_active' => __('Not Active', 'plughaus-property'),
+                'expires' => __('Expires:', 'plughaus-property'),
             )
         ));
     }

@@ -20,6 +20,9 @@
         // Initialize reports
         initReports();
         
+        // Initialize license management
+        initLicenseManagement();
+        
     });
     
     /**
@@ -255,6 +258,158 @@
                 $emailCheckboxes.prop('checked', false);
             });
         }
+    }
+    
+    /**
+     * License management functionality
+     */
+    function initLicenseManagement() {
+        // License validation button
+        $('#phpm-validate-license').on('click', function(e) {
+            e.preventDefault();
+            
+            var $button = $(this);
+            var licenseKey = $('#phpm_license_key').val();
+            
+            if (!licenseKey || licenseKey.indexOf('*') !== -1) {
+                alert(vmp_admin.strings.enter_license_key || 'Please enter a valid license key.');
+                return;
+            }
+            
+            $button.prop('disabled', true).text(vmp_admin.strings.validating || 'Validating...');
+            
+            $.ajax({
+                url: vmp_admin.api_url + '../phls/v1/validate',
+                type: 'POST',
+                data: {
+                    license_key: licenseKey
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('X-WP-Nonce', vmp_admin.nonce);
+                },
+                success: function(response) {
+                    if (response.success) {
+                        showLicenseMessage('success', response.message);
+                        // Reload page to show updated license status
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+                    } else {
+                        showLicenseMessage('error', response.message || 'License validation failed.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    var errorMessage = 'License validation failed.';
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.message) {
+                            errorMessage = response.message;
+                        }
+                    } catch (e) {
+                        // Use default error message
+                    }
+                    showLicenseMessage('error', errorMessage);
+                },
+                complete: function() {
+                    $button.prop('disabled', false).text(vmp_admin.strings.validate_license || 'Validate License');
+                }
+            });
+        });
+        
+        // License deactivation button
+        $('#phpm-deactivate-license').on('click', function(e) {
+            e.preventDefault();
+            
+            if (!confirm(vmp_admin.strings.confirm_deactivate || 'Are you sure you want to deactivate your license?')) {
+                return;
+            }
+            
+            var $button = $(this);
+            $button.prop('disabled', true).text(vmp_admin.strings.deactivating || 'Deactivating...');
+            
+            $.ajax({
+                url: vmp_admin.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'phpm_deactivate_license',
+                    nonce: vmp_admin.nonce
+                },
+                success: function(response) {
+                    if (response.success) {
+                        showLicenseMessage('success', response.data.message);
+                        // Reload page to show updated license status
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+                    } else {
+                        showLicenseMessage('error', response.data.message || 'License deactivation failed.');
+                    }
+                },
+                error: function() {
+                    showLicenseMessage('error', 'License deactivation failed.');
+                },
+                complete: function() {
+                    $button.prop('disabled', false).text(vmp_admin.strings.deactivate_license || 'Deactivate License');
+                }
+            });
+        });
+        
+        // License status check
+        if ($('#phpm_license_key').length) {
+            checkLicenseStatus();
+        }
+    }
+    
+    /**
+     * Show license message
+     */
+    function showLicenseMessage(type, message) {
+        var $container = $('#phpm_license_key').closest('td');
+        
+        // Remove existing messages
+        $container.find('.phpm-license-message').remove();
+        
+        // Add new message
+        var messageClass = type === 'success' ? 'notice-success' : 'notice-error';
+        var $message = $('<div class="notice ' + messageClass + ' inline phpm-license-message"><p>' + message + '</p></div>');
+        
+        $container.append($message);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(function() {
+            $message.fadeOut(function() {
+                $(this).remove();
+            });
+        }, 5000);
+    }
+    
+    /**
+     * Check license status
+     */
+    function checkLicenseStatus() {
+        $.ajax({
+            url: vmp_admin.api_url + '../phls/v1/status',
+            type: 'GET',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-WP-Nonce', vmp_admin.nonce);
+            },
+            success: function(response) {
+                if (response.is_valid) {
+                    $('.phpm-license-section .notice').removeClass('notice-warning').addClass('notice-success');
+                    $('.phpm-license-section .notice p').html('<strong>' + (vmp_admin.strings.license_status || 'License Status:') + '</strong> ' + (vmp_admin.strings.active || 'Active'));
+                    
+                    if (response.expires) {
+                        $('.phpm-license-section .notice p').append('<br><small>' + (vmp_admin.strings.expires || 'Expires:') + ' ' + response.expires + '</small>');
+                    }
+                } else {
+                    $('.phpm-license-section .notice').removeClass('notice-success').addClass('notice-warning');
+                    $('.phpm-license-section .notice p').html('<strong>' + (vmp_admin.strings.license_status || 'License Status:') + '</strong> ' + (vmp_admin.strings.not_active || 'Not Active'));
+                }
+            },
+            error: function() {
+                console.log('Could not check license status');
+            }
+        });
     }
     
     /**

@@ -46,6 +46,9 @@ class PHPM_License_Manager {
         
         // License settings
         add_action('admin_init', array($this, 'register_license_settings'));
+        
+        // AJAX handlers
+        add_action('wp_ajax_phpm_deactivate_license', array($this, 'ajax_deactivate_license'));
     }
     
     /**
@@ -283,5 +286,27 @@ class PHPM_License_Manager {
             'expires' => get_option('phpm_license_expires', ''),
             'is_valid' => self::is_valid()
         );
+    }
+    
+    /**
+     * AJAX handler for license deactivation
+     */
+    public function ajax_deactivate_license() {
+        // Check nonce
+        if (!wp_verify_nonce($_POST['nonce'], 'vmp_admin_nonce')) {
+            wp_die(__('Security check failed.', 'plughaus-property'));
+        }
+        
+        // Check permissions
+        if (!current_user_can('manage_options')) {
+            wp_die(__('Insufficient permissions.', 'plughaus-property'));
+        }
+        
+        // Deactivate license
+        self::deactivate_license();
+        
+        wp_send_json_success(array(
+            'message' => __('License deactivated successfully.', 'plughaus-property')
+        ));
     }
 }
