@@ -39,7 +39,7 @@ class PHPM_Activator {
         
         // Set activation timestamp
         update_option('vmp_activation_date', current_time('timestamp'));
-        update_option('vmp_version', VMP_VERSION);
+        update_option('vmp_version', VPM_VERSION);
     }
     
     /**

@@ -257,8 +257,8 @@ class Vireo_Property_Management {
  */
 function vpm_activate() {
     // Create database tables if needed
-    require_once VPM_CORE_DIR . 'includes/class-vpm-activator.php';
-    VPM_Activator::activate();
+    require_once VPM_CORE_DIR . 'includes/class-phpm-activator.php';
+    PHPM_Activator::activate();
 }
 register_activation_hook(__FILE__, 'vpm_activate');
 
