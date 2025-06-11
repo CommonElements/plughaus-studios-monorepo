@@ -1,8 +1,8 @@
 <?php
 /**
- * Dashboard functionality for PlugHaus Sports League
+ * Dashboard functionality for Vireo Sports League
  * 
- * @package PlugHaus_Sports_League
+ * @package Vireo_Sports_League
  * @since 1.0.0
  */
 
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class PSL_Dashboard {
+class VSL_Dashboard {
     
     /**
      * Initialize dashboard
@@ -23,19 +23,19 @@ class PSL_Dashboard {
      * Add dashboard widgets
      */
     public function add_dashboard_widgets() {
-        if (!PSL_Utilities::current_user_can_view_leagues()) {
+        if (!VSL_Utilities::current_user_can_view_leagues()) {
             return;
         }
         
         wp_add_dashboard_widget(
-            'psl_overview_widget',
-            __('Sports League Overview', 'plughaus-league'),
+            'vsl_overview_widget',
+            __('Sports League Overview', 'vireo-league'),
             array($this, 'overview_widget')
         );
         
         wp_add_dashboard_widget(
-            'psl_recent_matches_widget',
-            __('Recent Matches', 'plughaus-league'),
+            'vsl_recent_matches_widget',
+            __('Recent Matches', 'vireo-league'),
             array($this, 'recent_matches_widget')
         );
     }
@@ -46,28 +46,28 @@ class PSL_Dashboard {
     public function overview_widget() {
         $stats = $this->get_overview_stats();
         ?>
-        <div class="psl-dashboard-overview">
-            <div class="psl-stats-grid">
-                <div class="psl-stat">
-                    <span class="psl-stat-number"><?php echo esc_html($stats['leagues']); ?></span>
-                    <span class="psl-stat-label"><?php _e('Active Leagues', 'plughaus-league'); ?></span>
+        <div class="vsl-dashboard-overview">
+            <div class="vsl-stats-grid">
+                <div class="vsl-stat">
+                    <span class="vsl-stat-number"><?php echo esc_html($stats['leagues']); ?></span>
+                    <span class="vsl-stat-label"><?php _e('Active Leagues', 'vireo-league'); ?></span>
                 </div>
-                <div class="psl-stat">
-                    <span class="psl-stat-number"><?php echo esc_html($stats['teams']); ?></span>
-                    <span class="psl-stat-label"><?php _e('Teams', 'plughaus-league'); ?></span>
+                <div class="vsl-stat">
+                    <span class="vsl-stat-number"><?php echo esc_html($stats['teams']); ?></span>
+                    <span class="vsl-stat-label"><?php _e('Teams', 'vireo-league'); ?></span>
                 </div>
-                <div class="psl-stat">
-                    <span class="psl-stat-number"><?php echo esc_html($stats['players']); ?></span>
-                    <span class="psl-stat-label"><?php _e('Players', 'plughaus-league'); ?></span>
+                <div class="vsl-stat">
+                    <span class="vsl-stat-number"><?php echo esc_html($stats['players']); ?></span>
+                    <span class="vsl-stat-label"><?php _e('Players', 'vireo-league'); ?></span>
                 </div>
-                <div class="psl-stat">
-                    <span class="psl-stat-number"><?php echo esc_html($stats['matches']); ?></span>
-                    <span class="psl-stat-label"><?php _e('Matches Played', 'plughaus-league'); ?></span>
+                <div class="vsl-stat">
+                    <span class="vsl-stat-number"><?php echo esc_html($stats['matches']); ?></span>
+                    <span class="vsl-stat-label"><?php _e('Matches Played', 'vireo-league'); ?></span>
                 </div>
             </div>
             <p>
-                <a href="<?php echo admin_url('admin.php?page=psl-dashboard'); ?>" class="button button-primary">
-                    <?php _e('View Full Dashboard', 'plughaus-league'); ?>
+                <a href="<?php echo admin_url('admin.php?page=vsl-dashboard'); ?>" class="button button-primary">
+                    <?php _e('View Full Dashboard', 'vireo-league'); ?>
                 </a>
             </p>
         </div>
@@ -81,17 +81,17 @@ class PSL_Dashboard {
         $matches = $this->get_recent_matches();
         
         if (empty($matches)) {
-            echo '<p>' . __('No recent matches found.', 'plughaus-league') . '</p>';
+            echo '<p>' . __('No recent matches found.', 'vireo-league') . '</p>';
             return;
         }
         
-        echo '<ul class="psl-recent-matches">';
+        echo '<ul class="vsl-recent-matches">';
         foreach ($matches as $match) {
             $home_team = get_the_title($match->home_team_id);
             $away_team = get_the_title($match->away_team_id);
-            $home_score = get_post_meta($match->ID, '_psl_home_score', true);
-            $away_score = get_post_meta($match->ID, '_psl_away_score', true);
-            $match_date = get_post_meta($match->ID, '_psl_match_date', true);
+            $home_score = get_post_meta($match->ID, '_vsl_home_score', true);
+            $away_score = get_post_meta($match->ID, '_vsl_away_score', true);
+            $match_date = get_post_meta($match->ID, '_vsl_match_date', true);
             
             echo '<li>';
             printf(
@@ -100,13 +100,13 @@ class PSL_Dashboard {
                 esc_html($home_score),
                 esc_html($away_score),
                 esc_html($away_team),
-                esc_html(PSL_Utilities::format_match_date($match_date))
+                esc_html(VSL_Utilities::format_match_date($match_date))
             );
             echo '</li>';
         }
         echo '</ul>';
         
-        echo '<p><a href="' . admin_url('edit.php?post_type=psl_match') . '">' . __('View All Matches', 'plughaus-league') . '</a></p>';
+        echo '<p><a href="' . admin_url('edit.php?post_type=vsl_match') . '">' . __('View All Matches', 'vireo-league') . '</a></p>';
     }
     
     /**
@@ -114,10 +114,10 @@ class PSL_Dashboard {
      */
     private function get_overview_stats() {
         return array(
-            'leagues' => wp_count_posts('psl_league')->publish,
-            'teams' => wp_count_posts('psl_team')->publish,
-            'players' => wp_count_posts('psl_player')->publish,
-            'matches' => wp_count_posts('psl_match')->publish,
+            'leagues' => wp_count_posts('vsl_league')->publish,
+            'teams' => wp_count_posts('vsl_team')->publish,
+            'players' => wp_count_posts('vsl_player')->publish,
+            'matches' => wp_count_posts('vsl_match')->publish,
         );
     }
     
@@ -126,12 +126,12 @@ class PSL_Dashboard {
      */
     private function get_recent_matches() {
         return get_posts(array(
-            'post_type' => 'psl_match',
+            'post_type' => 'vsl_match',
             'posts_per_page' => 5,
             'post_status' => 'publish',
             'meta_query' => array(
                 array(
-                    'key' => '_psl_status',
+                    'key' => '_vsl_status',
                     'value' => 'completed',
                     'compare' => '='
                 )

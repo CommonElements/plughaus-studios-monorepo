@@ -218,7 +218,7 @@ class VSL_Utilities {
             "SELECT m.*, 
                     ht.post_title as home_team_name,
                     at.post_title as away_team_name
-             FROM {$wpdb->prefix}psl_matches m
+             FROM {$wpdb->prefix}vsl_matches m
              LEFT JOIN {$wpdb->posts} ht ON m.home_team_id = ht.ID
              LEFT JOIN {$wpdb->posts} at ON m.away_team_id = at.ID
              WHERE m.league_id = %d 
@@ -324,7 +324,7 @@ class VSL_Utilities {
      * Get sport configuration for a league
      */
     public static function get_sport_config($league_id) {
-        $sport = get_post_meta($league_id, '_psl_sport', true);
+        $sport = get_post_meta($league_id, '_vsl_sport', true);
         $sports = self::get_supported_sports();
         
         return isset($sports[$sport]) ? $sports[$sport] : $sports['soccer'];
@@ -335,10 +335,10 @@ class VSL_Utilities {
      */
     public static function get_league_teams($league_id) {
         return get_posts(array(
-            'post_type' => 'psl_team',
+            'post_type' => 'vsl_team',
             'meta_query' => array(
                 array(
-                    'key' => '_psl_league_id',
+                    'key' => '_vsl_league_id',
                     'value' => $league_id,
                     'compare' => '='
                 )
@@ -353,17 +353,17 @@ class VSL_Utilities {
      */
     public static function get_team_players($team_id) {
         return get_posts(array(
-            'post_type' => 'psl_player',
+            'post_type' => 'vsl_player',
             'meta_query' => array(
                 array(
-                    'key' => '_psl_team_id',
+                    'key' => '_vsl_team_id',
                     'value' => $team_id,
                     'compare' => '='
                 )
             ),
             'posts_per_page' => -1,
             'post_status' => 'publish',
-            'meta_key' => '_psl_jersey_number',
+            'meta_key' => '_vsl_jersey_number',
             'orderby' => 'meta_value_num',
             'order' => 'ASC',
         ));
@@ -402,14 +402,14 @@ class VSL_Utilities {
      * Check user capabilities for league management
      */
     public static function current_user_can_manage_leagues() {
-        return current_user_can('manage_psl_leagues') || current_user_can('manage_options');
+        return current_user_can('manage_vsl_leagues') || current_user_can('manage_options');
     }
     
     /**
      * Check user capabilities for viewing league data
      */
     public static function current_user_can_view_leagues() {
-        return current_user_can('view_psl_leagues') || self::current_user_can_manage_leagues();
+        return current_user_can('view_vsl_leagues') || self::current_user_can_manage_leagues();
     }
     
     /**
@@ -421,7 +421,7 @@ class VSL_Utilities {
         }
         
         // Check if user is assigned as coach for this team
-        $coach_id = get_post_meta($team_id, '_psl_coach_id', true);
+        $coach_id = get_post_meta($team_id, '_vsl_coach_id', true);
         return $coach_id && $coach_id == get_current_user_id();
     }
     
@@ -436,7 +436,7 @@ class VSL_Utilities {
         global $wpdb;
         
         $wpdb->insert(
-            $wpdb->prefix . 'psl_activity_log',
+            $wpdb->prefix . 'vsl_activity_log',
             array(
                 'type' => $type,
                 'message' => $message,
@@ -463,7 +463,7 @@ class VSL_Utilities {
             'points_loss' => 0,
         );
         
-        $settings = get_option('psl_league_settings', array());
+        $settings = get_option('vsl_league_settings', array());
         return wp_parse_args($settings, $defaults);
     }
     
@@ -479,7 +479,7 @@ class VSL_Utilities {
             'timezone' => get_option('timezone_string', 'America/New_York'),
         );
         
-        $settings = get_option('psl_display_settings', array());
+        $settings = get_option('vsl_display_settings', array());
         return wp_parse_args($settings, $defaults);
     }
 }

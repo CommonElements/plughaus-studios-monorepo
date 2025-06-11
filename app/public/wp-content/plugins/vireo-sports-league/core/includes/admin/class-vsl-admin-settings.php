@@ -1,8 +1,8 @@
 <?php
 /**
- * Admin settings for PlugHaus Sports League
+ * Admin settings for Vireo Sports League
  * 
- * @package PlugHaus_Sports_League
+ * @package Vireo_Sports_League
  * @since 1.0.0
  */
 
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class PSL_Admin_Settings {
+class VSL_Admin_Settings {
     
     /**
      * Initialize settings
@@ -25,16 +25,16 @@ class PSL_Admin_Settings {
      */
     public function register_settings() {
         // General settings
-        register_setting('psl_general_settings', 'psl_general_settings', array($this, 'sanitize_general_settings'));
+        register_setting('vsl_general_settings', 'vsl_general_settings', array($this, 'sanitize_general_settings'));
         
         // League settings
-        register_setting('psl_league_settings', 'psl_league_settings', array($this, 'sanitize_league_settings'));
+        register_setting('vsl_league_settings', 'vsl_league_settings', array($this, 'sanitize_league_settings'));
         
         // Display settings
-        register_setting('psl_display_settings', 'psl_display_settings', array($this, 'sanitize_display_settings'));
+        register_setting('vsl_display_settings', 'vsl_display_settings', array($this, 'sanitize_display_settings'));
         
         // Notification settings
-        register_setting('psl_notification_settings', 'psl_notification_settings', array($this, 'sanitize_notification_settings'));
+        register_setting('vsl_notification_settings', 'vsl_notification_settings', array($this, 'sanitize_notification_settings'));
         
         $this->add_settings_sections();
     }
@@ -45,130 +45,130 @@ class PSL_Admin_Settings {
     private function add_settings_sections() {
         // General Settings Section
         add_settings_section(
-            'psl_general_section',
-            __('General Settings', 'plughaus-league'),
+            'vsl_general_section',
+            __('General Settings', 'vireo-league'),
             array($this, 'general_section_callback'),
-            'psl_general_settings'
+            'vsl_general_settings'
         );
         
         add_settings_field(
             'default_sport',
-            __('Default Sport', 'plughaus-league'),
+            __('Default Sport', 'vireo-league'),
             array($this, 'default_sport_callback'),
-            'psl_general_settings',
-            'psl_general_section'
+            'vsl_general_settings',
+            'vsl_general_section'
         );
         
         add_settings_field(
             'date_format',
-            __('Date Format', 'plughaus-league'),
+            __('Date Format', 'vireo-league'),
             array($this, 'date_format_callback'),
-            'psl_general_settings',
-            'psl_general_section'
+            'vsl_general_settings',
+            'vsl_general_section'
         );
         
         add_settings_field(
             'time_format',
-            __('Time Format', 'plughaus-league'),
+            __('Time Format', 'vireo-league'),
             array($this, 'time_format_callback'),
-            'psl_general_settings',
-            'psl_general_section'
+            'vsl_general_settings',
+            'vsl_general_section'
         );
         
         add_settings_field(
             'timezone',
-            __('Timezone', 'plughaus-league'),
+            __('Timezone', 'vireo-league'),
             array($this, 'timezone_callback'),
-            'psl_general_settings',
-            'psl_general_section'
+            'vsl_general_settings',
+            'vsl_general_section'
         );
         
         // League Settings Section
         add_settings_section(
-            'psl_league_section',
-            __('League Settings', 'plughaus-league'),
+            'vsl_league_section',
+            __('League Settings', 'vireo-league'),
             array($this, 'league_section_callback'),
-            'psl_league_settings'
+            'vsl_league_settings'
         );
         
         add_settings_field(
             'points_win',
-            __('Points for Win', 'plughaus-league'),
+            __('Points for Win', 'vireo-league'),
             array($this, 'points_win_callback'),
-            'psl_league_settings',
-            'psl_league_section'
+            'vsl_league_settings',
+            'vsl_league_section'
         );
         
         add_settings_field(
             'points_draw',
-            __('Points for Draw', 'plughaus-league'),
+            __('Points for Draw', 'vireo-league'),
             array($this, 'points_draw_callback'),
-            'psl_league_settings',
-            'psl_league_section'
+            'vsl_league_settings',
+            'vsl_league_section'
         );
         
         add_settings_field(
             'points_loss',
-            __('Points for Loss', 'plughaus-league'),
+            __('Points for Loss', 'vireo-league'),
             array($this, 'points_loss_callback'),
-            'psl_league_settings',
-            'psl_league_section'
+            'vsl_league_settings',
+            'vsl_league_section'
         );
         
         add_settings_field(
             'allow_draws',
-            __('Allow Draws', 'plughaus-league'),
+            __('Allow Draws', 'vireo-league'),
             array($this, 'allow_draws_callback'),
-            'psl_league_settings',
-            'psl_league_section'
+            'vsl_league_settings',
+            'vsl_league_section'
         );
         
         add_settings_field(
             'standings_tiebreaker',
-            __('Standings Tiebreaker', 'plughaus-league'),
+            __('Standings Tiebreaker', 'vireo-league'),
             array($this, 'standings_tiebreaker_callback'),
-            'psl_league_settings',
-            'psl_league_section'
+            'vsl_league_settings',
+            'vsl_league_section'
         );
         
         // Display Settings Section
         add_settings_section(
-            'psl_display_section',
-            __('Display Settings', 'plughaus-league'),
+            'vsl_display_section',
+            __('Display Settings', 'vireo-league'),
             array($this, 'display_section_callback'),
-            'psl_display_settings'
+            'vsl_display_settings'
         );
         
         add_settings_field(
             'theme_color',
-            __('Theme Color', 'plughaus-league'),
+            __('Theme Color', 'vireo-league'),
             array($this, 'theme_color_callback'),
-            'psl_display_settings',
-            'psl_display_section'
+            'vsl_display_settings',
+            'vsl_display_section'
         );
         
         add_settings_field(
             'show_logos',
-            __('Show Team Logos', 'plughaus-league'),
+            __('Show Team Logos', 'vireo-league'),
             array($this, 'show_logos_callback'),
-            'psl_display_settings',
-            'psl_display_section'
+            'vsl_display_settings',
+            'vsl_display_section'
         );
         
         add_settings_field(
             'show_player_photos',
-            __('Show Player Photos', 'plughaus-league'),
+            __('Show Player Photos', 'vireo-league'),
             array($this, 'show_player_photos_callback'),
-            'psl_display_settings',
-            'psl_display_section'
+            'vsl_display_settings',
+            'vsl_display_section'
         );
         
         add_settings_field(
             'items_per_page',
-            __('Items Per Page', 'plughaus-league'),
+            __('Items Per Page', 'vireo-league'),
             array($this, 'items_per_page_callback'),
-            'psl_display_settings',
-            'psl_display_section'
+            'vsl_display_settings',
+            'vsl_display_section'
         );
     }
     
@@ -176,33 +176,33 @@ class PSL_Admin_Settings {
      * Add settings page to admin menu
      */
     public function add_settings_page() {
-        // This is already handled by PSL_Admin class
+        // This is already handled by VSL_Admin class
     }
     
     /**
      * Section callbacks
      */
     public function general_section_callback() {
-        echo '<p>' . __('Configure general plugin settings.', 'plughaus-league') . '</p>';
+        echo '<p>' . __('Configure general plugin settings.', 'vireo-league') . '</p>';
     }
     
     public function league_section_callback() {
-        echo '<p>' . __('Configure league-specific settings like scoring and standings.', 'plughaus-league') . '</p>';
+        echo '<p>' . __('Configure league-specific settings like scoring and standings.', 'vireo-league') . '</p>';
     }
     
     public function display_section_callback() {
-        echo '<p>' . __('Customize how league information is displayed on your website.', 'plughaus-league') . '</p>';
+        echo '<p>' . __('Customize how league information is displayed on your website.', 'vireo-league') . '</p>';
     }
     
     /**
      * Field callbacks
      */
     public function default_sport_callback() {
-        $options = get_option('psl_general_settings');
+        $options = get_option('vsl_general_settings');
         $value = isset($options['default_sport']) ? $options['default_sport'] : 'soccer';
-        $sports = PSL_Utilities::get_supported_sports();
+        $sports = VSL_Utilities::get_supported_sports();
         
-        echo '<select name="psl_general_settings[default_sport]">';
+        echo '<select name="vsl_general_settings[default_sport]">';
         foreach ($sports as $key => $sport) {
             printf('<option value="%s" %s>%s</option>', 
                 esc_attr($key), 
@@ -211,14 +211,14 @@ class PSL_Admin_Settings {
             );
         }
         echo '</select>';
-        echo '<p class="description">' . __('Default sport for new leagues.', 'plughaus-league') . '</p>';
+        echo '<p class="description">' . __('Default sport for new leagues.', 'vireo-league') . '</p>';
     }
     
     public function date_format_callback() {
-        $options = get_option('psl_general_settings');
+        $options = get_option('vsl_general_settings');
         $value = isset($options['date_format']) ? $options['date_format'] : 'Y-m-d';
         
-        echo '<select name="psl_general_settings[date_format]">';
+        echo '<select name="vsl_general_settings[date_format]">';
         $formats = array(
             'Y-m-d' => '2024-03-15',
             'm/d/Y' => '03/15/2024',
@@ -239,10 +239,10 @@ class PSL_Admin_Settings {
     }
     
     public function time_format_callback() {
-        $options = get_option('psl_general_settings');
+        $options = get_option('vsl_general_settings');
         $value = isset($options['time_format']) ? $options['time_format'] : 'H:i';
         
-        echo '<select name="psl_general_settings[time_format]">';
+        echo '<select name="vsl_general_settings[time_format]">';
         $formats = array(
             'H:i' => '14:30 (24-hour)',
             'g:i A' => '2:30 PM (12-hour)',
@@ -259,10 +259,10 @@ class PSL_Admin_Settings {
     }
     
     public function timezone_callback() {
-        $options = get_option('psl_general_settings');
+        $options = get_option('vsl_general_settings');
         $value = isset($options['timezone']) ? $options['timezone'] : get_option('timezone_string', 'America/New_York');
         
-        echo '<select name="psl_general_settings[timezone]">';
+        echo '<select name="vsl_general_settings[timezone]">';
         $timezones = timezone_identifiers_list();
         foreach ($timezones as $timezone) {
             printf('<option value="%s" %s>%s</option>', 
@@ -275,52 +275,52 @@ class PSL_Admin_Settings {
     }
     
     public function points_win_callback() {
-        $options = get_option('psl_league_settings');
+        $options = get_option('vsl_league_settings');
         $value = isset($options['points_win']) ? $options['points_win'] : 3;
         
-        printf('<input type="number" name="psl_league_settings[points_win]" value="%d" min="0" max="10" />', 
+        printf('<input type="number" name="vsl_league_settings[points_win]" value="%d" min="0" max="10" />', 
             esc_attr($value)
         );
     }
     
     public function points_draw_callback() {
-        $options = get_option('psl_league_settings');
+        $options = get_option('vsl_league_settings');
         $value = isset($options['points_draw']) ? $options['points_draw'] : 1;
         
-        printf('<input type="number" name="psl_league_settings[points_draw]" value="%d" min="0" max="10" />', 
+        printf('<input type="number" name="vsl_league_settings[points_draw]" value="%d" min="0" max="10" />', 
             esc_attr($value)
         );
     }
     
     public function points_loss_callback() {
-        $options = get_option('psl_league_settings');
+        $options = get_option('vsl_league_settings');
         $value = isset($options['points_loss']) ? $options['points_loss'] : 0;
         
-        printf('<input type="number" name="psl_league_settings[points_loss]" value="%d" min="0" max="10" />', 
+        printf('<input type="number" name="vsl_league_settings[points_loss]" value="%d" min="0" max="10" />', 
             esc_attr($value)
         );
     }
     
     public function allow_draws_callback() {
-        $options = get_option('psl_league_settings');
+        $options = get_option('vsl_league_settings');
         $value = isset($options['allow_draws']) ? $options['allow_draws'] : true;
         
-        printf('<input type="checkbox" name="psl_league_settings[allow_draws]" value="1" %s />', 
+        printf('<input type="checkbox" name="vsl_league_settings[allow_draws]" value="1" %s />', 
             checked($value, true, false)
         );
-        echo '<label for="psl_league_settings[allow_draws]">' . __('Allow matches to end in a draw', 'plughaus-league') . '</label>';
+        echo '<label for="vsl_league_settings[allow_draws]">' . __('Allow matches to end in a draw', 'vireo-league') . '</label>';
     }
     
     public function standings_tiebreaker_callback() {
-        $options = get_option('psl_league_settings');
+        $options = get_option('vsl_league_settings');
         $value = isset($options['standings_tiebreaker']) ? $options['standings_tiebreaker'] : 'goal_difference';
         
-        echo '<select name="psl_league_settings[standings_tiebreaker]">';
+        echo '<select name="vsl_league_settings[standings_tiebreaker]">';
         $tiebreakers = array(
-            'goal_difference' => __('Goal Difference', 'plughaus-league'),
-            'goals_for' => __('Goals For', 'plughaus-league'),
-            'head_to_head' => __('Head-to-Head Record', 'plughaus-league'),
-            'alphabetical' => __('Alphabetical', 'plughaus-league'),
+            'goal_difference' => __('Goal Difference', 'vireo-league'),
+            'goals_for' => __('Goals For', 'vireo-league'),
+            'head_to_head' => __('Head-to-Head Record', 'vireo-league'),
+            'alphabetical' => __('Alphabetical', 'vireo-league'),
         );
         
         foreach ($tiebreakers as $key => $label) {
@@ -334,42 +334,42 @@ class PSL_Admin_Settings {
     }
     
     public function theme_color_callback() {
-        $options = get_option('psl_display_settings');
+        $options = get_option('vsl_display_settings');
         $value = isset($options['theme_color']) ? $options['theme_color'] : '#007cba';
         
-        printf('<input type="color" name="psl_display_settings[theme_color]" value="%s" />', 
+        printf('<input type="color" name="vsl_display_settings[theme_color]" value="%s" />', 
             esc_attr($value)
         );
     }
     
     public function show_logos_callback() {
-        $options = get_option('psl_display_settings');
+        $options = get_option('vsl_display_settings');
         $value = isset($options['show_logos']) ? $options['show_logos'] : true;
         
-        printf('<input type="checkbox" name="psl_display_settings[show_logos]" value="1" %s />', 
+        printf('<input type="checkbox" name="vsl_display_settings[show_logos]" value="1" %s />', 
             checked($value, true, false)
         );
-        echo '<label for="psl_display_settings[show_logos]">' . __('Display team logos in tables and lists', 'plughaus-league') . '</label>';
+        echo '<label for="vsl_display_settings[show_logos]">' . __('Display team logos in tables and lists', 'vireo-league') . '</label>';
     }
     
     public function show_player_photos_callback() {
-        $options = get_option('psl_display_settings');
+        $options = get_option('vsl_display_settings');
         $value = isset($options['show_player_photos']) ? $options['show_player_photos'] : true;
         
-        printf('<input type="checkbox" name="psl_display_settings[show_player_photos]" value="1" %s />', 
+        printf('<input type="checkbox" name="vsl_display_settings[show_player_photos]" value="1" %s />', 
             checked($value, true, false)
         );
-        echo '<label for="psl_display_settings[show_player_photos]">' . __('Display player photos in rosters', 'plughaus-league') . '</label>';
+        echo '<label for="vsl_display_settings[show_player_photos]">' . __('Display player photos in rosters', 'vireo-league') . '</label>';
     }
     
     public function items_per_page_callback() {
-        $options = get_option('psl_display_settings');
+        $options = get_option('vsl_display_settings');
         $value = isset($options['items_per_page']) ? $options['items_per_page'] : 20;
         
-        printf('<input type="number" name="psl_display_settings[items_per_page]" value="%d" min="5" max="100" />', 
+        printf('<input type="number" name="vsl_display_settings[items_per_page]" value="%d" min="5" max="100" />', 
             esc_attr($value)
         );
-        echo '<p class="description">' . __('Number of items to show per page in tables.', 'plughaus-league') . '</p>';
+        echo '<p class="description">' . __('Number of items to show per page in tables.', 'vireo-league') . '</p>';
     }
     
     /**

@@ -63,9 +63,9 @@ class VSL_Public {
         );
         
         // Localize script
-        wp_localize_script('vsl-public', 'psl_public', array(
+        wp_localize_script('vsl-public', 'vsl_public', array(
             'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('psl_public_nonce'),
+            'nonce' => wp_create_nonce('vsl_public_nonce'),
             'strings' => array(
                 'loading' => __('Loading...', 'vireo-league'),
                 'error' => __('An error occurred. Please try again.', 'vireo-league'),

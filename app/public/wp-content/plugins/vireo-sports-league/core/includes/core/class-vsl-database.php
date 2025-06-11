@@ -1,8 +1,8 @@
 <?php
 /**
- * Database schema and management for PlugHaus Sports League
+ * Database schema and management for Vireo Sports League
  * 
- * @package PlugHaus_Sports_League
+ * @package Vireo_Sports_League
  * @since 1.0.0
  */
 
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class PSL_Database {
+class VSL_Database {
     
     /**
      * Initialize database hooks
@@ -23,11 +23,11 @@ class PSL_Database {
      * Create database tables if they don't exist
      */
     public static function maybe_create_tables() {
-        $current_version = get_option('psl_db_version', '0.0.0');
+        $current_version = get_option('vsl_db_version', '0.0.0');
         
-        if (version_compare($current_version, PLUGHAUS_LEAGUE_VERSION, '<')) {
+        if (version_compare($current_version, VIREO_LEAGUE_VERSION, '<')) {
             self::create_tables();
-            update_option('psl_db_version', PLUGHAUS_LEAGUE_VERSION);
+            update_option('vsl_db_version', VIREO_LEAGUE_VERSION);
         }
     }
     
@@ -40,7 +40,7 @@ class PSL_Database {
         $charset_collate = $wpdb->get_charset_collate();
         
         // Player statistics table
-        $stats_table = $wpdb->prefix . 'psl_player_stats';
+        $stats_table = $wpdb->prefix . 'vsl_player_stats';
         $stats_sql = "CREATE TABLE $stats_table (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             player_id bigint(20) unsigned NOT NULL,
@@ -61,7 +61,7 @@ class PSL_Database {
         ) $charset_collate;";
         
         // Team statistics table
-        $team_stats_table = $wpdb->prefix . 'psl_team_stats';
+        $team_stats_table = $wpdb->prefix . 'vsl_team_stats';
         $team_stats_sql = "CREATE TABLE $team_stats_table (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             team_id bigint(20) unsigned NOT NULL,
@@ -88,7 +88,7 @@ class PSL_Database {
         ) $charset_collate;";
         
         // Match events table (goals, cards, substitutions, etc.)
-        $events_table = $wpdb->prefix . 'psl_match_events';
+        $events_table = $wpdb->prefix . 'vsl_match_events';
         $events_sql = "CREATE TABLE $events_table (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             match_id bigint(20) unsigned NOT NULL,
@@ -108,7 +108,7 @@ class PSL_Database {
         ) $charset_collate;";
         
         // Activity log table
-        $activity_table = $wpdb->prefix . 'psl_activity_log';
+        $activity_table = $wpdb->prefix . 'vsl_activity_log';
         $activity_sql = "CREATE TABLE $activity_table (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             type varchar(50) NOT NULL,
@@ -127,7 +127,7 @@ class PSL_Database {
         ) $charset_collate;";
         
         // League settings table
-        $settings_table = $wpdb->prefix . 'psl_league_settings';
+        $settings_table = $wpdb->prefix . 'vsl_league_settings';
         $settings_sql = "CREATE TABLE $settings_table (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             league_id bigint(20) unsigned NOT NULL,
@@ -142,7 +142,7 @@ class PSL_Database {
         ) $charset_collate;";
         
         // Standings cache table (for performance)
-        $standings_table = $wpdb->prefix . 'psl_standings_cache';
+        $standings_table = $wpdb->prefix . 'vsl_standings_cache';
         $standings_sql = "CREATE TABLE $standings_table (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             league_id bigint(20) unsigned NOT NULL,
@@ -167,7 +167,7 @@ class PSL_Database {
         ) $charset_collate;";
         
         // Player season stats summary table
-        $player_season_table = $wpdb->prefix . 'psl_player_season_stats';
+        $player_season_table = $wpdb->prefix . 'vsl_player_season_stats';
         $player_season_sql = "CREATE TABLE $player_season_table (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             player_id bigint(20) unsigned NOT NULL,
@@ -204,7 +204,7 @@ class PSL_Database {
         dbDelta($player_season_sql);
         
         // Log activity
-        PSL_Utilities::log_activity('system', 'Database tables created/updated', 0, 0);
+        VSL_Utilities::log_activity('system', 'Database tables created/updated', 0, 0);
     }
     
     /**
@@ -213,7 +213,7 @@ class PSL_Database {
     public static function get_player_season_stats($player_id, $season_id) {
         global $wpdb;
         
-        $table = $wpdb->prefix . 'psl_player_season_stats';
+        $table = $wpdb->prefix . 'vsl_player_season_stats';
         
         return $wpdb->get_row($wpdb->prepare(
             "SELECT * FROM $table WHERE player_id = %d AND season_id = %d",
@@ -228,7 +228,7 @@ class PSL_Database {
     public static function update_player_season_stats($player_id, $team_id, $season_id, $league_id, $stats) {
         global $wpdb;
         
-        $table = $wpdb->prefix . 'psl_player_season_stats';
+        $table = $wpdb->prefix . 'vsl_player_season_stats';
         
         $existing = self::get_player_season_stats($player_id, $season_id);
         
@@ -259,7 +259,7 @@ class PSL_Database {
     public static function record_match_event($match_id, $team_id, $event_type, $event_time, $player_id = null, $event_data = null, $notes = null) {
         global $wpdb;
         
-        $table = $wpdb->prefix . 'psl_match_events';
+        $table = $wpdb->prefix . 'vsl_match_events';
         
         return $wpdb->insert($table, array(
             'match_id' => $match_id,
@@ -278,7 +278,7 @@ class PSL_Database {
     public static function get_match_events($match_id, $event_type = null) {
         global $wpdb;
         
-        $table = $wpdb->prefix . 'psl_match_events';
+        $table = $wpdb->prefix . 'vsl_match_events';
         
         $sql = "SELECT * FROM $table WHERE match_id = %d";
         $params = array($match_id);
@@ -299,7 +299,7 @@ class PSL_Database {
     public static function update_standings_cache($league_id, $season_id) {
         global $wpdb;
         
-        $table = $wpdb->prefix . 'psl_standings_cache';
+        $table = $wpdb->prefix . 'vsl_standings_cache';
         
         // Clear existing cache for this league/season
         $wpdb->delete($table, array(
@@ -308,7 +308,7 @@ class PSL_Database {
         ));
         
         // Calculate fresh standings
-        $standings = PSL_Utilities::calculate_standings($league_id, $season_id);
+        $standings = VSL_Utilities::calculate_standings($league_id, $season_id);
         
         // Insert new cache
         foreach ($standings as $position => $team_data) {
@@ -335,7 +335,7 @@ class PSL_Database {
     public static function get_cached_standings($league_id, $season_id) {
         global $wpdb;
         
-        $table = $wpdb->prefix . 'psl_standings_cache';
+        $table = $wpdb->prefix . 'vsl_standings_cache';
         
         return $wpdb->get_results($wpdb->prepare(
             "SELECT sc.*, p.post_title as team_name 
@@ -355,13 +355,13 @@ class PSL_Database {
         global $wpdb;
         
         $tables = array(
-            'psl_player_stats',
-            'psl_team_stats',
-            'psl_match_events',
-            'psl_activity_log',
-            'psl_league_settings',
-            'psl_standings_cache',
-            'psl_player_season_stats',
+            'vsl_player_stats',
+            'vsl_team_stats',
+            'vsl_match_events',
+            'vsl_activity_log',
+            'vsl_league_settings',
+            'vsl_standings_cache',
+            'vsl_player_season_stats',
         );
         
         foreach ($tables as $table) {
