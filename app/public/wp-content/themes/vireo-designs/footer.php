@@ -6,52 +6,88 @@
  */
 ?>
 
-    <!-- Clean Footer -->
+    <!-- Professional Footer -->
     <footer id="colophon" class="site-footer">
         <div class="container">
-            <div class="footer-content">
+            
+            <!-- Main Footer Content -->
+            <div class="footer-main">
                 
-                <!-- Footer Brand -->
-                <div class="footer-brand">
+                <!-- Company Info -->
+                <div class="footer-section footer-brand">
                     <a href="<?php echo esc_url(home_url('/')); ?>" class="footer-logo" rel="home">
                         <?php 
                         $logo_url = get_template_directory_uri() . '/assets/images/vireo.png';
                         $logo_path = str_replace(get_template_directory_uri(), get_template_directory(), $logo_url);
                         if (file_exists($logo_path)) {
-                            echo '<img src="' . $logo_url . '" alt="Vireo Logo" width="24" height="24" class="logo-image" />';
+                            echo '<img src="' . $logo_url . '" alt="Vireo Logo" width="32" height="32" class="logo-image" />';
                         }
                         ?>
-                        <span class="logo-text">Vireo</span>
+                        <span class="logo-text">Vireo Designs</span>
                     </a>
                     <p class="footer-description">
-                        Professional WordPress plugins for growing businesses.
+                        Professional WordPress plugins designed for growing businesses. Industry-specific solutions that save time and increase productivity.
                     </p>
+                    <div class="footer-social">
+                        <a href="https://twitter.com/vireodesigns" aria-label="Follow us on Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://github.com/vireodesigns" aria-label="View our GitHub" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/company/vireodesigns" aria-label="Connect on LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
                 </div>
                 
-                <!-- Quick Links -->
-                <nav class="footer-nav">
-                    <a href="<?php echo esc_url(home_url('/industries/')); ?>">Industries</a>
-                    <a href="<?php echo esc_url(home_url('/shop/')); ?>">Pricing</a>
-                    <a href="<?php echo esc_url(home_url('/support/')); ?>">Support</a>
-                    <a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a>
-                </nav>
+                <!-- Products -->
+                <div class="footer-section">
+                    <h4>Our Plugins</h4>
+                    <nav class="footer-links">
+                        <a href="<?php echo esc_url(home_url('/plugins/')); ?>">All Plugins</a>
+                        <a href="<?php echo esc_url(home_url('/industry-property-management/')); ?>">Property Management</a>
+                        <a href="<?php echo esc_url(home_url('/industry-sports-leagues/')); ?>">Sports Leagues</a>
+                        <a href="<?php echo esc_url(home_url('/industry-equipment-rental/')); ?>">Equipment Rental</a>
+                        <a href="<?php echo esc_url(home_url('/industry-automotive/')); ?>">Automotive</a>
+                        <a href="<?php echo esc_url(home_url('/shop/')); ?>">Pro Versions</a>
+                    </nav>
+                </div>
                 
-                <!-- Social Links -->
-                <div class="footer-social">
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <!-- Resources -->
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <nav class="footer-links">
+                        <a href="<?php echo esc_url(home_url('/support/')); ?>">Documentation</a>
+                        <a href="<?php echo esc_url(home_url('/support/tutorials/')); ?>">Tutorials</a>
+                        <a href="<?php echo esc_url(home_url('/support/api/')); ?>">API Reference</a>
+                        <a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a>
+                        <a href="<?php echo esc_url(home_url('/changelog/')); ?>">Changelog</a>
+                        <a href="<?php echo esc_url(home_url('/roadmap/')); ?>">Roadmap</a>
+                    </nav>
+                </div>
+                
+                <!-- Company -->
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <nav class="footer-links">
+                        <a href="<?php echo esc_url(home_url('/about/')); ?>">About Us</a>
+                        <a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a>
+                        <a href="<?php echo esc_url(home_url('/careers/')); ?>">Careers</a>
+                        <a href="<?php echo esc_url(home_url('/partners/')); ?>">Partners</a>
+                        <a href="<?php echo esc_url(home_url('/affiliate-program/')); ?>">Affiliate Program</a>
+                        <a href="<?php echo esc_url(home_url('/press/')); ?>">Press Kit</a>
+                    </nav>
                 </div>
                 
             </div>
             
             <!-- Footer Bottom -->
             <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> Vireo. All rights reserved.</p>
-                <div class="legal-links">
-                    <a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy</a>
-                    <a href="<?php echo esc_url(home_url('/terms-of-service/')); ?>">Terms</a>
+                <div class="footer-bottom-left">
+                    <p>&copy; <?php echo date('Y'); ?> Vireo Designs. All rights reserved.</p>
+                    <p class="footer-tagline">Empowering businesses with WordPress-native solutions.</p>
                 </div>
+                <nav class="legal-links">
+                    <a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy Policy</a>
+                    <a href="<?php echo esc_url(home_url('/terms-of-service/')); ?>">Terms of Service</a>
+                    <a href="<?php echo esc_url(home_url('/cookie-policy/')); ?>">Cookie Policy</a>
+                    <a href="<?php echo esc_url(home_url('/refund-policy/')); ?>">Refund Policy</a>
+                </nav>
             </div>
             
         </div>
@@ -156,7 +192,210 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* Additional CSS for dynamic elements */
+/* Enhanced Header & Footer Styling */
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.cart-wrapper,
+.account-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.cart-link,
+.account-link,
+.login-link,
+.support-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.cart-link:hover,
+.account-link:hover,
+.login-link:hover,
+.support-link:hover {
+    background: var(--gray-100);
+    color: var(--primary-color);
+}
+
+.cart-count {
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    padding: 0.125rem 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    min-width: 1.25rem;
+    text-align: center;
+}
+
+.cart-total {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Footer Styling */
+.site-footer {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 3rem 0 1rem;
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h4 {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.footer-brand .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.footer-description {
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: #334155;
+    color: #e2e8f0;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.footer-social a:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid #334155;
+    gap: 2rem;
+}
+
+.footer-bottom-left p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 0.875rem;
+}
+
+.footer-tagline {
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.legal-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.legal-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s ease;
+}
+
+.legal-links a:hover {
+    color: white;
+}
+
+/* Responsive Footer */
+@media (max-width: 1024px) {
+    .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-actions {
+        gap: 1rem;
+    }
+    
+    .header-actions span {
+        display: none;
+    }
+    
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .legal-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+/* Back to Top Button */
 .back-to-top {
     position: fixed;
     bottom: 20px;

@@ -1,26 +1,36 @@
 <?php
 /**
- * Template for displaying the Industries page
- *
- * @package Vireo_Designs
+ * Template Name: Clean Industries Overview
+ * Professional industries showcase
  */
 
 get_header();
 ?>
 
-<div class="industries-page">
+<div class="clean-industries-page">
     
-    <!-- Hero Section -->
+    <!-- Page Hero -->
     <section class="page-hero">
-        <div class="hero-background"></div>
-        <div class="hero-pattern"></div>
         <div class="container">
-            <div class="page-hero-content">
-                <h1 class="page-hero-title">Industry Solutions</h1>
-                <p class="page-hero-description">
-                    Specialized WordPress plugins designed for specific industries. 
-                    Built by experts who understand your business challenges.
+            <div class="hero-content">
+                <h1 class="hero-title">Industry Solutions</h1>
+                <p class="hero-description">
+                    Specialized WordPress plugins designed for specific industries. Built by experts who understand your business challenges.
                 </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="number">9</span>
+                        <span class="label">Industries Served</span>
+                    </div>
+                    <div class="stat">
+                        <span class="number">6</span>
+                        <span class="label">Plugins Available</span>
+                    </div>
+                    <div class="stat">
+                        <span class="number">100%</span>
+                        <span class="label">WordPress Native</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -28,278 +38,346 @@ get_header();
     <!-- Industries Grid -->
     <section class="industries-section">
         <div class="container">
+            <div class="section-header">
+                <h2>Choose Your Industry</h2>
+                <p>Find the perfect plugin solution tailored to your specific business needs.</p>
+            </div>
             
             <div class="industries-grid">
                 
                 <!-- Property Management -->
                 <div class="industry-card featured">
-                    <div class="industry-icon">
-                        <i class="fas fa-building"></i>
+                    <div class="industry-header">
+                        <div class="industry-icon">🏠</div>
+                        <div class="industry-meta">
+                            <h3 class="industry-title">Property Management</h3>
+                            <div class="industry-status">Available Now</div>
+                        </div>
+                        <div class="industry-badge">Most Popular</div>
                     </div>
-                    <h3 class="industry-title">Property Management</h3>
-                    <p class="industry-description">
-                        Complete property management suite for landlords, property managers, and real estate professionals. 
-                        Manage properties, tenants, leases, and maintenance requests.
-                    </p>
-                    <div class="industry-features">
-                        <span class="feature-tag">Tenant Management</span>
-                        <span class="feature-tag">Lease Tracking</span>
-                        <span class="feature-tag">Maintenance Requests</span>
-                        <span class="feature-tag">Payment Processing</span>
+                    
+                    <div class="industry-description">
+                        <p>Complete property management suite for landlords, property managers, and real estate professionals. Manage properties, tenants, leases, and maintenance requests.</p>
+                        
+                        <div class="industry-features">
+                            <span class="feature">Tenant Management</span>
+                            <span class="feature">Lease Tracking</span>
+                            <span class="feature">Maintenance Requests</span>
+                            <span class="feature">Payment Processing</span>
+                        </div>
                     </div>
-                    <div class="industry-status">
-                        <span class="status-badge status-available">Available Now</span>
-                    </div>
+                    
                     <div class="industry-actions">
-                        <a href="<?php echo esc_url(home_url('/industries/property-management/')); ?>" class="btn btn-primary">Learn More</a>
-                        <a href="<?php echo esc_url(home_url('/pricing/')); ?>" class="btn btn-outline">View Pricing</a>
+                        <a href="/industry-property-management/" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Learn More
+                        </a>
+                        <a href="https://wordpress.org/plugins/vireo-property-management/" class="btn btn-outline" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Download Free
+                        </a>
                     </div>
                 </div>
 
                 <!-- Sports Leagues -->
                 <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-trophy"></i>
+                    <div class="industry-header">
+                        <div class="industry-icon">⚽</div>
+                        <div class="industry-meta">
+                            <h3 class="industry-title">Sports Leagues</h3>
+                            <div class="industry-status">Available Now</div>
+                        </div>
                     </div>
-                    <h3 class="industry-title">Sports Leagues</h3>
-                    <p class="industry-description">
-                        Complete sports league management with team rosters, scheduling, 
-                        statistics tracking, tournament brackets, and player profiles.
-                    </p>
-                    <div class="industry-features">
-                        <span class="feature-tag">Team Management</span>
-                        <span class="feature-tag">Game Scheduling</span>
-                        <span class="feature-tag">Statistics Tracking</span>
-                        <span class="feature-tag">Tournament Brackets</span>
+                    
+                    <div class="industry-description">
+                        <p>Complete sports league management with team rosters, scheduling, statistics tracking, tournament brackets, and player profiles.</p>
+                        
+                        <div class="industry-features">
+                            <span class="feature">Team Management</span>
+                            <span class="feature">Game Scheduling</span>
+                            <span class="feature">Statistics Tracking</span>
+                            <span class="feature">Tournament Brackets</span>
+                        </div>
                     </div>
-                    <div class="industry-status">
-                        <span class="status-badge status-development">In Development</span>
-                    </div>
+                    
                     <div class="industry-actions">
-                        <a href="<?php echo esc_url(home_url('/industries/sports-leagues/')); ?>" class="btn btn-primary">Learn More</a>
-                        <a href="#" class="btn btn-outline btn-notify">Notify Me</a>
-                    </div>
-                </div>
-
-                <!-- Fantasy Sports -->
-                <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
-                    <h3 class="industry-title">Fantasy Sports</h3>
-                    <p class="industry-description">
-                        Advanced fantasy sports platform with league administration, 
-                        scoring systems, player statistics, and comprehensive analytics.
-                    </p>
-                    <div class="industry-features">
-                        <span class="feature-tag">League Administration</span>
-                        <span class="feature-tag">Custom Scoring</span>
-                        <span class="feature-tag">Player Analytics</span>
-                        <span class="feature-tag">Live Scoring</span>
-                    </div>
-                    <div class="industry-status">
-                        <span class="status-badge status-coming-soon">Coming Soon</span>
-                    </div>
-                    <div class="industry-actions">
-                        <a href="<?php echo esc_url(home_url('/industries/fantasy-sports/')); ?>" class="btn btn-primary">Learn More</a>
-                        <a href="#" class="btn btn-outline btn-notify">Notify Me</a>
-                    </div>
-                </div>
-
-                <!-- Gym & Fitness -->
-                <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-dumbbell"></i>
-                    </div>
-                    <h3 class="industry-title">Gym & Fitness</h3>
-                    <p class="industry-description">
-                        Streamline gym operations with member management, class scheduling, 
-                        trainer assignments, and equipment tracking for fitness centers.
-                    </p>
-                    <div class="industry-features">
-                        <span class="feature-tag">Member Management</span>
-                        <span class="feature-tag">Class Scheduling</span>
-                        <span class="feature-tag">Trainer Profiles</span>
-                        <span class="feature-tag">Equipment Tracking</span>
-                    </div>
-                    <div class="industry-status">
-                        <span class="status-badge status-coming-soon">Coming Soon</span>
-                    </div>
-                    <div class="industry-actions">
-                        <a href="<?php echo esc_url(home_url('/industries/gym-fitness/')); ?>" class="btn btn-primary">Learn More</a>
-                        <a href="#" class="btn btn-outline btn-notify">Notify Me</a>
+                        <a href="/industry-sports-leagues/" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Learn More
+                        </a>
+                        <a href="https://wordpress.org/plugins/vireo-sports-league/" class="btn btn-outline" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Download Free
+                        </a>
                     </div>
                 </div>
 
                 <!-- Equipment Rental -->
                 <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-tools"></i>
+                    <div class="industry-header">
+                        <div class="industry-icon">🚚</div>
+                        <div class="industry-meta">
+                            <h3 class="industry-title">Equipment Rental</h3>
+                            <div class="industry-status">Available Now</div>
+                        </div>
                     </div>
-                    <h3 class="industry-title">Equipment Rental</h3>
-                    <p class="industry-description">
-                        Manage equipment inventory, rentals, maintenance schedules, and customer relationships 
-                        for construction and tool rental businesses.
-                    </p>
-                    <div class="industry-features">
-                        <span class="feature-tag">Inventory Management</span>
-                        <span class="feature-tag">Rental Tracking</span>
-                        <span class="feature-tag">Maintenance Logs</span>
-                        <span class="feature-tag">Customer Portal</span>
+                    
+                    <div class="industry-description">
+                        <p>Manage equipment inventory, rentals, maintenance schedules, and customer relationships for construction and tool rental businesses.</p>
+                        
+                        <div class="industry-features">
+                            <span class="feature">Inventory Management</span>
+                            <span class="feature">Rental Tracking</span>
+                            <span class="feature">Booking Calendar</span>
+                            <span class="feature">Payment Processing</span>
+                        </div>
                     </div>
-                    <div class="industry-status">
-                        <span class="status-badge status-coming-soon">Coming Soon</span>
-                    </div>
+                    
                     <div class="industry-actions">
-                        <a href="<?php echo esc_url(home_url('/industries/equipment-rental/')); ?>" class="btn btn-primary">Learn More</a>
-                        <a href="#" class="btn btn-outline btn-notify">Notify Me</a>
+                        <a href="/industry-equipment-rental/" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Learn More
+                        </a>
+                        <a href="https://wordpress.org/plugins/equiprent-pro/" class="btn btn-outline" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Download Free
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Automotive -->
+                <div class="industry-card">
+                    <div class="industry-header">
+                        <div class="industry-icon">🚗</div>
+                        <div class="industry-meta">
+                            <h3 class="industry-title">Automotive</h3>
+                            <div class="industry-status">Available Now</div>
+                        </div>
+                    </div>
+                    
+                    <div class="industry-description">
+                        <p>Auto shop and small dealer management with inventory tracking, service appointments, and customer management systems.</p>
+                        
+                        <div class="industry-features">
+                            <span class="feature">Vehicle Inventory</span>
+                            <span class="feature">Service Tracking</span>
+                            <span class="feature">Customer Database</span>
+                            <span class="feature">Work Orders</span>
+                        </div>
+                    </div>
+                    
+                    <div class="industry-actions">
+                        <a href="/industry-automotive/" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Learn More
+                        </a>
+                        <a href="https://wordpress.org/plugins/dealeredge/" class="btn btn-outline" target="_blank">
+                            <i class="fas fa-download"></i>
+                            Download Free
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Gym & Fitness -->
+                <div class="industry-card">
+                    <div class="industry-header">
+                        <div class="industry-icon">💪</div>
+                        <div class="industry-meta">
+                            <h3 class="industry-title">Gym & Fitness</h3>
+                            <div class="industry-status">Coming Q2 2025</div>
+                        </div>
+                    </div>
+                    
+                    <div class="industry-description">
+                        <p>Streamline gym operations with member management, class scheduling, trainer assignments, and equipment tracking for fitness centers.</p>
+                        
+                        <div class="industry-features">
+                            <span class="feature">Member Management</span>
+                            <span class="feature">Class Scheduling</span>
+                            <span class="feature">Trainer Assignment</span>
+                            <span class="feature">Equipment Tracking</span>
+                        </div>
+                    </div>
+                    
+                    <div class="industry-actions">
+                        <a href="/industry-gym-fitness/" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Learn More
+                        </a>
+                        <a href="/contact/" class="btn btn-outline">
+                            <i class="fas fa-bell"></i>
+                            Get Notified
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Creative Services -->
+                <div class="industry-card">
+                    <div class="industry-header">
+                        <div class="industry-icon">📸</div>
+                        <div class="industry-meta">
+                            <h3 class="industry-title">Creative Services</h3>
+                            <div class="industry-status">Coming Q3 2025</div>
+                        </div>
+                    </div>
+                    
+                    <div class="industry-description">
+                        <p>Professional photography studio management with client booking, session planning, and workflow automation for photographers.</p>
+                        
+                        <div class="industry-features">
+                            <span class="feature">Client Booking</span>
+                            <span class="feature">Session Planning</span>
+                            <span class="feature">Gallery Management</span>
+                            <span class="feature">Workflow Automation</span>
+                        </div>
+                    </div>
+                    
+                    <div class="industry-actions">
+                        <a href="/industry-creative-services/" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Learn More
+                        </a>
+                        <a href="/contact/" class="btn btn-outline">
+                            <i class="fas fa-bell"></i>
+                            Get Notified
+                        </a>
                     </div>
                 </div>
 
                 <!-- Marina & RV Resorts -->
                 <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-anchor"></i>
+                    <div class="industry-header">
+                        <div class="industry-icon">⛵</div>
+                        <div class="industry-meta">
+                            <h3 class="industry-title">Marina & RV Resorts</h3>
+                            <div class="industry-status">Coming Q3 2025</div>
+                        </div>
                     </div>
-                    <h3 class="industry-title">Marina & RV Resorts</h3>
-                    <p class="industry-description">
-                        Comprehensive solution for marinas and RV parks. Manage slip rentals, 
-                        guest reservations, amenities, and seasonal bookings.
-                    </p>
-                    <div class="industry-features">
-                        <span class="feature-tag">Slip Management</span>
-                        <span class="feature-tag">Reservations</span>
-                        <span class="feature-tag">Seasonal Rates</span>
-                        <span class="feature-tag">Guest Services</span>
+                    
+                    <div class="industry-description">
+                        <p>Comprehensive solution for marinas and RV parks. Handle slip rentals, guest reservations, amenities, and seasonal bookings.</p>
+                        
+                        <div class="industry-features">
+                            <span class="feature">Slip Management</span>
+                            <span class="feature">Reservations</span>
+                            <span class="feature">Seasonal Rates</span>
+                            <span class="feature">Amenity Booking</span>
+                        </div>
                     </div>
-                    <div class="industry-status">
-                        <span class="status-badge status-coming-soon">Coming Soon</span>
-                    </div>
+                    
                     <div class="industry-actions">
-                        <a href="<?php echo esc_url(home_url('/industries/marina-rv-resorts/')); ?>" class="btn btn-primary">Learn More</a>
-                        <a href="#" class="btn btn-outline btn-notify">Notify Me</a>
+                        <a href="/industry-marina-rv-resorts/" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Learn More
+                        </a>
+                        <a href="/contact/" class="btn btn-outline">
+                            <i class="fas fa-bell"></i>
+                            Get Notified
+                        </a>
                     </div>
                 </div>
 
                 <!-- Self Storage -->
                 <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-warehouse"></i>
+                    <div class="industry-header">
+                        <div class="industry-icon">🏢</div>
+                        <div class="industry-meta">
+                            <h3 class="industry-title">Self Storage</h3>
+                            <div class="industry-status">Coming Q4 2025</div>
+                        </div>
                     </div>
-                    <h3 class="industry-title">Self Storage</h3>
-                    <p class="industry-description">
-                        Complete self-storage facility management with unit tracking, 
-                        tenant management, automated billing, and access control integration.
-                    </p>
-                    <div class="industry-features">
-                        <span class="feature-tag">Unit Management</span>
-                        <span class="feature-tag">Tenant Portal</span>
-                        <span class="feature-tag">Automated Billing</span>
-                        <span class="feature-tag">Access Control</span>
+                    
+                    <div class="industry-description">
+                        <p>Self-storage facility management with unit tracking, customer management, payment processing, and access control integration.</p>
+                        
+                        <div class="industry-features">
+                            <span class="feature">Unit Management</span>
+                            <span class="feature">Customer Portal</span>
+                            <span class="feature">Payment Processing</span>
+                            <span class="feature">Access Control</span>
+                        </div>
                     </div>
-                    <div class="industry-status">
-                        <span class="status-badge status-coming-soon">Coming Soon</span>
-                    </div>
+                    
                     <div class="industry-actions">
-                        <a href="<?php echo esc_url(home_url('/industries/self-storage/')); ?>" class="btn btn-primary">Learn More</a>
-                        <a href="#" class="btn btn-outline btn-notify">Notify Me</a>
+                        <a href="/industry-self-storage/" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Learn More
+                        </a>
+                        <a href="/contact/" class="btn btn-outline">
+                            <i class="fas fa-bell"></i>
+                            Get Notified
+                        </a>
                     </div>
                 </div>
 
                 <!-- Nonprofits -->
                 <div class="industry-card">
-                    <div class="industry-icon">
-                        <i class="fas fa-heart"></i>
+                    <div class="industry-header">
+                        <div class="industry-icon">❤️</div>
+                        <div class="industry-meta">
+                            <h3 class="industry-title">Nonprofits</h3>
+                            <div class="industry-status">Coming Q4 2025</div>
+                        </div>
                     </div>
-                    <h3 class="industry-title">Nonprofits</h3>
-                    <p class="industry-description">
-                        Comprehensive nonprofit management with donor tracking, volunteer coordination, 
-                        event management, and fundraising campaign tools.
-                    </p>
-                    <div class="industry-features">
-                        <span class="feature-tag">Donor Management</span>
-                        <span class="feature-tag">Volunteer Coordination</span>
-                        <span class="feature-tag">Event Planning</span>
-                        <span class="feature-tag">Fundraising Tools</span>
+                    
+                    <div class="industry-description">
+                        <p>Nonprofit organization management with donor tracking, volunteer coordination, event planning, and fundraising campaign tools.</p>
+                        
+                        <div class="industry-features">
+                            <span class="feature">Donor Management</span>
+                            <span class="feature">Volunteer Coordination</span>
+                            <span class="feature">Event Planning</span>
+                            <span class="feature">Fundraising Campaigns</span>
+                        </div>
                     </div>
-                    <div class="industry-status">
-                        <span class="status-badge status-coming-soon">Coming Soon</span>
-                    </div>
+                    
                     <div class="industry-actions">
-                        <a href="<?php echo esc_url(home_url('/industries/nonprofits/')); ?>" class="btn btn-primary">Learn More</a>
-                        <a href="#" class="btn btn-outline btn-notify">Notify Me</a>
+                        <a href="/industry-nonprofits/" class="btn btn-primary">
+                            <i class="fas fa-arrow-right"></i>
+                            Learn More
+                        </a>
+                        <a href="/contact/" class="btn btn-outline">
+                            <i class="fas fa-bell"></i>
+                            Get Notified
+                        </a>
                     </div>
                 </div>
 
             </div>
-
         </div>
     </section>
 
-    <!-- Why Choose Industry-Specific Solutions -->
-    <section class="why-industry-section">
+    <!-- Why Choose Industry-Specific -->
+    <section class="benefits-section">
         <div class="container">
-            
             <div class="section-header">
-                <h2 class="section-title">Why Industry-Specific Solutions?</h2>
-                <p class="section-description">
-                    Generic software often falls short. Our industry-focused plugins are built by experts 
-                    who understand the unique challenges and workflows of your business.
-                </p>
+                <h2>Why Industry-Specific Solutions?</h2>
+                <p>Generic software forces you to adapt your business to the software. We adapt our software to your business.</p>
             </div>
-
+            
             <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Built for Your Industry</h3>
+                    <p>Features designed specifically for your business type, not generic catch-all solutions.</p>
+                </div>
                 
                 <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-bullseye"></i>
-                    </div>
-                    <h3>Purpose-Built</h3>
-                    <p>Designed specifically for your industry's unique workflows and requirements.</p>
+                    <div class="benefit-icon">💰</div>
+                    <h3>Cost Effective</h3>
+                    <p>Pay once per year instead of expensive monthly SaaS subscriptions that add up quickly.</p>
                 </div>
-
+                
                 <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3>Quick Setup</h3>
-                    <p>Pre-configured with industry best practices. Get up and running in minutes, not months.</p>
+                    <div class="benefit-icon">🏠</div>
+                    <h3>Your Data, Your Control</h3>
+                    <p>Self-hosted WordPress solution means you own your data and control your infrastructure.</p>
                 </div>
-
+                
                 <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Expert Support</h3>
-                    <p>Our team understands your industry and can provide knowledgeable, relevant support.</p>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Scalable Growth</h3>
-                    <p>Solutions that grow with your business, from startup to enterprise.</p>
-                </div>
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="cta-background"></div>
-        <div class="cta-pattern"></div>
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">Ready to Transform Your Business?</h2>
-                <p class="cta-description">
-                    Choose the industry solution that fits your needs and start streamlining your operations today.
-                </p>
-                <div class="cta-actions">
-                    <a href="<?php echo esc_url(home_url('/pricing/')); ?>" class="btn btn-primary btn-lg">View Pricing</a>
-                    <a href="<?php echo esc_url(home_url('/contact/')); ?>" class="btn btn-outline btn-lg">Contact Sales</a>
+                    <div class="benefit-icon">🚀</div>
+                    <h3>Quick Implementation</h3>
+                    <p>Industry-specific workflows and templates mean faster setup and immediate productivity.</p>
                 </div>
             </div>
         </div>
@@ -308,161 +386,265 @@ get_header();
 </div>
 
 <style>
-/* Industries Page Styles */
+.clean-industries-page {
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+.page-hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    opacity: 0.9;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat .number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+}
+
+.stat .label {
+    font-size: 0.875rem;
+    opacity: 0.8;
+}
+
 .industries-section {
-    padding: var(--space-16) 0;
-    background: var(--gray-50);
+    padding: 4rem 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.section-header p {
+    font-size: 1.125rem;
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .industries-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: var(--space-8);
-    margin-top: var(--space-12);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .industry-card {
-    background: var(--white);
-    border: 2px solid var(--gray-200);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-8);
-    transition: all var(--transition-normal);
-    position: relative;
-    display: flex;
-    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #e2e8f0;
 }
 
 .industry-card:hover {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--primary-color);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
 }
 
 .industry-card.featured {
-    border-color: var(--primary-color);
-    background: linear-gradient(135deg, var(--white) 0%, rgba(5, 150, 105, 0.02) 100%);
+    border: 2px solid var(--primary-color);
+    position: relative;
 }
 
-.industry-card.featured::before {
-    content: "Featured";
-    position: absolute;
-    top: -12px;
-    left: var(--space-6);
-    background: var(--primary-color);
-    color: var(--white);
-    padding: var(--space-1) var(--space-3);
-    border-radius: var(--radius-full);
-    font-size: var(--text-xs);
-    font-weight: 700;
-    text-transform: uppercase;
+.industry-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    position: relative;
 }
 
 .industry-icon {
-    width: 80px;
-    height: 80px;
-    background: var(--primary-gradient);
-    border-radius: var(--radius-2xl);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: var(--space-6);
-    font-size: var(--text-3xl);
-    color: var(--white);
+    font-size: 3rem;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.industry-meta {
+    flex: 1;
 }
 
 .industry-title {
-    font-size: var(--text-xl);
-    font-weight: 700;
-    margin-bottom: var(--space-4);
-    color: var(--gray-900);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0 0 0.5rem 0;
 }
 
-.industry-description {
-    color: var(--gray-600);
+.industry-status {
+    font-size: 0.875rem;
+    color: #059669;
+    font-weight: 500;
+}
+
+.industry-badge {
+    background: var(--primary-color);
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-weight: 600;
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+}
+
+.industry-description p {
+    color: #475569;
     line-height: 1.6;
-    margin-bottom: var(--space-6);
-    flex-grow: 1;
+    margin-bottom: 1.5rem;
 }
 
 .industry-features {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-bottom: var(--space-6);
+    gap: 0.5rem;
+    margin-bottom: 2rem;
 }
 
-.industry-status {
-    margin-bottom: var(--space-6);
+.feature {
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 500;
 }
 
 .industry-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-3);
+    display: flex;
+    gap: 1rem;
 }
 
-.why-industry-section {
-    padding: var(--space-16) 0;
-    background: var(--white);
+.industry-actions .btn {
+    flex: 1;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-outline {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+    border: 2px solid var(--primary-color);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.benefits-section {
+    padding: 4rem 0;
+    background: white;
 }
 
 .benefits-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--space-8);
-    margin-top: var(--space-12);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .benefit-item {
     text-align: center;
-    padding: var(--space-6);
+    padding: 2rem 1rem;
 }
 
 .benefit-icon {
-    width: 60px;
-    height: 60px;
-    background: var(--primary-gradient);
-    border-radius: var(--radius-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--space-4);
-    font-size: var(--text-xl);
-    color: var(--white);
+    font-size: 3rem;
+    margin-bottom: 1rem;
 }
 
 .benefit-item h3 {
-    font-size: var(--text-lg);
-    font-weight: 700;
-    margin-bottom: var(--space-3);
-    color: var(--gray-900);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1rem;
 }
 
 .benefit-item p {
-    color: var(--gray-600);
+    color: #64748b;
     line-height: 1.6;
 }
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
     .industries-grid {
         grid-template-columns: 1fr;
-        gap: var(--space-6);
+        gap: 1.5rem;
     }
     
     .industry-actions {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
     
     .benefits-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-6);
-    }
-}
-
-@media (max-width: 480px) {
-    .benefits-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }
 </style>

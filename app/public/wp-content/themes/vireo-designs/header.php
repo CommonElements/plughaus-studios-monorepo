@@ -52,21 +52,22 @@
                             echo '<a href="' . esc_url(home_url('/industries/')) . '" class="dropdown-toggle">Industries <i class="fas fa-chevron-down"></i></a>';
                             echo '<ul class="dropdown-menu">';
                             echo '<li><a href="' . esc_url(home_url('/industries/')) . '">All Industries</a></li>';
-                            echo '<li><a href="' . esc_url(home_url('/industries/property-management/')) . '">Property Management</a></li>';
-                            echo '<li><a href="' . esc_url(home_url('/industries/sports-leagues/')) . '">Sports Leagues</a></li>';
-                            echo '<li><a href="' . esc_url(home_url('/industries/fantasy-sports/')) . '">Fantasy Sports</a></li>';
-                            echo '<li><a href="' . esc_url(home_url('/industries/gym-fitness/')) . '">Gym & Fitness</a></li>';
-                            echo '<li><a href="' . esc_url(home_url('/industries/equipment-rental/')) . '">Equipment Rental</a></li>';
-                            echo '<li><a href="' . esc_url(home_url('/industries/marina-rv-resorts/')) . '">Marina & RV Resorts</a></li>';
-                            echo '<li><a href="' . esc_url(home_url('/industries/self-storage/')) . '">Self Storage</a></li>';
-                            echo '<li><a href="' . esc_url(home_url('/industries/nonprofits/')) . '">Nonprofits</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/industry-property-management/')) . '">Property Management</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/industry-sports-leagues/')) . '">Sports Leagues</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/industry-automotive/')) . '">Automotive</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/industry-gym-fitness/')) . '">Gym & Fitness</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/industry-equipment-rental/')) . '">Equipment Rental</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/industry-marina-rv-resorts/')) . '">Marina & RV Resorts</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/industry-self-storage/')) . '">Self Storage</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/industry-nonprofits/')) . '">Nonprofits</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/industry-creative-services/')) . '">Creative Services</a></li>';
                             echo '</ul>';
                             echo '</li>';
                             echo '<li class="dropdown">';
                             echo '<a href="' . esc_url(home_url('/plugins/')) . '" class="dropdown-toggle">Plugins <i class="fas fa-chevron-down"></i></a>';
                             echo '<ul class="dropdown-menu">';
                             echo '<li><a href="' . esc_url(home_url('/plugins/')) . '">All Plugins</a></li>';
-                            echo '<li><a href="' . esc_url(home_url('/plugin-directory/')) . '">Plugin Directory</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/shop/')) . '">Shop Pro Versions</a></li>';
                             echo '<li><a href="' . esc_url(home_url('/industries/')) . '">By Industry</a></li>';
                             echo '</ul>';
                             echo '</li>';
@@ -81,8 +82,39 @@
                 
                 <!-- Header Actions -->
                 <div class="header-actions">
-                    <a href="<?php echo esc_url(home_url('/support/')); ?>" class="nav-link">Support</a>
-                    <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn-primary">Get Started</a>
+                    <div class="cart-wrapper">
+                        <?php if (function_exists('WC') && WC()->cart): ?>
+                            <a href="<?php echo esc_url(wc_get_cart_url()); ?>" class="cart-link">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
+                                <span class="cart-total"><?php echo WC()->cart->get_cart_total(); ?></span>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <div class="account-wrapper">
+                        <?php if (is_user_logged_in()): ?>
+                            <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>" class="account-link">
+                                <i class="fas fa-user"></i>
+                                <span>Account</span>
+                            </a>
+                        <?php else: ?>
+                            <a href="<?php echo esc_url(get_permalink(get_option('woocommerce_myaccount_page_id'))); ?>" class="login-link">
+                                <i class="fas fa-sign-in-alt"></i>
+                                <span>Login</span>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <a href="<?php echo esc_url(home_url('/support/')); ?>" class="support-link">
+                        <i class="fas fa-life-ring"></i>
+                        <span>Support</span>
+                    </a>
+                    
+                    <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Get Started
+                    </a>
                 </div>
                 
                 <!-- Mobile Menu Toggle -->
