@@ -40,8 +40,5 @@
     "build",
     "dist",
     "**/*.min.js"
-  ],
-  "references": [
-    { "path": "./app/public/wp-content/plugins/vireo-property-management" }
   ]
 }

@@ -51,10 +51,10 @@
   "homepage": "https://vireodesigns.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VireoDesigns/vireo-monorepo.git"
+    "url": "git+https://github.com/CommonElements/vireo-designs.git"
   },
   "bugs": {
-    "url": "https://github.com/VireoDesigns/vireo-monorepo/issues"
+    "url": "https://github.com/CommonElements/vireo-designs/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",

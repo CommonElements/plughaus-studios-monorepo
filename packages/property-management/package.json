@@ -8,7 +8,8 @@
   "homepage": "https://vireodesigns.com/plugins/property-management",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VireoDesigns/vireo-monorepo.git"
+    "url": "git+https://github.com/CommonElements/vireo-designs.git",
+    "directory": "packages/property-management"
   },
   "keywords": [
     "wordpress",
