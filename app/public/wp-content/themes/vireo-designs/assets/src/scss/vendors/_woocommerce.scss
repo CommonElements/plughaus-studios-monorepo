@@ -1,0 +1,39 @@
+/**
+ * WooCommerce integration styles for Vireo Designs
+ */
+
+.woocommerce {
+  .button {
+    @include btn-primary;
+  }
+  
+  .button.alt {
+    @include btn-secondary;
+  }
+  
+  .shop_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: $spacing-6;
+    
+    th,
+    td {
+      padding: $spacing-3 $spacing-4;
+      border-bottom: 1px solid $gray-200;
+      text-align: left;
+    }
+    
+    th {
+      background: $gray-50;
+      font-weight: $font-weight-medium;
+    }
+  }
+  
+  .cart-collaterals {
+    .cart_totals {
+      background: $gray-50;
+      padding: $spacing-6;
+      border-radius: $radius-lg;
+    }
+  }
+}

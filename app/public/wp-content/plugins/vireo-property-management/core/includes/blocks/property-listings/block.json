@@ -1,0 +1,73 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "vireo-property/property-listings",
+	"version": "1.0.0",
+	"title": "Property Listings",
+	"category": "vireo-property",
+	"icon": "building",
+	"description": "Display a grid or list of properties with basic information.",
+	"keywords": ["property", "listings", "real estate", "rentals"],
+	"textdomain": "vireo-property",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
+	"render": "file:./render.php",
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"attributes": {
+		"layout": {
+			"type": "string",
+			"default": "grid"
+		},
+		"columns": {
+			"type": "number",
+			"default": 3
+		},
+		"postsPerPage": {
+			"type": "number",
+			"default": 6
+		},
+		"showPagination": {
+			"type": "boolean",
+			"default": true
+		},
+		"propertyType": {
+			"type": "string",
+			"default": "all"
+		},
+		"orderBy": {
+			"type": "string",
+			"default": "date"
+		},
+		"order": {
+			"type": "string",
+			"default": "DESC"
+		},
+		"showExcerpt": {
+			"type": "boolean",
+			"default": true
+		},
+		"showPrice": {
+			"type": "boolean",
+			"default": true
+		},
+		"showLocation": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"example": {
+		"attributes": {
+			"layout": "grid",
+			"columns": 2,
+			"postsPerPage": 4
+		}
+	}
+}

@@ -1,0 +1,469 @@
+/**
+ * GymFlow Admin Styles
+ * 
+ * WordPress admin interface styling for GymFlow plugin
+ * 
+ * @package GymFlow
+ * @version 1.0.0
+ */
+
+/* ==========================================================================
+   Main Admin Layout
+   ========================================================================== */
+
+.gymflow-admin-page {
+    margin: 20px 0;
+}
+
+.gymflow-admin-header {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.gymflow-admin-header h1 {
+    margin: 0 0 10px 0;
+    color: #23282d;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.gymflow-admin-header .subtitle {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* ==========================================================================
+   Dashboard Widgets
+   ========================================================================== */
+
+.gymflow-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.gymflow-widget {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.gymflow-widget h3 {
+    margin: 0 0 15px 0;
+    color: #23282d;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.gymflow-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.gymflow-stat:last-child {
+    border-bottom: none;
+}
+
+.gymflow-stat-label {
+    color: #666;
+    font-size: 14px;
+}
+
+.gymflow-stat-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2271b1;
+}
+
+/* ==========================================================================
+   Form Styling
+   ========================================================================== */
+
+.gymflow-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.gymflow-form-row {
+    margin-bottom: 20px;
+}
+
+.gymflow-form-row label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #23282d;
+}
+
+.gymflow-form-row input,
+.gymflow-form-row select,
+.gymflow-form-row textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.gymflow-form-row input:focus,
+.gymflow-form-row select:focus,
+.gymflow-form-row textarea:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: none;
+}
+
+.gymflow-form-row .description {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* ==========================================================================
+   Table Styling
+   ========================================================================== */
+
+.gymflow-table {
+    width: 100%;
+    background: #fff;
+    border-collapse: collapse;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.gymflow-table th {
+    background: #f5f5f5;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #23282d;
+    border-bottom: 1px solid #ddd;
+}
+
+.gymflow-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: middle;
+}
+
+.gymflow-table tr:hover {
+    background: #f9f9f9;
+}
+
+.gymflow-table .actions {
+    white-space: nowrap;
+}
+
+.gymflow-table .actions a {
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   Member Management
+   ========================================================================== */
+
+.gymflow-member-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.gymflow-member-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.gymflow-member-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #666;
+}
+
+.gymflow-member-info h4 {
+    margin: 0 0 5px 0;
+    color: #23282d;
+    font-size: 18px;
+}
+
+.gymflow-member-info .membership-status {
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.membership-status.active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.membership-status.expired {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.membership-status.pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+/* ==========================================================================
+   Class Scheduling
+   ========================================================================== */
+
+.gymflow-calendar {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gymflow-calendar-header {
+    background: #f5f5f5;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gymflow-calendar-nav button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.gymflow-calendar-nav button:hover {
+    background: #e5e5e5;
+}
+
+.gymflow-class-item {
+    background: #2271b1;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 2px 0;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.gymflow-class-item:hover {
+    background: #1e5d8e;
+}
+
+/* ==========================================================================
+   Equipment Management
+   ========================================================================== */
+
+.gymflow-equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gymflow-equipment-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.gymflow-equipment-icon {
+    width: 60px;
+    height: 60px;
+    background: #f5f5f5;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #666;
+}
+
+.gymflow-equipment-status {
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+
+.equipment-status.available {
+    background: #d4edda;
+    color: #155724;
+}
+
+.equipment-status.booked {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.equipment-status.maintenance {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* ==========================================================================
+   Pro Feature Indicators
+   ========================================================================== */
+
+.gymflow-pro-feature {
+    position: relative;
+    opacity: 0.6;
+}
+
+.gymflow-pro-feature::after {
+    content: "PRO";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff6b35;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.gymflow-pro-notice {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 20px 0;
+}
+
+.gymflow-pro-notice h4 {
+    margin: 0 0 10px 0;
+    color: #856404;
+}
+
+.gymflow-pro-notice p {
+    margin: 0 0 10px 0;
+    color: #856404;
+}
+
+.gymflow-pro-notice .button {
+    background: #ff6b35;
+    border-color: #ff6b35;
+    color: #fff;
+}
+
+.gymflow-pro-notice .button:hover {
+    background: #e55a30;
+    border-color: #e55a30;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .gymflow-dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .gymflow-form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gymflow-equipment-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .gymflow-member-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .gymflow-member-avatar {
+        margin: 0 0 10px 0;
+    }
+    
+    .gymflow-calendar-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+.gymflow-widget,
+.gymflow-member-card,
+.gymflow-equipment-card {
+    transition: box-shadow 0.3s ease;
+}
+
+.gymflow-widget:hover,
+.gymflow-member-card:hover,
+.gymflow-equipment-card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.gymflow-class-item,
+.gymflow-equipment-card {
+    transition: transform 0.2s ease;
+}
+
+.gymflow-class-item:hover,
+.gymflow-equipment-card:hover {
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Loading States
+   ========================================================================== */
+
+.gymflow-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #2271b1;
+    border-radius: 50%;
+    animation: gymflow-spin 1s linear infinite;
+}
+
+@keyframes gymflow-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

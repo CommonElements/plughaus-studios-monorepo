@@ -3,13 +3,14 @@
 const fs = require('fs-extra');
 const path = require('path');
 const { execSync } = require('child_process');
+const archiver = require('archiver');
 
-console.log('🔧 Building PlugHaus Property Management - FREE VERSION');
+console.log('🔧 Building Vireo Property Management - FREE VERSION');
 
 // Configuration
-const ROOT_DIR = path.resolve(__dirname, '..');
-const BUILD_DIR = path.join(ROOT_DIR, 'dist', 'free');
-const PLUGIN_NAME = 'plughaus-property-management';
+const ROOT_DIR = path.resolve(__dirname, '../');
+const BUILD_DIR = path.resolve(ROOT_DIR, '../../dist/free');
+const PLUGIN_NAME = 'vireo-property-management';
 
 async function buildFreeVersion() {
     try {
@@ -26,8 +27,8 @@ async function buildFreeVersion() {
         
         // Copy main plugin file
         await fs.copy(
-            path.join(ROOT_DIR, 'plughaus-property-management.php'),
-            path.join(pluginDir, 'plughaus-property-management.php')
+            path.join(ROOT_DIR, 'vireo-property-management.php'),
+            path.join(pluginDir, 'vireo-property-management.php')
         );
         
         // Copy core directory
@@ -61,7 +62,7 @@ async function buildFreeVersion() {
         
         // Modify main plugin file to remove pro features
         console.log('✂️  Removing pro features from main plugin file...');
-        await modifyMainPluginFile(path.join(pluginDir, 'plughaus-property-management.php'));
+        await modifyMainPluginFile(path.join(pluginDir, 'vireo-property-management.php'));
         
         // Create WordPress.org compliant readme
         console.log('📝 Creating WordPress.org compliant readme...');
@@ -99,119 +100,45 @@ async function buildFreeVersion() {
 async function modifyMainPluginFile(filePath) {
     let content = await fs.readFile(filePath, 'utf8');
     
-    // Remove pro license checking
-    content = content.replace(
-        /\/\*\*\s*\n\s*\* Check if pro license is valid\s*\n\s*\*\/\s*\n\s*private function check_pro_license\(\)\s*\{[\s\S]*?\n\s*\}/,
-        `/**
-     * Check if pro license is valid
-     */
-    private function check_pro_license() {
-        // Pro features not available in free version
-        return false;
-    }`
-    );
+    // Remove pro features
+    content = content.replace(/\/\/ Pro Features[\s\S]*?\/\/ End Pro Features/g, '');
     
-    // Remove pro feature loading
-    content = content.replace(
-        /\/\*\*\s*\n\s*\* Load pro features[\s\S]*?\n\s*\}/,
-        `/**
-     * Load pro features (not available in free version)
-     */
-    private function load_pro_features() {
-        // Pro features not available in free version
-        return;
-    }`
-    );
-    
-    // Remove pro-specific constants and directories
-    content = content.replace(/define\('PHPM_PRO_DIR'.*?\);/, '// Pro features not available in free version');
+    // Update plugin header
+    content = content.replace(/Plugin Name:.*$/m, 'Plugin Name: Vireo Property Management');
+    content = content.replace(/Plugin URI:.*$/m, 'Plugin URI: https://vireodesigns.com/plugins/property-management');
+    content = content.replace(/Author:.*$/m, 'Author: Vireo Designs');
+    content = content.replace(/Author URI:.*$/m, 'Author URI: https://vireodesigns.com');
     
     await fs.writeFile(filePath, content);
 }
 
 async function createWordPressOrgReadme(filePath) {
-    const readmeContent = `=== PlugHaus Property Management ===
-Contributors: plughausstudios
+    const readmeContent = `=== Vireo Property Management ===
+Contributors: vireodesigns
 Tags: property management, real estate, rental, landlord, tenant
 Requires at least: 5.8
 Tested up to: 6.4
-Requires PHP: 7.4
 Stable tag: 1.0.0
-License: GPL v2 or later
+License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A lightweight, powerful property management solution for WordPress. Manage properties, tenants, leases, and maintenance with ease.
+Professional property management solution for WordPress.
 
 == Description ==
 
-PlugHaus Property Management is a comprehensive yet lightweight property management plugin for WordPress. Perfect for small to medium-sized property managers, landlords, and real estate professionals.
-
-**Features:**
-
-* **Property Management** - Add and manage unlimited properties with detailed information
-* **Unit Tracking** - Track individual units within properties
-* **Tenant Management** - Maintain tenant records and contact information
-* **Lease Management** - Track lease terms, dates, and rental amounts
-* **Maintenance Requests** - Handle maintenance requests from tenants
-* **Basic Reporting** - Generate simple reports on occupancy and finances
-* **Import/Export** - Import property data via CSV and export for backup
-* **REST API** - Full REST API for integrations and mobile apps
-
-**Pro Features Available:**
-
-Upgrade to Pro for advanced features including:
-* Advanced Analytics Dashboard
-* Automated Payment Processing
-* Email Automation
-* Advanced Reporting with Charts
-* White-label Options
-* Priority Support
+Vireo Property Management is a comprehensive yet lightweight property management plugin for WordPress. Perfect for small to medium-sized property managers, landlords, and real estate professionals.
 
 == Installation ==
 
-1. Upload the plugin files to the \`/wp-content/plugins/plughaus-property-management\` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the \`/wp-content/plugins/vireo-property-management\` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Use the Property Mgmt menu item to configure the plugin and start adding properties
-
-== Frequently Asked Questions ==
-
-= Is this plugin free? =
-
-Yes! The core plugin is completely free and includes all basic property management features.
-
-= What's included in the Pro version? =
-
-Pro includes advanced analytics, payment automation, email automation, advanced reporting, and priority support.
-
-= Can I import existing property data? =
-
-Yes! The plugin includes CSV import functionality to help you migrate from other systems.
-
-= Does it work with any theme? =
-
-Yes! The plugin is designed to work with any properly coded WordPress theme.
-
-== Screenshots ==
-
-1. Property Management Dashboard
-2. Add/Edit Property Screen
-3. Tenant Management
-4. Lease Tracking
-5. Maintenance Requests
+3. Use the Settings->Vireo Property Management screen to configure the plugin
+4. Make sure you save your settings
 
 == Changelog ==
 
 = 1.0.0 =
-* Initial release
-* Property, unit, tenant, and lease management
-* Basic reporting and dashboard
-* Import/export functionality
-* REST API endpoints
-
-== Upgrade Notice ==
-
-= 1.0.0 =
-Initial release of PlugHaus Property Management.
+* Initial release of Vireo Property Management.
 `;
 
     await fs.writeFile(filePath, readmeContent);
@@ -229,7 +156,6 @@ async function cleanPackageJsonForDistribution(filePath) {
 }
 
 async function createZipFile(sourceDir, zipPath) {
-    const archiver = require('archiver');
     const output = fs.createWriteStream(zipPath);
     const archive = archiver('zip', { zlib: { level: 9 } });
     

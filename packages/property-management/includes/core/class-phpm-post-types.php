@@ -1,14 +1,17 @@
 <?php
 /**
- * Custom Post Types for PlugHaus Property Management
+ * Custom Post Types for Vireo Property Management
+ *
+ * @package VireoPropertyManagement
+ * @since 1.0.0
  */
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+namespace Vireo\PropertyManagement\Core;
 
-class PHPM_Post_Types {
-    
+/**
+ * Handles custom post types registration
+ */
+class Post_Types {
     /**
      * Initialize post types
      */
@@ -21,20 +24,20 @@ class PHPM_Post_Types {
      * Register custom post types
      */
     public static function register_post_types() {
-        // Properties Post Type
-        register_post_type('phpm_property', array(
+        // Properties
+        register_post_type('vpm_property', array(
             'labels' => array(
-                'name' => __('Properties', 'plughaus-property'),
-                'singular_name' => __('Property', 'plughaus-property'),
-                'add_new' => __('Add Property', 'plughaus-property'),
-                'add_new_item' => __('Add New Property', 'plughaus-property'),
-                'edit_item' => __('Edit Property', 'plughaus-property'),
-                'new_item' => __('New Property', 'plughaus-property'),
-                'view_item' => __('View Property', 'plughaus-property'),
-                'search_items' => __('Search Properties', 'plughaus-property'),
-                'not_found' => __('No properties found', 'plughaus-property'),
-                'not_found_in_trash' => __('No properties found in trash', 'plughaus-property'),
-                'menu_name' => __('Properties', 'plughaus-property'),
+                'name' => __('Properties', 'vireo-property'),
+                'singular_name' => __('Property', 'vireo-property'),
+                'add_new' => __('Add Property', 'vireo-property'),
+                'add_new_item' => __('Add New Property', 'vireo-property'),
+                'edit_item' => __('Edit Property', 'vireo-property'),
+                'new_item' => __('New Property', 'vireo-property'),
+                'view_item' => __('View Property', 'vireo-property'),
+                'search_items' => __('Search Properties', 'vireo-property'),
+                'not_found' => __('No properties found', 'vireo-property'),
+                'not_found_in_trash' => __('No properties found in trash', 'vireo-property'),
+                'menu_name' => __('Properties', 'vireo-property')
             ),
             'public' => true,
             'show_ui' => true,
@@ -48,20 +51,20 @@ class PHPM_Post_Types {
             'menu_icon' => 'dashicons-building',
         ));
         
-        // Units Post Type
-        register_post_type('phpm_unit', array(
+        // Units
+        register_post_type('vpm_unit', array(
             'labels' => array(
-                'name' => __('Units', 'plughaus-property'),
-                'singular_name' => __('Unit', 'plughaus-property'),
-                'add_new' => __('Add Unit', 'plughaus-property'),
-                'add_new_item' => __('Add New Unit', 'plughaus-property'),
-                'edit_item' => __('Edit Unit', 'plughaus-property'),
-                'new_item' => __('New Unit', 'plughaus-property'),
-                'view_item' => __('View Unit', 'plughaus-property'),
-                'search_items' => __('Search Units', 'plughaus-property'),
-                'not_found' => __('No units found', 'plughaus-property'),
-                'not_found_in_trash' => __('No units found in trash', 'plughaus-property'),
-                'menu_name' => __('Units', 'plughaus-property'),
+                'name' => __('Units', 'vireo-property'),
+                'singular_name' => __('Unit', 'vireo-property'),
+                'add_new' => __('Add Unit', 'vireo-property'),
+                'add_new_item' => __('Add New Unit', 'vireo-property'),
+                'edit_item' => __('Edit Unit', 'vireo-property'),
+                'new_item' => __('New Unit', 'vireo-property'),
+                'view_item' => __('View Unit', 'vireo-property'),
+                'search_items' => __('Search Units', 'vireo-property'),
+                'not_found' => __('No units found', 'vireo-property'),
+                'not_found_in_trash' => __('No units found in trash', 'vireo-property'),
+                'menu_name' => __('Units', 'vireo-property')
             ),
             'public' => true,
             'show_ui' => true,
@@ -75,20 +78,20 @@ class PHPM_Post_Types {
             'menu_icon' => 'dashicons-admin-home',
         ));
         
-        // Tenants Post Type
-        register_post_type('phpm_tenant', array(
+        // Tenants
+        register_post_type('vpm_tenant', array(
             'labels' => array(
-                'name' => __('Tenants', 'plughaus-property'),
-                'singular_name' => __('Tenant', 'plughaus-property'),
-                'add_new' => __('Add Tenant', 'plughaus-property'),
-                'add_new_item' => __('Add New Tenant', 'plughaus-property'),
-                'edit_item' => __('Edit Tenant', 'plughaus-property'),
-                'new_item' => __('New Tenant', 'plughaus-property'),
-                'view_item' => __('View Tenant', 'plughaus-property'),
-                'search_items' => __('Search Tenants', 'plughaus-property'),
-                'not_found' => __('No tenants found', 'plughaus-property'),
-                'not_found_in_trash' => __('No tenants found in trash', 'plughaus-property'),
-                'menu_name' => __('Tenants', 'plughaus-property'),
+                'name' => __('Tenants', 'vireo-property'),
+                'singular_name' => __('Tenant', 'vireo-property'),
+                'add_new' => __('Add Tenant', 'vireo-property'),
+                'add_new_item' => __('Add New Tenant', 'vireo-property'),
+                'edit_item' => __('Edit Tenant', 'vireo-property'),
+                'new_item' => __('New Tenant', 'vireo-property'),
+                'view_item' => __('View Tenant', 'vireo-property'),
+                'search_items' => __('Search Tenants', 'vireo-property'),
+                'not_found' => __('No tenants found', 'vireo-property'),
+                'not_found_in_trash' => __('No tenants found in trash', 'vireo-property'),
+                'menu_name' => __('Tenants', 'vireo-property')
             ),
             'public' => false,
             'show_ui' => true,
@@ -102,20 +105,20 @@ class PHPM_Post_Types {
             'menu_icon' => 'dashicons-groups',
         ));
         
-        // Leases Post Type
-        register_post_type('phpm_lease', array(
+        // Leases
+        register_post_type('vpm_lease', array(
             'labels' => array(
-                'name' => __('Leases', 'plughaus-property'),
-                'singular_name' => __('Lease', 'plughaus-property'),
-                'add_new' => __('Add Lease', 'plughaus-property'),
-                'add_new_item' => __('Add New Lease', 'plughaus-property'),
-                'edit_item' => __('Edit Lease', 'plughaus-property'),
-                'new_item' => __('New Lease', 'plughaus-property'),
-                'view_item' => __('View Lease', 'plughaus-property'),
-                'search_items' => __('Search Leases', 'plughaus-property'),
-                'not_found' => __('No leases found', 'plughaus-property'),
-                'not_found_in_trash' => __('No leases found in trash', 'plughaus-property'),
-                'menu_name' => __('Leases', 'plughaus-property'),
+                'name' => __('Leases', 'vireo-property'),
+                'singular_name' => __('Lease', 'vireo-property'),
+                'add_new' => __('Add Lease', 'vireo-property'),
+                'add_new_item' => __('Add New Lease', 'vireo-property'),
+                'edit_item' => __('Edit Lease', 'vireo-property'),
+                'new_item' => __('New Lease', 'vireo-property'),
+                'view_item' => __('View Lease', 'vireo-property'),
+                'search_items' => __('Search Leases', 'vireo-property'),
+                'not_found' => __('No leases found', 'vireo-property'),
+                'not_found_in_trash' => __('No leases found in trash', 'vireo-property'),
+                'menu_name' => __('Leases', 'vireo-property')
             ),
             'public' => false,
             'show_ui' => true,
@@ -129,20 +132,20 @@ class PHPM_Post_Types {
             'menu_icon' => 'dashicons-media-text',
         ));
         
-        // Maintenance Requests Post Type
-        register_post_type('phpm_maintenance', array(
+        // Maintenance Requests
+        register_post_type('vpm_maintenance', array(
             'labels' => array(
-                'name' => __('Maintenance Requests', 'plughaus-property'),
-                'singular_name' => __('Maintenance Request', 'plughaus-property'),
-                'add_new' => __('Add Request', 'plughaus-property'),
-                'add_new_item' => __('Add New Request', 'plughaus-property'),
-                'edit_item' => __('Edit Request', 'plughaus-property'),
-                'new_item' => __('New Request', 'plughaus-property'),
-                'view_item' => __('View Request', 'plughaus-property'),
-                'search_items' => __('Search Requests', 'plughaus-property'),
-                'not_found' => __('No requests found', 'plughaus-property'),
-                'not_found_in_trash' => __('No requests found in trash', 'plughaus-property'),
-                'menu_name' => __('Maintenance', 'plughaus-property'),
+                'name' => __('Maintenance Requests', 'vireo-property'),
+                'singular_name' => __('Maintenance Request', 'vireo-property'),
+                'add_new' => __('Add Request', 'vireo-property'),
+                'add_new_item' => __('Add New Request', 'vireo-property'),
+                'edit_item' => __('Edit Request', 'vireo-property'),
+                'new_item' => __('New Request', 'vireo-property'),
+                'view_item' => __('View Request', 'vireo-property'),
+                'search_items' => __('Search Requests', 'vireo-property'),
+                'not_found' => __('No requests found', 'vireo-property'),
+                'not_found_in_trash' => __('No requests found in trash', 'vireo-property'),
+                'menu_name' => __('Maintenance', 'vireo-property')
             ),
             'public' => false,
             'show_ui' => true,
@@ -163,64 +166,64 @@ class PHPM_Post_Types {
     public static function register_post_statuses() {
         // Property statuses
         register_post_status('available', array(
-            'label' => __('Available', 'plughaus-property'),
+            'label' => __('Available', 'vireo-property'),
             'public' => true,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
-            'label_count' => _n_noop('Available <span class="count">(%s)</span>', 'Available <span class="count">(%s)</span>', 'plughaus-property'),
+            'label_count' => _n_noop('Available <span class="count">(%s)</span>', 'Available <span class="count">(%s)</span>', 'vireo-property'),
         ));
         
         register_post_status('occupied', array(
-            'label' => __('Occupied', 'plughaus-property'),
+            'label' => __('Occupied', 'vireo-property'),
             'public' => true,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
-            'label_count' => _n_noop('Occupied <span class="count">(%s)</span>', 'Occupied <span class="count">(%s)</span>', 'plughaus-property'),
+            'label_count' => _n_noop('Occupied <span class="count">(%s)</span>', 'Occupied <span class="count">(%s)</span>', 'vireo-property'),
         ));
         
         // Lease statuses
         register_post_status('active', array(
-            'label' => __('Active', 'plughaus-property'),
+            'label' => __('Active', 'vireo-property'),
             'public' => true,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
-            'label_count' => _n_noop('Active <span class="count">(%s)</span>', 'Active <span class="count">(%s)</span>', 'plughaus-property'),
+            'label_count' => _n_noop('Active <span class="count">(%s)</span>', 'Active <span class="count">(%s)</span>', 'vireo-property'),
         ));
         
         register_post_status('expired', array(
-            'label' => __('Expired', 'plughaus-property'),
+            'label' => __('Expired', 'vireo-property'),
             'public' => true,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
-            'label_count' => _n_noop('Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'plughaus-property'),
+            'label_count' => _n_noop('Expired <span class="count">(%s)</span>', 'Expired <span class="count">(%s)</span>', 'vireo-property'),
         ));
         
         // Maintenance statuses
         register_post_status('pending_review', array(
-            'label' => __('Pending Review', 'plughaus-property'),
+            'label' => __('Pending Review', 'vireo-property'),
             'public' => true,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
-            'label_count' => _n_noop('Pending Review <span class="count">(%s)</span>', 'Pending Review <span class="count">(%s)</span>', 'plughaus-property'),
+            'label_count' => _n_noop('Pending Review <span class="count">(%s)</span>', 'Pending Review <span class="count">(%s)</span>', 'vireo-property'),
         ));
         
         register_post_status('in_progress', array(
-            'label' => __('In Progress', 'plughaus-property'),
+            'label' => __('In Progress', 'vireo-property'),
             'public' => true,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
-            'label_count' => _n_noop('In Progress <span class="count">(%s)</span>', 'In Progress <span class="count">(%s)</span>', 'plughaus-property'),
+            'label_count' => _n_noop('In Progress <span class="count">(%s)</span>', 'In Progress <span class="count">(%s)</span>', 'vireo-property'),
         ));
         
         register_post_status('completed', array(
-            'label' => __('Completed', 'plughaus-property'),
+            'label' => __('Completed', 'vireo-property'),
             'public' => true,
             'show_in_admin_all_list' => true,
             'show_in_admin_status_list' => true,
-            'label_count' => _n_noop('Completed <span class="count">(%s)</span>', 'Completed <span class="count">(%s)</span>', 'plughaus-property'),
+            'label_count' => _n_noop('Completed <span class="count">(%s)</span>', 'Completed <span class="count">(%s)</span>', 'vireo-property'),
         ));
     }
 }
 
 // Initialize post types
-PHPM_Post_Types::init();
+Post_Types::init();

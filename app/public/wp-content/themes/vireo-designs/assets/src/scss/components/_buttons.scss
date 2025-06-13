@@ -1,0 +1,101 @@
+/**
+ * Button Components
+ */
+
+.btn {
+  @include btn-base;
+  
+  // Primary button
+  &.btn-primary,
+  &--primary {
+    @include btn-primary;
+  }
+  
+  // Secondary button
+  &.btn-secondary,
+  &--secondary {
+    @include btn-secondary;
+  }
+  
+  // Ghost button
+  &.btn-ghost,
+  &--ghost {
+    @include btn-ghost;
+  }
+  
+  // Button sizes
+  &.btn-sm,
+  &--sm {
+    padding: $spacing-2 $spacing-4;
+    font-size: $font-size-sm;
+  }
+  
+  &.btn-lg,
+  &--lg {
+    padding: $spacing-4 $spacing-8;
+    font-size: $font-size-lg;
+  }
+  
+  // Button with icon
+  .icon {
+    margin-right: $spacing-2;
+    
+    &:last-child {
+      margin-right: 0;
+      margin-left: $spacing-2;
+    }
+  }
+  
+  // Loading state
+  &.loading {
+    position: relative;
+    color: transparent !important;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+// Button group
+.btn-group {
+  display: inline-flex;
+  
+  .btn {
+    border-radius: 0;
+    
+    &:first-child {
+      border-top-left-radius: $btn-border-radius;
+      border-bottom-left-radius: $btn-border-radius;
+    }
+    
+    &:last-child {
+      border-top-right-radius: $btn-border-radius;
+      border-bottom-right-radius: $btn-border-radius;
+    }
+    
+    &:not(:last-child) {
+      border-right: none;
+    }
+    
+    &:focus {
+      z-index: 1;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

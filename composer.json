@@ -1,0 +1,68 @@
+{
+  "name": "vireo/designs-monorepo",
+  "description": "Vireo Designs - WordPress Plugin Development Studio",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Vireo Designs",
+      "email": "dev@vireodesigns.com",
+      "homepage": "https://vireodesigns.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=7.4",
+    "composer/installers": "^2.0",
+    "wp-coding-standards/wpcs": "^3.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.0",
+    "squizlabs/php_codesniffer": "^3.7",
+    "wp-cli/wp-cli-bundle": "^2.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Vireo\\": "packages/shared/src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Vireo\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit",
+    "test:watch": "phpunit --watch",
+    "phpcs": "phpcs",
+    "phpcbf": "phpcbf",
+    "phpmd": "phpmd app/public/wp-content/plugins text cleancode,codesize,controversial,design,naming,unusedcode",
+    "php-cs-fixer": "php-cs-fixer fix --dry-run --diff",
+    "php-cs-fixer:fix": "php-cs-fixer fix",
+    "quality": [
+      "@phpcs",
+      "@phpmd",
+      "@php-cs-fixer"
+    ],
+    "setup-dev": [
+      "composer install",
+      "npm install"
+    ]
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "extra": {
+    "installer-paths": {
+      "app/public/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "app/public/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+    }
+  }
+}

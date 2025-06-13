@@ -1,0 +1,16 @@
+<svg width="100" height="80" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Main bird body -->
+  <path d="M20 25 C20 15, 30 10, 45 15 C55 8, 65 10, 70 18 C75 20, 80 25, 82 35 C85 45, 80 55, 75 60 C70 65, 65 67, 60 68 L58 70 C55 72, 50 70, 45 68 L40 72 C35 75, 30 73, 28 70 C25 65, 22 55, 20 45 Z" fill="currentColor"/>
+  
+  <!-- Wing detail -->
+  <path d="M45 35 C50 38, 60 42, 65 50 C62 48, 55 45, 50 42 C48 40, 46 37, 45 35 Z" fill="currentColor" opacity="0.3"/>
+  
+  <!-- Eye -->
+  <circle cx="35" cy="22" r="2" fill="white"/>
+  
+  <!-- Beak -->
+  <path d="M20 25 L15 24 L20 28 Z" fill="currentColor"/>
+  
+  <!-- Feet -->
+  <path d="M40 72 L38 78 M42 72 L44 78 M58 70 L56 76 M60 70 L62 76" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

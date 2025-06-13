@@ -1,0 +1,225 @@
+/**
+ * Header layout styles for Vireo Designs
+ */
+
+.site-header {
+  background: $bg-primary;
+  border-bottom: 1px solid $gray-200;
+  position: sticky;
+  top: 0;
+  z-index: $z-index-header;
+  
+  .container {
+    @include container;
+    padding-top: $spacing-4;
+    padding-bottom: $spacing-4;
+  }
+  
+  .header-content {
+    @include flex-between;
+    align-items: center;
+    width: 100%;
+    gap: $spacing-6;
+  }
+}
+
+.site-branding {
+  .site-logo {
+    @include flex-center;
+    gap: $spacing-3;
+    text-decoration: none;
+    
+    img {
+      height: 32px;
+      width: auto;
+    }
+    
+    .logo-text {
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $text-primary;
+      text-decoration: none;
+    }
+  }
+}
+
+.main-navigation {
+  flex: 1;
+  
+  .nav-menu {
+    @include list-reset;
+    @include flex-center;
+    gap: $spacing-6;
+    
+    @include respond-to(tablet-down) {
+      display: none;
+    }
+    
+    li {
+      position: relative;
+      
+      a {
+        color: $text-primary;
+        text-decoration: none;
+        font-weight: $font-weight-medium;
+        padding: $spacing-2 $spacing-3;
+        border-radius: $radius-md;
+        transition: all $transition-fast;
+        
+        &:hover {
+          background-color: rgba($vireo-primary, 0.1);
+          color: $vireo-primary;
+        }
+      }
+      
+      &.dropdown {
+        .dropdown-menu {
+          @include list-reset;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: $bg-primary;
+          border: 1px solid $gray-200;
+          border-radius: $radius-md;
+          box-shadow: $shadow-lg;
+          padding: $spacing-2;
+          min-width: 200px;
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-10px);
+          transition: all $transition-base;
+          z-index: 100;
+          
+          li {
+            a {
+              display: block;
+              padding: $spacing-3 $spacing-4;
+              color: $text-secondary;
+              border-radius: $radius-base;
+              
+              &:hover {
+                background-color: $gray-50;
+                color: $vireo-primary;
+              }
+            }
+          }
+        }
+        
+        &:hover .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}
+
+.header-actions {
+  @include flex-center;
+  gap: $spacing-4;
+  
+  .nav-link {
+    color: $text-secondary;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    
+    &:hover {
+      color: $vireo-primary;
+    }
+  }
+}
+
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $spacing-2;
+  border-radius: $radius-md;
+  
+  @include respond-to(tablet-down) {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  
+  .hamburger {
+    width: 20px;
+    height: 2px;
+    background: $text-primary;
+    transition: all $transition-fast;
+    border-radius: 1px;
+  }
+  
+  &[aria-expanded="true"] {
+    .hamburger:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .hamburger:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+  }
+}
+
+// Mobile responsive adjustments
+@include respond-to(tablet-down) {
+  .site-header {
+    .header-content {
+      justify-content: space-between;
+    }
+    
+    .main-navigation {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: $bg-primary;
+      border-top: 1px solid $gray-200;
+      box-shadow: $shadow-lg;
+      z-index: 50;
+      
+      &.is-open {
+        display: block;
+      }
+      
+      .nav-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: $spacing-4;
+        
+        li {
+          width: 100%;
+          
+          a {
+            display: block;
+            padding: $spacing-3 $spacing-4;
+            border-radius: $radius-base;
+          }
+          
+          &.dropdown .dropdown-menu {
+            position: static;
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+            box-shadow: none;
+            border: none;
+            background: $gray-50;
+            margin-top: $spacing-2;
+          }
+        }
+      }
+    }
+    
+    .header-actions {
+      display: none;
+    }
+  }
+}

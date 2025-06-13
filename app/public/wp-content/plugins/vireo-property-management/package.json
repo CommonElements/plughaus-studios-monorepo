@@ -1,0 +1,39 @@
+{
+  "name": "plughaus-property-management",
+  "version": "1.0.0",
+  "description": "Build tools for PlugHaus Property Management plugin",
+  "author": "PlugHaus Studios",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "build": "wp-scripts build",
+    "build:free": "node build-scripts/build-free.js",
+    "build:pro": "node build-scripts/build-pro.js",
+    "check-engines": "wp-scripts check-engines",
+    "check-licenses": "wp-scripts check-licenses",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "lint:md:docs": "wp-scripts lint-md-docs",
+    "lint:pkg-json": "wp-scripts lint-pkg-json",
+    "packages-update": "wp-scripts packages-update",
+    "plugin-zip": "wp-scripts plugin-zip",
+    "start": "wp-scripts start",
+    "test:e2e": "wp-scripts test-e2e",
+    "test:unit": "wp-scripts test-unit-js"
+  },
+  "devDependencies": {
+    "@wordpress/api-fetch": "^6.34.0",
+    "@wordpress/block-editor": "^12.5.0",
+    "@wordpress/blocks": "^12.14.0",
+    "@wordpress/components": "^25.3.0",
+    "@wordpress/data": "^9.7.0",
+    "@wordpress/element": "^5.14.0",
+    "@wordpress/i18n": "^4.31.0",
+    "@wordpress/scripts": "^26.8.0",
+    "archiver": "^7.0.1"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.0",
+    "react-chartjs-2": "^5.2.0"
+  }
+}

@@ -1,0 +1,320 @@
+/**
+ * Responsive utilities for Vireo Designs
+ * 
+ * Responsive classes and utility helpers
+ */
+
+// Show/hide utilities
+.show {
+  display: block !important;
+}
+
+.hide {
+  display: none !important;
+}
+
+// Responsive visibility utilities
+@each $breakpoint in map-keys($breakpoints) {
+  @include respond-to($breakpoint) {
+    .show-#{$breakpoint} {
+      display: block !important;
+    }
+    
+    .hide-#{$breakpoint} {
+      display: none !important;
+    }
+    
+    .show-#{$breakpoint}-up {
+      display: block !important;
+    }
+    
+    .hide-#{$breakpoint}-up {
+      display: none !important;
+    }
+  }
+  
+  @include respond-to(#{$breakpoint}-down) {
+    .show-#{$breakpoint}-down {
+      display: block !important;
+    }
+    
+    .hide-#{$breakpoint}-down {
+      display: none !important;
+    }
+  }
+}
+
+// Responsive text alignment
+.text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+.text-justify { text-align: justify !important; }
+
+@each $breakpoint in map-keys($breakpoints) {
+  @include respond-to($breakpoint) {
+    .text-#{$breakpoint}-left { text-align: left !important; }
+    .text-#{$breakpoint}-center { text-align: center !important; }
+    .text-#{$breakpoint}-right { text-align: right !important; }
+    .text-#{$breakpoint}-justify { text-align: justify !important; }
+  }
+}
+
+// Responsive spacing utilities
+$spacing-values: (
+  0: 0,
+  1: $spacing-1,
+  2: $spacing-2,
+  3: $spacing-3,
+  4: $spacing-4,
+  5: $spacing-5,
+  6: $spacing-6,
+  8: $spacing-8,
+  10: $spacing-10,
+  12: $spacing-12,
+  16: $spacing-16,
+  20: $spacing-20,
+  24: $spacing-24
+);
+
+$spacing-properties: (
+  m: margin,
+  mt: margin-top,
+  mr: margin-right,
+  mb: margin-bottom,
+  ml: margin-left,
+  mx: (margin-left, margin-right),
+  my: (margin-top, margin-bottom),
+  p: padding,
+  pt: padding-top,
+  pr: padding-right,
+  pb: padding-bottom,
+  pl: padding-left,
+  px: (padding-left, padding-right),
+  py: (padding-top, padding-bottom)
+);
+
+// Generate spacing utilities
+@each $prop-key, $prop-value in $spacing-properties {
+  @each $size-key, $size-value in $spacing-values {
+    .#{$prop-key}-#{$size-key} {
+      @if type-of($prop-value) == list {
+        @each $property in $prop-value {
+          #{$property}: #{$size-value} !important;
+        }
+      } @else {
+        #{$prop-value}: #{$size-value} !important;
+      }
+    }
+  }
+}
+
+// Responsive spacing utilities
+@each $breakpoint in map-keys($breakpoints) {
+  @include respond-to($breakpoint) {
+    @each $prop-key, $prop-value in $spacing-properties {
+      @each $size-key, $size-value in $spacing-values {
+        .#{$prop-key}-#{$breakpoint}-#{$size-key} {
+          @if type-of($prop-value) == list {
+            @each $property in $prop-value {
+              #{$property}: #{$size-value} !important;
+            }
+          } @else {
+            #{$prop-value}: #{$size-value} !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive flex utilities
+.d-flex { display: flex !important; }
+.d-inline-flex { display: inline-flex !important; }
+.d-block { display: block !important; }
+.d-inline-block { display: inline-block !important; }
+.d-inline { display: inline !important; }
+.d-none { display: none !important; }
+
+@each $breakpoint in map-keys($breakpoints) {
+  @include respond-to($breakpoint) {
+    .d-#{$breakpoint}-flex { display: flex !important; }
+    .d-#{$breakpoint}-inline-flex { display: inline-flex !important; }
+    .d-#{$breakpoint}-block { display: block !important; }
+    .d-#{$breakpoint}-inline-block { display: inline-block !important; }
+    .d-#{$breakpoint}-inline { display: inline !important; }
+    .d-#{$breakpoint}-none { display: none !important; }
+  }
+}
+
+// Flex direction
+.flex-row { flex-direction: row !important; }
+.flex-row-reverse { flex-direction: row-reverse !important; }
+.flex-column { flex-direction: column !important; }
+.flex-column-reverse { flex-direction: column-reverse !important; }
+
+@each $breakpoint in map-keys($breakpoints) {
+  @include respond-to($breakpoint) {
+    .flex-#{$breakpoint}-row { flex-direction: row !important; }
+    .flex-#{$breakpoint}-row-reverse { flex-direction: row-reverse !important; }
+    .flex-#{$breakpoint}-column { flex-direction: column !important; }
+    .flex-#{$breakpoint}-column-reverse { flex-direction: column-reverse !important; }
+  }
+}
+
+// Flex wrap
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
+.flex-wrap-reverse { flex-wrap: wrap-reverse !important; }
+
+// Justify content
+.justify-start { justify-content: flex-start !important; }
+.justify-end { justify-content: flex-end !important; }
+.justify-center { justify-content: center !important; }
+.justify-between { justify-content: space-between !important; }
+.justify-around { justify-content: space-around !important; }
+.justify-evenly { justify-content: space-evenly !important; }
+
+@each $breakpoint in map-keys($breakpoints) {
+  @include respond-to($breakpoint) {
+    .justify-#{$breakpoint}-start { justify-content: flex-start !important; }
+    .justify-#{$breakpoint}-end { justify-content: flex-end !important; }
+    .justify-#{$breakpoint}-center { justify-content: center !important; }
+    .justify-#{$breakpoint}-between { justify-content: space-between !important; }
+    .justify-#{$breakpoint}-around { justify-content: space-around !important; }
+    .justify-#{$breakpoint}-evenly { justify-content: space-evenly !important; }
+  }
+}
+
+// Align items
+.items-start { align-items: flex-start !important; }
+.items-end { align-items: flex-end !important; }
+.items-center { align-items: center !important; }
+.items-baseline { align-items: baseline !important; }
+.items-stretch { align-items: stretch !important; }
+
+@each $breakpoint in map-keys($breakpoints) {
+  @include respond-to($breakpoint) {
+    .items-#{$breakpoint}-start { align-items: flex-start !important; }
+    .items-#{$breakpoint}-end { align-items: flex-end !important; }
+    .items-#{$breakpoint}-center { align-items: center !important; }
+    .items-#{$breakpoint}-baseline { align-items: baseline !important; }
+    .items-#{$breakpoint}-stretch { align-items: stretch !important; }
+  }
+}
+
+// Gap utilities
+$gap-values: (
+  0: 0,
+  1: $spacing-1,
+  2: $spacing-2,
+  3: $spacing-3,
+  4: $spacing-4,
+  5: $spacing-5,
+  6: $spacing-6,
+  8: $spacing-8,
+  10: $spacing-10,
+  12: $spacing-12
+);
+
+@each $size-key, $size-value in $gap-values {
+  .gap-#{$size-key} { gap: #{$size-value} !important; }
+  .gap-x-#{$size-key} { column-gap: #{$size-value} !important; }
+  .gap-y-#{$size-key} { row-gap: #{$size-value} !important; }
+}
+
+@each $breakpoint in map-keys($breakpoints) {
+  @include respond-to($breakpoint) {
+    @each $size-key, $size-value in $gap-values {
+      .gap-#{$breakpoint}-#{$size-key} { gap: #{$size-value} !important; }
+      .gap-x-#{$breakpoint}-#{$size-key} { column-gap: #{$size-value} !important; }
+      .gap-y-#{$breakpoint}-#{$size-key} { row-gap: #{$size-value} !important; }
+    }
+  }
+}
+
+// Grid utilities
+.grid { display: grid !important; }
+
+@for $i from 1 through 12 {
+  .grid-cols-#{$i} { grid-template-columns: repeat(#{$i}, 1fr) !important; }
+}
+
+@each $breakpoint in map-keys($breakpoints) {
+  @include respond-to($breakpoint) {
+    .grid-#{$breakpoint} { display: grid !important; }
+    
+    @for $i from 1 through 12 {
+      .grid-#{$breakpoint}-cols-#{$i} { grid-template-columns: repeat(#{$i}, 1fr) !important; }
+    }
+  }
+}
+
+// Width utilities
+.w-auto { width: auto !important; }
+.w-full { width: 100% !important; }
+.w-screen { width: 100vw !important; }
+
+$width-values: (
+  1\\/4: 25%,
+  1\\/3: 33.333333%,
+  1\\/2: 50%,
+  2\\/3: 66.666667%,
+  3\\/4: 75%
+);
+
+@each $key, $value in $width-values {
+  .w-#{$key} { width: #{$value} !important; }
+}
+
+// Height utilities
+.h-auto { height: auto !important; }
+.h-full { height: 100% !important; }
+.h-screen { height: 100vh !important; }
+
+// Position utilities
+.relative { position: relative !important; }
+.absolute { position: absolute !important; }
+.fixed { position: fixed !important; }
+.sticky { position: sticky !important; }
+.static { position: static !important; }
+
+// Overflow utilities
+.overflow-auto { overflow: auto !important; }
+.overflow-hidden { overflow: hidden !important; }
+.overflow-visible { overflow: visible !important; }
+.overflow-scroll { overflow: scroll !important; }
+
+.overflow-x-auto { overflow-x: auto !important; }
+.overflow-x-hidden { overflow-x: hidden !important; }
+.overflow-x-visible { overflow-x: visible !important; }
+.overflow-x-scroll { overflow-x: scroll !important; }
+
+.overflow-y-auto { overflow-y: auto !important; }
+.overflow-y-hidden { overflow-y: hidden !important; }
+.overflow-y-visible { overflow-y: visible !important; }
+.overflow-y-scroll { overflow-y: scroll !important; }
+
+// Z-index utilities
+.z-auto { z-index: auto !important; }
+.z-0 { z-index: 0 !important; }
+.z-10 { z-index: 10 !important; }
+.z-20 { z-index: 20 !important; }
+.z-30 { z-index: 30 !important; }
+.z-40 { z-index: 40 !important; }
+.z-50 { z-index: 50 !important; }
+
+// Container responsive utility
+.container-responsive {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+  
+  @include respond-to(tablet) {
+    padding: 0 $container-padding-tablet;
+  }
+  
+  @include respond-to(mobile) {
+    padding: 0 $container-padding-mobile;
+  }
+}

@@ -1,22 +1,22 @@
 <?php
 /**
- * Plugin Name: PlugHaus Property Management
- * Plugin URI: https://plughausstudios.com/plugins/property-management
- * Description: A lightweight, powerful property management solution for WordPress. Manage properties, tenants, leases, and maintenance with ease.
+ * Plugin Name: Vireo Property Management
+ * Plugin URI: https://vireodesigns.com/plugins/property-management
+ * Description: Professional property management solution for WordPress
  * Version: 1.0.0
- * Author: PlugHaus Studios
- * Author URI: https://plughausstudios.com
+ * Author: Vireo Designs
+ * Author URI: https://vireodesigns.com
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: plughaus-property
+ * Text Domain: vireo-property
  * Domain Path: /languages
- * Requires at least: 5.8
- * Requires PHP: 7.4
+ *
+ * @package Vireo_Property_Management
  */
 
-// Exit if accessed directly
-if (!defined('ABSPATH')) {
-    exit;
+// If this file is called directly, abort.
+if (!defined('WPINC')) {
+    die;
 }
 
 // Define plugin constants
@@ -28,9 +28,11 @@ define('PHPM_CORE_DIR', PHPM_PLUGIN_DIR . 'core/');
 define('PHPM_PRO_DIR', PHPM_PLUGIN_DIR . 'pro/');
 
 /**
- * Main PlugHaus Property Management Class
+ * Main Vireo Property Management Class
+ *
+ * @since 1.0.0
  */
-class PlugHaus_Property_Management {
+class Vireo_Property_Management {
     
     /**
      * Instance of this class
@@ -53,17 +55,18 @@ class PlugHaus_Property_Management {
     }
     
     /**
-     * Constructor
+     * Initialize the plugin
      */
-    private function __construct() {
-        // Check pro license status
-        $this->is_pro = $this->check_pro_license();
-        
+    public function __construct() {
+        $this->define_constants();
         $this->load_dependencies();
         $this->set_locale();
         $this->define_admin_hooks();
         $this->define_public_hooks();
         $this->define_api_hooks();
+        
+        // Check pro license status
+        $this->is_pro = $this->check_pro_license();
         
         // Load pro features if licensed
         if ($this->is_pro) {
@@ -126,16 +129,14 @@ class PlugHaus_Property_Management {
     }
     
     /**
-     * Set plugin locale for translations
+     * Load the plugin text domain for translation.
      */
-    private function set_locale() {
-        add_action('plugins_loaded', function() {
-            load_plugin_textdomain(
-                'plughaus-property',
-                false,
-                dirname(PHPM_PLUGIN_BASE) . '/core/languages/'
-            );
-        });
+    public function set_locale() {
+        load_plugin_textdomain(
+            'vireo-property',
+            false,
+            dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
+        );
     }
     
     /**
@@ -206,10 +207,10 @@ function phpm_deactivate() {
 register_deactivation_hook(__FILE__, 'phpm_deactivate');
 
 /**
- * Initialize and run the plugin
+ * Begins execution of the plugin.
  */
-function run_plughaus_property_management() {
-    $plugin = PlugHaus_Property_Management::get_instance();
+function run_vireo_property_management() {
+    $plugin = Vireo_Property_Management::get_instance();
     $plugin->run();
 }
-run_plughaus_property_management();
+run_vireo_property_management();

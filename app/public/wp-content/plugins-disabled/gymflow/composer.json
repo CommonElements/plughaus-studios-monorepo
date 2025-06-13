@@ -1,0 +1,91 @@
+{
+    "name": "vireodesigns/gymflow",
+    "description": "Professional fitness studio and gym management plugin for WordPress",
+    "version": "1.0.0",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://vireodesigns.com/plugins/gymflow",
+    "authors": [
+        {
+            "name": "Vireo Designs",
+            "email": "support@vireodesigns.com",
+            "homepage": "https://vireodesigns.com"
+        }
+    ],
+    "keywords": [
+        "wordpress",
+        "plugin",
+        "fitness",
+        "gym",
+        "studio",
+        "booking",
+        "membership",
+        "classes",
+        "trainers",
+        "equipment"
+    ],
+    "require": {
+        "php": ">=7.4",
+        "composer/installers": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "wp-coding-standards/wpcs": "^2.3",
+        "phpcompatibility/phpcompatibility-wp": "*",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+        "roave/security-advisories": "dev-latest"
+    },
+    "autoload": {
+        "psr-4": {
+            "GymFlow\\": "core/includes/",
+            "GymFlow\\Admin\\": "core/includes/admin/",
+            "GymFlow\\Core\\": "core/includes/core/",
+            "GymFlow\\Public\\": "core/includes/public/",
+            "GymFlow\\API\\": "core/includes/api/"
+        },
+        "files": [
+            "core/includes/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "GymFlow\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "cs": "phpcs",
+        "cbf": "phpcbf",
+        "lint": "find . -name '*.php' ! -path './vendor/*' ! -path './node_modules/*' -exec php -l {} \\;",
+        "post-install-cmd": [
+            "bash build-scripts/setup-dev.sh"
+        ],
+        "post-update-cmd": [
+            "bash build-scripts/setup-dev.sh"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "extra": {
+        "installer-name": "gymflow",
+        "wordpress-install-dir": "wp-content/plugins/gymflow"
+    },
+    "support": {
+        "email": "support@vireodesigns.com",
+        "issues": "https://github.com/vireodesigns/gymflow/issues",
+        "forum": "https://wordpress.org/support/plugin/gymflow",
+        "docs": "https://vireodesigns.com/docs/gymflow"
+    },
+    "funding": [
+        {
+            "type": "custom",
+            "url": "https://vireodesigns.com/pricing"
+        }
+    ]
+}

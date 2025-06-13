@@ -1,0 +1,358 @@
+/**
+ * Import/Export Admin Styles
+ */
+
+.phmp-import-export-container .card {
+    max-width: none;
+    margin-bottom: 20px;
+}
+
+.phmp-import-export-container .card h2 {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e2e4e7;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.phmp-import-export-container .card h2 .dashicons {
+    margin-right: 8px;
+    color: #0073aa;
+}
+
+/* Export Section */
+.phmp-export-section .form-table th {
+    width: 150px;
+}
+
+.export-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.export-filters label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+}
+
+.export-filters input,
+.export-filters select {
+    margin-top: 5px;
+}
+
+.filter-input {
+    min-width: 150px;
+}
+
+/* Import Section */
+.import-templates {
+    background: #f8f9fa;
+    border: 1px solid #e2e4e7;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.import-templates h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.template-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.template-buttons .button {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+}
+
+.template-buttons .dashicons {
+    margin-right: 6px;
+}
+
+/* Guidelines Section */
+.guidelines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.guideline-item {
+    background: #f8f9fa;
+    border: 1px solid #e2e4e7;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.guideline-item h3 {
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    color: #1e293b;
+}
+
+.guideline-item h3 .dashicons {
+    margin-right: 8px;
+    color: #0073aa;
+}
+
+.guideline-item p {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* Examples Section */
+.format-examples {
+    margin-top: 15px;
+}
+
+.example-section {
+    margin-bottom: 25px;
+}
+
+.example-section h3 {
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.csv-example {
+    display: block;
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+/* Results Section */
+.phmp-results .card {
+    border-left: 4px solid #00a32a;
+}
+
+.import-summary {
+    padding: 20px 0;
+}
+
+.import-summary h3 {
+    color: #00a32a;
+    margin-top: 0;
+}
+
+.data-type-result {
+    background: #f8f9fa;
+    border: 1px solid #e2e4e7;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.data-type-result h4 {
+    margin: 0 0 10px 0;
+    color: #1e293b;
+}
+
+.import-errors {
+    background: #fcf2f2;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.import-errors h4 {
+    color: #721c24;
+    margin: 0 0 10px 0;
+}
+
+.import-errors ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.import-errors li {
+    color: #721c24;
+    margin-bottom: 5px;
+}
+
+.total-summary {
+    background: #e7f3ff;
+    border: 1px solid #b8daff;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.total-summary p {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Progress indicator */
+#import-export-progress {
+    margin: 20px 0;
+}
+
+#import-export-progress .spinner {
+    visibility: visible;
+}
+
+/* Form styling */
+.phmp-export-form,
+.phmp-import-form {
+    margin-top: 20px;
+}
+
+.phmp-export-form .button,
+.phmp-import-form .button {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    height: auto;
+    padding: 12px 24px;
+}
+
+.phmp-export-form .button .dashicons,
+.phmp-import-form .button .dashicons {
+    margin-right: 8px;
+}
+
+/* File input styling */
+#import-file {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .guidelines-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .export-filters {
+        flex-direction: column;
+    }
+    
+    .template-buttons {
+        flex-direction: column;
+    }
+    
+    .template-buttons .button {
+        justify-content: center;
+    }
+    
+    .csv-example {
+        font-size: 12px;
+    }
+}
+
+/* Details/summary styling for errors */
+details {
+    margin-top: 10px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 5px 0;
+}
+
+summary:hover {
+    color: #0073aa;
+}
+
+details[open] summary {
+    margin-bottom: 10px;
+}
+
+/* Loading states */
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Success animations */
+@keyframes successPulse {
+    0% { background-color: #d4edda; }
+    50% { background-color: #c3e6cb; }
+    100% { background-color: #d4edda; }
+}
+
+.notice-success {
+    animation: successPulse 2s ease-in-out;
+}
+
+/* Error styling */
+.import-error-item {
+    background: #fff2f2;
+    border-left: 4px solid #dc3545;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+}
+
+/* Filter row animation */
+.export-filters-row {
+    transition: all 0.3s ease;
+}
+
+/* Card spacing improvements */
+.phmp-import-export-container .card:last-child {
+    margin-bottom: 0;
+}
+
+/* Button group improvements */
+.template-buttons .button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+/* Status indicators */
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.status-indicator.success {
+    background-color: #00a32a;
+}
+
+.status-indicator.error {
+    background-color: #dc3545;
+}
+
+.status-indicator.warning {
+    background-color: #ffc107;
+}
+
+/* Enhanced form table styling */
+.form-table th {
+    vertical-align: top;
+    padding-top: 15px;
+}
+
+.form-table td {
+    padding-top: 10px;
+}
+
+/* File size and type validation feedback */
+.file-validation-error {
+    color: #dc3545;
+    font-weight: 500;
+    margin-top: 5px;
+}

@@ -1,0 +1,52 @@
+{
+    "name": "vireodesigns/equiprent-pro",
+    "description": "Professional equipment rental management system for WordPress",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Vireo Designs",
+            "email": "info@vireodesigns.com",
+            "homepage": "https://vireodesigns.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "composer/installers": "^2.0"
+    },
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^2.3",
+        "phpunit/phpunit": "^9.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+        "phpstan/phpstan": "^1.0",
+        "szepeviktor/phpstan-wordpress": "^1.0"
+    },
+    "scripts": {
+        "phpcs": "phpcs --standard=WordPress core/",
+        "phpcbf": "phpcbf --standard=WordPress core/",
+        "phpstan": "phpstan analyse",
+        "test": "phpunit",
+        "test:unit": "phpunit --testsuite=unit",
+        "test:integration": "phpunit --testsuite=integration"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "installer-name": "equiprent-pro"
+    },
+    "support": {
+        "issues": "https://github.com/vireodesigns/equiprent-pro/issues",
+        "source": "https://github.com/vireodesigns/equiprent-pro",
+        "docs": "https://docs.vireodesigns.com/equiprent-pro"
+    }
+}

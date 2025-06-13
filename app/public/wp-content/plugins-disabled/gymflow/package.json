@@ -1,0 +1,142 @@
+{
+  "name": "gymflow",
+  "version": "1.0.0",
+  "description": "Professional fitness studio and gym management plugin for WordPress",
+  "main": "gymflow.php",
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "node-sass core/assets/scss/admin.scss core/assets/css/admin.css && node-sass core/assets/scss/public.scss core/assets/css/public.css",
+    "build:js": "webpack --mode=production",
+    "watch": "npm run watch:css & npm run watch:js",
+    "watch:css": "node-sass core/assets/scss/admin.scss core/assets/css/admin.css --watch && node-sass core/assets/scss/public.scss core/assets/css/public.css --watch",
+    "watch:js": "webpack --mode=development --watch",
+    "lint": "npm run lint:css && npm run lint:js",
+    "lint:css": "stylelint 'core/assets/scss/**/*.scss'",
+    "lint:js": "eslint 'core/assets/js/**/*.js'",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "npm run watch",
+    "production": "npm run build",
+    "build:free": "node build-scripts/build-free.js",
+    "build:pro": "node build-scripts/build-pro.js",
+    "package": "npm run build && npm run build:free && npm run build:pro",
+    "deploy:free": "node build-scripts/deploy.js --type=free",
+    "deploy:pro": "node build-scripts/deploy.js --type=pro",
+    "setup:dev": "bash build-scripts/setup-dev.sh",
+    "clean": "rimraf dist/ node_modules/.cache/",
+    "format": "prettier --write 'core/assets/js/**/*.js' 'core/assets/scss/**/*.scss'",
+    "validate": "npm run lint && npm run test",
+    "precommit": "npm run validate",
+    "postinstall": "npm run setup:dev"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "fitness",
+    "gym",
+    "studio",
+    "booking",
+    "membership",
+    "classes",
+    "trainers",
+    "equipment",
+    "management"
+  ],
+  "author": {
+    "name": "Vireo Designs",
+    "email": "support@vireodesigns.com",
+    "url": "https://vireodesigns.com"
+  },
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://vireodesigns.com/plugins/gymflow",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vireodesigns/gymflow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vireodesigns/gymflow/issues",
+    "email": "support@vireodesigns.com"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "@wordpress/scripts": "^26.0.0",
+    "archiver": "^6.0.0",
+    "babel-loader": "^9.1.0",
+    "css-loader": "^6.8.0",
+    "eslint": "^8.50.0",
+    "eslint-config-wordpress": "^2.0.0",
+    "fs-extra": "^11.1.0",
+    "jest": "^29.7.0",
+    "mini-css-extract-plugin": "^2.7.0",
+    "node-sass": "^9.0.0",
+    "prettier": "^3.0.0",
+    "rimraf": "^5.0.0",
+    "sass-loader": "^13.3.0",
+    "stylelint": "^15.10.0",
+    "stylelint-config-wordpress": "^17.0.0",
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.0"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.0",
+    "flatpickr": "^4.6.0",
+    "select2": "^4.1.0"
+  },
+  "browserslist": [
+    "extends @wordpress/browserslist-config"
+  ],
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "entry",
+          "corejs": 3
+        }
+      ]
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "wordpress"
+    ],
+    "env": {
+      "browser": true,
+      "jquery": true
+    },
+    "globals": {
+      "wp": "readonly",
+      "gymflow_ajax": "readonly",
+      "gymflowAdmin": "readonly"
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-wordpress",
+    "rules": {
+      "no-descending-specificity": null,
+      "font-weight-notation": null
+    }
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/js/setup.js"
+    ],
+    "testMatch": [
+      "**/tests/js/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "core/assets/js/**/*.js",
+      "!core/assets/js/**/*.min.js"
+    ]
+  },
+  "funding": {
+    "type": "custom",
+    "url": "https://vireodesigns.com/pricing"
+  }
+}

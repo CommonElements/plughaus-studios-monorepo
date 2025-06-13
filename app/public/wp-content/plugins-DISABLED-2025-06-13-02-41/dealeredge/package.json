@@ -1,0 +1,34 @@
+{
+  "name": "dealeredge",
+  "version": "1.0.0",
+  "description": "Complete auto shop and small car dealership management system for WordPress",
+  "main": "dealeredge.php",
+  "scripts": {
+    "build": "echo 'No build process defined yet'",
+    "build:free": "node build-scripts/build-free.js",
+    "dev": "echo 'Development mode'",
+    "watch": "echo 'Watch mode'"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "auto-shop",
+    "dealership",
+    "vehicle-management",
+    "work-orders",
+    "inventory"
+  ],
+  "author": "Vireo Designs",
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://vireodesigns.com/plugins/dealeredge",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vireodesigns/dealeredge"
+  },
+  "bugs": {
+    "url": "https://github.com/vireodesigns/dealeredge/issues"
+  },
+  "devDependencies": {
+    "archiver": "^5.3.1"
+  }
+}

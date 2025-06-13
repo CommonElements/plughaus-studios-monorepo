@@ -1,0 +1,24 @@
+/**
+ * Plugins page styles for Vireo Designs
+ */
+
+.plugins-page {
+  .plugins-grid {
+    @include grid(2, $spacing-8);
+    margin: $spacing-12 0;
+    
+    @include respond-to(mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .plugin-filters {
+    margin-bottom: $spacing-8;
+    @include flex-center;
+    gap: $spacing-4;
+    
+    @include respond-to(mobile) {
+      flex-wrap: wrap;
+    }
+  }
+}

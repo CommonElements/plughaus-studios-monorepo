@@ -1,0 +1,47 @@
+/**
+ * Main stylesheet for Vireo Designs Theme
+ * 
+ * This file imports all the theme styles and compiles them into a single CSS file.
+ * Uses SCSS for better organization and maintainability.
+ */
+
+// Variables and mixins
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'abstracts/functions';
+
+// Base styles
+@import 'base/reset';
+@import 'base/typography';
+
+// Layout components
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/grid';
+@import 'layout/navigation';
+
+// Components
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/forms';
+@import 'components/hero';
+@import 'components/modal';
+@import 'components/tabs';
+
+// Pages
+@import 'pages/home';
+@import 'pages/plugins';
+@import 'pages/about';
+@import 'pages/contact';
+@import 'pages/pricing';
+
+// Vendors/Third-party
+@import 'vendors/woocommerce';
+
+// Professional enhancements
+@import 'enhancements/professional';
+@import 'enhancements/ui-ux';
+
+// Utilities
+@import 'utilities/helpers';
+@import 'utilities/animations';

@@ -1,0 +1,53 @@
+{
+  "name": "equiprent-pro",
+  "version": "1.0.0",
+  "description": "Professional equipment rental management system for WordPress",
+  "main": "equiprent-pro.php",
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "echo 'CSS compilation would go here - using basic CSS for now'",
+    "build:js": "echo 'JavaScript compilation would go here - using basic JS for now'",
+    "build:free": "node build-scripts/build-free.js",
+    "build:pro": "node build-scripts/build-pro.js",
+    "watch": "npm run watch:css && npm run watch:js",
+    "watch:css": "echo 'CSS watching would go here'",
+    "watch:js": "echo 'JavaScript watching would go here'",
+    "lint": "eslint core/assets/js/",
+    "lint:fix": "eslint core/assets/js/ --fix"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "equipment",
+    "rental",
+    "booking",
+    "inventory",
+    "management",
+    "business"
+  ],
+  "author": "Vireo Designs <info@vireodesigns.com>",
+  "license": "GPL-2.0-or-later",
+  "homepage": "https://vireodesigns.com/plugins/equiprent-pro",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vireodesigns/equiprent-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vireodesigns/equiprent-pro/issues"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^26.0.0",
+    "@wordpress/env": "^8.0.0",
+    "eslint": "^8.0.0",
+    "postcss": "^8.0.0",
+    "autoprefixer": "^10.0.0",
+    "cssnano": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": [
+    "extends @wordpress/browserslist-config"
+  ]
+}

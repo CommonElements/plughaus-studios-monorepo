@@ -1,0 +1,118 @@
+/**
+ * PlugHaus Property Management - Admin Styles
+ */
+
+/* Dashboard Widgets */
+.phpm-dashboard-widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.phpm-widget {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    padding: 20px;
+}
+
+.phpm-widget h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Stats Grid */
+.phpm-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.phpm-stat {
+    text-align: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+.phpm-stat-number {
+    font-size: 28px;
+    font-weight: 600;
+    color: #2271b1;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.phpm-stat-label {
+    font-size: 13px;
+    color: #646970;
+}
+
+/* Report Cards */
+.phpm-reports-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.phpm-report-card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    padding: 20px;
+    text-align: center;
+}
+
+.phpm-report-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.phpm-report-card p {
+    color: #646970;
+    margin-bottom: 15px;
+}
+
+/* Import/Export Sections */
+.phpm-import-export-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.phpm-section {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    padding: 20px;
+}
+
+.phpm-section h2 {
+    margin-top: 0;
+}
+
+/* Property Meta Box */
+.phpm-property-meta table.form-table th {
+    width: 150px;
+}
+
+/* Admin Menu Icons */
+#adminmenu .toplevel_page_phpm-dashboard .wp-menu-image:before {
+    content: "\f522";
+}
+
+/* Responsive */
+@media screen and (max-width: 782px) {
+    .phpm-dashboard-widgets,
+    .phpm-reports-list,
+    .phpm-import-export-sections {
+        grid-template-columns: 1fr;
+    }
+    
+    .phpm-stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

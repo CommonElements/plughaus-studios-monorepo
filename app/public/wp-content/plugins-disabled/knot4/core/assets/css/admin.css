@@ -1,0 +1,662 @@
+/**
+ * Admin stylesheet for Knot4
+ * 
+ * @package Knot4
+ * @since 1.0.0
+ */
+
+/* ========================================================================
+   Dashboard Layout
+   ======================================================================== */
+
+.knot4-dashboard {
+    margin: 20px 0;
+}
+
+.knot4-page-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    font-size: 1.8em;
+    color: #23282d;
+}
+
+.knot4-page-title .dashicons {
+    font-size: 1.2em;
+    color: #007cba;
+}
+
+/* ========================================================================
+   Dashboard Widgets
+   ======================================================================== */
+
+.knot4-dashboard-widgets {
+    display: grid;
+    gap: 25px;
+}
+
+.knot4-stat-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.knot4-stat-card {
+    background: white;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.knot4-stat-card:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.knot4-stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #007cba;
+}
+
+.knot4-stat-card.donations::before {
+    background: #007cba;
+}
+
+.knot4-stat-card.donors::before {
+    background: #00a32a;
+}
+
+.knot4-stat-card.events::before {
+    background: #ffb900;
+}
+
+.knot4-stat-card.average::before {
+    background: #826eb4;
+}
+
+.knot4-stat-card .stat-icon {
+    font-size: 2.5em;
+    color: #007cba;
+}
+
+.knot4-stat-card.donors .stat-icon {
+    color: #00a32a;
+}
+
+.knot4-stat-card.events .stat-icon {
+    color: #ffb900;
+}
+
+.knot4-stat-card.average .stat-icon {
+    color: #826eb4;
+}
+
+.knot4-stat-card .stat-content h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.8em;
+    font-weight: 600;
+    color: #23282d;
+}
+
+.knot4-stat-card .stat-content p {
+    margin: 0 0 3px 0;
+    font-size: 1.1em;
+    color: #50575e;
+}
+
+.knot4-stat-card .stat-period {
+    font-size: 0.85em;
+    color: #787c82;
+}
+
+/* ========================================================================
+   Charts
+   ======================================================================== */
+
+.knot4-charts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.knot4-chart-widget {
+    background: white;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.knot4-chart-widget h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.2em;
+    color: #23282d;
+    border-bottom: 1px solid #dcdcde;
+    padding-bottom: 10px;
+}
+
+.knot4-chart-widget canvas {
+    max-height: 300px;
+}
+
+/* ========================================================================
+   Recent Activity
+   ======================================================================== */
+
+.knot4-recent-activity {
+    background: white;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.knot4-recent-activity h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.2em;
+    color: #23282d;
+    border-bottom: 1px solid #dcdcde;
+    padding-bottom: 10px;
+}
+
+.knot4-activity-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.knot4-activity-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid #f6f7f7;
+}
+
+.knot4-activity-list li:last-child {
+    border-bottom: none;
+}
+
+.knot4-activity-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.knot4-activity-content strong {
+    color: #23282d;
+}
+
+.knot4-activity-meta {
+    font-size: 0.9em;
+    color: #787c82;
+}
+
+/* ========================================================================
+   Quick Actions
+   ======================================================================== */
+
+.knot4-quick-actions {
+    background: white;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.knot4-quick-actions h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.2em;
+    color: #23282d;
+    border-bottom: 1px solid #dcdcde;
+    padding-bottom: 10px;
+}
+
+.knot4-quick-actions .action-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.knot4-quick-actions .button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    padding: 12px 16px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.knot4-quick-actions .button .dashicons {
+    font-size: 16px;
+}
+
+/* ========================================================================
+   Upgrade Page
+   ======================================================================== */
+
+.knot4-upgrade-page {
+    max-width: 1000px;
+}
+
+.knot4-upgrade-hero {
+    text-align: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px 40px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.knot4-upgrade-hero h2 {
+    font-size: 2.2em;
+    margin-bottom: 15px;
+}
+
+.knot4-upgrade-hero p {
+    font-size: 1.2em;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.knot4-pro-features {
+    margin-bottom: 40px;
+}
+
+.knot4-pro-features .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.knot4-pro-features .feature-item {
+    background: white;
+    border: 1px solid #c3c4c7;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.knot4-pro-features .feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.knot4-pro-features .feature-item .dashicons {
+    font-size: 3em;
+    color: #00a32a;
+    margin-bottom: 20px;
+}
+
+.knot4-pro-features .feature-item h3 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+    color: #23282d;
+}
+
+.knot4-pro-features .feature-item p {
+    color: #50575e;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.knot4-upgrade-cta {
+    text-align: center;
+    background: #f6f7f7;
+    padding: 40px;
+    border-radius: 8px;
+}
+
+.knot4-upgrade-cta .button-hero {
+    font-size: 1.2em;
+    padding: 16px 32px;
+    margin-bottom: 15px;
+}
+
+.knot4-upgrade-cta p {
+    margin: 0;
+    color: #787c82;
+}
+
+/* ========================================================================
+   Dashboard Widget (WordPress Dashboard)
+   ======================================================================== */
+
+.knot4-dashboard-widget {
+    padding: 0;
+}
+
+.knot4-widget-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.knot4-widget-stats .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #f6f7f7;
+    border-radius: 4px;
+}
+
+.knot4-widget-stats .stat-item .dashicons {
+    font-size: 1.5em;
+    color: #007cba;
+}
+
+.knot4-widget-stats .stat-item div {
+    display: flex;
+    flex-direction: column;
+}
+
+.knot4-widget-stats .stat-item strong {
+    font-size: 1.1em;
+    color: #23282d;
+}
+
+.knot4-widget-stats .stat-item span {
+    font-size: 0.9em;
+    color: #787c82;
+}
+
+/* ========================================================================
+   Form Styles
+   ======================================================================== */
+
+.knot4-admin-form {
+    background: white;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.knot4-admin-form h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.2em;
+    color: #23282d;
+    border-bottom: 1px solid #dcdcde;
+    padding-bottom: 10px;
+}
+
+.knot4-form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.knot4-form-col {
+    flex: 1;
+}
+
+.knot4-form-col label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #23282d;
+}
+
+.knot4-form-col input,
+.knot4-form-col textarea,
+.knot4-form-col select {
+    width: 100%;
+    max-width: none;
+}
+
+.knot4-form-description {
+    font-size: 0.9em;
+    color: #787c82;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* ========================================================================
+   Tables
+   ======================================================================== */
+
+.knot4-admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.knot4-admin-table th {
+    background: #f6f7f7;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #23282d;
+    border-bottom: 1px solid #c3c4c7;
+}
+
+.knot4-admin-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #f6f7f7;
+    color: #50575e;
+}
+
+.knot4-admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+.knot4-admin-table tr:hover {
+    background: #f6f7f7;
+}
+
+/* ========================================================================
+   Status Badges
+   ======================================================================== */
+
+.knot4-status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.knot4-status-completed {
+    background: #d1edda;
+    color: #155724;
+}
+
+.knot4-status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.knot4-status-failed {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.knot4-status-cancelled {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+.knot4-status-active {
+    background: #d4edda;
+    color: #155724;
+}
+
+/* ========================================================================
+   Notifications
+   ======================================================================== */
+
+.knot4-admin-notice {
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.knot4-admin-notice.success {
+    background: #d1edda;
+    color: #155724;
+    border-left: 4px solid #28a745;
+}
+
+.knot4-admin-notice.error {
+    background: #f8d7da;
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
+
+.knot4-admin-notice.warning {
+    background: #fff3cd;
+    color: #856404;
+    border-left: 4px solid #ffc107;
+}
+
+.knot4-admin-notice.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border-left: 4px solid #17a2b8;
+}
+
+.knot4-admin-notice .dashicons {
+    flex-shrink: 0;
+}
+
+/* ========================================================================
+   Responsive Design
+   ======================================================================== */
+
+@media (max-width: 1200px) {
+    .knot4-charts-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .knot4-stat-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .knot4-charts-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .knot4-quick-actions .action-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .knot4-pro-features .feature-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .knot4-form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .knot4-upgrade-hero {
+        padding: 40px 20px;
+    }
+    
+    .knot4-upgrade-hero h2 {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .knot4-stat-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .knot4-widget-stats .stat-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+    
+    .knot4-page-title {
+        font-size: 1.5em;
+    }
+    
+    .knot4-admin-table {
+        font-size: 0.9em;
+    }
+    
+    .knot4-admin-table th,
+    .knot4-admin-table td {
+        padding: 8px 10px;
+    }
+}
+
+/* ========================================================================
+   Print Styles
+   ======================================================================== */
+
+@media print {
+    .knot4-stat-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .knot4-chart-widget {
+        break-inside: avoid;
+    }
+    
+    .button,
+    .knot4-quick-actions {
+        display: none;
+    }
+}
+
+/* ========================================================================
+   Accessibility Enhancements
+   ======================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .knot4-stat-card,
+    .knot4-pro-features .feature-item {
+        transition: none;
+    }
+}
+
+/* Focus styles */
+.knot4-quick-actions .button:focus,
+.knot4-admin-form input:focus,
+.knot4-admin-form textarea:focus,
+.knot4-admin-form select:focus {
+    outline: 2px solid #007cba;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .knot4-stat-card {
+        border-width: 2px;
+    }
+    
+    .knot4-status-badge {
+        border: 1px solid currentColor;
+    }
+}

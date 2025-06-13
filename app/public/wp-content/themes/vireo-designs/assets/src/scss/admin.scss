@@ -1,0 +1,323 @@
+/**
+ * Admin stylesheet for Vireo Designs Theme
+ * 
+ * Styles for WordPress admin interface enhancements
+ */
+
+// Import necessary abstracts
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+@import 'abstracts/functions';
+
+// Admin-specific styles
+.vireo-admin {
+  font-family: $font-family-sans;
+  
+  // Enhanced meta boxes
+  .postbox.vireo-enhanced {
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    box-shadow: $shadow-sm;
+    margin-bottom: $spacing-6;
+    
+    .postbox-header {
+      background: linear-gradient(135deg, $vireo-light 0%, $gray-50 100%);
+      border-bottom: 1px solid $gray-200;
+      border-radius: $radius-lg $radius-lg 0 0;
+      padding: $spacing-4 $spacing-6;
+      
+      h2 {
+        color: $vireo-dark;
+        font-weight: $font-weight-semibold;
+        margin: 0;
+      }
+    }
+    
+    .inside {
+      padding: $spacing-6;
+    }
+  }
+  
+  // Tab interface
+  .vireo-admin-tabs {
+    .tab-nav {
+      display: flex;
+      border-bottom: 1px solid $gray-200;
+      margin-bottom: $spacing-6;
+      
+      a {
+        padding: $spacing-3 $spacing-6;
+        color: $text-secondary;
+        text-decoration: none;
+        border-bottom: 2px solid transparent;
+        transition: all $transition-fast;
+        
+        &:hover {
+          color: $vireo-primary;
+        }
+        
+        &.active {
+          color: $vireo-primary;
+          border-bottom-color: $vireo-primary;
+          font-weight: $font-weight-medium;
+        }
+      }
+    }
+    
+    .tab-panel {
+      display: none;
+      
+      &.active {
+        display: block;
+      }
+    }
+  }
+  
+  // Form elements
+  .form-table {
+    th {
+      color: $text-primary;
+      font-weight: $font-weight-medium;
+      padding: $spacing-4 $spacing-2 $spacing-4 0;
+    }
+    
+    td {
+      padding: $spacing-4 $spacing-2;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="number"],
+    textarea,
+    select {
+      @include input-base;
+      min-width: 300px;
+    }
+    
+    .description {
+      color: $text-muted;
+      font-size: $font-size-sm;
+      margin-top: $spacing-2;
+    }
+  }
+  
+  // Color picker enhancements
+  .wp-color-picker {
+    border-radius: $radius-md !important;
+  }
+  
+  // Media uploader
+  .vireo-media-upload {
+    @include btn-secondary;
+    margin-right: $spacing-3;
+  }
+  
+  .media-preview {
+    margin-top: $spacing-4;
+    padding: $spacing-4;
+    border: 2px dashed $gray-200;
+    border-radius: $radius-md;
+    text-align: center;
+    
+    img {
+      border-radius: $radius-md;
+    }
+    
+    &:empty::before {
+      content: "No media selected";
+      color: $text-muted;
+    }
+  }
+  
+  // AJAX actions
+  .vireo-ajax-action {
+    @include btn-primary;
+    
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+  
+  // Admin notices
+  .notice {
+    border-left: 4px solid $vireo-primary;
+    border-radius: 0 $radius-md $radius-md 0;
+    
+    &.notice-success {
+      border-left-color: $success;
+      background-color: rgba($success, 0.05);
+    }
+    
+    &.notice-error {
+      border-left-color: $error;
+      background-color: rgba($error, 0.05);
+    }
+    
+    &.notice-warning {
+      border-left-color: $warning;
+      background-color: rgba($warning, 0.05);
+    }
+  }
+  
+  // Settings sections
+  .vireo-settings-section {
+    background: $bg-primary;
+    border: 1px solid $gray-200;
+    border-radius: $radius-lg;
+    margin-bottom: $spacing-8;
+    overflow: hidden;
+    
+    .section-header {
+      background: $gray-50;
+      padding: $spacing-6;
+      border-bottom: 1px solid $gray-200;
+      
+      h3 {
+        margin: 0;
+        color: $text-primary;
+        font-weight: $font-weight-semibold;
+      }
+      
+      p {
+        margin: $spacing-2 0 0;
+        color: $text-secondary;
+        font-size: $font-size-sm;
+      }
+    }
+    
+    .section-content {
+      padding: $spacing-6;
+    }
+  }
+  
+  // Plugin cards in admin
+  .vireo-plugin-card {
+    @include card;
+    margin-bottom: $spacing-6;
+    
+    .plugin-header {
+      padding: $spacing-6;
+      border-bottom: 1px solid $gray-200;
+      @include flex-between;
+      
+      .plugin-info {
+        h4 {
+          margin: 0 0 $spacing-2;
+          color: $text-primary;
+        }
+        
+        .plugin-version {
+          color: $text-muted;
+          font-size: $font-size-sm;
+        }
+      }
+      
+      .plugin-status {
+        padding: $spacing-1 $spacing-3;
+        border-radius: $radius-full;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-medium;
+        
+        &.active {
+          background: rgba($success, 0.1);
+          color: $success;
+        }
+        
+        &.inactive {
+          background: rgba($gray-500, 0.1);
+          color: $gray-500;
+        }
+      }
+    }
+    
+    .plugin-content {
+      padding: $spacing-6;
+    }
+    
+    .plugin-actions {
+      padding: $spacing-6;
+      border-top: 1px solid $gray-200;
+      @include flex-between;
+      
+      .btn {
+        margin-right: $spacing-3;
+        
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+// WordPress admin menu enhancements
+#adminmenu {
+  .wp-submenu a[href*="vireo"] {
+    position: relative;
+    
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 0;
+      background: $vireo-primary;
+      transition: height $transition-fast;
+    }
+    
+    &:hover::before {
+      height: 100%;
+    }
+  }
+}
+
+// Dashboard widgets
+.vireo-dashboard-widget {
+  .inside {
+    padding: 0;
+  }
+  
+  .widget-content {
+    padding: $spacing-6;
+  }
+  
+  .widget-header {
+    background: $vireo-light;
+    padding: $spacing-4 $spacing-6;
+    border-bottom: 1px solid rgba($vireo-primary, 0.1);
+    
+    h4 {
+      margin: 0;
+      color: $vireo-dark;
+      font-weight: $font-weight-medium;
+    }
+  }
+  
+  .stats-grid {
+    @include grid(3, $spacing-4);
+    margin-top: $spacing-4;
+    
+    .stat-item {
+      text-align: center;
+      padding: $spacing-4;
+      background: $gray-50;
+      border-radius: $radius-md;
+      
+      .stat-number {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-bold;
+        color: $vireo-primary;
+      }
+      
+      .stat-label {
+        font-size: $font-size-sm;
+        color: $text-secondary;
+        margin-top: $spacing-1;
+      }
+    }
+  }
+}

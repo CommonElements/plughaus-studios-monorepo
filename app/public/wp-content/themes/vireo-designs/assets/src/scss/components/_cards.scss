@@ -1,0 +1,247 @@
+/**
+ * Card Components
+ */
+
+.card {
+  @include card;
+  
+  &.card-hover {
+    @include card-hover;
+  }
+  
+  .card-header {
+    padding: $spacing-6;
+    border-bottom: 1px solid $gray-200;
+    
+    .card-title {
+      @include heading-3;
+      margin: 0;
+    }
+    
+    .card-subtitle {
+      @include body-base;
+      color: $text-secondary;
+      margin: $spacing-2 0 0;
+    }
+  }
+  
+  .card-body {
+    padding: $spacing-6;
+  }
+  
+  .card-footer {
+    padding: $spacing-4 $spacing-6;
+    background: $gray-50;
+    border-top: 1px solid $gray-200;
+    @include flex-between;
+  }
+  
+  // Card variants
+  &.card-featured {
+    border: 2px solid $vireo-primary;
+    position: relative;
+    
+    &::before {
+      content: "Featured";
+      position: absolute;
+      top: -1px;
+      right: $spacing-6;
+      background: $vireo-primary;
+      color: white;
+      padding: $spacing-1 $spacing-3;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-medium;
+      border-radius: 0 0 $radius-md $radius-md;
+    }
+  }
+  
+  &.card-gradient {
+    background: $bg-gradient;
+    color: white;
+    
+    .card-title {
+      color: white;
+    }
+    
+    .card-subtitle {
+      color: rgba(white, 0.8);
+    }
+  }
+}
+
+// Plugin cards
+.plugin-card {
+  @include card;
+  @include card-hover;
+  
+  .plugin-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: $radius-lg;
+    margin-bottom: $spacing-4;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+  }
+  
+  .plugin-title {
+    @include heading-3;
+    margin: 0 0 $spacing-2;
+    
+    a {
+      color: inherit;
+      text-decoration: none;
+      
+      &:hover {
+        color: $vireo-primary;
+      }
+    }
+  }
+  
+  .plugin-description {
+    @include body-base;
+    color: $text-secondary;
+    margin-bottom: $spacing-4;
+  }
+  
+  .plugin-meta {
+    @include flex-between;
+    font-size: $font-size-sm;
+    color: $text-muted;
+    margin-bottom: $spacing-4;
+  }
+  
+  .plugin-actions {
+    @include flex-between;
+    
+    .btn {
+      flex: 1;
+      margin-right: $spacing-2;
+      
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  
+  .plugin-price {
+    font-weight: $font-weight-bold;
+    color: $vireo-primary;
+    
+    .price-free {
+      color: $success;
+    }
+  }
+  
+  .plugin-category {
+    display: inline-block;
+    padding: $spacing-1 $spacing-2;
+    background: rgba($vireo-primary, 0.1);
+    color: $vireo-primary;
+    font-size: $font-size-xs;
+    border-radius: $radius-sm;
+    margin-bottom: $spacing-2;
+  }
+}
+
+// Team member cards
+.team-card {
+  @include card;
+  text-align: center;
+  
+  .team-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto $spacing-4;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .team-name {
+    @include heading-3;
+    margin: 0 0 $spacing-1;
+  }
+  
+  .team-role {
+    color: $text-secondary;
+    margin-bottom: $spacing-4;
+  }
+  
+  .team-social {
+    @include flex-center;
+    gap: $spacing-3;
+    
+    a {
+      color: $text-muted;
+      transition: color $transition-fast;
+      
+      &:hover {
+        color: $vireo-primary;
+      }
+    }
+  }
+}
+
+// Testimonial cards
+.testimonial-card {
+  @include card;
+  position: relative;
+  
+  &::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: $spacing-6;
+    font-size: 80px;
+    color: rgba($vireo-primary, 0.1);
+    font-family: serif;
+    line-height: 1;
+  }
+  
+  .testimonial-content {
+    @include body-large;
+    font-style: italic;
+    margin-bottom: $spacing-6;
+  }
+  
+  .testimonial-author {
+    @include flex-center;
+    gap: $spacing-4;
+    
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    .author-info {
+      .author-name {
+        font-weight: $font-weight-medium;
+        margin: 0;
+      }
+      
+      .author-role {
+        font-size: $font-size-sm;
+        color: $text-secondary;
+        margin: 0;
+      }
+    }
+  }
+}

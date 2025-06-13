@@ -1,0 +1,15 @@
+/**
+ * Professional enhancement styles for Vireo Designs
+ */
+
+.professional-feature {
+  background: $vireo-light;
+  padding: $spacing-8;
+  border-radius: $radius-lg;
+  border: 1px solid rgba($vireo-primary, 0.2);
+  
+  h3 {
+    color: $vireo-primary;
+    margin-bottom: $spacing-4;
+  }
+}

@@ -1,0 +1,224 @@
+/**
+ * Base styles for Vireo Designs
+ * 
+ * Core element styles and global styling
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: $base-font-size;
+  scroll-behavior: smooth;
+  
+  @include respond-to(mobile) {
+    font-size: $mobile-font-size;
+  }
+}
+
+body {
+  font-family: $font-family-sans;
+  font-size: $font-size-base;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-relaxed;
+  color: $text-primary;
+  background-color: $bg-primary;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  
+  // Smooth font rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+// Main content area
+main {
+  min-height: 60vh;
+  display: block;
+}
+
+// Links
+a {
+  color: $vireo-primary;
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover,
+  &:focus {
+    color: $vireo-dark;
+    text-decoration: underline;
+  }
+  
+  &:focus {
+    outline: 2px solid $vireo-primary;
+    outline-offset: 2px;
+  }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Lists
+ul,
+ol {
+  margin: 0 0 $spacing-4;
+  padding-left: $spacing-6;
+}
+
+li {
+  margin-bottom: $spacing-2;
+}
+
+// Tables
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: $spacing-6;
+}
+
+th,
+td {
+  padding: $spacing-3 $spacing-4;
+  text-align: left;
+  border-bottom: 1px solid $gray-200;
+}
+
+th {
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  background-color: $gray-50;
+}
+
+// Code
+code,
+pre {
+  font-family: $font-family-mono;
+  background-color: $gray-100;
+  border-radius: $radius-sm;
+}
+
+code {
+  padding: $spacing-1 $spacing-2;
+  font-size: 0.875em;
+  color: $vireo-dark;
+}
+
+pre {
+  padding: $spacing-4;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  border: 1px solid $gray-200;
+  
+  code {
+    padding: 0;
+    background: none;
+    border-radius: 0;
+  }
+}
+
+// Blockquotes
+blockquote {
+  margin: $spacing-6 0;
+  padding: $spacing-4 $spacing-6;
+  border-left: 4px solid $vireo-primary;
+  background-color: $vireo-light;
+  font-style: italic;
+  
+  p {
+    margin-bottom: 0;
+  }
+  
+  cite {
+    display: block;
+    margin-top: $spacing-3;
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    font-style: normal;
+    
+    &::before {
+      content: "— ";
+    }
+  }
+}
+
+// Horizontal rules
+hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    $gray-300,
+    transparent
+  );
+  margin: $spacing-8 0;
+}
+
+// Focus states
+:focus {
+  outline: 2px solid $vireo-primary;
+  outline-offset: 2px;
+}
+
+// Selection
+::selection {
+  background-color: rgba($vireo-primary, 0.2);
+  color: $vireo-dark;
+}
+
+// Print styles
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+  
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  
+  thead {
+    display: table-header-group;
+  }
+  
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}

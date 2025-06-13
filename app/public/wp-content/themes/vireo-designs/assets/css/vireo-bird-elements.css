@@ -1,0 +1,332 @@
+/**
+ * Vireo Bird Elements - Subtle brand integration
+ * Adds small bird icons throughout the site for consistent branding
+ */
+
+/* Bird Icon Classes */
+.vireo-bird-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/vireo-bird-small.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.vireo-bird-icon.medium {
+    width: 32px;
+    height: 32px;
+    background-image: url('../images/vireo-bird-icon.svg');
+}
+
+.vireo-bird-icon.large {
+    width: 48px;
+    height: 48px;
+    background-image: url('../images/vireo-bird.svg');
+}
+
+/* Primary color variations */
+.vireo-bird-icon.primary {
+    color: var(--primary-color);
+}
+
+.vireo-bird-icon.gray {
+    color: var(--gray-400);
+}
+
+.vireo-bird-icon.white {
+    color: var(--white);
+}
+
+/* Subtle Section Dividers */
+.section-divider::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/vireo-bird-small.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: var(--space-4) auto;
+    opacity: 0.3;
+    color: var(--primary-color);
+}
+
+/* Bullet Points with Bird Icons */
+.bird-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.bird-list li {
+    position: relative;
+    padding-left: var(--space-8);
+    margin-bottom: var(--space-2);
+}
+
+.bird-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    width: 16px;
+    height: 16px;
+    background-image: url('../images/vireo-bird-small.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: var(--primary-color);
+    opacity: 0.7;
+}
+
+/* Header Enhancement */
+.site-header .logo-area::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -40px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    background-image: url('../images/vireo-bird-small.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    color: var(--gray-400);
+}
+
+/* Testimonial Cards */
+.testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    width: 20px;
+    height: 20px;
+    background-image: url('../images/vireo-bird-small.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.2;
+    color: var(--primary-color);
+}
+
+/* Feature Cards Enhancement */
+.feature-card .feature-icon {
+    position: relative;
+}
+
+.feature-card .feature-icon::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: -8px;
+    width: 12px;
+    height: 12px;
+    background-image: url('../images/vireo-bird-small.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.3;
+    color: var(--primary-color);
+}
+
+/* Plugin Card Corners */
+.plugin-card::after {
+    content: '';
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    width: 14px;
+    height: 14px;
+    background-image: url('../images/vireo-bird-small.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.15;
+    color: var(--primary-color);
+    transition: opacity var(--transition-fast);
+}
+
+.plugin-card:hover::after {
+    opacity: 0.3;
+}
+
+/* Success Messages with Bird */
+.success-message {
+    position: relative;
+    padding-left: var(--space-10);
+}
+
+.success-message::before {
+    content: '';
+    position: absolute;
+    left: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url('../images/vireo-bird-small.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: var(--success-color);
+}
+
+/* Newsletter Signup Enhancement */
+.newsletter-signup::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-image: url('../images/vireo-bird-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0 auto var(--space-4);
+    opacity: 0.6;
+    color: var(--primary-color);
+}
+
+/* Footer Enhancement */
+.footer-column h4::before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url('../images/vireo-bird-small.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: var(--space-2);
+    opacity: 0.4;
+    color: var(--gray-400);
+    vertical-align: middle;
+}
+
+/* Page Title Enhancements */
+.page-title-with-bird {
+    position: relative;
+    display: inline-block;
+}
+
+.page-title-with-bird::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -48px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background-image: url('../images/vireo-bird-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.3;
+    color: var(--primary-color);
+}
+
+/* Hover Effects */
+.bird-hover:hover .vireo-bird-icon {
+    transform: scale(1.1);
+    transition: transform var(--transition-fast);
+}
+
+/* Loading States with Bird */
+.bird-loading {
+    position: relative;
+}
+
+.bird-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/vireo-bird-small.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: birdPulse 2s infinite;
+    color: var(--primary-color);
+}
+
+@keyframes birdPulse {
+    0%, 100% { 
+        opacity: 0.3; 
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% { 
+        opacity: 0.8; 
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .page-title-with-bird::after {
+        right: -36px;
+        width: 24px;
+        height: 24px;
+    }
+    
+    .site-header .logo-area::after {
+        display: none;
+    }
+    
+    .bird-list li {
+        padding-left: var(--space-6);
+    }
+    
+    .bird-list li::before {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* Utility Classes */
+.no-bird::before,
+.no-bird::after {
+    display: none !important;
+}
+
+.bird-opacity-low { opacity: 0.2; }
+.bird-opacity-medium { opacity: 0.5; }
+.bird-opacity-high { opacity: 0.8; }
+
+/* Animation Classes */
+.bird-fade-in {
+    animation: birdFadeIn 0.6s ease-out;
+}
+
+@keyframes birdFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.bird-bounce {
+    animation: birdBounce 2s infinite;
+}
+
+@keyframes birdBounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-5px);
+    }
+    60% {
+        transform: translateY(-3px);
+    }
+}
