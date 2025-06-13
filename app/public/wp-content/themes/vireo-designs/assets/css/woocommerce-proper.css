@@ -1,0 +1,133 @@
+/* Proper WooCommerce Cart Widget */
+.woocommerce-cart-widget {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-widget-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    gap: 8px;
+}
+
+.cart-widget-link:hover {
+    background-color: #f8f9fa;
+    color: #2c5aa0;
+}
+
+.cart-widget-link i {
+    font-size: 18px;
+}
+
+.cart-count {
+    background: #e74c3c;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+    min-width: 18px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.cart-total {
+    font-weight: 600;
+    color: #2c5aa0;
+}
+
+/* WooCommerce Block Styles */
+.wc-block-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.wc-block-grid__product {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.wc-block-grid__product:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border-color: #2c5aa0;
+}
+
+.wc-block-components-product-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.wc-block-components-product-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c5aa0;
+    margin-bottom: 15px;
+}
+
+.wc-block-components-product-button {
+    background: #2c5aa0;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.wc-block-components-product-button:hover {
+    background: #1e3f73;
+    transform: translateY(-2px);
+}
+
+/* Cart Page Styles */
+.wp-block-woocommerce-cart {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.wc-block-cart__empty-cart__title {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.wc-block-components-order-summary {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+}
+
+.wc-block-components-checkout-place-order-button {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: none;
+    padding: 18px 30px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 8px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.wc-block-components-checkout-place-order-button:hover {
+    background: linear-gradient(135deg, #218838 0%, #1ea085 100%);
+    transform: translateY(-2px);
+}

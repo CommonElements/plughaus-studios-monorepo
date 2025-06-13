@@ -1,0 +1,177 @@
+/*
+WooCommerce Styles for Vireo Designs Theme
+Follows WordPress and WooCommerce best practices
+*/
+
+/* Product Grid */
+.woocommerce ul.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.woocommerce ul.products li.product {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.woocommerce ul.products li.product:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border-color: #2c5aa0;
+}
+
+/* Product Images */
+.woocommerce ul.products li.product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* Product Titles */
+.woocommerce ul.products li.product h2,
+.woocommerce ul.products li.product .woocommerce-loop-product__title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 15px 0 10px;
+    line-height: 1.4;
+}
+
+/* Product Prices */
+.woocommerce ul.products li.product .price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c5aa0;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* Add to Cart Buttons */
+.woocommerce ul.products li.product .button {
+    background: #2c5aa0;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.woocommerce ul.products li.product .button:hover {
+    background: #1e3f73;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Cart and Checkout */
+.woocommerce-cart table.cart {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.woocommerce-cart table.cart th,
+.woocommerce-cart table.cart td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.woocommerce .cart-collaterals {
+    margin-top: 30px;
+}
+
+.woocommerce .cart_totals {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+/* Checkout */
+.woocommerce-checkout .col-1,
+.woocommerce-checkout .col-2 {
+    width: 48%;
+    float: left;
+}
+
+.woocommerce-checkout .col-2 {
+    float: right;
+}
+
+.woocommerce form.checkout_coupon,
+.woocommerce form.login,
+.woocommerce form.register {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+/* Form Fields */
+.woocommerce .form-row {
+    margin-bottom: 20px;
+}
+
+.woocommerce .form-row label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+.woocommerce .form-row input[type="text"],
+.woocommerce .form-row input[type="email"],
+.woocommerce .form-row input[type="tel"],
+.woocommerce .form-row select,
+.woocommerce .form-row textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Messages */
+.woocommerce .woocommerce-message {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.woocommerce .woocommerce-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .woocommerce ul.products {
+        grid-template-columns: 1fr;
+    }
+    
+    .woocommerce-checkout .col-1,
+    .woocommerce-checkout .col-2 {
+        width: 100%;
+        float: none;
+        margin-bottom: 30px;
+    }
+}

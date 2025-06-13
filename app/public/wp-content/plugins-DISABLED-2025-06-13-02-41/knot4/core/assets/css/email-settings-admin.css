@@ -1,0 +1,627 @@
+/**
+ * Email Settings Admin Styles for Knot4
+ * 
+ * @package Knot4
+ * @since 1.0.0
+ */
+
+/* Email Settings Layout */
+.knot4-email-settings {
+    max-width: 1400px;
+}
+
+.knot4-email-tabs .nav-tab {
+    position: relative;
+    margin-right: 5px;
+    padding: 12px 20px;
+    font-size: 14px;
+}
+
+.knot4-pro-badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+
+/* Templates Container */
+.knot4-templates-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    min-height: 600px;
+}
+
+.knot4-templates-sidebar {
+    width: 300px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.knot4-templates-sidebar h3 {
+    margin: 0;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e1e1e1;
+    font-size: 16px;
+    color: #333;
+}
+
+.knot4-template-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.knot4-template-btn {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    background: white;
+    text-align: left;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f1f1;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.knot4-template-btn:hover {
+    background: #f8f9fa;
+}
+
+.knot4-template-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.knot4-template-btn strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.knot4-template-btn span {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+}
+
+.knot4-template-btn.active span {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.knot4-modified-indicator {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: #f39c12;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* Template Editor */
+.knot4-template-editor {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.knot4-editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.knot4-template-title {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.knot4-editor-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.knot4-editor-actions .button {
+    font-size: 12px;
+    padding: 6px 12px;
+    height: auto;
+}
+
+.knot4-preview-btn,
+.knot4-test-btn {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+}
+
+.knot4-preview-btn:hover,
+.knot4-test-btn:hover {
+    background: #5a6fd8;
+    border-color: #5a6fd8;
+}
+
+.knot4-reset-btn {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.knot4-reset-btn:hover {
+    background: #c82333;
+    border-color: #c82333;
+}
+
+/* Template Form */
+#knot4-template-form {
+    padding: 20px;
+}
+
+.knot4-field-group {
+    margin-bottom: 20px;
+}
+
+.knot4-field-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.knot4-field-group input[type="text"],
+.knot4-field-group input[type="email"] {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.knot4-field-group .description {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Available Variables */
+.knot4-available-variables {
+    background: #f8f9fa;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.knot4-available-variables h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.knot4-variables-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.knot4-variable-item {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #e1e1e1;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 12px;
+}
+
+.knot4-variable-item:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.knot4-variable-code {
+    font-family: monospace;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.knot4-variable-desc {
+    color: #666;
+    font-size: 11px;
+}
+
+.knot4-variable-item:hover .knot4-variable-desc {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Template Placeholder */
+.knot4-template-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    text-align: center;
+    color: #666;
+}
+
+.knot4-placeholder-content .dashicons {
+    font-size: 60px;
+    margin-bottom: 20px;
+    color: #ccc;
+}
+
+.knot4-placeholder-content h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.knot4-placeholder-content p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Modal Styles */
+.knot4-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.knot4-modal-content {
+    background: white;
+    border-radius: 8px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.knot4-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.knot4-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.knot4-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.knot4-modal-close:hover {
+    background: #e1e1e1;
+    color: #333;
+}
+
+.knot4-modal-body {
+    padding: 20px;
+    min-width: 500px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Preview Modal Specific */
+#knot4-preview-modal .knot4-modal-content {
+    max-width: 800px;
+}
+
+.knot4-preview-content {
+    background: #f8f9fa;
+    border: 1px solid #e1e1e1;
+    border-radius: 6px;
+    padding: 20px;
+    min-height: 400px;
+}
+
+.knot4-preview-content iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Test Email Modal */
+#knot4-test-modal .knot4-field-group {
+    margin-bottom: 15px;
+}
+
+#knot4-test-modal .knot4-form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* Automation Settings */
+.knot4-automation-settings {
+    background: white;
+    border: 1px solid #ccd0d4;
+    border-radius: 6px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.knot4-settings-section {
+    margin-bottom: 30px;
+}
+
+.knot4-settings-section h3 {
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e1e1e1;
+    color: #333;
+}
+
+.knot4-settings-section .form-table {
+    margin-top: 0;
+}
+
+.knot4-settings-section .form-table th {
+    width: 250px;
+    padding: 15px 10px 15px 0;
+}
+
+.knot4-settings-section .form-table td {
+    padding: 15px 10px 15px 0;
+}
+
+.knot4-settings-section label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.knot4-settings-section input[type="checkbox"] {
+    margin: 0;
+}
+
+.knot4-settings-section .description {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.knot4-settings-section .description input[type="number"] {
+    width: 60px;
+    padding: 4px 6px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+/* Pro Upgrade Notice */
+.knot4-pro-upgrade-notice {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.knot4-pro-upgrade-notice h3 {
+    margin: 0 0 15px 0;
+    color: white;
+    font-size: 24px;
+}
+
+.knot4-pro-upgrade-notice p {
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+.knot4-pro-upgrade-notice .button {
+    background: white;
+    color: #667eea;
+    border: none;
+    padding: 12px 24px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.knot4-pro-upgrade-notice .button:hover {
+    background: #f8f9fa;
+    transform: translateY(-1px);
+    color: #667eea;
+}
+
+/* Email Logs */
+.knot4-email-logs {
+    background: white;
+    border: 1px solid #ccd0d4;
+    border-radius: 6px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Loading States */
+.knot4-loading {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.knot4-loading::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    animation: knot4-spin 1s linear infinite;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+@keyframes knot4-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .knot4-templates-container {
+        flex-direction: column;
+    }
+    
+    .knot4-templates-sidebar {
+        width: 100%;
+    }
+    
+    .knot4-template-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1px;
+        background: #e1e1e1;
+    }
+    
+    .knot4-template-btn {
+        border-bottom: none;
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .knot4-editor-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .knot4-editor-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .knot4-modal-content {
+        max-width: 95%;
+        margin: 20px;
+    }
+    
+    .knot4-modal-body {
+        min-width: auto;
+        padding: 15px;
+    }
+    
+    .knot4-variables-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Success/Error Messages */
+.knot4-message {
+    padding: 12px 15px;
+    border-radius: 4px;
+    margin: 15px 0;
+    font-size: 14px;
+}
+
+.knot4-message.success {
+    background: #d1f2eb;
+    color: #0f5132;
+    border: 1px solid #a7e3d0;
+}
+
+.knot4-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f1aeb5;
+}
+
+.knot4-message.info {
+    background: #cfe2ff;
+    color: #055160;
+    border: 1px solid #9ec5fe;
+}
+
+/* Form Actions */
+.knot4-form-actions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e1e1e1;
+    text-align: right;
+}
+
+.knot4-form-actions .button {
+    margin-left: 10px;
+}
+
+/* Email Editor Enhancements */
+.wp-editor-wrap {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.quicktags-toolbar {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+/* Variable Insertion */
+.knot4-variable-insert {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    cursor: pointer;
+    margin: 2px;
+}
+
+.knot4-variable-insert:hover {
+    background: #5a6fd8;
+}

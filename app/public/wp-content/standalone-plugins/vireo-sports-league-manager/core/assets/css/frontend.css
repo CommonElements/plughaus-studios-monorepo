@@ -1,0 +1,252 @@
+/* Vireo Sports League - Frontend Styles */
+
+.vsl-league-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.vsl-league-table th,
+.vsl-league-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.vsl-league-table th {
+    background: #059669;
+    color: white;
+    font-weight: bold;
+}
+
+.vsl-league-table tr:hover {
+    background: #f9f9f9;
+}
+
+.vsl-standings {
+    margin: 20px 0;
+}
+
+.vsl-team-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+}
+
+.vsl-team-card:hover {
+    transform: translateY(-2px);
+}
+
+.vsl-team-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.vsl-team-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.vsl-stat {
+    text-align: center;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.vsl-stat-value {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #059669;
+}
+
+.vsl-stat-label {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.vsl-match-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.vsl-match-teams {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.vsl-team {
+    flex: 1;
+    text-align: center;
+}
+
+.vsl-vs {
+    margin: 0 20px;
+    font-weight: bold;
+    color: #666;
+}
+
+.vsl-score {
+    font-size: 2em;
+    font-weight: bold;
+    color: #059669;
+    margin: 10px 0;
+}
+
+.vsl-match-info {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.vsl-player-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.vsl-player-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.vsl-player-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    color: #999;
+}
+
+.vsl-player-name {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.vsl-player-position {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.vsl-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #059669;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.vsl-btn:hover {
+    background: #047857;
+    color: white;
+}
+
+.vsl-btn-secondary {
+    background: #6b7280;
+}
+
+.vsl-btn-secondary:hover {
+    background: #4b5563;
+}
+
+.vsl-calendar {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.vsl-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.vsl-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: #eee;
+}
+
+.vsl-calendar-day {
+    background: white;
+    padding: 10px;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.vsl-calendar-day.other-month {
+    background: #f9f9f9;
+    color: #999;
+}
+
+.vsl-calendar-day.has-match {
+    background: #f0fdf4;
+}
+
+.vsl-match-indicator {
+    background: #059669;
+    color: white;
+    font-size: 0.8em;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+    .vsl-match-teams {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .vsl-vs {
+        margin: 10px 0;
+    }
+    
+    .vsl-team-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .vsl-calendar-grid {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 0;
+    }
+    
+    .vsl-calendar-day {
+        min-height: 40px;
+        padding: 5px;
+    }
+}

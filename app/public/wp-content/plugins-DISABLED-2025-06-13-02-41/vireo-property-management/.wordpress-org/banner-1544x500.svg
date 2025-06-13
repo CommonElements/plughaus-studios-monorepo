@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1544" height="500" viewBox="0 0 1544 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient Background -->
+  <defs>
+    <linearGradient id="bgGradient2x" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#047857;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#065f46;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="pattern2x" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+      <circle cx="30" cy="30" r="2" fill="white" opacity="0.1"/>
+    </pattern>
+  </defs>
+  
+  <rect width="1544" height="500" fill="url(#bgGradient2x)"/>
+  <rect width="1544" height="500" fill="url(#pattern2x)"/>
+  
+  <!-- Left Side - Building Illustration -->
+  <g transform="translate(100, 100)">
+    <!-- Building Shadow -->
+    <ellipse cx="150" cy="290" rx="120" ry="16" fill="black" opacity="0.1"/>
+    
+    <!-- Main Building -->
+    <rect x="60" y="120" width="180" height="180" rx="8" fill="white" opacity="0.95"/>
+    
+    <!-- Windows Grid -->
+    <g>
+      <rect x="80" y="140" width="32" height="32" rx="4" fill="#059669"/>
+      <rect x="124" y="140" width="32" height="32" rx="4" fill="#059669"/>
+      <rect x="168" y="140" width="32" height="32" rx="4" fill="#059669"/>
+      
+      <rect x="80" y="184" width="32" height="32" rx="4" fill="#059669"/>
+      <rect x="124" y="184" width="32" height="32" rx="4" fill="#059669"/>
+      <rect x="168" y="184" width="32" height="32" rx="4" fill="#059669"/>
+      
+      <rect x="80" y="228" width="32" height="32" rx="4" fill="#059669"/>
+      <rect x="168" y="228" width="32" height="32" rx="4" fill="#059669"/>
+    </g>
+    
+    <!-- Door -->
+    <rect x="124" y="228" width="32" height="72" rx="4" fill="#047857"/>
+    <circle cx="132" cy="264" r="2" fill="white"/>
+    
+    <!-- Roof -->
+    <path d="M40 120 L150 50 L260 120 Z" fill="white"/>
+    
+    <!-- Vireo Bird on roof -->
+    <g transform="translate(130, 70)">
+      <path d="M0 10 Q6 0 16 0 Q26 0 32 10 L36 20 L32 26 Q26 32 16 32 Q6 32 0 26 L-4 20 Z" fill="#10b981"/>
+      <circle cx="16" cy="12" r="2" fill="#047857"/>
+      <path d="M28 16 L40 14 L38 18" stroke="#10b981" stroke-width="2" fill="none"/>
+    </g>
+  </g>
+  
+  <!-- Right Side - Text Content -->
+  <g transform="translate(500, 130)">
+    <!-- Plugin Name -->
+    <text x="0" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="800" fill="white">
+      Vireo Property Management
+    </text>
+    
+    <!-- Tagline -->
+    <text x="0" y="70" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="400" fill="white" opacity="0.9">
+      Professional Property Management for WordPress
+    </text>
+    
+    <!-- Description -->
+    <text x="0" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="300" fill="white" opacity="0.8">
+      The perfect alternative to expensive SaaS platforms like Yardi or AppFolio
+    </text>
+    
+    <!-- Features Grid -->
+    <g transform="translate(0, 160)">
+      <g transform="translate(0, 0)">
+        <circle cx="12" cy="12" r="10" fill="white" opacity="0.2"/>
+        <path d="M12 6 L17 11 L9 19 L5 15" stroke="white" stroke-width="3" fill="none"/>
+        <text x="36" y="18" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="white">
+          Manage Properties &amp; Units
+        </text>
+      </g>
+      
+      <g transform="translate(400, 0)">
+        <circle cx="12" cy="12" r="10" fill="white" opacity="0.2"/>
+        <path d="M12 6 L17 11 L9 19 L5 15" stroke="white" stroke-width="3" fill="none"/>
+        <text x="36" y="18" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="white">
+          Track Tenants &amp; Leases
+        </text>
+      </g>
+      
+      <g transform="translate(0, 50)">
+        <circle cx="12" cy="12" r="10" fill="white" opacity="0.2"/>
+        <path d="M12 6 L17 11 L9 19 L5 15" stroke="white" stroke-width="3" fill="none"/>
+        <text x="36" y="18" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="white">
+          Handle Maintenance Requests
+        </text>
+      </g>
+      
+      <g transform="translate(400, 50)">
+        <circle cx="12" cy="12" r="10" fill="white" opacity="0.2"/>
+        <path d="M12 6 L17 11 L9 19 L5 15" stroke="white" stroke-width="3" fill="none"/>
+        <text x="36" y="18" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="white">
+          Generate Financial Reports
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Bottom Branding -->
+  <g transform="translate(0, 440)">
+    <rect x="0" y="0" width="1544" height="60" fill="black" opacity="0.1"/>
+    <text x="50" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="white">
+      Built by Vireo Designs
+    </text>
+    <text x="1344" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="white" opacity="0.8">
+      vireodesigns.com
+    </text>
+  </g>
+</svg>
