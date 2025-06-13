@@ -1,13 +1,21 @@
 <?php
 /**
- * Capabilities management for PlugHaus Property Management
+ * Capabilities management for Vireo Property Management
+ *
+ * @package VireoPropertyManagement
+ * @since 1.0.0
  */
+
+namespace Vireo\PropertyManagement\Core;
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-class PHPM_Capabilities {
+/**
+ * Handles user capabilities and roles
+ */
+class Capabilities {
     
     /**
      * Initialize capabilities
@@ -221,7 +229,7 @@ class PHPM_Capabilities {
      */
     private static function create_custom_roles() {
         // Property Manager Role
-        add_role('phpm_property_manager', __('Property Manager', 'plughaus-property'), array(
+        add_role('phpm_property_manager', __('Property Manager', 'vireo-property'), array(
             'read' => true,
             
             // Properties - full access
@@ -301,7 +309,7 @@ class PHPM_Capabilities {
         ));
         
         // Tenant Role
-        add_role('phpm_tenant', __('Tenant', 'plughaus-property'), array(
+        add_role('phpm_tenant', __('Tenant', 'vireo-property'), array(
             'read' => true,
             
             // Limited read access

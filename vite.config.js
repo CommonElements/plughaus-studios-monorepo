@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
+import sass from 'sass';
 
 export default defineConfig({
   plugins: [vue()],
@@ -9,9 +10,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: {
-        'property-management-admin': resolve(__dirname, 'app/public/wp-content/plugins/plughaus-property-management/assets/js/admin.js'),
-        'property-management-public': resolve(__dirname, 'app/public/wp-content/plugins/plughaus-property-management/assets/js/public.js'),
-        'studio-theme': resolve(__dirname, 'app/public/wp-content/themes/plughaus-studios/assets/js/main.js'),
+        'property-management-admin': resolve(__dirname, 'app/public/wp-content/plugins/vireo-property-management/assets/js/admin.js'),
+        'property-management-public': resolve(__dirname, 'app/public/wp-content/plugins/vireo-property-management/assets/js/public.js'),
+        'studio-theme': resolve(__dirname, 'app/public/wp-content/themes/vireo-designs/assets/js/main.js'),
       },
       formats: ['iife'],
       name: 'PlugHausStudios'
@@ -31,9 +32,10 @@ export default defineConfig({
           return 'assets/[name].[ext]';
         },
         entryFileNames: 'js/[name].js',
+        chunkFileNames: 'js/[name].js',
       }
     },
-    outDir: 'build',
+    outDir: 'dist',
     emptyOutDir: false,
   },
 
@@ -41,8 +43,12 @@ export default defineConfig({
   server: {
     proxy: {
       // Proxy WordPress requests to Local by Flywheel
-      '^/wp-.*': {
-        target: 'http://plughaus-studios-the-beginning-is-finished.local',
+      '/wp-admin': {
+        target: 'http://vireo-designs-the-beginning-is-finished.local',
+        changeOrigin: true,
+      },
+      '/wp-json': {
+        target: 'http://vireo-designs-the-beginning-is-finished.local',
         changeOrigin: true,
       },
     },
@@ -52,7 +58,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "./app/public/wp-content/themes/plughaus-studios/assets/scss/variables.scss";`
+        additionalData: `@import "./app/public/wp-content/themes/vireo-designs/assets/scss/variables.scss";`
       }
     }
   },

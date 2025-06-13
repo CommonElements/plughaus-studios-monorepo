@@ -5,21 +5,21 @@
  */
 
 // Add admin menu item
-add_action('admin_menu', 'plughaus_add_page_creator_menu');
+add_action('admin_menu', 'vireo_add_page_creator_menu');
 
-function plughaus_add_page_creator_menu() {
+function vireo_add_page_creator_menu() {
     add_management_page(
         'Create Vireo Pages',
         'Create Pages',
         'manage_options',
-        'plughaus-create-pages',
-        'plughaus_create_pages_admin_page'
+        'vireo-create-pages',
+        'vireo_create_pages_admin_page'
     );
 }
 
-function plughaus_create_pages_admin_page() {
+function vireo_create_pages_admin_page() {
     if (isset($_POST['create_pages'])) {
-        plughaus_create_all_pages();
+        vireo_create_all_pages();
     }
     
     ?>
@@ -55,7 +55,7 @@ function plughaus_create_pages_admin_page() {
     <?php
 }
 
-function plughaus_create_all_pages() {
+function vireo_create_all_pages() {
     if (!wp_verify_nonce($_POST['create_pages_nonce'], 'create_pages')) {
         return false;
     }

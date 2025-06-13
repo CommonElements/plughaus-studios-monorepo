@@ -59,10 +59,10 @@ $category_names = $categories ? array_map(function($cat) { return $cat->name; },
             <span class="plugin-status status-<?php echo esc_attr($status); ?>">
                 <?php
                 $status_labels = array(
-                    'available' => __('Available Now', 'plughaus-studios'),
-                    'coming-soon' => __('Coming Soon', 'plughaus-studios'),
-                    'in-development' => __('In Development', 'plughaus-studios'),
-                    'beta' => __('Beta', 'plughaus-studios'),
+                    'available' => __('Available Now', 'vireo-designs'),
+                    'coming-soon' => __('Coming Soon', 'vireo-designs'),
+                    'in-development' => __('In Development', 'vireo-designs'),
+                    'beta' => __('Beta', 'vireo-designs'),
                 );
                 echo esc_html($status_labels[$status] ?? ucwords(str_replace('-', ' ', $status)));
                 ?>
@@ -71,7 +71,7 @@ $category_names = $categories ? array_map(function($cat) { return $cat->name; },
             <?php if ($featured) : ?>
                 <span class="featured-badge">
                     <i class="fas fa-star"></i>
-                    <?php _e('Featured', 'plughaus-studios'); ?>
+                    <?php _e('Featured', 'vireo-designs'); ?>
                 </span>
             <?php endif; ?>
         </div>
@@ -107,7 +107,7 @@ $category_names = $categories ? array_map(function($cat) { return $cat->name; },
                 <?php if ($download_count) : ?>
                     <div class="plugin-stat">
                         <i class="fas fa-download"></i>
-                        <span><?php echo number_format($download_count); ?> <?php _e('downloads', 'plughaus-studios'); ?></span>
+                        <span><?php echo number_format($download_count); ?> <?php _e('downloads', 'vireo-designs'); ?></span>
                     </div>
                 <?php endif; ?>
                 
@@ -130,7 +130,7 @@ $category_names = $categories ? array_map(function($cat) { return $cat->name; },
         <!-- Features Preview -->
         <?php if (!empty($features_array)) : ?>
             <div class="plugin-features">
-                <h5><?php _e('Features:', 'plughaus-studios'); ?></h5>
+                <h5><?php _e('Features:', 'vireo-designs'); ?></h5>
                 <ul class="features-list">
                     <?php foreach (array_slice($features_array, 0, 3) as $feature) : ?>
                         <li>
@@ -141,7 +141,7 @@ $category_names = $categories ? array_map(function($cat) { return $cat->name; },
                     <?php if (count($features_array) > 3) : ?>
                         <li class="more-features">
                             <i class="fas fa-plus"></i>
-                            <?php printf(__('And %d more...', 'plughaus-studios'), count($features_array) - 3); ?>
+                            <?php printf(__('And %d more...', 'vireo-designs'), count($features_array) - 3); ?>
                         </li>
                     <?php endif; ?>
                 </ul>
@@ -152,13 +152,13 @@ $category_names = $categories ? array_map(function($cat) { return $cat->name; },
         <div class="plugin-pricing">
             <div class="price-options">
                 <div class="price-option free">
-                    <span class="price-label"><?php _e('Free', 'plughaus-studios'); ?></span>
+                    <span class="price-label"><?php _e('Free', 'vireo-designs'); ?></span>
                     <span class="price-value"><?php echo esc_html($price_free); ?></span>
                 </div>
                 
                 <?php if ($price_pro) : ?>
                     <div class="price-option pro">
-                        <span class="price-label"><?php _e('Pro', 'plughaus-studios'); ?></span>
+                        <span class="price-label"><?php _e('Pro', 'vireo-designs'); ?></span>
                         <span class="price-value"><?php echo esc_html($price_pro); ?></span>
                     </div>
                 <?php endif; ?>
@@ -171,34 +171,34 @@ $category_names = $categories ? array_map(function($cat) { return $cat->name; },
         <div class="primary-actions">
             <a href="<?php the_permalink(); ?>" class="btn btn-primary">
                 <i class="fas fa-info-circle"></i>
-                <?php _e('Learn More', 'plughaus-studios'); ?>
+                <?php _e('Learn More', 'vireo-designs'); ?>
             </a>
             
             <?php if ($status === 'available' && $wordpress_url) : ?>
                 <a href="<?php echo esc_url($wordpress_url); ?>" class="btn btn-secondary" target="_blank" rel="noopener">
                     <i class="fab fa-wordpress"></i>
-                    <?php _e('Download Free', 'plughaus-studios'); ?>
+                    <?php _e('Download Free', 'vireo-designs'); ?>
                 </a>
             <?php elseif ($demo_url) : ?>
                 <a href="<?php echo esc_url($demo_url); ?>" class="btn btn-outline" target="_blank" rel="noopener">
                     <i class="fas fa-eye"></i>
-                    <?php _e('View Demo', 'plughaus-studios'); ?>
+                    <?php _e('View Demo', 'vireo-designs'); ?>
                 </a>
             <?php endif; ?>
         </div>
         
         <div class="secondary-actions">
             <?php if ($github_url) : ?>
-                <a href="<?php echo esc_url($github_url); ?>" class="action-link" target="_blank" rel="noopener" title="<?php _e('View on GitHub', 'plughaus-studios'); ?>">
+                <a href="<?php echo esc_url($github_url); ?>" class="action-link" target="_blank" rel="noopener" title="<?php _e('View on GitHub', 'vireo-designs'); ?>">
                     <i class="fab fa-github"></i>
                 </a>
             <?php endif; ?>
             
-            <button class="action-link share-plugin" title="<?php _e('Share Plugin', 'plughaus-studios'); ?>" data-url="<?php the_permalink(); ?>" data-title="<?php the_title_attribute(); ?>">
+            <button class="action-link share-plugin" title="<?php _e('Share Plugin', 'vireo-designs'); ?>" data-url="<?php the_permalink(); ?>" data-title="<?php the_title_attribute(); ?>">
                 <i class="fas fa-share-alt"></i>
             </button>
             
-            <button class="action-link bookmark-plugin" title="<?php _e('Bookmark Plugin', 'plughaus-studios'); ?>" data-plugin-id="<?php echo esc_attr($plugin_id); ?>">
+            <button class="action-link bookmark-plugin" title="<?php _e('Bookmark Plugin', 'vireo-designs'); ?>" data-plugin-id="<?php echo esc_attr($plugin_id); ?>">
                 <i class="far fa-bookmark"></i>
             </button>
         </div>

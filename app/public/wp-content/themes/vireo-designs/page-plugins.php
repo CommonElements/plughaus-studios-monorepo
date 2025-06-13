@@ -1,17 +1,13 @@
 <?php
 /**
- * Template Name: Plugins Page
- * Unified plugins directory showcasing all Vireo Designs plugins
+ * Template Name: Professional Plugin Directory
+ * Complete plugin showcase for Vireo Designs
  */
 
 get_header();
-
-// Debug output to verify page is loading
-echo '<!-- Plugin Directory Page Template Loading -->';
 ?>
 
 <div class="plugin-directory-page">
-<!-- VIREO PLUGIN DIRECTORY PAGE TEMPLATE LOADED SUCCESSFULLY -->
     
     <section class="page-header">
         <div class="container">

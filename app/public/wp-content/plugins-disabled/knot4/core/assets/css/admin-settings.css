@@ -1,0 +1,474 @@
+/**
+ * Admin Settings Styles for Knot4
+ * 
+ * @package Knot4
+ * @since 1.0.0
+ */
+
+/* Settings Page Layout */
+.knot4-settings-wrap {
+    max-width: 1200px;
+}
+
+.knot4-settings-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccd0d4;
+}
+
+.knot4-settings-header .knot4-logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    background: #667eea;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.knot4-settings-header h1 {
+    margin: 0;
+    font-size: 28px;
+    color: #23282d;
+}
+
+.knot4-settings-header .subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Settings Tabs */
+.knot4-settings-tabs {
+    margin-bottom: 20px;
+}
+
+.knot4-settings-tabs .nav-tab {
+    position: relative;
+    margin-right: 5px;
+    padding: 12px 20px;
+    font-size: 14px;
+    text-decoration: none;
+    border: 1px solid #ccd0d4;
+    border-bottom: none;
+    background: #f1f1f1;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.knot4-settings-tabs .nav-tab:hover {
+    background: #fff;
+    color: #000;
+}
+
+.knot4-settings-tabs .nav-tab-active,
+.knot4-settings-tabs .nav-tab-active:hover {
+    background: #fff;
+    color: #000;
+    border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
+}
+
+/* Tab Content */
+.knot4-tab-content {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    padding: 20px;
+    border-radius: 0 0 4px 4px;
+}
+
+.knot4-tab-panel {
+    display: none;
+}
+
+.knot4-tab-panel.active {
+    display: block;
+}
+
+/* Form Sections */
+.form-table th {
+    width: 220px;
+    padding: 20px 10px 20px 0;
+    vertical-align: top;
+    font-weight: 600;
+    color: #23282d;
+}
+
+.form-table td {
+    padding: 15px 10px 20px 0;
+    vertical-align: top;
+}
+
+.form-table .description {
+    font-size: 13px;
+    color: #666;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+/* Page Selection Fields */
+.knot4-page-select-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.knot4-page-select-container select {
+    min-width: 250px;
+    flex: 1;
+}
+
+.knot4-create-page {
+    white-space: nowrap;
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+    text-shadow: none;
+    box-shadow: none;
+    transition: all 0.2s ease;
+}
+
+.knot4-create-page:hover {
+    background: #5a6fd8;
+    border-color: #5a6fd8;
+    color: white;
+}
+
+.knot4-create-page:disabled {
+    background: #ccc;
+    border-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* Field States */
+.error {
+    border-color: #dc3232 !important;
+    box-shadow: 0 0 2px rgba(220, 50, 50, 0.8);
+}
+
+.success {
+    border-color: #46b450 !important;
+    box-shadow: 0 0 2px rgba(70, 180, 80, 0.8);
+}
+
+/* Required Field Indicator */
+.required {
+    color: #dc3232;
+    font-weight: bold;
+}
+
+/* Settings Groups */
+.knot4-settings-group {
+    margin-bottom: 30px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.knot4-settings-group h3 {
+    margin: 0;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #ccd0d4;
+    font-size: 16px;
+    color: #23282d;
+}
+
+.knot4-settings-group .form-table {
+    margin: 0;
+}
+
+.knot4-settings-group .form-table tr:last-child th,
+.knot4-settings-group .form-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Stripe Key Fields */
+.stripe-key-field {
+    position: relative;
+}
+
+.stripe-key-field .dashicons {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #46b450;
+    display: none;
+}
+
+.stripe-key-field.valid .dashicons {
+    display: block;
+}
+
+/* Test Mode Toggle */
+.test-mode-notice {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+    padding: 12px 15px;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+.test-mode-notice .dashicons {
+    margin-right: 5px;
+    color: #f39c12;
+}
+
+/* Help Text and Tooltips */
+.knot4-help-tip {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: #666;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 16px;
+    font-size: 12px;
+    cursor: help;
+    margin-left: 5px;
+    position: relative;
+}
+
+.knot4-help-tip:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+/* Organization Info Display */
+.knot4-org-preview {
+    background: #f8f9fa;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.knot4-org-preview h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.knot4-org-preview p {
+    margin: 5px 0;
+    color: #666;
+}
+
+/* Currency Selection */
+.currency-select {
+    position: relative;
+}
+
+.currency-symbol {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-weight: bold;
+}
+
+.currency-select input {
+    padding-left: 30px;
+}
+
+/* Save Button */
+.knot4-save-settings {
+    background: #46b450;
+    border-color: #46b450;
+    color: white;
+    font-size: 14px;
+    padding: 8px 20px;
+    height: auto;
+    box-shadow: none;
+    text-shadow: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.knot4-save-settings:hover,
+.knot4-save-settings:focus {
+    background: #419446;
+    border-color: #419446;
+    color: white;
+}
+
+/* Loading States */
+.knot4-loading {
+    position: relative;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.knot4-loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    animation: knot4-spin 1s linear infinite;
+}
+
+@keyframes knot4-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .knot4-page-select-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .knot4-page-select-container select {
+        min-width: auto;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .knot4-create-page {
+        width: 100%;
+    }
+    
+    .form-table th,
+    .form-table td {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+    }
+    
+    .form-table th {
+        border-bottom: none;
+        margin-bottom: 5px;
+    }
+    
+    .knot4-settings-tabs .nav-tab {
+        display: block;
+        margin: 0 0 5px 0;
+        text-align: center;
+    }
+}
+
+/* Status Indicators */
+.knot4-status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.knot4-status-indicator.connected {
+    background: #d1f2eb;
+    color: #0f5132;
+}
+
+.knot4-status-indicator.disconnected {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.knot4-status-indicator.testing {
+    background: #fff3cd;
+    color: #856404;
+}
+
+/* Integration Status */
+.knot4-integration-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    border-left: 4px solid #667eea;
+}
+
+.knot4-integration-status .dashicons {
+    color: #667eea;
+}
+
+/* Pro Features */
+.knot4-pro-feature {
+    position: relative;
+    opacity: 0.6;
+}
+
+.knot4-pro-feature::after {
+    content: "Pro Feature";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.knot4-pro-upgrade {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.knot4-pro-upgrade h3 {
+    margin: 0 0 10px 0;
+    color: white;
+}
+
+.knot4-pro-upgrade p {
+    margin: 0 0 15px 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.knot4-pro-upgrade .button {
+    background: white;
+    color: #667eea;
+    border: none;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.knot4-pro-upgrade .button:hover {
+    background: #f8f9fa;
+    transform: translateY(-1px);
+}

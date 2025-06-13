@@ -264,7 +264,7 @@ get_header(); ?>
                         <i class="fas fa-download"></i>
                         Download Free
                     </a>
-                    <a href="/pricing/" class="btn btn-outline btn-xl">
+                    <a href="/shop/" class="btn btn-outline btn-xl">
                         <i class="fas fa-crown"></i>
                         Upgrade to Pro
                     </a>

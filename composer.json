@@ -1,44 +1,42 @@
 {
-  "name": "plughaus/studios-monorepo",
-  "description": "PlugHaus Studios - WordPress Plugin Development Studio",
+  "name": "vireo/designs-monorepo",
+  "description": "Vireo Designs - WordPress Plugin Development Studio",
   "type": "project",
   "license": "GPL-2.0-or-later",
   "authors": [
     {
-      "name": "PlugHaus Studios",
-      "email": "dev@plughausstudios.com",
-      "homepage": "https://plughausstudios.com"
+      "name": "Vireo Designs",
+      "email": "dev@vireodesigns.com",
+      "homepage": "https://vireodesigns.com"
     }
   ],
   "minimum-stability": "stable",
   "require": {
     "php": ">=7.4",
-    "composer/installers": "^2.0"
+    "composer/installers": "^2.0",
+    "wp-coding-standards/wpcs": "^3.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.5",
-    "wp-coding-standards/wpcs": "^3.0",
-    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "phpunit/phpunit": "^9.0",
     "squizlabs/php_codesniffer": "^3.7",
-    "phpmd/phpmd": "^2.13",
-    "friendsofphp/php-cs-fixer": "^3.0"
+    "wp-cli/wp-cli-bundle": "^2.7"
   },
   "autoload": {
     "psr-4": {
-      "PlugHaus\\": "packages/shared/src/"
+      "Vireo\\": "packages/shared/src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "PlugHaus\\Tests\\": "tests/"
+      "Vireo\\Tests\\": "tests/"
     }
   },
   "scripts": {
     "test": "phpunit",
     "test:watch": "phpunit --watch",
-    "phpcs": "phpcs --standard=WordPress",
-    "phpcbf": "phpcbf --standard=WordPress",
+    "phpcs": "phpcs",
+    "phpcbf": "phpcbf",
     "phpmd": "phpmd app/public/wp-content/plugins text cleancode,codesize,controversial,design,naming,unusedcode",
     "php-cs-fixer": "php-cs-fixer fix --dry-run --diff",
     "php-cs-fixer:fix": "php-cs-fixer fix",

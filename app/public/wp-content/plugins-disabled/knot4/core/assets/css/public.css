@@ -1,0 +1,757 @@
+/**
+ * Main public stylesheet for Knot4
+ * 
+ * @package Knot4
+ * @since 1.0.0
+ */
+
+/* ========================================================================
+   Base Styles
+   ======================================================================== */
+
+.knot4-container {
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.knot4-sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* ========================================================================
+   Form Styles
+   ======================================================================== */
+
+.knot4-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.knot4-form-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.knot4-form-section {
+    margin-bottom: 25px;
+}
+
+.knot4-form-section h4 {
+    margin-bottom: 15px;
+    color: #34495e;
+    font-size: 1.2em;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 8px;
+}
+
+.knot4-form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.knot4-form-col {
+    flex: 1;
+}
+
+.knot4-form-col.knot4-full-width {
+    flex: 100%;
+}
+
+.knot4-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.knot4-label .required {
+    color: #e74c3c;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ========================================================================
+   Button Styles
+   ======================================================================== */
+
+.knot4-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: 1.4;
+}
+
+.knot4-btn-primary {
+    background: #3498db;
+    color: white;
+}
+
+.knot4-btn-primary:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.knot4-btn-secondary {
+    background: #95a5a6;
+    color: white;
+}
+
+.knot4-btn-secondary:hover {
+    background: #7f8c8d;
+}
+
+.knot4-btn-success {
+    background: #27ae60;
+    color: white;
+}
+
+.knot4-btn-success:hover {
+    background: #229954;
+}
+
+.knot4-btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.knot4-btn-danger:hover {
+    background: #c0392b;
+}
+
+.knot4-size-small {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.knot4-size-large {
+    padding: 16px 32px;
+    font-size: 18px;
+}
+
+.knot4-size-hero {
+    padding: 20px 40px;
+    font-size: 20px;
+}
+
+/* Button Loading State */
+.knot4-submit-btn {
+    position: relative;
+    min-width: 120px;
+}
+
+.knot4-submit-btn .btn-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.knot4-submit-btn .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: knot4-spin 1s ease-in-out infinite;
+    margin-right: 8px;
+}
+
+@keyframes knot4-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========================================================================
+   Amount Selection
+   ======================================================================== */
+
+.knot4-amount-section {
+    text-align: center;
+}
+
+.knot4-amount-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.knot4-amount-btn {
+    padding: 15px 20px;
+    border: 2px solid #3498db;
+    background: transparent;
+    color: #3498db;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 80px;
+}
+
+.knot4-amount-btn:hover,
+.knot4-amount-btn.active {
+    background: #3498db;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+}
+
+.knot4-custom-amount {
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+/* ========================================================================
+   Frequency Options
+   ======================================================================== */
+
+.knot4-frequency-options {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.knot4-radio-label {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: 2px solid #bdc3c7;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.knot4-radio-label:hover {
+    border-color: #3498db;
+}
+
+.knot4-radio-label input[type="radio"] {
+    margin-right: 8px;
+}
+
+.knot4-radio-label:has(input:checked) {
+    border-color: #3498db;
+    background: rgba(52, 152, 219, 0.1);
+}
+
+/* ========================================================================
+   Checkbox Styles
+   ======================================================================== */
+
+.knot4-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.knot4-checkbox-label input[type="checkbox"] {
+    margin-right: 10px;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.knot4-checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+/* ========================================================================
+   Message Styles
+   ======================================================================== */
+
+.knot4-form-messages {
+    margin-top: 20px;
+}
+
+.knot4-message {
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.knot4-message-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.knot4-message-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.knot4-message-warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.knot4-message-info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* ========================================================================
+   Events Layout
+   ======================================================================== */
+
+.knot4-events-container {
+    margin: 20px 0;
+}
+
+.knot4-events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.knot4-event-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.knot4-event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.knot4-event-image {
+    height: 200px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+}
+
+.knot4-event-content {
+    padding: 20px;
+}
+
+.knot4-event-title {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.knot4-event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    color: #7f8c8d;
+}
+
+.knot4-event-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.knot4-event-excerpt {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.knot4-event-actions {
+    border-top: 1px solid #ecf0f1;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Event List Layout */
+.knot4-events-list {
+    list-style: none;
+    padding: 0;
+}
+
+.knot4-event-list-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ecf0f1;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background: white;
+    transition: box-shadow 0.3s ease;
+}
+
+.knot4-event-list-item:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================================================
+   Donor Portal
+   ======================================================================== */
+
+.knot4-donor-portal {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.knot4-portal-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px;
+}
+
+.knot4-portal-tabs {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.knot4-tab-nav {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    overflow-x: auto;
+}
+
+.knot4-tab-btn {
+    padding: 15px 20px;
+    border: none;
+    background: transparent;
+    color: #6c757d;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.knot4-tab-btn:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.knot4-tab-btn.active {
+    background: white;
+    color: #007cba;
+    border-bottom: 3px solid #007cba;
+}
+
+.knot4-tab-content {
+    min-height: 400px;
+}
+
+.knot4-tab-panel {
+    display: none;
+    padding: 30px;
+}
+
+.knot4-tab-panel.active {
+    display: block;
+}
+
+/* Overview Stats */
+.knot4-overview-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.knot4-stat-item {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.knot4-stat-item .stat-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.knot4-stat-item .stat-label {
+    color: #7f8c8d;
+    font-size: 0.9em;
+}
+
+/* Donations List */
+.knot4-donations-list {
+    list-style: none;
+    padding: 0;
+}
+
+.knot4-donation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ecf0f1;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background: #fafafa;
+}
+
+.knot4-donation-item .donation-amount {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #27ae60;
+}
+
+.knot4-donation-details {
+    text-align: right;
+    font-size: 0.9em;
+    color: #7f8c8d;
+}
+
+/* ========================================================================
+   Organization Info
+   ======================================================================== */
+
+.knot4-organization-info {
+    margin: 20px 0;
+}
+
+.knot4-org-list {
+    list-style: none;
+    padding: 0;
+}
+
+.knot4-org-item {
+    margin-bottom: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.knot4-org-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.knot4-org-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.knot4-org-card .knot4-org-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    border: none;
+}
+
+.knot4-org-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.knot4-org-value {
+    color: #34495e;
+}
+
+/* ========================================================================
+   Powered By (Free Version)
+   ======================================================================== */
+
+.knot4-powered-by {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #ecf0f1;
+}
+
+.knot4-powered-by small {
+    color: #7f8c8d;
+}
+
+.knot4-powered-by a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.knot4-powered-by a:hover {
+    text-decoration: underline;
+}
+
+/* ========================================================================
+   No Results Messages
+   ======================================================================== */
+
+.knot4-no-events,
+.knot4-no-donations,
+.knot4-portal-error {
+    text-align: center;
+    padding: 40px 20px;
+    color: #7f8c8d;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+/* ========================================================================
+   Responsive Design
+   ======================================================================== */
+
+@media (max-width: 768px) {
+    .knot4-form-container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .knot4-form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .knot4-amount-buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .knot4-frequency-options {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .knot4-tab-nav {
+        flex-direction: column;
+    }
+    
+    .knot4-events-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .knot4-event-list-item {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+    
+    .knot4-overview-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .knot4-org-inline {
+        flex-direction: column;
+    }
+    
+    .knot4-org-card {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .knot4-amount-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .knot4-donation-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .knot4-donation-details {
+        text-align: center;
+        margin-top: 10px;
+    }
+}
+
+/* ========================================================================
+   Accessibility
+   ======================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for better accessibility */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+.knot4-amount-btn:focus,
+.knot4-tab-btn:focus {
+    outline: 2px solid #3498db;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .knot4-form-container {
+        border: 2px solid #000;
+    }
+    
+    .knot4-btn-primary {
+        background: #000;
+        border: 2px solid #000;
+    }
+    
+    .knot4-amount-btn {
+        border-width: 3px;
+    }
+}

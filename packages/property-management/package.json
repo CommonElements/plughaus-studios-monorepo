@@ -1,15 +1,14 @@
 {
-  "name": "@plughausstudios/property-management",
+  "name": "@vireodesigns/property-management",
   "version": "1.0.0",
-  "description": "PlugHaus Property Management - Complete property management solution for WordPress",
-  "main": "plughaus-property-management.php",
-  "author": "PlugHaus Studios",
+  "description": "Vireo Property Management - Complete property management solution for WordPress",
+  "main": "vireo-property-management.php",
+  "author": "Vireo Designs",
   "license": "GPL-2.0-or-later",
-  "homepage": "https://plughausstudios.com/plugins/property-management",
+  "homepage": "https://vireodesigns.com/plugins/property-management",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CommonElements/plughaus-studios-monorepo.git",
-    "directory": "packages/property-management"
+    "url": "git+https://github.com/VireoDesigns/vireo-monorepo.git"
   },
   "keywords": [
     "wordpress",
@@ -20,8 +19,8 @@
     "tenant"
   ],
   "scripts": {
-    "dev": "wp-scripts start",
-    "build": "wp-scripts build",
+    "dev": "vite",
+    "build": "vite build",
     "build:free": "node ../../tools/build/extract-plugin.js --plugin=property-management --type=free",
     "build:pro": "node ../../tools/build/extract-plugin.js --plugin=property-management --type=pro",
     "check-engines": "wp-scripts check-engines",
@@ -31,26 +30,34 @@
     "lint:js": "wp-scripts lint-js",
     "lint:md:docs": "wp-scripts lint-md-docs",
     "lint:pkg-json": "wp-scripts lint-pkg-json",
-    "lint": "npm run lint:js && npm run lint:css",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "packages-update": "wp-scripts packages-update",
     "plugin-zip": "wp-scripts plugin-zip",
     "start": "wp-scripts start",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js",
-    "test": "npm run test:unit"
+    "test": "jest"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^26.8.0",
-    "@wordpress/i18n": "^4.31.0",
-    "@wordpress/components": "^25.3.0",
-    "@wordpress/element": "^5.14.0",
-    "@wordpress/blocks": "^12.14.0",
-    "@wordpress/block-editor": "^12.5.0",
-    "@wordpress/data": "^9.7.0",
-    "@wordpress/api-fetch": "^6.34.0"
+    "@types/jest": "^29.0.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "sass": "^1.69.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0"
   },
   "dependencies": {
     "chart.js": "^4.4.0",
-    "react-chartjs-2": "^5.2.0"
+    "react-chartjs-2": "^5.2.0",
+    "@wordpress/components": "^25.0.0",
+    "@wordpress/element": "^5.0.0",
+    "@wordpress/i18n": "^4.0.0"
   }
 }

@@ -38,7 +38,7 @@ get_header(); ?>
                             </svg>
                             Explore Industries
                         </a>
-                        <a href="/pricing/" class="btn btn-outline btn-lg">
+                        <a href="/shop/" class="btn btn-outline btn-lg">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                             </svg>
@@ -276,7 +276,7 @@ get_header(); ?>
                     </div>
                     <div class="plugin-actions">
                         <a href="/plugins/property-management-pro/" class="btn btn-outline">Learn More</a>
-                        <a href="/pricing/" class="btn btn-primary">Get Started</a>
+                        <a href="/shop/" class="btn btn-primary">Get Started</a>
                     </div>
                 </div>
                 
@@ -472,7 +472,7 @@ get_header(); ?>
                     Be among the first to experience our innovative WordPress plugins designed for modern business needs.
                 </p>
                 <div class="cta-actions">
-                    <a href="/pricing/" class="btn btn-primary btn-xl">
+                    <a href="/shop/" class="btn btn-primary btn-xl">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M13 9V3.5L23.5 12 13 20.5V15c-5.5 0-10 1.5-10 7 0-5 1.5-10 10-12z"/>
                         </svg>

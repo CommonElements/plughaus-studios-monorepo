@@ -21,7 +21,7 @@ class Vireo_Stripe_Checkout {
      */
     public function create_checkout_session() {
         // Verify nonce
-        if (!wp_verify_nonce($_POST['nonce'], 'plughaus_nonce')) {
+        if (!wp_verify_nonce($_POST['nonce'], 'vireo_nonce')) {
             wp_die('Security check failed');
         }
         
@@ -108,9 +108,9 @@ class Vireo_Stripe_Checkout {
         );
         
         // Add to WordPress options for now (in production, use proper database table)
-        $purchases = get_option('plughaus_purchases', array());
+        $purchases = get_option('vireo_purchases', array());
         $purchases[] = $purchase_data;
-        update_option('plughaus_purchases', $purchases);
+        update_option('vireo_purchases', $purchases);
         
         // Send confirmation email
         $this->send_confirmation_email($session, $purchase_data);
@@ -137,9 +137,9 @@ class Vireo_Stripe_Checkout {
             'expires_at' => date('Y-m-d H:i:s', strtotime('+1 year')),
         );
         
-        $licenses = get_option('plughaus_licenses', array());
+        $licenses = get_option('vireo_licenses', array());
         $licenses[$license_key] = $license_data;
-        update_option('plughaus_licenses', $licenses);
+        update_option('vireo_licenses', $licenses);
         
         return $license_key;
     }

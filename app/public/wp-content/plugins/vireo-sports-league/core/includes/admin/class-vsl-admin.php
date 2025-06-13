@@ -135,28 +135,28 @@ class VSL_Admin {
      * Dashboard page
      */
     public function dashboard_page() {
-        include_once PLUGHAUS_LEAGUE_CORE_DIR . 'admin/views/dashboard.php';
+        include_once VIREO_LEAGUE_CORE_DIR . 'admin/views/dashboard.php';
     }
     
     /**
      * Standings page
      */
     public function standings_page() {
-        include_once PLUGHAUS_LEAGUE_CORE_DIR . 'admin/views/standings.php';
+        include_once VIREO_LEAGUE_CORE_DIR . 'admin/views/standings.php';
     }
     
     /**
      * Statistics page
      */
     public function statistics_page() {
-        include_once PLUGHAUS_LEAGUE_CORE_DIR . 'admin/views/statistics.php';
+        include_once VIREO_LEAGUE_CORE_DIR . 'admin/views/statistics.php';
     }
     
     /**
      * Settings page
      */
     public function settings_page() {
-        include_once PLUGHAUS_LEAGUE_CORE_DIR . 'admin/views/settings.php';
+        include_once VIREO_LEAGUE_CORE_DIR . 'admin/views/settings.php';
     }
     
     /**
@@ -165,9 +165,9 @@ class VSL_Admin {
     public function enqueue_styles() {
         wp_enqueue_style(
             'vsl-admin',
-            PLUGHAUS_LEAGUE_PLUGIN_URL . 'core/assets/css/admin.css',
+            VIREO_LEAGUE_PLUGIN_URL . 'core/assets/css/admin.css',
             array(),
-            PLUGHAUS_LEAGUE_VERSION
+            VIREO_LEAGUE_VERSION
         );
         
         // Enqueue additional styles for specific pages
@@ -175,9 +175,9 @@ class VSL_Admin {
         if ($screen && strpos($screen->id, 'psl') !== false) {
             wp_enqueue_style(
                 'vsl-admin-page',
-                PLUGHAUS_LEAGUE_PLUGIN_URL . 'core/assets/css/admin-page.css',
+                VIREO_LEAGUE_PLUGIN_URL . 'core/assets/css/admin-page.css',
                 array('vsl-admin'),
-                PLUGHAUS_LEAGUE_VERSION
+                VIREO_LEAGUE_VERSION
             );
         }
     }
@@ -188,9 +188,9 @@ class VSL_Admin {
     public function enqueue_scripts() {
         wp_enqueue_script(
             'vsl-admin',
-            PLUGHAUS_LEAGUE_PLUGIN_URL . 'core/assets/js/admin.js',
+            VIREO_LEAGUE_PLUGIN_URL . 'core/assets/js/admin.js',
             array('jquery', 'wp-util'),
-            PLUGHAUS_LEAGUE_VERSION,
+            VIREO_LEAGUE_VERSION,
             true
         );
         

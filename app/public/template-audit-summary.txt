@@ -1,0 +1,107 @@
+COMPREHENSIVE WORDPRESS TEMPLATE AUDIT REPORT
+=============================================
+Date: December 6, 2025
+Site: Vireo Designs (Local by Flywheel)
+
+CRITICAL ISSUES FOUND:
+======================
+
+1. MISSING TEMPLATE FILES (5 pages affected):
+   ❌ page-industry.php - Used by 3 pages but file doesn't exist
+   ❌ page-plugin-directory.php - Used by 1 page but file doesn't exist  
+   ❌ page-plugin-property-management.php - Used by 1 page but file doesn't exist
+
+2. DUPLICATE PAGE SLUGS (causing conflicts):
+   ⚠️ /equipment-rental - 2 pages use this slug
+   ⚠️ /property-management - 3 pages use this slug
+   ⚠️ /sports-leagues - 2 pages use this slug
+   ⚠️ /properties - 2 pages use this slug
+   ⚠️ /submit-maintenance-request - 2 pages use this slug
+
+3. PAGES USING DEFAULT TEMPLATE (should have custom):
+   - booking-checkout
+   - booking-confirmation  
+   - customer-dashboard
+   - damage-waiver
+   - equipment-catalog
+   - maintenance-request
+   - make-reservation
+   - my-bookings
+   - properties (both versions)
+   - property-listings
+   - property-portal
+   - property-search
+   - rental-terms-conditions
+   - studiosnap-booking-test
+   - submit-maintenance-request (both versions)
+   - tenant-dashboard
+   - tenant-portal
+
+IMMEDIATE ACTIONS REQUIRED:
+==========================
+
+HIGH PRIORITY:
+1. Create missing template files:
+   - Create page-plugin-directory.php for Plugin Directory page
+   - Create page-plugin-property-management.php for Property Management Pro page
+   - Replace page-industry.php references with specific industry templates
+
+2. Fix duplicate page slugs:
+   - Rename or delete duplicate pages with same slugs
+   - Update internal links and navigation accordingly
+
+MEDIUM PRIORITY:
+3. Create functional page templates for:
+   - Property management system pages (properties, tenant-portal, etc.)
+   - Equipment rental system pages (booking-checkout, equipment-catalog, etc.)
+   - Customer dashboard and user account pages
+
+LOW PRIORITY:
+4. Clean up test/development pages:
+   - Remove or properly template studiosnap-booking-test
+   - Consolidate duplicate properties pages
+   - Clean up old/unused pages
+
+PAGES WITH CORRECT TEMPLATES:
+============================
+✅ Core pages properly templated:
+   - Home (page-home.php)
+   - About (page-about.php)
+   - Contact (page-contact.php)
+   - Pricing (page-pricing.php)
+   - Support (page-support.php)
+   - Features (page-features.php)
+   - Industries (page-industries.php)
+   - Plugins (page-plugins.php)
+   - Blog (page-blog.php)
+
+✅ Industry pages properly templated:
+   - Equipment Rental (page-industry-equipment-rental.php)
+   - Property Management (page-industry-property-management.php)
+   - Sports Leagues (page-industry-sports-leagues.php)
+   - Auto/Dealer (page-industry-automotive.php)
+   - Gym/Fitness (page-industry-gym-fitness.php)
+   - Creative Services (page-industry-creative-services.php)
+
+TEMPLATE NAMING RECOMMENDATIONS:
+===============================
+- Property system: page-property-*.php
+- Equipment rental: page-equipment-*.php or page-rental-*.php
+- Customer/User: page-customer-*.php or page-user-*.php
+- Booking system: page-booking-*.php
+- Admin/Dashboard: page-dashboard-*.php
+
+NEXT STEPS:
+===========
+1. Fix critical missing template files
+2. Resolve duplicate page slug conflicts
+3. Create templates for functional pages based on business requirements
+4. Test all pages load correctly with proper templates
+5. Update navigation and internal links
+6. Clean up unused/test pages
+
+Total Pages Audited: 43
+Pages with Issues: 23
+Pages Working Correctly: 20
+
+This audit reveals significant template organization issues that should be addressed to ensure proper page functionality and SEO.

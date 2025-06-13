@@ -1,13 +1,15 @@
 <?php
 /**
- * Shared utilities for PlugHaus Studios plugins
+ * Shared utilities for Vireo Designs plugins
  * 
  * NOTE: This file is copied into each plugin during build/extraction
  * It should NOT be referenced as a shared dependency at runtime
  *
- * @package PlugHausShared
+ * @package VireoShared
  * @since 1.0.0
  */
+
+namespace Vireo\Shared;
 
 // Prevent direct access
 if (!defined('ABSPATH')) {
@@ -18,7 +20,7 @@ if (!defined('ABSPATH')) {
  * Shared utilities class that gets copied into each plugin
  * Each plugin will rename this class to avoid conflicts
  */
-class PlugHaus_Shared_Utilities {
+class Vireo_Shared_Utilities {
 
     /**
      * Format currency amount

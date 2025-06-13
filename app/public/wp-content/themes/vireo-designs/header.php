@@ -70,7 +70,7 @@
                             echo '<li><a href="' . esc_url(home_url('/industries/')) . '">By Industry</a></li>';
                             echo '</ul>';
                             echo '</li>';
-                            echo '<li><a href="' . esc_url(home_url('/pricing/')) . '">Pricing</a></li>';
+                            echo '<li><a href="' . esc_url(home_url('/shop/')) . '">Pricing</a></li>';
                             echo '<li><a href="' . esc_url(home_url('/about/')) . '">About</a></li>';
                             echo '<li><a href="' . esc_url(home_url('/contact/')) . '">Contact</a></li>';
                             echo '</ul>';
@@ -82,7 +82,7 @@
                 <!-- Header Actions -->
                 <div class="header-actions">
                     <a href="<?php echo esc_url(home_url('/support/')); ?>" class="nav-link">Support</a>
-                    <a href="<?php echo esc_url(home_url('/pricing/')); ?>" class="btn btn-primary">Get Started</a>
+                    <a href="<?php echo esc_url(home_url('/shop/')); ?>" class="btn btn-primary">Get Started</a>
                 </div>
                 
                 <!-- Mobile Menu Toggle -->

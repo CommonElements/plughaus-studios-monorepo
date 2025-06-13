@@ -1,0 +1,43 @@
+{
+  "name": "equiprent-pro",
+  "version": "1.0.0",
+  "description": "Professional equipment rental management for WordPress",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "build:free": "node build-scripts/build-free.js",
+    "build:pro": "node build-scripts/build-pro.js",
+    "dev": "webpack --mode development --watch",
+    "lint": "eslint assets/js/",
+    "lint:fix": "eslint assets/js/ --fix"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "equipment",
+    "rental",
+    "booking",
+    "inventory"
+  ],
+  "author": "Vireo Designs",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@wordpress/scripts": "^26.0.0",
+    "archiver": "^5.3.1",
+    "eslint": "^8.0.0",
+    "fs-extra": "^11.0.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.0.0"
+  },
+  "dependencies": {
+    "chart.js": "^3.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vireodesigns/equiprent-pro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vireodesigns/equiprent-pro/issues"
+  },
+  "homepage": "https://vireodesigns.com/plugins/equiprent-pro"
+}

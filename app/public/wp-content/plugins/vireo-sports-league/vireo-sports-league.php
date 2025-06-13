@@ -146,19 +146,19 @@ class Vireo_Sports_League {
         // Modules will be loaded later - commented out for initial setup
         /*
         // Teams module (core feature)
-        require_once PLUGHAUS_LEAGUE_CORE_DIR . 'modules/teams/class-psl-teams.php';
+        require_once VIREO_LEAGUE_CORE_DIR . 'modules/teams/class-psl-teams.php';
         
         // Players module (core feature)
-        require_once PLUGHAUS_LEAGUE_CORE_DIR . 'modules/players/class-psl-players.php';
+        require_once VIREO_LEAGUE_CORE_DIR . 'modules/players/class-psl-players.php';
         
         // Matches module (core feature)
-        require_once PLUGHAUS_LEAGUE_CORE_DIR . 'modules/matches/class-psl-matches.php';
+        require_once VIREO_LEAGUE_CORE_DIR . 'modules/matches/class-psl-matches.php';
         
         // Standings module (core feature)
-        require_once PLUGHAUS_LEAGUE_CORE_DIR . 'modules/standings/class-psl-standings.php';
+        require_once VIREO_LEAGUE_CORE_DIR . 'modules/standings/class-psl-standings.php';
         
         // Statistics module (basic features in free)
-        require_once PLUGHAUS_LEAGUE_CORE_DIR . 'modules/statistics/class-psl-statistics.php';
+        require_once VIREO_LEAGUE_CORE_DIR . 'modules/statistics/class-psl-statistics.php';
         */
     }
     

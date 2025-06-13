@@ -51,8 +51,8 @@ get_header(); ?>
                     }
                     ?>
                     
-                    <form class="plughaus-contact-form" method="post" action="">
-                        <?php wp_nonce_field('plughaus_contact_form', 'contact_nonce'); ?>
+                    <form class="vireo-contact-form" method="post" action="">
+                        <?php wp_nonce_field('vireo_contact_form', 'contact_nonce'); ?>
                         
                         <div style="margin-bottom: 1.5rem;">
                             <label for="contact_name" style="display: block; font-weight: 600; margin-bottom: 0.5rem; color: var(--gray-700);">Name *</label>
@@ -99,7 +99,7 @@ get_header(); ?>
                             </div>
                             <div>
                                 <h4 style="margin: 0 0 0.25rem 0; color: var(--gray-900);">Email</h4>
-                                <p style="margin: 0; color: var(--gray-600);">hello@plughausstudios.com</p>
+                                <p style="margin: 0; color: var(--gray-600);">hello@vireodesigns.com</p>
                             </div>
                         </div>
                         
@@ -109,7 +109,7 @@ get_header(); ?>
                             </div>
                             <div>
                                 <h4 style="margin: 0 0 0.25rem 0; color: var(--gray-900);">Support</h4>
-                                <p style="margin: 0; color: var(--gray-600);">support@plughausstudios.com</p>
+                                <p style="margin: 0; color: var(--gray-600);">support@vireodesigns.com</p>
                             </div>
                         </div>
                         

@@ -18,6 +18,9 @@ if (defined('WP_DEBUG') && WP_DEBUG) {
     }
 }
 
+// Load secure Stripe configuration
+require_once get_template_directory() . '/stripe-config.php';
+
 // Load Stripe checkout functionality
 require_once get_template_directory() . '/includes/stripe-checkout.php';
 
@@ -42,10 +45,11 @@ require_once get_template_directory() . '/includes/woocommerce-checkout-enhancem
 // Load Secure Download System
 require_once get_template_directory() . '/includes/secure-download-system.php';
 
-// Load Purchase Flow Tester (development only)
-if (defined('WP_DEBUG') && WP_DEBUG) {
-    require_once get_template_directory() . '/includes/purchase-flow-tester.php';
-}
+// DISABLED: Purchase Flow Tester causes redirect loop in development
+// The auto_redirect_to_test() function redirects homepage to /purchase-test/
+// if (defined('WP_DEBUG') && WP_DEBUG) {
+//     require_once get_template_directory() . '/includes/purchase-flow-tester.php';
+// }
 
 // Load Package Delivery System
 require_once get_template_directory() . '/includes/vireo-package-delivery.php';
@@ -115,16 +119,19 @@ function vireo_designs_scripts() {
     // Legacy assets for backwards compatibility (only if compiled versions don't exist)
     if (!file_exists(get_template_directory() . '/assets/dist/css/main.css')) {
         // Enqueue enhanced professional design
-        wp_enqueue_style('plughaus-studios-enhanced', get_template_directory_uri() . '/assets/css/enhanced-professional.css', array('vireo-fallback'), '1.0.0');
+        wp_enqueue_style('vireo-designs-enhanced', get_template_directory_uri() . '/assets/css/enhanced-professional.css', array('vireo-fallback'), '1.0.0');
+        
+        // Enqueue navigation dropdown styles (high priority)
+        wp_enqueue_style('vireo-navigation-dropdown', get_template_directory_uri() . '/assets/css/navigation-dropdown.css', array('vireo-designs-enhanced'), '1.0.0');
         
         // Enqueue enhanced header & footer
-        wp_enqueue_style('plughaus-header-footer', get_template_directory_uri() . '/assets/css/header-footer-enhanced.css', array('plughaus-studios-enhanced'), '1.0.0');
+        wp_enqueue_style('vireo-header-footer', get_template_directory_uri() . '/assets/css/header-footer-enhanced.css', array('vireo-navigation-dropdown'), '1.0.0');
         
         // Enqueue component library
-        wp_enqueue_style('plughaus-components', get_template_directory_uri() . '/assets/css/components.css', array('plughaus-studios-enhanced'), '1.0.0');
+        wp_enqueue_style('vireo-components', get_template_directory_uri() . '/assets/css/components.css', array('vireo-designs-enhanced'), '1.0.0');
         
         // Enqueue refined plugin cards (high priority for plugin directory)
-        wp_enqueue_style('vireo-plugin-cards-refined', get_template_directory_uri() . '/assets/css/plugin-cards-refined.css', array('plughaus-components'), '1.0.2');
+        wp_enqueue_style('vireo-plugin-cards-refined', get_template_directory_uri() . '/assets/css/plugin-cards-refined.css', array('vireo-components'), '1.0.2');
         
         // Enqueue plugin directory enhanced styles
         if (is_page_template('page-plugins.php') || is_page('plugins') || is_page('plugin-directory')) {
@@ -136,7 +143,7 @@ function vireo_designs_scripts() {
         wp_enqueue_style('vireo-color-overrides', get_template_directory_uri() . '/assets/css/color-overrides.css', array('vireo-plugin-cards-refined'), '1.0.0');
         
         // Enqueue UI/UX enhancements
-        wp_enqueue_style('vireo-ui-enhancements', get_template_directory_uri() . '/assets/css/ui-ux-enhancements.css', array('plughaus-studios-enhanced'), '1.0.0');
+        wp_enqueue_style('vireo-ui-enhancements', get_template_directory_uri() . '/assets/css/ui-ux-enhancements.css', array('vireo-designs-enhanced'), '1.0.0');
         wp_enqueue_script('vireo-ui-enhancements', get_template_directory_uri() . '/assets/js/ui-ux-enhancements.js', array('jquery'), '1.0.0', true);
         
         // Enqueue bird elements
@@ -145,15 +152,18 @@ function vireo_designs_scripts() {
         
         // Enqueue homepage enhancements
         if (is_page_template('page-home.php') || is_page_template('page-home-enhanced.php') || is_front_page()) {
-            wp_enqueue_style('plughaus-homepage-enhanced', get_template_directory_uri() . '/assets/css/homepage-enhanced.css', array('plughaus-studios-enhanced'), '1.0.0');
-            wp_enqueue_style('vireo-homepage-redesigned', get_template_directory_uri() . '/assets/css/homepage-redesigned.css', array('plughaus-homepage-enhanced'), '1.1.0');
+            wp_enqueue_style('vireo-homepage-enhanced', get_template_directory_uri() . '/assets/css/homepage-enhanced.css', array('vireo-designs-enhanced'), '1.0.0');
+            wp_enqueue_style('vireo-homepage-redesigned', get_template_directory_uri() . '/assets/css/homepage-redesigned.css', array('vireo-homepage-enhanced'), '1.1.0');
         }
         
         // Theme JavaScript
-        wp_enqueue_script('plughaus-studios-script', get_template_directory_uri() . '/assets/js/theme.js', array('jquery'), '1.0.0', true);
+        wp_enqueue_script('vireo-designs-script', get_template_directory_uri() . '/assets/js/theme.js', array('jquery'), '1.0.0', true);
+        
+        // Navigation dropdown JavaScript
+        wp_enqueue_script('vireo-navigation-dropdown', get_template_directory_uri() . '/assets/js/navigation-dropdown.js', array('jquery'), '1.0.0', true);
         
         // Header & Footer JavaScript
-        wp_enqueue_script('plughaus-header-footer', get_template_directory_uri() . '/assets/js/header-footer.js', array(), '1.0.0', true);
+        wp_enqueue_script('vireo-header-footer', get_template_directory_uri() . '/assets/js/header-footer.js', array(), '1.0.0', true);
     }
     
     // Google Fonts
@@ -163,7 +173,7 @@ function vireo_designs_scripts() {
     wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css', array(), '6.0.0');
     
     // Localize script for AJAX
-    $script_handle = file_exists(get_template_directory() . '/assets/dist/js/main.js') ? 'vireo-main' : 'plughaus-studios-script';
+    $script_handle = file_exists(get_template_directory() . '/assets/dist/js/main.js') ? 'vireo-main' : 'vireo-designs-script';
     wp_localize_script($script_handle, 'vireo_ajax', array(
         'ajax_url' => admin_url('admin-ajax.php'),
         'nonce' => wp_create_nonce('vireo_nonce'),
@@ -333,7 +343,7 @@ function vireo_designs_plugin_details_callback($post) {
         </tr>
         <tr>
             <th><label for="demo_url"><?php _e('Demo URL', 'vireo-designs'); ?></label></th>
-            <td><input type="url" id="demo_url" name="demo_url" value="<?php echo esc_attr($demo_url); ?>" placeholder="https://demo.plughausstudios.com/plugin-name" /></td>
+            <td><input type="url" id="demo_url" name="demo_url" value="<?php echo esc_attr($demo_url); ?>" placeholder="https://demo.vireodesigns.com/plugin-name" /></td>
         </tr>
         <tr>
             <th><label for="price_free"><?php _e('Free Version Price', 'vireo-designs'); ?></label></th>
@@ -545,8 +555,8 @@ function vireo_designs_contact_form_shortcode($atts) {
             <h3><?php echo esc_html($atts['title']); ?></h3>
         <?php endif; ?>
         
-        <form class="plughaus-contact-form" method="post" action="">
-            <?php wp_nonce_field('plughaus_contact_form', 'contact_nonce'); ?>
+        <form class="vireo-contact-form" method="post" action="">
+            <?php wp_nonce_field('vireo_contact_form', 'contact_nonce'); ?>
             
             <div class="form-group">
                 <label for="contact_name"><?php _e('Name', 'vireo-designs'); ?> *</label>
@@ -590,7 +600,7 @@ add_shortcode('contact_form', 'vireo_designs_contact_form_shortcode');
  * Handle Contact Form Submission
  */
 function vireo_designs_handle_contact_form() {
-    if (!isset($_POST['submit_contact_form']) || !wp_verify_nonce($_POST['contact_nonce'], 'plughaus_contact_form')) {
+    if (!isset($_POST['submit_contact_form']) || !wp_verify_nonce($_POST['contact_nonce'], 'vireo_contact_form')) {
         return;
     }
     
@@ -667,7 +677,7 @@ function vireo_designs_customize_register($wp_customize) {
     ));
     
     $wp_customize->add_setting('contact_email', array(
-        'default' => 'hello@plughausstudios.com',
+        'default' => 'hello@vireodesigns.com',
         'sanitize_callback' => 'sanitize_email',
     ));
     
@@ -678,7 +688,7 @@ function vireo_designs_customize_register($wp_customize) {
     ));
     
     $wp_customize->add_setting('support_email', array(
-        'default' => 'support@plughausstudios.com',
+        'default' => 'support@vireodesigns.com',
         'sanitize_callback' => 'sanitize_email',
     ));
     
@@ -694,7 +704,7 @@ add_action('customize_register', 'vireo_designs_customize_register');
  * Add Admin Styles
  */
 function vireo_designs_admin_styles() {
-    wp_enqueue_style('plughaus-studios-admin', get_template_directory_uri() . '/assets/css/admin.css', array(), '1.0.0');
+    wp_enqueue_style('vireo-designs-admin', get_template_directory_uri() . '/assets/css/admin.css', array(), '1.0.0');
 }
 add_action('admin_enqueue_scripts', 'vireo_designs_admin_styles');
 
@@ -800,16 +810,16 @@ function vireo_designs_flush_rewrites() {
 }
 add_action('after_switch_theme', 'vireo_designs_flush_rewrites');
 // WooCommerce integration functions
-function plughaus_add_woocommerce_support() {
+function vireo_add_woocommerce_support() {
     add_theme_support('woocommerce');
     add_theme_support('wc-product-gallery-zoom');
     add_theme_support('wc-product-gallery-lightbox');
     add_theme_support('wc-product-gallery-slider');
 }
-add_action('after_setup_theme', 'plughaus_add_woocommerce_support');
+add_action('after_setup_theme', 'vireo_add_woocommerce_support');
 
 // Add Buy Pro button to plugin cards
-function plughaus_get_plugin_pro_button($plugin_id) {
+function vireo_get_plugin_pro_button($plugin_id) {
     $product_id = get_post_meta($plugin_id, '_linked_product', true);
     if ($product_id) {
         $product = wc_get_product($product_id);
@@ -823,7 +833,7 @@ function plughaus_get_plugin_pro_button($plugin_id) {
 }
 
 // Display license info in My Account
-function plughaus_display_customer_licenses() {
+function vireo_display_customer_licenses() {
     if (function_exists('lmfwc_get_customer_licenses')) {
         $customer_id = get_current_user_id();
         $licenses = lmfwc_get_customer_licenses($customer_id);
@@ -847,10 +857,10 @@ function plughaus_display_customer_licenses() {
         }
     }
 }
-add_action('woocommerce_account_dashboard', 'plughaus_display_customer_licenses');
+add_action('woocommerce_account_dashboard', 'vireo_display_customer_licenses');
 
 // Custom product fields for license management
-function plughaus_add_license_fields() {
+function vireo_add_license_fields() {
     global $post;
     if ($post->post_type !== 'product') return;
     
@@ -872,9 +882,9 @@ function plughaus_add_license_fields() {
     
     echo '</div>';
 }
-add_action('woocommerce_product_options_general_product_data', 'plughaus_add_license_fields');
+add_action('woocommerce_product_options_general_product_data', 'vireo_add_license_fields');
 
-function plughaus_save_license_fields($post_id) {
+function vireo_save_license_fields($post_id) {
     $enable_license = isset($_POST['_enable_license_management']) ? 'yes' : 'no';
     update_post_meta($post_id, '_enable_license_management', $enable_license);
     
@@ -882,7 +892,7 @@ function plughaus_save_license_fields($post_id) {
         update_post_meta($post_id, '_license_activations_limit', sanitize_text_field($_POST['_license_activations_limit']));
     }
 }
-add_action('woocommerce_process_product_meta', 'plughaus_save_license_fields');
+add_action('woocommerce_process_product_meta', 'vireo_save_license_fields');
 
 /**
  * Professional Menu Fallback

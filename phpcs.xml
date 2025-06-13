@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<ruleset name="PlugHaus Studios Coding Standards">
-  <description>WordPress Coding Standards for PlugHaus Studios</description>
+<ruleset name="Vireo Designs Coding Standards">
+  <description>WordPress Coding Standards for Vireo Designs</description>
 
   <!-- Scan all files in directory -->
-  <file>./app/public/wp-content/plugins/plughaus-property-management</file>
-  <file>./app/public/wp-content/themes/plughaus-studios</file>
+  <file>./app/public/wp-content/plugins/vireo-property-management</file>
+  <file>./app/public/wp-content/themes/vireo-designs</file>
   <file>./packages</file>
 
   <!-- Exclude vendor and build directories -->
@@ -30,10 +30,8 @@
   <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
     <properties>
       <property name="prefixes" type="array">
-        <element value="phpm"/>
-        <element value="plughaus"/>
-        <element value="PHPM"/>
-        <element value="PLUGHAUS"/>
+        <element value="vireo"/>
+        <element value="VIREO"/>
       </property>
     </properties>
   </rule>

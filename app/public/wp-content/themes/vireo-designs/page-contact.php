@@ -56,7 +56,7 @@ get_header(); ?>
                     ?>
                     
                     <form method="post" action="">
-                        <?php wp_nonce_field('plughaus_contact_form', 'contact_nonce'); ?>
+                        <?php wp_nonce_field('vireo_contact_form', 'contact_nonce'); ?>
                         
                         <div class="form-group">
                             <label for="contact_name" class="form-label">Full Name *</label>
@@ -132,7 +132,7 @@ get_header(); ?>
                             </div>
                             <h3 class="content-card-title">Sales & Pricing</h3>
                             <p class="content-card-description">Questions about our Pro plans, enterprise pricing, or need a custom quote?</p>
-                            <a href="mailto:sales@plughausstudios.com" class="btn btn-outline btn-sm">
+                            <a href="mailto:sales@vireodesigns.com" class="btn btn-outline btn-sm">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                                 </svg>
@@ -149,7 +149,7 @@ get_header(); ?>
                             </div>
                             <h3 class="content-card-title">Custom Development</h3>
                             <p class="content-card-description">Need a custom plugin or modifications to existing ones? Let's discuss your project.</p>
-                            <a href="mailto:dev@plughausstudios.com" class="btn btn-outline btn-sm">
+                            <a href="mailto:dev@vireodesigns.com" class="btn btn-outline btn-sm">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                                 </svg>

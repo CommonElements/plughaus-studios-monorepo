@@ -7,6 +7,8 @@
 
 get_header(); ?>
 
+<!-- Blog/Posts listing template -->
+
 <main id="primary" class="site-main">
     <div class="container">
         
@@ -79,7 +81,7 @@ get_header(); ?>
                             
                             <footer class="entry-footer">
                                 <a href="<?php the_permalink(); ?>" class="btn btn-outline">
-                                    <?php _e('Learn More', 'plughaus-studios'); ?>
+                                    <?php _e('Learn More', 'vireo-designs'); ?>
                                     <i class="fas fa-arrow-right"></i>
                                 </a>
                                 
@@ -92,14 +94,14 @@ get_header(); ?>
                                     <?php if ($wordpress_url) : ?>
                                         <a href="<?php echo esc_url($wordpress_url); ?>" class="btn btn-secondary" target="_blank">
                                             <i class="fab fa-wordpress"></i>
-                                            <?php _e('WordPress.org', 'plughaus-studios'); ?>
+                                            <?php _e('WordPress.org', 'vireo-designs'); ?>
                                         </a>
                                     <?php endif; ?>
                                     
                                     <?php if ($github_url) : ?>
                                         <a href="<?php echo esc_url($github_url); ?>" class="btn btn-outline" target="_blank">
                                             <i class="fab fa-github"></i>
-                                            <?php _e('GitHub', 'plughaus-studios'); ?>
+                                            <?php _e('GitHub', 'vireo-designs'); ?>
                                         </a>
                                     <?php endif; ?>
                                 <?php endif; ?>
@@ -113,8 +115,8 @@ get_header(); ?>
             <?php
             // Pagination
             the_posts_pagination(array(
-                'prev_text' => __('Previous', 'plughaus-studios'),
-                'next_text' => __('Next', 'plughaus-studios'),
+                'prev_text' => __('Previous', 'vireo-designs'),
+                'next_text' => __('Next', 'vireo-designs'),
             ));
             ?>
             
@@ -122,15 +124,15 @@ get_header(); ?>
             
             <section class="no-results not-found">
                 <header class="page-header">
-                    <h1 class="page-title"><?php _e('Nothing here', 'plughaus-studios'); ?></h1>
+                    <h1 class="page-title"><?php _e('Nothing here', 'vireo-designs'); ?></h1>
                 </header>
                 
                 <div class="page-content">
                     <?php if (is_search()) : ?>
-                        <p><?php _e('Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'plughaus-studios'); ?></p>
+                        <p><?php _e('Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'vireo-designs'); ?></p>
                         <?php get_search_form(); ?>
                     <?php else : ?>
-                        <p><?php _e('It seems we can\'t find what you\'re looking for. Perhaps searching can help.', 'plughaus-studios'); ?></p>
+                        <p><?php _e('It seems we can\'t find what you\'re looking for. Perhaps searching can help.', 'vireo-designs'); ?></p>
                         <?php get_search_form(); ?>
                     <?php endif; ?>
                 </div>

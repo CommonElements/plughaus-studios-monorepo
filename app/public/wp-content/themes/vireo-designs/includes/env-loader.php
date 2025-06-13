@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-function plughaus_load_env() {
+function vireo_load_env() {
     $env_file = ABSPATH . '../../../.env.local';
     
     if (!file_exists($env_file)) {
@@ -38,5 +38,5 @@ function plughaus_load_env() {
 }
 
 // Load environment variables
-plughaus_load_env();
+vireo_load_env();
 ?>

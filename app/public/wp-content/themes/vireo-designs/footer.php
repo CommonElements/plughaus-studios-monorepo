@@ -31,7 +31,7 @@
                 <!-- Quick Links -->
                 <nav class="footer-nav">
                     <a href="<?php echo esc_url(home_url('/industries/')); ?>">Industries</a>
-                    <a href="<?php echo esc_url(home_url('/pricing/')); ?>">Pricing</a>
+                    <a href="<?php echo esc_url(home_url('/shop/')); ?>">Pricing</a>
                     <a href="<?php echo esc_url(home_url('/support/')); ?>">Support</a>
                     <a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a>
                 </nav>

@@ -45,12 +45,12 @@ class Vireo_Download_Handler {
         // Define available plugins and their files
         $available_plugins = array(
             'property-management' => array(
-                'free' => 'plughaus-property-management-free.zip',
+                'free' => 'vireo-property-management-free.zip',
                 'name' => 'Property Management',
                 'size' => '2.1MB'
             ),
             'community-management' => array(
-                'free' => 'plughaus-community-management-free.zip',
+                'free' => 'vireo-community-management-free.zip',
                 'name' => 'Community Management',
                 'size' => '1.8MB'
             )
@@ -120,13 +120,13 @@ class Vireo_Download_Handler {
         return "<?php
 /**
  * Plugin Name: Vireo {$plugin_name}
- * Plugin URI: https://plughausstudios.com/plugins/{$plugin_slug}/
+ * Plugin URI: https://vireodesigns.com/plugins/{$plugin_slug}/
  * Description: Professional {$plugin_name} plugin for WordPress. This is the free version with core features.
  * Version: 1.0.0
  * Author: Vireo Designs
- * Author URI: https://plughausstudios.com
+ * Author URI: https://vireodesigns.com
  * License: GPL v2 or later
- * Text Domain: plughaus-{$plugin_slug}
+ * Text Domain: vireo-{$plugin_slug}
  */
 
 // Prevent direct access
@@ -135,9 +135,9 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin constants
-define('PLUGHAUS_" . strtoupper(str_replace('-', '_', $plugin_slug)) . "_VERSION', '1.0.0');
-define('PLUGHAUS_" . strtoupper(str_replace('-', '_', $plugin_slug)) . "_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('PLUGHAUS_" . strtoupper(str_replace('-', '_', $plugin_slug)) . "_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('VIREO_" . strtoupper(str_replace('-', '_', $plugin_slug)) . "_VERSION', '1.0.0');
+define('VIREO_" . strtoupper(str_replace('-', '_', $plugin_slug)) . "_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('VIREO_" . strtoupper(str_replace('-', '_', $plugin_slug)) . "_PLUGIN_URL', plugin_dir_url(__FILE__));
 
 /**
  * Main Plugin Class
@@ -153,7 +153,7 @@ class Vireo_" . str_replace('-', '_', ucwords($plugin_slug, '-')) . " {
     
     public function init() {
         // Initialize plugin functionality
-        load_plugin_textdomain('plughaus-{$plugin_slug}', false, dirname(plugin_basename(__FILE__)) . '/languages');
+        load_plugin_textdomain('vireo-{$plugin_slug}', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
     
     public function add_admin_menu() {
@@ -161,7 +161,7 @@ class Vireo_" . str_replace('-', '_', ucwords($plugin_slug, '-')) . " {
             '{$plugin_name}',
             '{$plugin_name}',
             'manage_options',
-            'plughaus-{$plugin_slug}',
+            'vireo-{$plugin_slug}',
             array(\$this, 'admin_page'),
             'dashicons-building',
             30
@@ -181,7 +181,7 @@ class Vireo_" . str_replace('-', '_', ucwords($plugin_slug, '-')) . " {
                     <li>✓ Priority support</li>
                     <li>✓ Custom integrations</li>
                 </ul>
-                <p><a href=\"https://plughausstudios.com/plugins/{$plugin_slug}/\" class=\"button button-primary\" target=\"_blank\">Learn More About Pro</a></p>
+                <p><a href=\"https://vireodesigns.com/plugins/{$plugin_slug}/\" class=\"button button-primary\" target=\"_blank\">Learn More About Pro</a></p>
             </div>
             
             <div class=\"card\">
@@ -210,9 +210,9 @@ class Vireo_" . str_replace('-', '_', ucwords($plugin_slug, '-')) . " {
                 <h2>Need Help?</h2>
                 <p>Get support and find resources:</p>
                 <ul>
-                    <li><a href=\"https://plughausstudios.com/support/\" target=\"_blank\">Documentation & Support</a></li>
-                    <li><a href=\"https://plughausstudios.com/contact/\" target=\"_blank\">Contact Us</a></li>
-                    <li><a href=\"https://wordpress.org/support/plugin/plughaus-{$plugin_slug}/\" target=\"_blank\">Community Forums</a></li>
+                    <li><a href=\"https://vireodesigns.com/support/\" target=\"_blank\">Documentation & Support</a></li>
+                    <li><a href=\"https://vireodesigns.com/contact/\" target=\"_blank\">Contact Us</a></li>
+                    <li><a href=\"https://wordpress.org/support/plugin/vireo-{$plugin_slug}/\" target=\"_blank\">Community Forums</a></li>
                 </ul>
             </div>
         </div>
@@ -221,7 +221,7 @@ class Vireo_" . str_replace('-', '_', ucwords($plugin_slug, '-')) . " {
     
     public function activate() {
         // Create necessary database tables or options
-        add_option('plughaus_{$plugin_slug}_version', PLUGHAUS_" . strtoupper(str_replace('-', '_', $plugin_slug)) . "_VERSION);
+        add_option('vireo_{$plugin_slug}_version', VIREO_" . strtoupper(str_replace('-', '_', $plugin_slug)) . "_VERSION);
         
         // Flush rewrite rules
         flush_rewrite_rules();
@@ -239,7 +239,7 @@ new Vireo_" . str_replace('-', '_', ucwords($plugin_slug, '-')) . "();
 /**
  * Check for Pro version
  */
-function plughaus_{$plugin_slug}_check_pro() {
+function vireo_{$plugin_slug}_check_pro() {
     // This would check for Pro license in the actual plugin
     return false; // Free version always returns false
 }
@@ -247,15 +247,15 @@ function plughaus_{$plugin_slug}_check_pro() {
 /**
  * Pro upgrade notice
  */
-function plughaus_{$plugin_slug}_pro_notice() {
-    if (!plughaus_{$plugin_slug}_check_pro()) {
+function vireo_{$plugin_slug}_pro_notice() {
+    if (!vireo_{$plugin_slug}_check_pro()) {
         echo '<div class=\"notice notice-info is-dismissible\">';
         echo '<p><strong>Vireo {$plugin_name} Pro</strong> - Unlock advanced features with our Pro version!</p>';
-        echo '<p><a href=\"https://plughausstudios.com/plugins/{$plugin_slug}/\" class=\"button button-primary\" target=\"_blank\">Upgrade to Pro</a></p>';
+        echo '<p><a href=\"https://vireodesigns.com/plugins/{$plugin_slug}/\" class=\"button button-primary\" target=\"_blank\">Upgrade to Pro</a></p>';
         echo '</div>';
     }
 }
-add_action('admin_notices', 'plughaus_{$plugin_slug}_pro_notice');
+add_action('admin_notices', 'vireo_{$plugin_slug}_pro_notice');
 ";
     }
     
@@ -266,7 +266,7 @@ add_action('admin_notices', 'plughaus_{$plugin_slug}_pro_notice');
         $plugin_slug = strtolower(str_replace(' ', '-', $plugin_name));
         
         return "=== Vireo {$plugin_name} ===
-Contributors: plughausstudios
+Contributors: vireostudios
 Tags: {$plugin_slug}, business, management, professional
 Requires at least: 5.8
 Tested up to: 6.4
@@ -295,11 +295,11 @@ Vireo {$plugin_name} is a comprehensive solution for managing your business proc
 * White-label options
 * API access
 
-[Learn more about Pro features](https://plughausstudios.com/plugins/{$plugin_slug}/)
+[Learn more about Pro features](https://vireodesigns.com/plugins/{$plugin_slug}/)
 
 == Installation ==
 
-1. Upload the plugin files to `/wp-content/plugins/plughaus-{$plugin_slug}/`
+1. Upload the plugin files to `/wp-content/plugins/vireo-{$plugin_slug}/`
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Use the {$plugin_name} menu item to configure the plugin
 
@@ -362,7 +362,7 @@ Initial release of Vireo {$plugin_name}.
      * Track download count
      */
     private function increment_download_count($plugin) {
-        $count_key = 'plughaus_downloads_' . $plugin;
+        $count_key = 'vireo_downloads_' . $plugin;
         $current_count = get_option($count_key, 0);
         update_option($count_key, $current_count + 1);
         
@@ -377,7 +377,7 @@ Initial release of Vireo {$plugin_name}.
      * Handle trial requests (AJAX)
      */
     public function handle_trial_request() {
-        check_ajax_referer('plughaus_trial', 'nonce');
+        check_ajax_referer('vireo_trial', 'nonce');
         
         $plugin = sanitize_text_field($_POST['plugin']);
         $email = sanitize_email($_POST['email']);
@@ -432,7 +432,7 @@ Initial release of Vireo {$plugin_name}.
     private function send_trial_confirmation_email($email, $name, $plugin) {
         $subject = 'Your Vireo Designs Trial Request';
         $message = sprintf(
-            "Hi %s,\n\nThank you for your interest in our %s plugin!\n\nWe've received your trial request and will be in touch within 24 hours with your trial access details.\n\nIn the meantime, feel free to:\n- Browse our documentation: https://plughausstudios.com/docs/\n- Check out our other plugins: https://plughausstudios.com/plugins/\n- Contact us with questions: https://plughausstudios.com/contact/\n\nBest regards,\nThe Vireo Designs Team",
+            "Hi %s,\n\nThank you for your interest in our %s plugin!\n\nWe've received your trial request and will be in touch within 24 hours with your trial access details.\n\nIn the meantime, feel free to:\n- Browse our documentation: https://vireodesigns.com/docs/\n- Check out our other plugins: https://vireodesigns.com/plugins/\n- Contact us with questions: https://vireodesigns.com/contact/\n\nBest regards,\nThe Vireo Designs Team",
             $name,
             ucwords(str_replace('-', ' ', $plugin))
         );
@@ -444,7 +444,7 @@ Initial release of Vireo {$plugin_name}.
      * Track download (AJAX)
      */
     public function track_download() {
-        check_ajax_referer('plughaus_track', 'nonce');
+        check_ajax_referer('vireo_track', 'nonce');
         
         $plugin = sanitize_text_field($_POST['plugin']);
         $version = sanitize_text_field($_POST['version']);
@@ -453,7 +453,7 @@ Initial release of Vireo {$plugin_name}.
         $this->increment_download_count($plugin);
         
         // Return download stats
-        $total_downloads = get_option('plughaus_downloads_' . $plugin, 0);
+        $total_downloads = get_option('vireo_downloads_' . $plugin, 0);
         
         wp_send_json_success(array(
             'total_downloads' => $total_downloads,
@@ -466,8 +466,8 @@ Initial release of Vireo {$plugin_name}.
      */
     public static function get_download_stats($plugin) {
         return array(
-            'total' => get_option('plughaus_downloads_' . $plugin, 0),
-            'today' => get_option('plughaus_downloads_' . $plugin . '_' . date('Y-m-d'), 0),
+            'total' => get_option('vireo_downloads_' . $plugin, 0),
+            'today' => get_option('vireo_downloads_' . $plugin . '_' . date('Y-m-d'), 0),
             'this_week' => self::get_weekly_downloads($plugin),
             'this_month' => self::get_monthly_downloads($plugin)
         );
@@ -480,7 +480,7 @@ Initial release of Vireo {$plugin_name}.
         $total = 0;
         for ($i = 0; $i < 7; $i++) {
             $date = date('Y-m-d', strtotime('-' . $i . ' days'));
-            $total += get_option('plughaus_downloads_' . $plugin . '_' . $date, 0);
+            $total += get_option('vireo_downloads_' . $plugin . '_' . $date, 0);
         }
         return $total;
     }
@@ -492,7 +492,7 @@ Initial release of Vireo {$plugin_name}.
         $total = 0;
         for ($i = 0; $i < 30; $i++) {
             $date = date('Y-m-d', strtotime('-' . $i . ' days'));
-            $total += get_option('plughaus_downloads_' . $plugin . '_' . $date, 0);
+            $total += get_option('vireo_downloads_' . $plugin . '_' . $date, 0);
         }
         return $total;
     }
@@ -504,7 +504,7 @@ new Vireo_Download_Handler();
 /**
  * Helper function to generate download URL
  */
-function plughaus_get_download_url($plugin, $version = 'free') {
+function vireo_get_download_url($plugin, $version = 'free') {
     return add_query_arg(array(
         'download' => '1',
         'plugin' => $plugin,
@@ -516,12 +516,12 @@ function plughaus_get_download_url($plugin, $version = 'free') {
 /**
  * Helper function to get download button HTML
  */
-function plughaus_get_download_button($plugin, $version = 'free', $text = '', $class = 'btn btn-primary') {
+function vireo_get_download_button($plugin, $version = 'free', $text = '', $class = 'btn btn-primary') {
     if (empty($text)) {
         $text = $version === 'free' ? 'Download Free' : 'Get Pro';
     }
     
-    $url = plughaus_get_download_url($plugin, $version);
+    $url = vireo_get_download_url($plugin, $version);
     $icon = $version === 'free' ? 'fas fa-download' : 'fas fa-crown';
     
     return sprintf(

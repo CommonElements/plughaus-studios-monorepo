@@ -41,9 +41,9 @@ get_header(); ?>
                 <div class="plugin-hero__info">
                     <!-- Breadcrumbs -->
                     <nav class="breadcrumbs">
-                        <a href="<?php echo esc_url(home_url('/')); ?>"><?php _e('Home', 'plughaus-studios'); ?></a>
+                        <a href="<?php echo esc_url(home_url('/')); ?>"><?php _e('Home', 'vireo-designs'); ?></a>
                         <span class="separator">></span>
-                        <a href="<?php echo esc_url(home_url('/plugins/')); ?>"><?php _e('Plugins', 'plughaus-studios'); ?></a>
+                        <a href="<?php echo esc_url(home_url('/plugins/')); ?>"><?php _e('Plugins', 'vireo-designs'); ?></a>
                         <span class="separator">></span>
                         <span class="current"><?php the_title(); ?></span>
                     </nav>
@@ -76,10 +76,10 @@ get_header(); ?>
                                     <span class="plugin-status status-<?php echo esc_attr($status); ?>">
                                         <?php
                                         $status_labels = array(
-                                            'available' => __('Available Now', 'plughaus-studios'),
-                                            'coming-soon' => __('Coming Soon', 'plughaus-studios'),
-                                            'in-development' => __('In Development', 'plughaus-studios'),
-                                            'beta' => __('Beta', 'plughaus-studios'),
+                                            'available' => __('Available Now', 'vireo-designs'),
+                                            'coming-soon' => __('Coming Soon', 'vireo-designs'),
+                                            'in-development' => __('In Development', 'vireo-designs'),
+                                            'beta' => __('Beta', 'vireo-designs'),
                                         );
                                         echo esc_html($status_labels[$status] ?? ucwords(str_replace('-', ' ', $status)));
                                         ?>
@@ -104,7 +104,7 @@ get_header(); ?>
                                     <?php if ($download_count) : ?>
                                         <div class="stat">
                                             <i class="fas fa-download"></i>
-                                            <span><?php echo number_format($download_count); ?> <?php _e('downloads', 'plughaus-studios'); ?></span>
+                                            <span><?php echo number_format($download_count); ?> <?php _e('downloads', 'vireo-designs'); ?></span>
                                         </div>
                                     <?php endif; ?>
                                     
@@ -130,36 +130,36 @@ get_header(); ?>
                         <?php if ($status === 'available' && $wordpress_url) : ?>
                             <a href="<?php echo esc_url($wordpress_url); ?>" class="btn btn-primary large" target="_blank" rel="noopener">
                                 <i class="fab fa-wordpress"></i>
-                                <?php _e('Download Free', 'plughaus-studios'); ?>
+                                <?php _e('Download Free', 'vireo-designs'); ?>
                             </a>
                         <?php endif; ?>
                         
                         <?php if ($price_pro) : ?>
                             <a href="#pricing" class="btn btn-secondary large">
                                 <i class="fas fa-star"></i>
-                                <?php _e('Get Pro Version', 'plughaus-studios'); ?>
+                                <?php _e('Get Pro Version', 'vireo-designs'); ?>
                             </a>
                         <?php endif; ?>
                         
                         <?php if ($demo_url) : ?>
                             <a href="<?php echo esc_url($demo_url); ?>" class="btn btn-outline large" target="_blank" rel="noopener">
                                 <i class="fas fa-eye"></i>
-                                <?php _e('View Demo', 'plughaus-studios'); ?>
+                                <?php _e('View Demo', 'vireo-designs'); ?>
                             </a>
                         <?php endif; ?>
                     </div>
                     
                     <div class="secondary-actions">
                         <?php if ($github_url) : ?>
-                            <a href="<?php echo esc_url($github_url); ?>" class="action-link" target="_blank" rel="noopener" title="<?php _e('View on GitHub', 'plughaus-studios'); ?>">
+                            <a href="<?php echo esc_url($github_url); ?>" class="action-link" target="_blank" rel="noopener" title="<?php _e('View on GitHub', 'vireo-designs'); ?>">
                                 <i class="fab fa-github"></i>
-                                <span><?php _e('GitHub', 'plughaus-studios'); ?></span>
+                                <span><?php _e('GitHub', 'vireo-designs'); ?></span>
                             </a>
                         <?php endif; ?>
                         
                         <button class="action-link share-plugin" data-url="<?php the_permalink(); ?>" data-title="<?php the_title_attribute(); ?>">
                             <i class="fas fa-share-alt"></i>
-                            <span><?php _e('Share', 'plughaus-studios'); ?></span>
+                            <span><?php _e('Share', 'vireo-designs'); ?></span>
                         </button>
                     </div>
                 </div>
@@ -177,7 +177,7 @@ get_header(); ?>
                     
                     <!-- Plugin Description -->
                     <section class="plugin-section">
-                        <h2><?php _e('Description', 'plughaus-studios'); ?></h2>
+                        <h2><?php _e('Description', 'vireo-designs'); ?></h2>
                         <div class="entry-content">
                             <?php the_content(); ?>
                         </div>
@@ -186,12 +186,12 @@ get_header(); ?>
                     <!-- Features -->
                     <?php if (!empty($features_array) || !empty($pro_features_array)) : ?>
                         <section id="features" class="plugin-section">
-                            <h2><?php _e('Features', 'plughaus-studios'); ?></h2>
+                            <h2><?php _e('Features', 'vireo-designs'); ?></h2>
                             
                             <div class="features-comparison">
                                 <?php if (!empty($features_array)) : ?>
                                     <div class="features-column free">
-                                        <h3><?php _e('Free Version', 'plughaus-studios'); ?></h3>
+                                        <h3><?php _e('Free Version', 'vireo-designs'); ?></h3>
                                         <ul class="features-list">
                                             <?php foreach ($features_array as $feature) : ?>
                                                 <li>
@@ -205,7 +205,7 @@ get_header(); ?>
                                 
                                 <?php if (!empty($pro_features_array)) : ?>
                                     <div class="features-column pro">
-                                        <h3><?php _e('Pro Version', 'plughaus-studios'); ?></h3>
+                                        <h3><?php _e('Pro Version', 'vireo-designs'); ?></h3>
                                         <ul class="features-list">
                                             <?php foreach ($pro_features_array as $feature) : ?>
                                                 <li>
@@ -226,7 +226,7 @@ get_header(); ?>
                     if (!empty($gallery['ids'])) :
                     ?>
                         <section class="plugin-section">
-                            <h2><?php _e('Screenshots', 'plughaus-studios'); ?></h2>
+                            <h2><?php _e('Screenshots', 'vireo-designs'); ?></h2>
                             <div class="plugin-gallery">
                                 <?php
                                 $image_ids = explode(',', $gallery['ids']);
@@ -249,12 +249,12 @@ get_header(); ?>
                     <!-- Pricing -->
                     <?php if ($price_pro) : ?>
                         <section id="pricing" class="plugin-section">
-                            <h2><?php _e('Pricing', 'plughaus-studios'); ?></h2>
+                            <h2><?php _e('Pricing', 'vireo-designs'); ?></h2>
                             
                             <div class="pricing-table">
                                 <div class="pricing-column free">
                                     <div class="pricing-header">
-                                        <h3><?php _e('Free Version', 'plughaus-studios'); ?></h3>
+                                        <h3><?php _e('Free Version', 'vireo-designs'); ?></h3>
                                         <div class="price"><?php echo esc_html($price_free); ?></div>
                                     </div>
                                     <div class="pricing-content">
@@ -270,7 +270,7 @@ get_header(); ?>
                                         <?php if ($wordpress_url) : ?>
                                             <a href="<?php echo esc_url($wordpress_url); ?>" class="btn btn-outline" target="_blank" rel="noopener">
                                                 <i class="fab fa-wordpress"></i>
-                                                <?php _e('Download Free', 'plughaus-studios'); ?>
+                                                <?php _e('Download Free', 'vireo-designs'); ?>
                                             </a>
                                         <?php endif; ?>
                                     </div>
@@ -278,7 +278,7 @@ get_header(); ?>
                                 
                                 <div class="pricing-column pro featured">
                                     <div class="pricing-header">
-                                        <h3><?php _e('Pro Version', 'plughaus-studios'); ?></h3>
+                                        <h3><?php _e('Pro Version', 'vireo-designs'); ?></h3>
                                         <div class="price"><?php echo esc_html($price_pro); ?></div>
                                     </div>
                                     <div class="pricing-content">
@@ -289,12 +289,12 @@ get_header(); ?>
                                                 <?php endforeach; ?>
                                             </ul>
                                         <?php endif; ?>
-                                        <p class="pro-note"><?php _e('Includes all free features plus:', 'plughaus-studios'); ?></p>
+                                        <p class="pro-note"><?php _e('Includes all free features plus:', 'vireo-designs'); ?></p>
                                     </div>
                                     <div class="pricing-footer">
                                         <a href="#contact" class="btn btn-primary">
                                             <i class="fas fa-star"></i>
-                                            <?php _e('Get Pro Version', 'plughaus-studios'); ?>
+                                            <?php _e('Get Pro Version', 'vireo-designs'); ?>
                                         </a>
                                     </div>
                                 </div>
@@ -305,15 +305,15 @@ get_header(); ?>
                     <!-- Requirements -->
                     <?php if ($tested_wp_version || $min_php_version) : ?>
                         <section class="plugin-section">
-                            <h2><?php _e('Requirements', 'plughaus-studios'); ?></h2>
+                            <h2><?php _e('Requirements', 'vireo-designs'); ?></h2>
                             
                             <div class="requirements-grid">
                                 <?php if ($tested_wp_version) : ?>
                                     <div class="requirement">
                                         <i class="fab fa-wordpress"></i>
                                         <div>
-                                            <h4><?php _e('WordPress Version', 'plughaus-studios'); ?></h4>
-                                            <p><?php printf(__('Tested up to %s', 'plughaus-studios'), esc_html($tested_wp_version)); ?></p>
+                                            <h4><?php _e('WordPress Version', 'vireo-designs'); ?></h4>
+                                            <p><?php printf(__('Tested up to %s', 'vireo-designs'), esc_html($tested_wp_version)); ?></p>
                                         </div>
                                     </div>
                                 <?php endif; ?>
@@ -322,8 +322,8 @@ get_header(); ?>
                                     <div class="requirement">
                                         <i class="fab fa-php"></i>
                                         <div>
-                                            <h4><?php _e('PHP Version', 'plughaus-studios'); ?></h4>
-                                            <p><?php printf(__('Requires PHP %s or higher', 'plughaus-studios'), esc_html($min_php_version)); ?></p>
+                                            <h4><?php _e('PHP Version', 'vireo-designs'); ?></h4>
+                                            <p><?php printf(__('Requires PHP %s or higher', 'vireo-designs'), esc_html($min_php_version)); ?></p>
                                         </div>
                                     </div>
                                 <?php endif; ?>
@@ -331,8 +331,8 @@ get_header(); ?>
                                 <div class="requirement">
                                     <i class="fas fa-server"></i>
                                     <div>
-                                        <h4><?php _e('Server Requirements', 'plughaus-studios'); ?></h4>
-                                        <p><?php _e('Standard WordPress hosting', 'plughaus-studios'); ?></p>
+                                        <h4><?php _e('Server Requirements', 'vireo-designs'); ?></h4>
+                                        <p><?php _e('Standard WordPress hosting', 'vireo-designs'); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -341,25 +341,25 @@ get_header(); ?>
                     
                     <!-- Support -->
                     <section class="plugin-section">
-                        <h2><?php _e('Support', 'plughaus-studios'); ?></h2>
+                        <h2><?php _e('Support', 'vireo-designs'); ?></h2>
                         
                         <div class="support-options">
                             <div class="support-option">
                                 <i class="fab fa-wordpress"></i>
-                                <h4><?php _e('Community Support', 'plughaus-studios'); ?></h4>
-                                <p><?php _e('Get help from the WordPress community through our support forums.', 'plughaus-studios'); ?></p>
+                                <h4><?php _e('Community Support', 'vireo-designs'); ?></h4>
+                                <p><?php _e('Get help from the WordPress community through our support forums.', 'vireo-designs'); ?></p>
                                 <a href="https://wordpress.org/support/plugin/<?php echo sanitize_title(get_the_title()); ?>/" class="btn btn-outline" target="_blank" rel="noopener">
-                                    <?php _e('Visit Forums', 'plughaus-studios'); ?>
+                                    <?php _e('Visit Forums', 'vireo-designs'); ?>
                                 </a>
                             </div>
                             
                             <?php if ($price_pro) : ?>
                                 <div class="support-option pro">
                                     <i class="fas fa-headset"></i>
-                                    <h4><?php _e('Priority Support', 'plughaus-studios'); ?></h4>
-                                    <p><?php _e('Pro customers get direct email support with faster response times.', 'plughaus-studios'); ?></p>
+                                    <h4><?php _e('Priority Support', 'vireo-designs'); ?></h4>
+                                    <p><?php _e('Pro customers get direct email support with faster response times.', 'vireo-designs'); ?></p>
                                     <a href="#contact" class="btn btn-primary">
-                                        <?php _e('Contact Support', 'plughaus-studios'); ?>
+                                        <?php _e('Contact Support', 'vireo-designs'); ?>
                                     </a>
                                 </div>
                             <?php endif; ?>
@@ -373,21 +373,21 @@ get_header(); ?>
                     
                     <!-- Quick Info -->
                     <div class="sidebar-widget plugin-info">
-                        <h3><?php _e('Plugin Information', 'plughaus-studios'); ?></h3>
+                        <h3><?php _e('Plugin Information', 'vireo-designs'); ?></h3>
                         
                         <dl class="plugin-details">
                             <?php if ($version) : ?>
-                                <dt><?php _e('Version', 'plughaus-studios'); ?></dt>
+                                <dt><?php _e('Version', 'vireo-designs'); ?></dt>
                                 <dd><?php echo esc_html($version); ?></dd>
                             <?php endif; ?>
                             
                             <?php if ($download_count) : ?>
-                                <dt><?php _e('Downloads', 'plughaus-studios'); ?></dt>
+                                <dt><?php _e('Downloads', 'vireo-designs'); ?></dt>
                                 <dd><?php echo number_format($download_count); ?></dd>
                             <?php endif; ?>
                             
                             <?php if ($rating) : ?>
-                                <dt><?php _e('Rating', 'plughaus-studios'); ?></dt>
+                                <dt><?php _e('Rating', 'vireo-designs'); ?></dt>
                                 <dd>
                                     <div class="rating-display">
                                         <?php for ($i = 1; $i <= 5; $i++) : ?>
@@ -399,11 +399,11 @@ get_header(); ?>
                             <?php endif; ?>
                             
                             <?php if ($tested_wp_version) : ?>
-                                <dt><?php _e('WordPress Version', 'plughaus-studios'); ?></dt>
+                                <dt><?php _e('WordPress Version', 'vireo-designs'); ?></dt>
                                 <dd><?php echo esc_html($tested_wp_version); ?></dd>
                             <?php endif; ?>
                             
-                            <dt><?php _e('Last Updated', 'plughaus-studios'); ?></dt>
+                            <dt><?php _e('Last Updated', 'vireo-designs'); ?></dt>
                             <dd><?php echo get_the_modified_date(); ?></dd>
                         </dl>
                     </div>
@@ -411,7 +411,7 @@ get_header(); ?>
                     <!-- Tags -->
                     <?php if ($tags) : ?>
                         <div class="sidebar-widget plugin-tags">
-                            <h3><?php _e('Tags', 'plughaus-studios'); ?></h3>
+                            <h3><?php _e('Tags', 'vireo-designs'); ?></h3>
                             <div class="tag-cloud">
                                 <?php foreach ($tags as $tag) : ?>
                                     <a href="<?php echo esc_url(get_term_link($tag)); ?>" class="tag">
@@ -446,7 +446,7 @@ get_header(); ?>
                     if ($related_plugins->have_posts()) :
                     ?>
                         <div class="sidebar-widget related-plugins">
-                            <h3><?php _e('Related Plugins', 'plughaus-studios'); ?></h3>
+                            <h3><?php _e('Related Plugins', 'vireo-designs'); ?></h3>
                             
                             <div class="related-plugins-list">
                                 <?php while ($related_plugins->have_posts()) : $related_plugins->the_post(); ?>

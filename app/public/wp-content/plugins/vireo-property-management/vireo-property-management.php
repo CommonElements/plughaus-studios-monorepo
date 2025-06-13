@@ -266,8 +266,8 @@ register_activation_hook(__FILE__, 'vpm_activate');
  * Plugin deactivation hook
  */
 function vpm_deactivate() {
-    require_once VPM_CORE_DIR . 'includes/class-vpm-deactivator.php';
-    VPM_Deactivator::deactivate();
+    require_once VPM_CORE_DIR . 'includes/class-phpm-deactivator.php';
+    PHPM_Deactivator::deactivate();
 }
 register_deactivation_hook(__FILE__, 'vpm_deactivate');
 

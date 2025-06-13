@@ -1,0 +1,369 @@
+/**
+ * EquipRent Pro Admin Styles
+ */
+
+/* Main admin layout */
+.equiprent-admin-page {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Dashboard widgets */
+.equiprent-dashboard-widgets {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.equiprent-dashboard-widget {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.equiprent-dashboard-widget h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.equiprent-stat-number {
+    font-size: 36px;
+    font-weight: bold;
+    color: #2271b1;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.equiprent-stat-label {
+    color: #666;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Equipment status indicators */
+.equipment-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.equipment-status.status-available {
+    background: #d4edda;
+    color: #155724;
+}
+
+.equipment-status.status-rented {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.equipment-status.status-maintenance {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.equipment-status.status-damaged {
+    background: #f5c6cb;
+    color: #721c24;
+}
+
+.equipment-status.status-retired {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+/* Booking status indicators */
+.booking-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.booking-status.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.booking-status.status-confirmed {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.booking-status.status-active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.booking-status.status-completed {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+.booking-status.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.booking-status.status-overdue {
+    background: #f5c6cb;
+    color: #721c24;
+}
+
+/* Form styles */
+.equiprent-form-group {
+    margin-bottom: 20px;
+}
+
+.equiprent-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+.equiprent-form-group input,
+.equiprent-form-group select,
+.equiprent-form-group textarea {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.equiprent-form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.equiprent-form-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.equiprent-form-row .equiprent-form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* Stock information */
+.stock-info {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Pro upgrade messages */
+.equiprent-pro-notice {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.equiprent-pro-notice h3 {
+    color: white;
+    margin: 0 0 10px 0;
+}
+
+.equiprent-pro-notice .button {
+    background: white;
+    color: #667eea;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.equiprent-pro-notice .button:hover {
+    background: #f0f0f0;
+    color: #667eea;
+}
+
+/* Calendar styles */
+.equiprent-calendar {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.equiprent-calendar-header {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.equiprent-calendar-nav button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.equiprent-calendar-nav button:hover {
+    background: #e9ecef;
+}
+
+/* List table improvements */
+.wp-admin .widefat th.column-equipment_image,
+.wp-admin .widefat td.column-equipment_image {
+    width: 60px;
+    text-align: center;
+}
+
+.wp-admin .widefat th.column-equipment_sku,
+.wp-admin .widefat td.column-equipment_sku {
+    width: 100px;
+}
+
+.wp-admin .widefat th.column-equipment_status,
+.wp-admin .widefat td.column-equipment_status {
+    width: 100px;
+}
+
+.wp-admin .widefat th.column-equipment_rate,
+.wp-admin .widefat td.column-equipment_rate {
+    width: 100px;
+    text-align: right;
+}
+
+.wp-admin .widefat th.column-equipment_stock,
+.wp-admin .widefat td.column-equipment_stock {
+    width: 80px;
+    text-align: center;
+}
+
+/* Equipment image placeholder */
+.no-image-placeholder {
+    width: 50px;
+    height: 50px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 20px;
+}
+
+/* Meta box styles */
+.equiprent-meta-box-content {
+    padding: 12px;
+}
+
+.equiprent-meta-box-content .form-table th {
+    width: 150px;
+    padding: 10px 0;
+}
+
+.equiprent-meta-box-content .form-table td {
+    padding: 10px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .equiprent-dashboard-widgets {
+        grid-template-columns: 1fr;
+    }
+    
+    .equiprent-form-row {
+        flex-direction: column;
+    }
+    
+    .equiprent-form-row .equiprent-form-group {
+        min-width: auto;
+    }
+}
+
+/* Loading states */
+.equiprent-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.equiprent-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #ccc;
+    border-top-color: #2271b1;
+    border-radius: 50%;
+    animation: equiprent-spin 1s linear infinite;
+}
+
+@keyframes equiprent-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Button styles */
+.equiprent-button {
+    background: #2271b1;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.equiprent-button:hover {
+    background: #135e96;
+    color: white;
+}
+
+.equiprent-button.secondary {
+    background: #6c757d;
+}
+
+.equiprent-button.secondary:hover {
+    background: #5a6268;
+}
+
+.equiprent-button.success {
+    background: #28a745;
+}
+
+.equiprent-button.success:hover {
+    background: #218838;
+}
+
+.equiprent-button.danger {
+    background: #dc3545;
+}
+
+.equiprent-button.danger:hover {
+    background: #c82333;
+}
